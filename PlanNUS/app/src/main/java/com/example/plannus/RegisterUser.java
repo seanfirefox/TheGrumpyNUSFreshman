@@ -112,7 +112,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()) {
                             User user = new User(fullName, age, email);
 
-                            FirebaseDatabase.getInstance().getReference("Users")
+                            FirebaseDatabase.getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

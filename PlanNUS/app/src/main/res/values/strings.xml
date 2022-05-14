@@ -4,9 +4,29 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings used for Main Activity-->
+    <string name="Email">Email</string>
+    <string name="Login">Login</string>
+    <string name="Register">Register</string>
+
+    <!-- Strings used for Register User Activity-->
+    <string name="RegisterUser">REGISTER USER</string>
+    <string name="RegisterEmail">Email</string>
+    <string name="RegisterAge">Age</string>
+    <string name="FullName">Full Name</string>
+
+    <!-- Strings used for Content Main Activity-->
+    <string name="Calendar">My Calendar</string>
+    <string name="Timetable">My Timetable</string>
+    <string name="ToDoList">My Tasks</string>
+    <string name="calendarDesc">Calendar Image</string>
+    <string name="timetableDesc">Timetable Image</string>
+    <string name="nusModsDesc">NUSMods Image</string>
+    <string name="WelcomeBack">Welcome Back Name</string>
+
 </resources>

@@ -11,11 +11,11 @@
         android:id="@+id/WelcomeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="16sp"
         android:fontFamily="casual"
-        android:text="Welcome Back name!"
+        android:text="@string/WelcomeBack"
         android:textColor="#000000"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,32 +24,30 @@
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:layout_width="384dp"
-        android:layout_height="316dp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="48dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+        android:layout_width="383dp"
+        android:layout_height="208dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="48sp">
     </HorizontalScrollView>
 
     <TextView
         android:id="@+id/calenderButtonMain"
-        android:layout_width="209dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="My Calendar"
-        android:textSize="24dp"
+        android:layout_width="209sp"
+        android:layout_height="31sp"
+        android:layout_marginTop="4sp"
+        android:text="@string/Calendar"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <ImageButton
+        android:contentDescription="@string/calendarDesc"
         android:id="@+id/imageButton"
-        android:layout_width="408dp"
-        android:layout_height="103dp"
+        android:layout_width="408sp"
+        android:layout_height="103sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,18 +56,21 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="209dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:text="My Timetable"
-        android:textSize="24dp"
+        android:layout_width="209sp"
+        android:layout_height="36sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/Timetable"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
     <ImageButton
+        android:contentDescription="@string/timetableDesc"
         android:id="@+id/imageButton2"
-        android:layout_width="404dp"
-        android:layout_height="91dp"
+        android:layout_width="404sp"
+        android:layout_height="91sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -77,20 +78,24 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="199dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="8dp"
-        android:text="My To-Do List"
-        android:textSize="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        tools:layout_editor_absoluteX="16dp" />
+        android:layout_width="199sp"
+        android:layout_height="38sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="196dp"
+        android:text="@string/ToDoList"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
     <ImageButton
+        android:contentDescription="@string/nusModsDesc"
         android:id="@+id/imageButton3"
         android:layout_width="409dp"
         android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_launcher_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>

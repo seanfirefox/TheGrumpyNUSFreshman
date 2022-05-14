@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ContentMainActivity">
 
 
     <TextView
@@ -24,10 +24,10 @@
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:layout_width="410dp"
-        android:layout_height="318dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="47dp">
+        android:layout_width="384dp"
+        android:layout_height="316dp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="48dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,8 +48,8 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="409dp"
-        android:layout_height="131dp"
+        android:layout_width="408dp"
+        android:layout_height="103dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +68,8 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="407dp"
-        android:layout_height="108dp"
+        android:layout_width="404dp"
+        android:layout_height="91dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"

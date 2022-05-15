@@ -47,10 +47,9 @@
         app:layout_constraintTop_toBottomOf="@+id/hiName" />
 
     <ScrollView
-        android:contentDescription="@string/Announcements"
         android:id="@+id/Announcements"
-        android:layout_width="407dp"
-        android:layout_height="226dp"
+        android:layout_width="408dp"
+        android:layout_height="228dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeBackMsg">
@@ -79,7 +78,6 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:contentDescription="@string/nusModsDesc"
                 android:id="@+id/nusModsImgView"
                 android:layout_width="354dp"
                 android:layout_height="123dp"
@@ -93,17 +91,13 @@
                 android:id="@+id/calendarImgView"
                 android:layout_width="354dp"
                 android:layout_height="123dp"
-                android:contentDescription="@string/CalendarImg"
-                android:scrollbarFadeDuration="250"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.296"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calendarTextView"
-                app:srcCompat="@drawable/calendarimg"
-                tools:ignore="ImageContrastCheck" />
+                app:srcCompat="@drawable/calendarimg" />
 
             <ImageButton
-                android:contentDescription="@string/ToDoListImg"
                 android:id="@+id/checklistImgView"
                 android:layout_width="354dp"
                 android:layout_height="123dp"
@@ -145,7 +139,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/ToDoList"
-                android:contentDescription="@string/ToDoListImg"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

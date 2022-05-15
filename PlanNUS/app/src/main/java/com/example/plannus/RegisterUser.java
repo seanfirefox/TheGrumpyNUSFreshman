@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,8 @@ import java.util.Objects;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView banner, registerUser;
+    private TextView registerUser;
+    private ImageView banner;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private ProgressBar progressBar;
 
@@ -36,7 +38,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_register_user);
 
         mAuth = FirebaseAuth.getInstance();
-        banner = (TextView) findViewById(R.id.banner);
+        banner = (ImageView) findViewById(R.id.registerUserLogo);
         banner.setOnClickListener(this);
 
         registerUser = (Button) findViewById(R.id.registerUser);
@@ -53,7 +55,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.banner:
+            case R.id.registerUserLogo:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.registerUser:

@@ -13,6 +13,10 @@
     <string name="Email">Email</string>
     <string name="Login">Login</string>
     <string name="Register">Register</string>
+    <string name="plannus_logo">PlanNUS Logo</string>
+    <string name="emailIcon">EmailIcon</string>
+    <string name="pwdIcon">Password Icon</string>
+
 
     <!-- Strings used for Register User Activity-->
     <string name="RegisterUser">REGISTER USER</string>
@@ -21,12 +25,18 @@
     <string name="FullName">Full Name</string>
 
     <!-- Strings used for Content Main Activity-->
+    <string name="Announcements">Announcements</string>
     <string name="Calendar">My Calendar</string>
+    <string name="CalendarImg">My Calendar Image</string>
     <string name="Timetable">My Timetable</string>
+    <string name="TimetableImg">My Timetable Image</string>
     <string name="ToDoList">My Tasks</string>
+    <string name="ToDoListImg">My Tasks Image</string>
     <string name="calendarDesc">Calendar Image</string>
     <string name="timetableDesc">Timetable Image</string>
     <string name="nusModsDesc">NUSMods Image</string>
-    <string name="WelcomeBack">Welcome Back Name</string>
+    <string name="hello">Hi NAME</string>
+    <string name="WelcomeMsg">Welcome Back !</string>
+    <string name="appIcon">App Icon</string>
 
 </resources>

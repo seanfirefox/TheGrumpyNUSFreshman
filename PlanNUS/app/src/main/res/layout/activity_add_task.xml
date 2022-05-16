@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_colour"
+    tools:context=".AddTaskActivity">
+
+    <ImageButton
+        android:id="@+id/imageButtonAddTask"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:background="@drawable/backbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/AddTasks"
+        android:layout_width="347dp"
+        android:layout_height="67dp"
+        android:text="Add A New Task"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonAddTask"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TaskTxTtextView"
+        android:layout_width="81dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="56dp"
+        android:text="Task: "
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddTasks" />
+
+    <TextView
+        android:id="@+id/statusTexTtextView"
+        android:layout_width="103dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:text="Status: "
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TaskTxTtextView" />
+
+    <TextView
+        android:id="@+id/tagTexTtextView"
+        android:layout_width="67dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:text="Tag: "
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/taskTypeEditText"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusTexTtextView" />
+
+    <TextView
+        android:id="@+id/deadLineTexTtextView"
+        android:layout_width="135dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:text="Deadline: "
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagTexTtextView" />
+
+    <TextView
+        android:id="@+id/plannedTexTtextView"
+        android:layout_width="213dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="24dp"
+        android:text="Planned Date:"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/timeDuetextView"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/dateDuetextView"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:text="Date: "
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/dueDateEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadLineTexTtextView" />
+
+    <TextView
+        android:id="@+id/datePlannedtextView"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:text="Date: "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plannedTexTtextView" />
+
+    <TextView
+        android:id="@+id/timeDuetextView"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:text="Time: "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateDuetextView" />
+
+    <TextView
+        android:id="@+id/timePlannedtextView2"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:text="Time: "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datePlannedtextView" />
+
+    <EditText
+        android:id="@+id/taskTypeEditText"
+        android:layout_width="285dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints="Tag"
+        android:ems="10"
+        android:hint="e.g CS1101S/Personal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescEditStatus" />
+
+    <EditText
+        android:id="@+id/taskDescEditText"
+        android:layout_width="285dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints="Task"
+        android:ems="10"
+        android:hint="Enter description of task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toEndOf="@+id/TaskTxTtextView"
+        app:layout_constraintTop_toBottomOf="@+id/AddTasks" />
+
+    <EditText
+        android:id="@+id/taskDescEditStatus"
+        android:layout_width="285dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:autofillHints="Status"
+        android:ems="10"
+        android:hint="% of work completed"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintStart_toEndOf="@+id/statusTexTtextView"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescEditText" />
+
+    <EditText
+        android:id="@+id/dueDateEditText"
+        android:layout_width="285dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints="Status"
+        android:ems="8"
+        android:hint="Due Date Here"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadLineTexTtextView" />
+
+    <EditText
+        android:id="@+id/plannedDateEditText"
+        android:layout_width="285dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints="Status"
+        android:ems="10"
+        android:hint="Planned Date Here"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/datePlannedtextView"
+        app:layout_constraintTop_toBottomOf="@+id/plannedTexTtextView" />
+
+    <EditText
+        android:id="@+id/dueTimeEditText"
+        android:layout_width="285dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints="Status"
+        android:ems="8"
+        android:hint="Due Time Here"
+        android:inputType="datetime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/timeDuetextView"
+        app:layout_constraintTop_toBottomOf="@+id/dueDateEditText" />
+
+    <EditText
+        android:id="@+id/plannedTimeEditText"
+        android:layout_width="285dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints="Status"
+        android:ems="10"
+        android:hint="Planned Time Here"
+        android:inputType="datetime"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/timePlannedtextView2"
+        app:layout_constraintTop_toBottomOf="@+id/plannedDateEditText"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Save Task"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePlannedtextView2"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

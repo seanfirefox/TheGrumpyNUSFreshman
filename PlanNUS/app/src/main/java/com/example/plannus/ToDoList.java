@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,12 +18,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ToDoList extends AppCompatActivity {
+public class ToDoList extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
     DatabaseReference database;
     MyAdapter myAdapter;
     ArrayList<ToDoTask> list;
+    private Button createTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class ToDoList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        createTask = findViewById(R.id.createTask);
+        createTask.setOnClickListener(this);
         list = new ArrayList<>();
         myAdapter = new MyAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
@@ -54,5 +60,13 @@ public class ToDoList extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.createTask:
+                startActivity(new Intent(this, AddTaskActivity.class));
+        }
     }
 }

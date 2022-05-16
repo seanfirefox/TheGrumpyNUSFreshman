@@ -28,6 +28,8 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:hint="@string/Email"
+        android:autofillHints="emailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -39,6 +41,8 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="@string/Password"
+        android:autofillHints="password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintStart_toEndOf="@+id/imageView2"

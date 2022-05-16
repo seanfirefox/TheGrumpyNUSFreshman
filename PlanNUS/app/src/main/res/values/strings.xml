@@ -11,6 +11,7 @@
 
     <!-- Strings used for Main Activity-->
     <string name="Email">Email</string>
+    <string name="Password">Password</string>
     <string name="Login">Login</string>
     <string name="Register">Register</string>
     <string name="plannus_logo">PlanNUS Logo</string>

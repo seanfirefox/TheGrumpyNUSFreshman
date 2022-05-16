@@ -27,20 +27,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="2dp" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="409dp"
-        android:layout_height="580dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myTasks">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <Button
         android:id="@+id/createTask"
         android:layout_width="165dp"
@@ -48,9 +34,7 @@
         android:layout_marginEnd="24dp"
         android:text="Create Task"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/completedTask"
@@ -59,7 +43,15 @@
         android:text="Completed Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/createTask"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskList"
+        android:layout_width="409dp"
+        android:layout_height="608dp"
+        app:layout_constraintBottom_toTopOf="@+id/createTask"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintTop_toBottomOf="@+id/myTasks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,14 @@ package com.example.plannus;
 
 public class ToDoTask {
 
-    String moduleName, task, status, deadLine;
+    private String moduleName, task, status, deadLine;
+
+    public ToDoTask(String moduleName, String task, String status, String deadLine) {
+        this.moduleName = moduleName;
+        this.task = task;
+        this.status = status;
+        this.deadLine = deadLine;
+    }
 
     public String getModuleName() {
         return moduleName;

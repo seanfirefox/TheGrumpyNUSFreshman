@@ -19,55 +19,60 @@
         android:id="@+id/AddTasks"
         android:layout_width="347dp"
         android:layout_height="67dp"
+        android:layout_marginTop="4dp"
         android:text="Add A New Task"
         android:textAlignment="viewStart"
         android:textColor="#000000"
-        android:textSize="40sp"
+        android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageButtonAddTask"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TaskTxTtextView"
-        android:layout_width="81dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="113dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="52dp"
         android:text="Task: "
-        android:textSize="30sp"
+        android:textAlignment="textEnd"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddTasks" />
 
     <TextView
         android:id="@+id/statusTexTtextView"
-        android:layout_width="103dp"
-        android:layout_height="46dp"
+        android:layout_width="113dp"
+        android:layout_height="36dp"
         android:layout_marginTop="8dp"
         android:text="Status: "
-        android:textSize="30sp"
+        android:textAlignment="textEnd"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TaskTxTtextView" />
 
     <TextView
         android:id="@+id/tagTexTtextView"
-        android:layout_width="67dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="113dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
         android:text="Tag: "
-        android:textSize="30sp"
+        android:textAlignment="textEnd"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/taskTypeEditText"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusTexTtextView" />
 
     <TextView
         android:id="@+id/deadLineTexTtextView"
-        android:layout_width="135dp"
-        android:layout_height="46dp"
+        android:layout_width="409dp"
+        android:layout_height="37dp"
         android:layout_marginTop="28dp"
         android:text="Deadline: "
-        android:textSize="30sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,13 +80,15 @@
 
     <TextView
         android:id="@+id/plannedTexTtextView"
-        android:layout_width="213dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="409dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
         android:text="Planned Date:"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/timeDuetextView"
-        tools:layout_editor_absoluteX="16dp" />
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeDuetextView" />
 
     <TextView
         android:id="@+id/dateDuetextView"
@@ -90,7 +97,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:text="Date: "
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/dueDateEditText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +110,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:text="Date: "
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plannedTexTtextView" />
 
@@ -114,7 +121,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:text="Time: "
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateDuetextView" />
 
@@ -125,14 +132,14 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:text="Time: "
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/datePlannedtextView" />
 
     <EditText
         android:id="@+id/taskTypeEditText"
         android:layout_width="285dp"
-        android:layout_height="46dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="Tag"
@@ -145,20 +152,20 @@
         android:id="@+id/taskDescEditText"
         android:layout_width="285dp"
         android:layout_height="46dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="Task"
         android:ems="10"
         android:hint="Enter description of task"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/TaskTxTtextView"
         app:layout_constraintTop_toBottomOf="@+id/AddTasks" />
 
     <EditText
         android:id="@+id/taskDescEditStatus"
         android:layout_width="285dp"
-        android:layout_height="46dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:autofillHints="Status"

@@ -67,7 +67,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.checklistImgView:
-                startActivity(new Intent(this, AddTaskActivity.class));
+                startActivity(new Intent(this, ToDoList.class));
         }
     }
 

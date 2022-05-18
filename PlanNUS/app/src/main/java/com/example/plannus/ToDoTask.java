@@ -2,13 +2,16 @@ package com.example.plannus;
 
 public class ToDoTask {
 
-    private String moduleName, task, status, deadLine;
+    private String moduleName, task, status, deadLineDate, deadLineTime, plannedDate, plannedTime;
 
-    public ToDoTask(String moduleName, String task, String status, String deadLine) {
+    public ToDoTask(String moduleName, String task, String status, String deadLineDate, String deadLineTime, String plannedDate, String plannedTime) {
         this.moduleName = moduleName;
         this.task = task;
         this.status = status;
-        this.deadLine = deadLine;
+        this.deadLineDate = deadLineDate;
+        this.deadLineTime = deadLineTime;
+        this.plannedDate = plannedDate;
+        this.plannedTime = plannedTime;
     }
 
     public String getModuleName() {
@@ -23,7 +26,13 @@ public class ToDoTask {
         return status;
     }
 
-    public String getDeadLine() {
-        return deadLine;
+    public String getDeadLineDate() {
+        return deadLineDate;
     }
+
+    public String getDeadLineTime() { return deadLineTime; }
+
+    public String getPlannedDate() { return  plannedDate; }
+
+    public String getPlannedTime() { return plannedTime; }
 }

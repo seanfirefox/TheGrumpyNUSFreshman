@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private ImageView banner;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private ProgressBar progressBar;
-
+    private FirebaseFirestore mStore;
     private FirebaseAuth mAuth;
 
     @Override
@@ -39,6 +40,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
         banner = (ImageView) findViewById(R.id.registerUserLogo);
+        mStore = FirebaseFirestore.getInstance();
         banner.setOnClickListener(this);
 
         registerUser = (Button) findViewById(R.id.registerUser);
@@ -107,6 +109,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
 
         progressBar.setVisibility(View.VISIBLE);
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -135,5 +138,18 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+        /*
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("CreateUsrSuccess", "Successful User Creation");
+                        } else {
+                            Log.d("CreateUsrFail", "Failed to Create User");
+                        }
+                    }
+                });
+        */
     }
 }

@@ -74,10 +74,8 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String planTime = plannedTime.getText().toString().trim();
 
         ToDoTask t = new ToDoTask(tag, task, stats, deadlineDate, deadLineTime, planDate, planTime);
-        DocumentReference docRef = fDataBase.collection("Users").document(userID);
-        Map<String, ToDoTask> taskList = new HashMap<>();
-        taskList.put(task, t);
-        docRef.set(taskList, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
+        DocumentReference docRef = fDataBase.collection("Users").document(userID).collection("Tasks").document(task);
+        docRef.set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
             Log.d("TaskCreated", "onSuccess: Task is created");
         } ).addOnFailureListener(new OnFailureListener() {
             @Override

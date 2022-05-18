@@ -62,61 +62,60 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
 
         createTask = findViewById(R.id.createTask);
         createTask.setOnClickListener(this);
-        list = new ArrayList<>();
-        myAdapter = new MyAdapter(this, list);
+        list = new ArrayList<ToDoTask>();
+        myAdapter = new MyAdapter(ToDoList.this, list);
         recyclerView.setAdapter(myAdapter);
-
-
-
 
         EventChangeListener();
     }
 
     private void EventChangeListener() {
-        fireStore.collection("Users").document(this.userID).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        fireStore.collection("Users").document(this.userID).collection("Tasks").orderBy("moduleName", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot documentSnapshot = task.getResult();
-                            if (progressDialog.isShowing()) {
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            if(progressDialog.isShowing()) {
                                 progressDialog.dismiss();
                             }
-                                if (documentSnapshot.exists()) {
-                                    Log.d("Successful", "DocumentSnapshot data: " + documentSnapshot.getData());
-                                } else {
-                                    Log.d("Fail", "No Such Document");
-                                }
-                            } else {
-                                if (progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
-                                }
-                                Log.d("Fail", "get failed with", task.getException());
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            if(dc.getType() == DocumentChange.Type.ADDED) {
+                                list.add(dc.getDocument().toObject(ToDoTask.class));
                             }
                         }
-                    });
-//    Listener(new EventListener<QuerySnapshot>() {
+
+                        myAdapter.notifyDataSetChanged();
+                        if(progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                });
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //                    @Override
-//                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                        if (error != null) {
-//                            if(progressDialog.isShowing()) {
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            DocumentSnapshot documentSnapshot = task.getResult();
+//                            if (progressDialog.isShowing()) {
 //                                progressDialog.dismiss();
 //                            }
-//                            Log.e("Firestore error", error.getMessage());
-//                            return;
-//                        }
-//                        for (DocumentChange dc : value.getDocumentChanges()) {
-//                            if(dc.getType() == DocumentChange.Type.ADDED) {
-//                                list.add(dc.getDocument().toObject(ToDoTask.class));
+//                            if (documentSnapshot.exists()) {
+//                                Log.d("Successful", "DocumentSnapshot data: " + documentSnapshot.getData());
+//                                list.add(documentSnapshot.toObject(ToDoTask.class));
+//                            } else {
+//                                Log.d("Fail", "No Such Document");
 //                            }
-//                        }
-//
-//                        myAdapter.notifyDataSetChanged();
-//                        if(progressDialog.isShowing()) {
-//                            progressDialog.dismiss();
+//                        } else {
+//                            if (progressDialog.isShowing()) {
+//                                progressDialog.dismiss();
+//                            }
+//                            Log.d("Fail", "get failed with", task.getException());
 //                        }
 //                    }
 //                });
+
 
     }
 

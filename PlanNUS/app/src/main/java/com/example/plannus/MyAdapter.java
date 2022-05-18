@@ -35,7 +35,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.moduleName.setText(toDoTask.getModuleName());
         holder.task.setText(toDoTask.getTask());
         holder.status.setText(toDoTask.getStatus());
-        holder.deadLine.setText(toDoTask.getDeadLine());
+        holder.deadlineDate.setText(toDoTask.getDeadLineDate());
+        holder.deadlineTime.setText(toDoTask.getDeadLineTime());
+        holder.plannedDate.setText(toDoTask.getPlannedDate());
+        holder.plannedTime.setText(toDoTask.getPlannedTime());
     }
 
     @Override
@@ -45,7 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView moduleName, task, status, deadLine;
+        TextView moduleName, task, status, deadlineDate, deadlineTime, plannedDate, plannedTime;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,7 +56,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             moduleName = itemView.findViewById(R.id.moduleName);
             task = itemView.findViewById(R.id.toDoTask);
             status = itemView.findViewById(R.id.status);
-            deadLine = itemView.findViewById(R.id.deadline);
+            deadlineDate = itemView.findViewById(R.id.deadlineDate);
+            deadlineTime = itemView.findViewById(R.id.deadlineTime);
+            plannedDate = itemView.findViewById(R.id.plannedDate);
+            plannedTime = itemView.findViewById(R.id.plannedTime);
         }
     }
 }

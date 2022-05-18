@@ -73,7 +73,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String planDate = plannedDate.getText().toString().trim();
         String planTime = plannedTime.getText().toString().trim();
 
-        ToDoTask t = new ToDoTask(tag, task, stats, deadlineDate);
+        ToDoTask t = new ToDoTask(tag, task, stats, deadlineDate, deadLineTime, planDate, planTime);
         DocumentReference docRef = fDataBase.collection("Users").document(userID);
         Map<String, ToDoTask> taskList = new HashMap<>();
         taskList.put(task, t);

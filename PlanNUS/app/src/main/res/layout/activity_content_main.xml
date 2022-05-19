@@ -46,21 +46,15 @@
         app:layout_constraintStart_toEndOf="@+id/mainContentLogo"
         app:layout_constraintTop_toBottomOf="@+id/hiName" />
 
-    <ScrollView
-        android:contentDescription="@string/Announcements"
-        android:id="@+id/Announcements"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskListAnnouncements"
         android:layout_width="407dp"
         android:layout_height="226dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/OtherApplications"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeBackMsg">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/mainContentLogo" />
 
     <ScrollView
         android:id="@+id/OtherApplications"
@@ -70,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Announcements"
+        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout

@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.MyViewHolder> {
 
     Context context;
 
     ArrayList<ToDoTask> list;
 
-    public MyAdapter(Context context, ArrayList<ToDoTask> list) {
+    public ToDoListAdapter(Context context, ArrayList<ToDoTask> list) {
         this.context = context;
         this.list = list;
     }
@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         ToDoTask toDoTask = list.get(position);
         holder.moduleName.setText(toDoTask.getModuleName());
         holder.task.setText(toDoTask.getTask());
-        holder.status.setText(toDoTask.getStatus());
+        holder.status.setText(toDoTask.getStatus() + "%");
         holder.deadlineDate.setText(toDoTask.getDeadLineDate());
         holder.deadlineTime.setText(toDoTask.getDeadLineTime());
         holder.plannedDate.setText(toDoTask.getPlannedDate());
@@ -53,11 +53,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            moduleName = itemView.findViewById(R.id.moduleName);
-            task = itemView.findViewById(R.id.toDoTask);
+            moduleName = itemView.findViewById(R.id.moduleNameAnnouncements);
+            task = itemView.findViewById(R.id.toDoTaskAnnouncements);
             status = itemView.findViewById(R.id.status);
-            deadlineDate = itemView.findViewById(R.id.deadlineDate);
-            deadlineTime = itemView.findViewById(R.id.deadlineTime);
+            deadlineDate = itemView.findViewById(R.id.deadlineDateAnnouncements);
+            deadlineTime = itemView.findViewById(R.id.deadlineTimeAnnouncements);
             plannedDate = itemView.findViewById(R.id.plannedDate);
             plannedTime = itemView.findViewById(R.id.plannedTime);
         }

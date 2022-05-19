@@ -1,6 +1,5 @@
 package com.example.plannus;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,16 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -33,21 +24,21 @@ import java.util.ArrayList;
 
 public class ToDoList extends AppCompatActivity implements View.OnClickListener {
 
-    RecyclerView recyclerView;
-    FirebaseFirestore fireStore;
-    MyAdapter myAdapter;
-    ArrayList<ToDoTask> list;
+    private RecyclerView recyclerView;
+    private FirebaseFirestore fireStore;
+    private ToDoListAdapter toDoListAdapter;
+    private ArrayList<ToDoTask> list;
     private Button createTask;
     private FirebaseAuth mAuth;
     private String userID;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
 
-        recyclerView = findViewById(R.id.taskList);
+        recyclerView = findViewById(R.id.taskListAnnouncements);
         fireStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         userID = mAuth.getCurrentUser().getUid();
@@ -63,14 +54,17 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
         createTask = findViewById(R.id.createTask);
         createTask.setOnClickListener(this);
         list = new ArrayList<ToDoTask>();
-        myAdapter = new MyAdapter(ToDoList.this, list);
-        recyclerView.setAdapter(myAdapter);
+        toDoListAdapter = new ToDoListAdapter(ToDoList.this, list);
+        recyclerView.setAdapter(toDoListAdapter);
 
         EventChangeListener();
     }
 
     private void EventChangeListener() {
-        fireStore.collection("Users").document(this.userID).collection("Tasks").orderBy("moduleName", Query.Direction.ASCENDING)
+        fireStore.collection("Users")
+                .document(this.userID)
+                .collection("Tasks")
+                .orderBy("deadLineTime", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -87,7 +81,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
                             }
                         }
 
-                        myAdapter.notifyDataSetChanged();
+                        toDoListAdapter.notifyDataSetChanged();
                         if(progressDialog.isShowing()) {
                             progressDialog.dismiss();
                         }

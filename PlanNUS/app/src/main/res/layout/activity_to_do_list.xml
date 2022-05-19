@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskList"
+        android:id="@+id/taskListAnnouncements"
         android:layout_width="409dp"
         android:layout_height="608dp"
         app:layout_constraintBottom_toTopOf="@+id/createTask"

@@ -6,10 +6,10 @@ We used an SMT Solver because timetable scheduling could be seen as a constraint
 
 ## Requirements
 
-'''bash
+```bash
 Python 3
 z3
 z3-solver
 json
 requests
-'''
+```

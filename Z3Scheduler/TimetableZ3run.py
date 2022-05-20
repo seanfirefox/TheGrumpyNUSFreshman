@@ -2,7 +2,7 @@ from scrapper import *
 from timetableZ3 import *
 
 OPTIONS = [
-
+    "OneFreeDay"
 ]
 
 numMods = int(input("How many modules are you intending to take ? \n"))
@@ -17,6 +17,11 @@ scrapper.scrape()
 
 timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed)
 timetable.optimiseTimetable()
+for item in OPTIONS :
+    print("Do You want the " + item + " constraint ? \n")
+    if (input() == "Yes") :
+        TimeTableSchedulerZ3.OPTIONS[item] = True
+        timetable.addOtherConstraints()
 
 if (timetable.lastSolnStatus == unsat) :
     print("Terminating . . . \n")

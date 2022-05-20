@@ -1,6 +1,7 @@
 package com.example.plannus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +20,59 @@ import java.util.ArrayList;
 public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoListAdapter.TaskHolder> {
     private OnItemClickListener listener;
 
+
     public ToDoListAdapter(@NonNull FirestoreRecyclerOptions<ToDoTask> options) {
         super(options);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull TaskHolder holder, int position, @NonNull ToDoTask model) {
-        holder.taskName.setText(model.getTask());
-        holder.tagName.setText(model.getModuleName());
-        holder.status.setText(model.getStatus());
-        holder.dueDate.setText(model.getDeadLineDate());
-        holder.dueTime.setText(model.getDeadLineTime());
-        holder.plannedDate.setText(model.getPlannedDate());
-        holder.plannedTime.setText(model.getPlannedTime());
+//        holder.taskName.setText(model.getTask());
+//        holder.tagName.setText(model.getModuleName());
+//        holder.status.setText(model.getStatus());
+//        holder.dueDate.setText(model.getDeadLineDate());
+//        holder.dueTime.setText(model.getDeadLineTime());
+//        holder.plannedDate.setText(model.getPlannedDate());
+//        holder.plannedTime.setText(model.getPlannedTime());
+
+        String moduleName, task, status, deadlineDate, deadlineTime, plannedDate, plannedTime;
+        String[] taskInfo;
+
+        moduleName = model.getModuleName();
+        task = model.getTask();
+        status = model.getStatus();
+        deadlineDate = model.getDeadLineDate();
+        deadlineTime = model.getDeadLineTime();
+        plannedDate = model.getPlannedDate();
+        plannedTime = model.getPlannedTime();
+
+
+        holder.taskName.setText(moduleName);
+        holder.tagName.setText(task);
+        holder.status.setText(status + "%");
+        holder.dueDate.setText(deadlineDate);
+        holder.dueTime.setText(deadlineTime);
+        holder.plannedDate.setText(plannedDate);
+        holder.plannedTime.setText(plannedTime);
+
+        taskInfo = new String[] {
+                moduleName,
+                task,
+                status,
+                deadlineDate,
+                deadlineTime,
+                plannedDate,
+                plannedTime};
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), EditTaskActivity.class);
+                intent.putExtra("taskInfo", taskInfo);
+
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });;
     }
 
     @NonNull
@@ -65,15 +106,15 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
             plannedDate = itemView.findViewById(R.id.PlannedDate);
             plannedTime = itemView.findViewById(R.id.PlannedTime);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION && listener != null) {
-                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
-                    }
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = getAdapterPosition();
+//                    if (position != RecyclerView.NO_POSITION && listener != null) {
+//                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+//                    }
+//                }
+//            });
         }
     }
 

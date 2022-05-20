@@ -8,178 +8,189 @@
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/taskHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/toDoTaskName"
+            android:text="Task :"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Task :"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/toDoTaskName"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="8dp"
+            android:text="Quiz 1"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/toDoTaskAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="Quiz 1"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tagHeader"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/taskHeader"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:text="Tag :"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tagName"
+            android:layout_width="291dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toDoTaskName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/tagHeader"
+            android:text="CS2030S"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
+
+        <TextView
+            android:id="@+id/statusTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_below="@id/tagHeader"
+            android:text="Status :"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Module Name :"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/statusInt"
+            android:layout_width="87dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tagName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="167dp"
+            android:layout_toEndOf="@+id/statusTag"
+            android:text="50%"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/moduleNameAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="CS2030S"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/deadlineDateTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_below="@+id/statusTag"
+            android:text="DeadLine Date:"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Status :"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="50%"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/deadlineDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_below="@+id/statusInt"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/deadlineDateTag"
+            android:text="12122022"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DeadLine Date:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/deadlineDateAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="12122022"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/deadlineTimeTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_below="@+id/deadlineDate"
+            android:text="DeadLine Time:"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DeadLine Time:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/deadlineTimeAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="1300"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/deadlineTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_below="@+id/deadlineDate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/deadlineTimeTag"
+            android:text="1400"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Planned Date:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/plannedDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="12122022"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/PlannedDateTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_below="@+id/deadlineTimeTag"
+            android:text="Planned Date:"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Planned Time:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/PlannedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deadlineTime"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/PlannedDateTag"
+            android:text="10122022"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/plannedTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="1200"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/PlannedTimeTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PlannedDateTag"
+            android:text="Planned Time:"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/PlannedTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PlannedDate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/deadlineTimeTag"
+            android:text="1400"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
+
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

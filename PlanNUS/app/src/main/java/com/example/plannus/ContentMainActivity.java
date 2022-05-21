@@ -89,7 +89,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         taskListAdapter = new AnnouncementsAdapter(options);
         RecyclerView recyclerView = findViewById(R.id.mainTaskListAnnouncements);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(taskListAdapter);
     }
 

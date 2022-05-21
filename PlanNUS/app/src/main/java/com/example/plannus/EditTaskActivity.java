@@ -71,11 +71,9 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.deleteButton:
                 deleteTask();
-                finish();
                 break;
             case R.id.editButton:
                 editask();
-                finish();
                 break;
         }
     }
@@ -103,7 +101,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         } ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("TaskFail", "onFailure: "+ e.toString());
+                Log.d("TaskFail", "onFailure: "+ e);
             }
         });
     }

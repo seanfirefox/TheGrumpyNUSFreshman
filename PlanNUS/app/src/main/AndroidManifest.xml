@@ -16,13 +16,16 @@
         tools:targetApi="31">
         <activity
             android:name=".EditTaskActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ToDoList"/>
         <activity
             android:name=".AddTaskActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ToDoList"/>
         <activity
             android:name=".ToDoList"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ContentMainActivity"/>
         <activity
             android:name=".ContentMainActivity"
             android:exported="false" />

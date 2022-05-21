@@ -7,54 +7,40 @@
     android:background="@color/bg_colour"
     tools:context=".ContentMainActivity">
 
-    <ImageView
-        android:id="@+id/mainContentLogo"
-        android:layout_width="105dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:contentDescription="@string/appIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_only" />
-
     <TextView
         android:id="@+id/hiName"
-        android:layout_width="303dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="401dp"
+        android:layout_height="62dp"
         android:fontFamily="casual"
         android:text="@string/hello"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toEndOf="@+id/mainContentLogo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/welcomeBackMsg"
-        android:layout_width="306dp"
-        android:layout_height="58dp"
+        android:layout_width="401dp"
+        android:layout_height="62dp"
         android:fontFamily="casual"
         android:text="@string/WelcomeMsg"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mainContentLogo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hiName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainTaskListAnnouncements"
         android:layout_width="407dp"
         android:layout_height="226dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/OtherApplications"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainContentLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeBackMsg" />
 
     <ScrollView
         android:id="@+id/OtherApplications"
@@ -73,10 +59,10 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:contentDescription="@string/nusModsDesc"
                 android:id="@+id/nusModsImgView"
                 android:layout_width="354dp"
                 android:layout_height="123dp"
+                android:contentDescription="@string/nusModsDesc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.296"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,10 +83,10 @@
                 tools:ignore="ImageContrastCheck" />
 
             <ImageButton
-                android:contentDescription="@string/ToDoListImg"
                 android:id="@+id/checklistImgView"
                 android:layout_width="354dp"
                 android:layout_height="123dp"
+                android:contentDescription="@string/ToDoListImg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.296"
@@ -138,8 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@string/ToDoList"
                 android:contentDescription="@string/ToDoListImg"
+                android:text="@string/ToDoList"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

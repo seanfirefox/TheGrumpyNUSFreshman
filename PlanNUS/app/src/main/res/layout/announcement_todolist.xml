@@ -8,79 +8,109 @@
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="354dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/taskHeaderAnnouncements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:text="Task :"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/taskHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Task :"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/toDoTaskAnnouncements"
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@id/taskHeaderAnnouncements"
+            android:text="Quiz 1"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
 
-            <TextView
-                android:id="@+id/toDoTaskAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="Quiz 1"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/moduleNameAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="CS2030S"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/moduleNameAnnouncements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_above="@id/deadlineTimeAnnouncements"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@id/toDoTaskAnnouncements"
+            android:text="CS2030S"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
 
-            <TextView
-                android:id="@+id/dueHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Due:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/dueHeaderAnnouncements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Due:"
+            android:layout_margin="8dp"
+            android:layout_below="@id/taskHeaderAnnouncements"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/deadlineDateAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="12122022"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
+        <TextView
+            android:id="@+id/deadlineDateAnnouncements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taskHeaderAnnouncements"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/dueHeaderAnnouncements"
+            android:text="12122022"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
 
-            <TextView
-                android:id="@+id/deadlineTimeAnnouncements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="1300"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/deadlineTimeAnnouncements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taskHeaderAnnouncements"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@id/deadlineDateAnnouncements"
+            android:text="1300"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
 
-    </LinearLayout>
+
+    </RelativeLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:orientation="horizontal">-->
+
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:orientation="horizontal">-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
 </androidx.cardview.widget.CardView>

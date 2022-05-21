@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 public class EditTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button deleteButton;
     private Button editButton;
     private FirebaseFirestore fireStore;
     private FirebaseAuth mAuth;
@@ -58,10 +57,6 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         editPlannedDate.setText(taskInfo[5], TextView.BufferType.EDITABLE);
         editPlannedTime.setText(taskInfo[6], TextView.BufferType.EDITABLE);
 
-
-        deleteButton = findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(this);
-
         editButton = findViewById(R.id.editButton);
         editButton.setOnClickListener(this);
     }
@@ -69,9 +64,6 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.deleteButton:
-                deleteTask();
-                break;
             case R.id.editButton:
                 editask();
                 break;

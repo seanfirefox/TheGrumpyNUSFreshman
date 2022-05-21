@@ -60,7 +60,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         switch(v.getId()) {
             case R.id.saveButton:
                 addTask();
-                finish();
+                // finish();
                 break;
         }
     }

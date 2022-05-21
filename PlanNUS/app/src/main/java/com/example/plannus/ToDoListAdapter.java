@@ -1,11 +1,10 @@
 package com.example.plannus;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,13 +26,6 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
 
     @Override
     protected void onBindViewHolder(@NonNull TaskHolder holder, int position, @NonNull ToDoTask model) {
-//        holder.taskName.setText(model.getTask());
-//        holder.tagName.setText(model.getModuleName());
-//        holder.status.setText(model.getStatus());
-//        holder.dueDate.setText(model.getDeadLineDate());
-//        holder.dueTime.setText(model.getDeadLineTime());
-//        holder.plannedDate.setText(model.getPlannedDate());
-//        holder.plannedTime.setText(model.getPlannedTime());
 
         String moduleName, task, status, deadlineDate, deadlineTime, plannedDate, plannedTime;
         String[] taskInfo;
@@ -106,15 +98,6 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
             plannedDate = itemView.findViewById(R.id.PlannedDate);
             plannedTime = itemView.findViewById(R.id.PlannedTime);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int position = getAdapterPosition();
-//                    if (position != RecyclerView.NO_POSITION && listener != null) {
-//                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
-//                    }
-//                }
-//            });
         }
     }
 
@@ -126,56 +109,3 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         this.listener = listener;
     }
 }
-
-//public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.MyViewHolder> {
-//
-//    Context context;
-//
-//    ArrayList<ToDoTask> list;
-//
-//    public ToDoListAdapter(Context context, ArrayList<ToDoTask> list) {
-//        this.context = context;
-//        this.list = list;
-//    }
-//
-//    @NonNull
-//    @Override
-//    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View v = LayoutInflater.from(context).inflate(R.layout.todotask, parent, false);
-//        return new MyViewHolder(v);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        ToDoTask toDoTask = list.get(position);
-//        holder.moduleName.setText(toDoTask.getModuleName());
-//        holder.task.setText(toDoTask.getTask());
-//        holder.status.setText(toDoTask.getStatus() + "%");
-//        holder.deadlineDate.setText(toDoTask.getDeadLineDate());
-//        holder.deadlineTime.setText(toDoTask.getDeadLineTime());
-//        holder.plannedDate.setText(toDoTask.getPlannedDate());
-//        holder.plannedTime.setText(toDoTask.getPlannedTime());
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return list.size();
-//    }
-//
-//    public static class MyViewHolder extends RecyclerView.ViewHolder {
-//
-//        TextView moduleName, task, status, deadlineDate, deadlineTime, plannedDate, plannedTime;
-//
-//        public MyViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//
-//            moduleName = itemView.findViewById(R.id.moduleNameAnnouncements);
-//            task = itemView.findViewById(R.id.toDoTaskAnnouncements);
-//            status = itemView.findViewById(R.id.status);
-//            deadlineDate = itemView.findViewById(R.id.deadlineDateAnnouncements);
-//            deadlineTime = itemView.findViewById(R.id.deadlineTimeAnnouncements);
-//            plannedDate = itemView.findViewById(R.id.plannedDate);
-//            plannedTime = itemView.findViewById(R.id.plannedTime);
-//        }
-//    }
-//}

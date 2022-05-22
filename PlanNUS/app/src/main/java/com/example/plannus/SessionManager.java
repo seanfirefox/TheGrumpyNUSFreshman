@@ -15,8 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Objects;
-
 public class SessionManager {
 
     private static SessionManager sm = null;

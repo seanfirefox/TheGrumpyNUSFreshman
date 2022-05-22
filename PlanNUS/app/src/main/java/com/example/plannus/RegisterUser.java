@@ -53,7 +53,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
 
         sessionManager.register(new User(fullName, age, email, password));
 

@@ -13,6 +13,7 @@
         android:layout_height="62dp"
         android:fontFamily="casual"
         android:text="@string/hello"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -35,14 +36,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainTaskListAnnouncements"
-        android:layout_width="407dp"
-        android:layout_height="226dp"
+        android:layout_width="410dp"
+        android:layout_height="218dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeBackMsg" />
 
-    <ScrollView
+    <LinearLayout
         android:id="@+id/OtherApplications"
         android:layout_width="408dp"
         android:layout_height="371dp"
@@ -56,84 +57,87 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/OtherAppsConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <ImageButton
+            <Button
                 android:id="@+id/nusModsImgView"
-                android:layout_width="354dp"
-                android:layout_height="123dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
                 android:contentDescription="@string/nusModsDesc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/plannerTextView"
-                app:srcCompat="@drawable/nusmods" />
-
-            <ImageButton
-                android:id="@+id/calendarImgView"
-                android:layout_width="354dp"
-                android:layout_height="123dp"
-                android:contentDescription="@string/CalendarImg"
-                android:scrollbarFadeDuration="250"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendarTextView"
-                app:srcCompat="@drawable/calendarimg"
-                tools:ignore="ImageContrastCheck" />
-
-            <ImageButton
-                android:id="@+id/checklistImgView"
-                android:layout_width="354dp"
-                android:layout_height="123dp"
-                android:contentDescription="@string/ToDoListImg"
+                android:text="Generate a Timetable"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.296"
+                app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
-                app:srcCompat="@drawable/checklist" />
+                app:srcCompat="@drawable/nusmods" />
+
+            <Button
+                android:id="@+id/calendarImgView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/CalendarImg"
+                android:scrollbarFadeDuration="250"
+                android:text="My Calendar"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/toDoListTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="ImageContrastCheck" />
+
+            <Button
+                android:id="@+id/checklistImgView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/ToDoListImg"
+                android:text="My Tasks"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/plannerTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/calendarTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/Calendar"
+                android:text="See What You Have On Today !"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/calendarImgView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.058"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
 
             <TextView
                 android:id="@+id/plannerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Timetable"
+                android:layout_marginBottom="12dp"
+                android:text="Plan Your Timetable !"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/nusModsImgView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.061"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendarImgView" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/toDoListTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
                 android:contentDescription="@string/ToDoListImg"
-                android:text="@string/ToDoList"
+                android:text="See What You Have To Do Today !"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nusModsImgView" />
+                app:layout_constraintBottom_toTopOf="@+id/checklistImgView"
+                tools:layout_editor_absoluteX="23dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

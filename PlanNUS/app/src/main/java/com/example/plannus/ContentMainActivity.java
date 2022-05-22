@@ -14,23 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class ContentMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button checklistImgView;
-    private FirebaseFirestore fireStore;
+    private Button checklistButton, timetableGenerator, calendarButton;
     private AnnouncementsAdapter taskListAdapter;
-
-    private FirebaseAuth fAuth;
-    private DatabaseReference dRef;
     private TextView wlcMsg;
     private User user;
     private String userID;
@@ -42,22 +35,30 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_main);
 
-        sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth().getCurrentUser().getUid();
+        initVars();
         initProfile();
 
-        fireStore = FirebaseFirestore.getInstance();
+        setUpRecyclerView();
+    }
+
+    public void initVars() {
+        sessionManager = SessionManager.get();
+        userID = sessionManager.getAuth().getCurrentUser().getUid();
+
         taskRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(this.userID)
                 .collection("Tasks");
 
-        checklistImgView = findViewById(R.id.checklistImgView);
-        checklistImgView.setOnClickListener(this);
+        checklistButton = findViewById(R.id.checklistImgView);
+        checklistButton.setOnClickListener(this);
 
-        setUpRecyclerView();
+        timetableGenerator = findViewById(R.id.nusModsImgView);
+        timetableGenerator.setOnClickListener(this);
+
+        calendarButton = findViewById(R.id.calendarImgView);
+        calendarButton.setOnClickListener(this);
     }
-
 
     private void initProfile() {
         sessionManager.getdRef()
@@ -108,6 +109,12 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v.getId() == R.id.checklistImgView) {
             startActivity(new Intent(this, ToDoList.class));
+        } else if (v.getId() == R.id.calendarImgView) {
+            Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
+        } else if (v.getId() == R.id.nusModsImgView) {
+            Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
+        } else {
+            
         }
     }
 

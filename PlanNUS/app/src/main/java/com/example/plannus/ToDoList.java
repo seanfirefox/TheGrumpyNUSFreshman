@@ -11,34 +11,40 @@ import android.view.View;
 import android.widget.Button;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 
 public class ToDoList extends AppCompatActivity implements View.OnClickListener {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String userID;
     private CollectionReference taskRef;
     private ToDoListAdapter adapter;
     private Button createTask;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
+        initVars();
+        setUpRecyclerView();
+    }
 
-        userID = mAuth.getCurrentUser().getUid();
-        taskRef = db.collection("Users")
-                .document(this.userID)
-                .collection("Tasks");
+    public void initVars() {
+
+        sessionManager = SessionManager.get();
+        userID = sessionManager.getAuth()
+                .getCurrentUser()
+                .getUid();
+
         createTask = findViewById(R.id.createTask);
         createTask.setOnClickListener(this);
 
-        setUpRecyclerView();
+        taskRef = sessionManager.getFireStore()
+                .collection("Users")
+                .document(this.userID)
+                .collection("Tasks");
     }
 
     private void setUpRecyclerView() {
@@ -55,7 +61,12 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
         recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+        slider().attachToRecyclerView(recyclerView);
+
+    }
+
+    private ItemTouchHelper slider() {
+        return new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -66,8 +77,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 adapter.deleteItem(viewHolder.getBindingAdapterPosition());
             }
-        }).attachToRecyclerView(recyclerView);
-
+        });
     }
 
     @Override
@@ -84,9 +94,8 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.createTask:
-                startActivity(new Intent(this, AddTaskActivity.class));
+        if (v.getId() == R.id.createTask) {
+            startActivity(new Intent(this, AddTaskActivity.class));
         }
     }
 }

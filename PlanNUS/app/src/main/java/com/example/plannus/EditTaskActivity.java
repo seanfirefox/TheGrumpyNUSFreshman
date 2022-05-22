@@ -30,7 +30,20 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+        initVars();
+        renderVars();
+        editButton = findViewById(R.id.editButton);
+        editButton.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.editButton) {
+            editTask();
+        }
+    }
+
+    public void initVars() {
         sessionManager = SessionManager.get();
         userId = sessionManager.getAuth().getCurrentUser().getUid();
         taskInfo = getIntent().getStringArrayExtra("taskInfo");
@@ -44,7 +57,9 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         editDueTime = findViewById(R.id.editDueTime);
         editPlannedDate = findViewById(R.id.editPlannedDate);
         editPlannedTime = findViewById(R.id.editPlannedTime);
+    }
 
+    public void renderVars() {
         editTask.setText(task, TextView.BufferType.EDITABLE);
         editStatus.setText(taskInfo[2], TextView.BufferType.EDITABLE);
         editTag.setText(taskInfo[0], TextView.BufferType.EDITABLE);
@@ -52,19 +67,9 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         editDueTime.setText(taskInfo[4], TextView.BufferType.EDITABLE);
         editPlannedDate.setText(taskInfo[5], TextView.BufferType.EDITABLE);
         editPlannedTime.setText(taskInfo[6], TextView.BufferType.EDITABLE);
-
-        editButton = findViewById(R.id.editButton);
-        editButton.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.editButton) {
-            editask();
-        }
-    }
-
-    private void editask() {
+    private void editTask() {
         String editedTask = editTask.getText().toString().trim();
         String stats = editStatus.getText().toString().trim();
         String tag = editTag.getText().toString().trim();

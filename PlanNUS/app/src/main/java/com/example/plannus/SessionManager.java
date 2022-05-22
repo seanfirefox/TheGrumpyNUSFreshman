@@ -1,21 +1,21 @@
 package com.example.plannus;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class SessionManager {
 
@@ -25,8 +25,10 @@ public class SessionManager {
     private final FirebaseFirestore fireStore;
     private final DatabaseReference dRef;
     private final FirebaseDatabase database;
-    private static boolean loginStatus = false;
+    private String userID;
+    private User user;
 
+    private static boolean loginStatus = false;
     private static boolean registerStatus = false;
 
     private SessionManager(FirebaseAuth fAuth, FirebaseFirestore fireStore, FirebaseDatabase database) {
@@ -73,8 +75,7 @@ public class SessionManager {
                 });
     }
 
-    public void login(String email, String password, Context context) {
-        Log.d("String", context.toString());
+    public void login(String email, String password) {;
         fAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -86,6 +87,31 @@ public class SessionManager {
                         }
                     }
                 });
+    }
+
+    private String getUserID() {
+        if (userID == null) {
+            userID = fAuth.getCurrentUser().getUid();
+        }
+        return userID;
+    }
+
+    public User getUser() {
+            dRef.child(getUserID())
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            user = snapshot.getValue(User.class);
+                            Log.d("Expose Name", user.fullName);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.d("Failed", "unable to access name");
+                        }
+                    });
+
+        return user;
     }
 
     public boolean getLoginStatus() {

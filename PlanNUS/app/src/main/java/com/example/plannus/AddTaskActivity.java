@@ -3,12 +3,14 @@ package com.example.plannus;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,18 +29,21 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     private Button saveTask;
     private ImageButton backButton;
     private EditText newTask, newStatus, newTag, dueDate, dueTime, plannedDate, plannedTime;
-    private FirebaseFirestore fDataBase;
-    private FirebaseAuth fAuth;
     private String userID;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        initVars();
+    }
 
-        fAuth = FirebaseAuth.getInstance();
-        fDataBase = FirebaseFirestore.getInstance();
-        userID = fAuth.getCurrentUser().getUid();
+    public void initVars() {
+        sessionManager = SessionManager.get();
+        userID = sessionManager.getAuth()
+                .getCurrentUser()
+                .getUid();
 
         saveTask = findViewById(R.id.saveButton);
         saveTask.setOnClickListener(this);
@@ -57,11 +62,10 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.saveButton:
-                addTask();
-                // finish();
-                break;
+        if (v.getId() == R.id.saveButton) {
+            addTask();
+        } else {
+            Log.d("No Other Button", "No Other button");
         }
     }
 
@@ -74,14 +78,23 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String planDate = plannedDate.getText().toString().trim();
         String planTime = plannedTime.getText().toString().trim();
 
-        ToDoTask t = new ToDoTask(tag, task, stats, deadlineDate, deadLineTime, planDate, planTime);
-        DocumentReference docRef = fDataBase.collection("Users").document(userID).collection("Tasks").document(task);
-        docRef.set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
+        Log.d("QUERY SUCCESS", "Query of Addition was successful");
+        ToDoTask newTask = new ToDoTask(tag, task, stats, deadlineDate, deadLineTime, planDate, planTime);
+        DocumentReference docRef = sessionManager.getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("Tasks")
+                .document(task);
+        docRef.set(newTask, SetOptions.merge())
+                .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
             Log.d("TaskCreated", "onSuccess: Task is created");
+            Toast.makeText(AddTaskActivity.this, "Task added Successfully",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(AddTaskActivity.this, ToDoList.class));
         } ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("TaskFail", "onFailure: "+ e.toString());
+                Toast.makeText(AddTaskActivity.this, "Failed to Create Task", Toast.LENGTH_LONG).show();
             }
         });
     }

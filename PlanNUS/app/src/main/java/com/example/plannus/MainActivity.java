@@ -31,12 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText passWord;
     private ProgressBar progressBar;
     private Button loginButton;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sessionManager = SessionManager.get();
         initVars();
     }
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
     public void tryLogin() {
         String email = this.emailAddress.getText().toString().trim();
         String password = this.passWord.getText().toString().trim();
@@ -60,20 +62,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressBar.setVisibility(View.VISIBLE);
 
-        FirebaseAuth dataBase = FirebaseAuth.getInstance();
-        dataBase.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                         if (task.isSuccessful()) {
-                             startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
-                         } else {
-                             Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
-                             progressBar.setVisibility(View.GONE);
-                         }
-                    }
-                                       }
-                );
+        sessionManager.login(email, password, MainActivity.this);
+        if (sessionManager.getLoginStatus()) {
+            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
+        } else {
+            Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void initVars() {

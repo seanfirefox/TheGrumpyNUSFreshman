@@ -1,6 +1,10 @@
 package com.example.plannus;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class SessionManager extends AppCompatActivity {
+public class SessionManager {
 
     private static SessionManager sm = null;
 
@@ -21,6 +25,9 @@ public class SessionManager extends AppCompatActivity {
     private final FirebaseFirestore fireStore;
     private final DatabaseReference dRef;
     private final FirebaseDatabase database;
+    private static boolean loginStatus = false;
+
+    private static boolean registerStatus = false;
 
     private SessionManager(FirebaseAuth fAuth, FirebaseFirestore fireStore, FirebaseDatabase database) {
         this.fAuth = fAuth;
@@ -31,6 +38,8 @@ public class SessionManager extends AppCompatActivity {
 
     public static SessionManager get() {
         if (sm == null) {
+            loginStatus = false;
+            registerStatus = false;
             sm = new SessionManager(FirebaseAuth.getInstance(),
                     FirebaseFirestore.getInstance(),
                     FirebaseDatabase.getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/"));
@@ -51,8 +60,10 @@ public class SessionManager extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
+                                                registerStatus = true;
                                                 Log.d("Successful login", "Successful Login");
                                             } else {
+                                                registerStatus = false;
                                                 Log.d("Unsuccessful login", "Unsuccessful login");
                                             }
                                         }
@@ -60,5 +71,28 @@ public class SessionManager extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void login(String email, String password, Context context) {
+        Log.d("String", context.toString());
+        fAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            loginStatus = true;
+                        } else {
+                            loginStatus = false;
+                        }
+                    }
+                });
+    }
+
+    public boolean getLoginStatus() {
+        return loginStatus;
+    }
+
+    public boolean getRegisterStatus() {
+        return registerStatus;
     }
 }

@@ -54,6 +54,11 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, MainActivity.class));
         } else {
             registerUser();
+            if (sessionManager.getRegisterStatus()) {
+                Toast.makeText(this, "Registered successfully, please go back to Main Page to login", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Failed to register, please try again", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

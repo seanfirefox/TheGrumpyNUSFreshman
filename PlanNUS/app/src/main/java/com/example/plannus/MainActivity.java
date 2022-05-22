@@ -12,17 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.datatransport.runtime.dagger.Provides;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import javax.inject.Singleton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -61,8 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         progressBar.setVisibility(View.VISIBLE);
+        sessionManager.login(email, password);
 
-        sessionManager.login(email, password, MainActivity.this);
+
         if (sessionManager.getLoginStatus()) {
             startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
         } else {

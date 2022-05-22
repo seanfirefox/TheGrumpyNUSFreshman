@@ -36,12 +36,14 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     private User user;
     private String userID;
     private CollectionReference taskRef;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_main);
 
+        sessionManager = SessionManager.get();
         fAuth = FirebaseAuth.getInstance();
         userID = fAuth.getCurrentUser().getUid();
         initProfile();
@@ -59,24 +61,32 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
 
 
     private void initProfile() {
-        dRef = FirebaseDatabase
-                .getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("Users")
-                .child(userID);
-        dRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user = snapshot.getValue(User.class);
-                wlcMsg = findViewById(R.id.hiName);
-                wlcMsg.setText("Hi " + user.fullName + " !");
-                Log.d("Expose Name", user.fullName);
-            }
+//        dRef = FirebaseDatabase
+//                .getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/")
+//                .getReference("Users")
+//                .child(userID);
+//        dRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                user = snapshot.getValue(User.class);
+//                wlcMsg = findViewById(R.id.hiName);
+//                wlcMsg.setText("Hi " + user.fullName + " !");
+//                Log.d("Expose Name", user.fullName);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+        user = sessionManager.getUser();
+        if (user == null) {
+            Toast.makeText(ContentMainActivity.this, "Access got cancelled", Toast.LENGTH_LONG).show();
+        } else {
+            wlcMsg = findViewById(R.id.hiName);
+            wlcMsg.setText("Hi " + user.fullName + " !");
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ContentMainActivity.this, "Access got cancelled", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     private void setUpRecyclerView() {

@@ -11,8 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,20 +19,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private ImageView banner;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private ProgressBar progressBar;
-    private FirebaseFirestore mStore;
-    private FirebaseAuth mAuth;
     private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
         sessionManager = SessionManager.get();
-
         initVars();
-        mAuth = FirebaseAuth.getInstance();
-        mStore = FirebaseFirestore.getInstance();
     }
 
     @Override

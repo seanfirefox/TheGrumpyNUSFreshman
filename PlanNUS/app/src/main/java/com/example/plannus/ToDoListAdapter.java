@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoListAdapter.TaskHolder> {
-//    private OnItemClickListener listener;
 
     public ToDoListAdapter(@NonNull FirestoreRecyclerOptions<ToDoTask> options) {
         super(options);
@@ -97,12 +95,4 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
 
         }
     }
-
-//    public interface OnItemClickListener {
-//        void onItemClick(DocumentSnapshot documentSnapshot, int position);
-//    }
-//
-//    public void setOnItemClickListener(OnItemClickListener listener) {
-//        this.listener = listener;
-//    }
 }

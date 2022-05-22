@@ -9,23 +9,16 @@
 
     <TextView
         android:id="@+id/myTasks"
-        android:layout_width="261dp"
-        android:layout_height="73dp"
+        android:layout_width="404dp"
+        android:layout_height="72dp"
         android:text="My Tasks"
         android:textColor="#000000"
         android:textSize="50sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:background="@drawable/backbutton"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp" />
 
     <Button
         android:id="@+id/createTask"

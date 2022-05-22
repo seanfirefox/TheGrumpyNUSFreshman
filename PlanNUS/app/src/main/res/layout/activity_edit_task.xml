@@ -7,258 +7,181 @@
     android:background="@color/bg_colour"
     tools:context=".EditTaskActivity">
 
-    <ImageButton
-        android:id="@+id/backButtonEditTask"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:background="@drawable/backbutton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/editTasks"
-        android:layout_width="347dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="409dp"
+        android:layout_height="62dp"
         android:text="Edit/Delete Task"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/backButtonEditTask"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="4dp" />
 
     <TextView
         android:id="@+id/editTaskTxTtextView"
         android:layout_width="113dp"
         android:layout_height="36dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="52dp"
         android:text="Task: "
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTasks" />
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="123dp" />
 
     <TextView
         android:id="@+id/editStatusTexTtextView"
         android:layout_width="113dp"
         android:layout_height="36dp"
-        android:layout_marginTop="8dp"
         android:text="Status: "
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskTxTtextView" />
+        tools:layout_editor_absoluteY="168dp" />
 
     <TextView
         android:id="@+id/editTagTexTtextView"
         android:layout_width="113dp"
         android:layout_height="36dp"
-        android:layout_marginTop="12dp"
         android:text="Tag: "
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/editTag"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editStatusTexTtextView" />
+        tools:layout_editor_absoluteY="216dp" />
 
     <TextView
         android:id="@+id/editDeadLineTexTtextView"
         android:layout_width="409dp"
         android:layout_height="37dp"
-        android:layout_marginTop="28dp"
-        android:text="Deadline: "
+        android:text="   Deadline: "
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTagTexTtextView" />
+        tools:layout_editor_absoluteY="280dp" />
 
     <TextView
         android:id="@+id/editPlannedTexTtextView"
         android:layout_width="409dp"
         android:layout_height="37dp"
-        android:layout_marginTop="20dp"
-        android:text="Planned Date:"
+        android:text="   Planned Date:"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTimeDuetextView" />
+        tools:layout_editor_absoluteY="442dp" />
 
     <TextView
         android:id="@+id/editDateDuetextView"
         android:layout_width="56dp"
         android:layout_height="40dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
         android:text="Date: "
         android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/editDueDate"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDeadLineTexTtextView" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="330dp" />
 
     <TextView
         android:id="@+id/editDatePlannedtextView"
         android:layout_width="56dp"
         android:layout_height="40dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
         android:text="Date: "
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPlannedTexTtextView" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="491dp" />
 
     <TextView
         android:id="@+id/editTimeDuetextView"
         android:layout_width="56dp"
         android:layout_height="40dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
         android:text="Time: "
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDateDuetextView" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="382dp" />
 
     <TextView
         android:id="@+id/editTimePlannedtextView2"
         android:layout_width="56dp"
         android:layout_height="40dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
         android:text="Time: "
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDatePlannedtextView" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="543dp" />
 
     <EditText
         android:id="@+id/editTag"
         android:layout_width="285dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:autofillHints="Tag"
         android:ems="10"
         android:hint="e.g CS1101S/Personal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editStatusDesc" />
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="218dp" />
 
     <EditText
         android:id="@+id/editTaskDesc"
         android:layout_width="285dp"
         android:layout_height="46dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
         android:autofillHints="Task"
         android:ems="10"
         android:hint="Enter description of task"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTaskTxTtextView"
-        app:layout_constraintTop_toBottomOf="@+id/editTasks" />
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="115dp" />
 
     <EditText
         android:id="@+id/editStatusDesc"
         android:layout_width="285dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
         android:autofillHints="Status"
         android:ems="10"
         android:hint="% of work completed"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.789"
-        app:layout_constraintStart_toEndOf="@+id/editStatusTexTtextView"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskDesc" />
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="170dp" />
 
     <EditText
         android:id="@+id/editDueDate"
         android:layout_width="285dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
         android:autofillHints="Status"
         android:ems="8"
         android:hint="Due Date Here"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDeadLineTexTtextView" />
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="330dp" />
 
     <EditText
         android:id="@+id/editPlannedDate"
         android:layout_width="285dp"
         android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
         android:autofillHints="Status"
         android:ems="10"
         android:hint="Planned Date Here"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toEndOf="@+id/editDatePlannedtextView"
-        app:layout_constraintTop_toBottomOf="@+id/editPlannedTexTtextView" />
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="491dp" />
 
     <EditText
         android:id="@+id/editDueTime"
         android:layout_width="285dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
         android:autofillHints="Status"
         android:ems="8"
         android:hint="Due Time Here"
         android:inputType="datetime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toEndOf="@+id/editTimeDuetextView"
-        app:layout_constraintTop_toBottomOf="@+id/editDueDate" />
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="382dp" />
 
     <EditText
         android:id="@+id/editPlannedTime"
         android:layout_width="285dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
         android:autofillHints="Status"
         android:ems="10"
         android:hint="Planned Time Here"
         android:inputType="datetime"
-        app:layout_constraintBottom_toTopOf="@+id/editButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toEndOf="@+id/editTimePlannedtextView2"
-        app:layout_constraintTop_toBottomOf="@+id/editPlannedDate"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="543dp" />
 
     <Button
         android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
         android:text="Save Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
-        app:layout_constraintStart_toEndOf="@+id/deleteButton"
-        app:layout_constraintTop_toBottomOf="@+id/editTimePlannedtextView2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="112dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTimePlannedtextView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editPlannedTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

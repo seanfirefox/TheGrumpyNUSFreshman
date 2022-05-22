@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
     private TextView registerUser;
@@ -32,37 +34,26 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     private FirebaseFirestore mStore;
     private FirebaseAuth mAuth;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
+        sessionManager = SessionManager.get();
+
+        initVars();
         mAuth = FirebaseAuth.getInstance();
-        banner = (ImageView) findViewById(R.id.registerUserLogo);
         mStore = FirebaseFirestore.getInstance();
-        banner.setOnClickListener(this);
-
-        registerUser = (Button) findViewById(R.id.registerUser);
-        registerUser.setOnClickListener(this);
-
-        editTextFullName = (EditText)  findViewById(R.id.fullName);
-        editTextAge = (EditText) findViewById(R.id.age);
-        editTextEmail = (EditText) findViewById(R.id.email);
-        editTextPassword = (EditText) findViewById(R.id.password);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.registerUserLogo:
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-            case R.id.registerUser:
-                registerUser();
-                break;
+        if (v.getId() == R.id.registerUserLogo) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            registerUser();
         }
     }
 
@@ -72,76 +63,44 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String fullName = editTextFullName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
 
-        if(fullName.isEmpty()) {
-            editTextFullName.setError("Full name is required!");
-            editTextFullName.requestFocus();
-            return;
-        }
-
-        if(age.isEmpty()) {
-            editTextAge.setError("Age is required!");
-            editTextAge.requestFocus();
-            return;
-        }
-
-        if(email.isEmpty()) {
-            editTextEmail.setError("Email is required!");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please provide valid email!");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if(password.isEmpty()) {
-            editTextPassword.setError("Password is required!");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        if(password.length() < 6) {
-            editTextPassword.setError("Min password length should be 6 characters!");
-            editTextPassword.requestFocus();
+        if (!credentialsCheck(fullName, age, email, password)) {
             return;
         }
 
         progressBar.setVisibility(View.VISIBLE);
 
-        SessionManager sessionManager= new SessionManager(FirebaseAuth.getInstance(),
-                FirebaseFirestore.getInstance(),
-                FirebaseDatabase.getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/"));
-
         sessionManager.register(new User(fullName, age, email, password));
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()) {
-//                            User user = new User(fullName, age, email);
-//
-//                            FirebaseDatabase.getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
-//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//                                            if (task.isSuccessful()) {
-//                                                Log.d("Successfull login", "SUcecsful Login");
-//                                                Toast.makeText(RegisterUser.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
-//                                                progressBar.setVisibility(View.VISIBLE);
-//                                            } else {
-//                                                Toast.makeText(RegisterUser.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-//                                                progressBar.setVisibility(View.GONE);
-//                                            }
-//                                        }
-//                                    });
-//                        } else {
-//                            Toast.makeText(RegisterUser.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
-//                            progressBar.setVisibility(View.GONE);
-//                        }
-//                    }
-//                });
+
+    }
+
+    public void initVars() {
+        banner = findViewById(R.id.registerUserLogo);
+        banner.setOnClickListener(this);
+
+        registerUser = findViewById(R.id.registerUser);
+        registerUser.setOnClickListener(this);
+
+        editTextFullName = findViewById(R.id.fullName);
+        editTextAge = findViewById(R.id.age);
+        editTextEmail = findViewById(R.id.email);
+        editTextPassword = findViewById(R.id.password);
+
+        progressBar = findViewById(R.id.progressBar);
+    }
+
+    public boolean emailCheck(String email) {
+        return !(email.isEmpty()) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public boolean particularsCheck(String fullName, String age) {
+        return !(fullName.isEmpty()) && !(age.isEmpty());
+    }
+
+    public boolean passwordCheck(String password) {
+        return !(password.isEmpty()) && !(password.length() < 6);
+    }
+
+    public boolean credentialsCheck(String fullName, String age, String email, String password) {
+        return particularsCheck(fullName, age) && emailCheck(email) && passwordCheck(password);
     }
 }

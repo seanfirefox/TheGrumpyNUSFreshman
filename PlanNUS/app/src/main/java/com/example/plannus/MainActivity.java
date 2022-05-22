@@ -14,10 +14,15 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.datatransport.runtime.dagger.Provides;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import javax.inject.Singleton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,26 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        register = (TextView) findViewById(R.id.register);
-        register.setOnClickListener(this);
-
-        loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(this);
-
-        emailAddress = (EditText) findViewById(R.id.emailAddress);
-        passWord = (EditText) findViewById(R.id.passWord);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        initVars();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.register:
-                startActivity(new Intent(this, RegisterUser.class));
-                break;
-            case R.id.loginButton:
-                tryLogin();
-                break;
+        if (v.getId() == R.id.register) {
+            startActivity(new Intent(this, RegisterUser.class));
+        } else {
+            tryLogin();
         }
     }
 
@@ -59,25 +53,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String email = this.emailAddress.getText().toString().trim();
         String password = this.passWord.getText().toString().trim();
 
-        // Email Format check
-        if (email.equals("")) {
-            this.emailAddress.setError("Email is required to login!");
-            this.emailAddress.requestFocus();
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            this.emailAddress.setError("Invalid Email Format!");
-            this.emailAddress.requestFocus();
-        } else {}
-
-        // Password Format Check
-        if(password.isEmpty()) {
-            this.passWord.setError("Password is required!");
-            this.passWord.requestFocus();
+        if (!credentialCheck(email, password)) {
+            Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
             return;
-        } else if(password.length() < 6) {
-            this.passWord.setError("Min password length should be 6 characters!");
-            this.passWord.requestFocus();
-            return;
-        } else {}
+        }
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -96,4 +75,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                        }
                 );
     }
+
+    public void initVars() {
+        register = findViewById(R.id.register);
+        register.setOnClickListener(this);
+
+        loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(this);
+
+        emailAddress = findViewById(R.id.emailAddress);
+        passWord = findViewById(R.id.passWord);
+        progressBar = findViewById(R.id.progressBar);
+    }
+
+    public boolean passwordCheck(String password) {
+        return !(password.isEmpty()) && !(password.length() < 6);
+    }
+
+    public boolean emailCheck(String email) {
+        return !(email.isEmpty()) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public boolean credentialCheck(String email, String password) {
+        return passwordCheck(password) && emailCheck(email);
+    }
+
+
+
 }

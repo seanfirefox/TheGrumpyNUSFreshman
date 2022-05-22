@@ -26,9 +26,6 @@ public class SessionManager {
     private String userID;
     private User user;
 
-    private static boolean loginStatus = false;
-    private static boolean registerStatus = false;
-
     private SessionManager(FirebaseAuth fAuth, FirebaseFirestore fireStore, FirebaseDatabase database) {
         this.fAuth = fAuth;
         this.fireStore = fireStore;
@@ -38,8 +35,6 @@ public class SessionManager {
 
     public static SessionManager get() {
         if (sm == null) {
-            loginStatus = false;
-            registerStatus = false;
             sm = new SessionManager(FirebaseAuth.getInstance(),
                     FirebaseFirestore.getInstance(),
                     FirebaseDatabase.getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/"));
@@ -47,76 +42,24 @@ public class SessionManager {
         return sm;
     }
 
-
-    public void register(User user) {
-        fAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            dRef.child(fAuth.getCurrentUser().getUid())
-                                    .setValue(user)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                registerStatus = true;
-                                                Log.d("Successful login", "Successful Login");
-                                            } else {
-                                                registerStatus = false;
-                                                Log.d("Unsuccessful login", "Unsuccessful login");
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
+    public FirebaseAuth getAuth() {
+        return fAuth;
     }
 
-    public void login(String email, String password) {;
-        fAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            loginStatus = true;
-                        } else {
-                            loginStatus = false;
-                        }
-                    }
-                });
+    public FirebaseFirestore getFireStore() {
+        return fireStore;
     }
 
-    private String getUserID() {
-        if (userID == null) {
-            userID = fAuth.getCurrentUser().getUid();
-        }
-        return userID;
+    public FirebaseDatabase getDatabase() {
+        return database;
     }
 
-    public User getUser() {
-            dRef.child(getUserID())
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            user = snapshot.getValue(User.class);
-                            Log.d("Expose Name", user.fullName);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.d("Failed", "unable to access name");
-                        }
-                    });
-
-        return user;
+    public String getUID() {
+        return fAuth.getCurrentUser().getUid();
     }
 
-    public boolean getLoginStatus() {
-        return loginStatus;
+    public DatabaseReference getdRef() {
+        return dRef;
     }
 
-    public boolean getRegisterStatus() {
-        return registerStatus;
-    }
 }

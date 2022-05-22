@@ -1,5 +1,6 @@
 package com.example.plannus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,15 +8,18 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView register;
+    private Button register;
     private EditText emailAddress;
     private EditText passWord;
     private ProgressBar progressBar;
@@ -48,16 +52,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
             return;
         }
-
         progressBar.setVisibility(View.VISIBLE);
-        sessionManager.login(email, password);
-
-
-        if (sessionManager.getLoginStatus()) {
-            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
-        } else {
-            Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
-        }
+        sessionManager.getAuth()
+                .signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
+                        } else {
+                            Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     public void initVars() {

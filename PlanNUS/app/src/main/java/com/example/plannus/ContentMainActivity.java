@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,12 +43,12 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_content_main);
 
         sessionManager = SessionManager.get();
-        fAuth = FirebaseAuth.getInstance();
-        userID = fAuth.getCurrentUser().getUid();
+        userID = sessionManager.getAuth().getCurrentUser().getUid();
         initProfile();
 
         fireStore = FirebaseFirestore.getInstance();
-        taskRef = fireStore.collection("Users")
+        taskRef = sessionManager.getFireStore()
+                .collection("Users")
                 .document(this.userID)
                 .collection("Tasks");
 
@@ -61,32 +60,22 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
 
 
     private void initProfile() {
-//        dRef = FirebaseDatabase
-//                .getInstance("https://plannus-cad5f-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                .getReference("Users")
-//                .child(userID);
-//        dRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                user = snapshot.getValue(User.class);
-//                wlcMsg = findViewById(R.id.hiName);
-//                wlcMsg.setText("Hi " + user.fullName + " !");
-//                Log.d("Expose Name", user.fullName);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-        user = sessionManager.getUser();
-        if (user == null) {
-            Toast.makeText(ContentMainActivity.this, "Access got cancelled", Toast.LENGTH_LONG).show();
-        } else {
-            wlcMsg = findViewById(R.id.hiName);
-            wlcMsg.setText("Hi " + user.fullName + " !");
-        }
+        sessionManager.getdRef()
+                .child(userID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        user = snapshot.getValue(User.class);
+                        wlcMsg = findViewById(R.id.hiName);
+                        wlcMsg.setText("Hi " + user.fullName + " !");
+                        Log.d("Expose Name", user.fullName);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ContentMainActivity.this, "Access got cancelled", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setUpRecyclerView() {
@@ -117,9 +106,8 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.checklistImgView:
-                startActivity(new Intent(this, ToDoList.class));
+        if (v.getId() == R.id.checklistImgView) {
+            startActivity(new Intent(this, ToDoList.class));
         }
     }
 

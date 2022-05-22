@@ -1,9 +1,11 @@
 package com.example.plannus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +13,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
@@ -35,11 +41,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, MainActivity.class));
         } else {
             registerUser();
-            if (sessionManager.getRegisterStatus()) {
-                Toast.makeText(this, "Registered successfully, please go back to Main Page to login", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Failed to register, please try again", Toast.LENGTH_LONG).show();
-            }
+
         }
     }
 
@@ -55,7 +57,32 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         progressBar.setVisibility(View.GONE);
 
-        sessionManager.register(new User(fullName, age, email, password));
+        sessionManager.getAuth()
+                .createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    sessionManager.getdRef()
+                                            .child(sessionManager.getUID())
+                                            .setValue(new User(fullName, age, email, password))
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(RegisterUser.this, "Registered successfully, please go back to Main Page to login", Toast.LENGTH_LONG).show();
+                                                        Log.d("Successful login", "Successful Login");
+                                                    } else {
+                                                        Toast.makeText(RegisterUser.this, "Failed to register, please try again", Toast.LENGTH_LONG).show();
+                                                        Log.d("Unsuccessful login", "Unsuccessful login");
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
+                        }
+                );
 
     }
 

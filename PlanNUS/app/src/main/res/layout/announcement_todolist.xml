@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/toDoTaskAnnouncements"
-            android:layout_width="118dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="8dp"

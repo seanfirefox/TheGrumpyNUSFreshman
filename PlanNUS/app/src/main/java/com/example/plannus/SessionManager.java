@@ -23,8 +23,6 @@ public class SessionManager {
     private final FirebaseFirestore fireStore;
     private final DatabaseReference dRef;
     private final FirebaseDatabase database;
-    private String userID;
-    private User user;
 
     private SessionManager(FirebaseAuth fAuth, FirebaseFirestore fireStore, FirebaseDatabase database) {
         this.fAuth = fAuth;

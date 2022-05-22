@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Arrays;
@@ -22,11 +20,10 @@ import java.util.Arrays;
 public class EditTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button editButton;
-    private FirebaseFirestore fireStore;
-    private FirebaseAuth mAuth;
     private String userId;
     private String[] taskInfo;
     private String task;
+    private SessionManager sessionManager;
     private EditText editTask, editStatus, editTag, editDueDate, editDueTime , editPlannedDate, editPlannedTime;
 
     @Override
@@ -34,10 +31,9 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        fireStore = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        userId = mAuth.getCurrentUser().getUid();
-        taskInfo = (String[]) getIntent().getStringArrayExtra("taskInfo");
+        sessionManager = SessionManager.get();
+        userId = sessionManager.getAuth().getCurrentUser().getUid();
+        taskInfo = getIntent().getStringArrayExtra("taskInfo");
         task = taskInfo[1];
         Log.e("check", Arrays.toString(taskInfo));
 
@@ -63,10 +59,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.editButton:
-                editask();
-                break;
+        if (v.getId() == R.id.editButton) {
+            editask();
         }
     }
 
@@ -84,7 +78,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         }
 
         ToDoTask t = new ToDoTask(tag, editedTask, stats, deadlineDate, deadLineTime, planDate, planTime);
-        DocumentReference docRef = fireStore.collection("Users")
+        DocumentReference docRef = sessionManager.getFireStore()
+                .collection("Users")
                 .document(userId)
                 .collection("Tasks")
                 .document(editedTask);
@@ -99,7 +94,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void deleteTask() {
-        fireStore.collection("Users")
+        sessionManager.getFireStore()
+                .collection("Users")
                 .document(userId)
                 .collection("Tasks")
                 .document(task)

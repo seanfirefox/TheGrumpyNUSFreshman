@@ -41,9 +41,12 @@ public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, Ann
         // time is in the form HH/MM
         // output is Hrs Mins if date is the same
         // or just Days Hrs if date is diff
-        int day = Integer.valueOf(date.substring(0,2));
-        int month = Integer.valueOf(date.substring(3,5));
-        int year = Integer.valueOf(date.substring(6,10));
+//        int day = Integer.valueOf(date.substring(0,2));
+//        int month = Integer.valueOf(date.substring(3,5));
+//        int year = Integer.valueOf(date.substring(6,10));
+        int day = Integer.valueOf(date.substring(6,8));
+        int month = Integer.valueOf(date.substring(4,6));
+        int year = Integer.valueOf(date.substring(0,4));
         int hour = Integer.valueOf(time.substring(0,2));
         int min = Integer.valueOf(time.substring(3,5));
 

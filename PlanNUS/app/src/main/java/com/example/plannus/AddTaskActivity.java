@@ -83,13 +83,19 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String task = newTask.getText().toString().trim();
         String stats = newStatus.getText().toString().trim();
         String tag = newTag.getText().toString().trim();
+
         String deadlineDate = dueDate.getText().toString().trim();
+        String deadLineDateStore = DateFormatter.dateToNumber(deadlineDate);
+
         String deadLineTime = dueTime.getText().toString().trim();
+
         String planDate = plannedDate.getText().toString().trim();
+        String planDateStore = DateFormatter.dateToNumber(planDate);
+
         String planTime = plannedTime.getText().toString().trim();
 
         Log.d("QUERY SUCCESS", "Query of Addition was successful");
-        ToDoTask newTask = new ToDoTask(tag, task, stats, deadlineDate, deadLineTime, planDate, planTime);
+        ToDoTask newTask = new ToDoTask(tag, task, stats, deadLineDateStore, deadLineTime, planDateStore, planTime);
         DocumentReference docRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(userID)

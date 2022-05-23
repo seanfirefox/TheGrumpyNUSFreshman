@@ -43,6 +43,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == R.id.editButton) {
             editTask();
+            finish();
         } else if (v.getId() == R.id.editDueDateButton) {
             calendarDialog(editDueDate);
         } else if (v.getId() == R.id.editPlannedDateButton) {
@@ -93,15 +94,17 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         String stats = editStatus.getText().toString().trim();
         String tag = editTag.getText().toString().trim();
         String deadlineDate = editDueDate.getText().toString().trim();
+        String deadlineDateStore = DateFormatter.dateToNumber(deadlineDate);
         String deadLineTime = editDueTime.getText().toString().trim();
         String planDate = editPlannedDate.getText().toString().trim();
+        String planDateStore = DateFormatter.dateToNumber(planDate);
         String planTime = editPlannedTime.getText().toString().trim();
 
         if (!(editedTask.equals(task))) {
             deleteTask();
         }
 
-        ToDoTask t = new ToDoTask(tag, editedTask, stats, deadlineDate, deadLineTime, planDate, planTime);
+        ToDoTask t = new ToDoTask(tag, editedTask, stats, deadlineDateStore, deadLineTime, planDateStore, planTime);
         DocumentReference docRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(userId)

@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,19 +18,16 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public class EditTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button editButton;
+    private Button editButton, editDueDate, editDueTime , editPlannedDate, editPlannedTime;
     private String userId;
     private String[] taskInfo;
     private String task;
     private SessionManager sessionManager;
-    private EditText editTask, editStatus, editTag, editDueDate, editDueTime , editPlannedDate, editPlannedTime;
+    private EditText editTask, editStatus, editTag;
     private DateTimeDialog dateTimePicker;
-    private int hour;
-    private int min;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +43,13 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == R.id.editButton) {
             editTask();
-        } else if (v.getId() == R.id.editDueDate) {
+        } else if (v.getId() == R.id.editDueDateButton) {
             calendarDialog(editDueDate);
-        } else if (v.getId() == R.id.editPlannedDate) {
+        } else if (v.getId() == R.id.editPlannedDateButton) {
             calendarDialog(editPlannedDate);
-        } else if (v.getId() == R.id.editDueTime) {
+        } else if (v.getId() == R.id.editDueTimeButton) {
             timeDialog(editDueTime);
-        } else if (v.getId() == R.id.editPlannedTime) {
+        } else if (v.getId() == R.id.editPlannedTimeButton) {
             timeDialog(editPlannedTime);
         } else {}
     }
@@ -70,16 +65,16 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
         editTag = findViewById(R.id.editTag);
-        editDueDate = findViewById(R.id.editDueDate);
+        editDueDate = findViewById(R.id.editDueDateButton);
         editDueDate.setOnClickListener(this);
 
-        editDueTime = findViewById(R.id.editDueTime);
+        editDueTime = findViewById(R.id.editDueTimeButton);
         editDueTime.setOnClickListener(this);
 
-        editPlannedDate = findViewById(R.id.editPlannedDate);
+        editPlannedDate = findViewById(R.id.editPlannedButton);
         editPlannedDate.setOnClickListener(this);
 
-        editPlannedTime = findViewById(R.id.editPlannedTime);
+        editPlannedTime = findViewById(R.id.editPlannedButton);
         editPlannedTime.setOnClickListener(this);
     }
 
@@ -144,30 +139,25 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         Log.e("Successful", task);
     }
 
-    public void calendarDialog(EditText dialog) {
-        String date = dialog.getText().toString().trim();
+    public void calendarDialog(Button dialog) {
+        DatePickerDialog.OnDateSetListener dateSetListener = dateTimePicker.initDate(dialog);
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                EditTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String date = dayOfMonth + "/" + month + "/" + year;
-                dialog.setText(date);
-            }
-        }, dateTimePicker.getYear(), dateTimePicker.getMonth(), dateTimePicker.getDay());
+                EditTaskActivity.this,
+                dateSetListener,
+                dateTimePicker.getYear(),
+                dateTimePicker.getMonth(),
+                dateTimePicker.getDay());
         datePickerDialog.show();
     }
 
-    public void timeDialog(EditText dialog) {
-        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                hour = hourOfDay;
-                min = minute;
-                dialog.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
-            }
-        };
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, timeSetListener, hour, min, true);
+    public void timeDialog(Button dialog) {
+        TimePickerDialog.OnTimeSetListener timeSetListener = dateTimePicker.initTIme(dialog);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                EditTaskActivity.this,
+                timeSetListener,
+                dateTimePicker.getHour(),
+                dateTimePicker.getMinute(),
+                true);
         timePickerDialog.show();
     }
 }

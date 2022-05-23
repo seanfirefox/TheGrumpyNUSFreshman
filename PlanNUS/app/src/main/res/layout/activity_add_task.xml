@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/AddTasks"
-        android:layout_width="347dp"
+        android:layout_width="407dp"
         android:layout_height="67dp"
         android:layout_marginTop="4dp"
         android:text="Add A New Task"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="40dp"
         android:textStyle="bold"

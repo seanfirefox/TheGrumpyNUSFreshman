@@ -23,7 +23,6 @@ import com.google.firebase.firestore.SetOptions;
 public class AddTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button saveTask, dueDate, dueTime, plannedDate, plannedTime;
-    private ImageButton backButton;
     private EditText newTask, newStatus, newTag;
     private String userID;
     private SessionManager sessionManager;
@@ -61,8 +60,6 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         plannedTime = findViewById(R.id.plannedTimeButton);
         plannedTime.setOnClickListener(this);
 
-        backButton = findViewById(R.id.imageButtonAddTask);
-        backButton.setOnClickListener(this);
     }
 
     @Override

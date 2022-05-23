@@ -71,10 +71,10 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         editDueTime = findViewById(R.id.editDueTimeButton);
         editDueTime.setOnClickListener(this);
 
-        editPlannedDate = findViewById(R.id.editPlannedButton);
+        editPlannedDate = findViewById(R.id.editPlannedDateButton);
         editPlannedDate.setOnClickListener(this);
 
-        editPlannedTime = findViewById(R.id.editPlannedButton);
+        editPlannedTime = findViewById(R.id.editPlannedTimeButton);
         editPlannedTime.setOnClickListener(this);
     }
 

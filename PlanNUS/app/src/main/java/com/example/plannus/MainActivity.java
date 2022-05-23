@@ -31,7 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sessionManager = SessionManager.get();
+
         initVars();
+    }
+
+    public void cleanActivity() {
+        emailAddress.setText("");
+        passWord.setText("");
     }
 
     @Override
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        cleanActivity();
                         if (task.isSuccessful()) {
                             progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(MainActivity.this, ContentMainActivity.class));

@@ -7,14 +7,6 @@
     android:background="@color/bg_colour"
     tools:context=".AddTaskActivity">
 
-    <ImageButton
-        android:id="@+id/imageButtonAddTask"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:background="@drawable/backbutton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/AddTasks"
         android:layout_width="347dp"
@@ -26,8 +18,7 @@
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonAddTask"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -98,7 +89,7 @@
         android:layout_marginTop="12dp"
         android:text="Date: "
         android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/dueDateEditText"
+        app:layout_constraintEnd_toStartOf="@+id/dueDateButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deadLineTexTtextView" />
@@ -177,26 +168,28 @@
         app:layout_constraintStart_toEndOf="@+id/statusTexTtextView"
         app:layout_constraintTop_toBottomOf="@+id/taskDescEditText" />
 
-    <EditText
-        android:id="@+id/dueDateEditText"
+    <Button
+        android:id="@+id/dueDateButton"
         android:layout_width="285dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="Status"
+        android:backgroundTint="#DCCFB5"
         android:ems="8"
         android:hint="Due Date Here"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deadLineTexTtextView" />
 
-    <EditText
-        android:id="@+id/plannedDateEditText"
+    <Button
+        android:id="@+id/plannedDateButton"
         android:layout_width="285dp"
         android:layout_height="40dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
         android:autofillHints="Status"
+        android:backgroundTint="#DCCFB5"
         android:ems="10"
         android:hint="Planned Date Here"
         android:inputType="date"
@@ -205,34 +198,36 @@
         app:layout_constraintStart_toEndOf="@+id/datePlannedtextView"
         app:layout_constraintTop_toBottomOf="@+id/plannedTexTtextView" />
 
-    <EditText
-        android:id="@+id/dueTimeEditText"
+    <Button
+        android:id="@+id/dueTimeButton"
         android:layout_width="285dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:autofillHints="Status"
         android:ems="8"
+        android:backgroundTint="#DCCFB5"
         android:hint="Due Time Here"
         android:inputType="datetime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toEndOf="@+id/timeDuetextView"
-        app:layout_constraintTop_toBottomOf="@+id/dueDateEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/dueDateButton" />
 
-    <EditText
-        android:id="@+id/plannedTimeEditText"
+    <Button
+        android:id="@+id/plannedTimeButton"
         android:layout_width="285dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:autofillHints="Status"
         android:ems="10"
+        android:backgroundTint="#DCCFB5"
         android:hint="Planned Time Here"
         android:inputType="datetime"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toEndOf="@+id/timePlannedtextView2"
-        app:layout_constraintTop_toBottomOf="@+id/plannedDateEditText"
+        app:layout_constraintTop_toBottomOf="@+id/plannedDateButton"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button

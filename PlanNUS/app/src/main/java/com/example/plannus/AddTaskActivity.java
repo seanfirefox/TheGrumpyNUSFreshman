@@ -55,7 +55,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         newTask = findViewById(R.id.taskDescEditText);
         newStatus = findViewById(R.id.taskDescEditStatus);
         newTag = findViewById(R.id.taskTypeEditText);
-        dueDate = findViewById(R.id.dueDateEditText);
+        dueDate = findViewById(R.id.dueDateButton);
         dueDate.setOnClickListener(this);
 
         dueTime = findViewById(R.id.dueTimeEditText);
@@ -75,7 +75,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v.getId() == R.id.saveButton) {
             addTask();
-        } else if (v.getId() == R.id.dueDateEditText) {
+        } else if (v.getId() == R.id.dueDateButton) {
             calendarDialog(dueDate);
         } else if (v.getId() == R.id.plannedDateEditText) {
             calendarDialog(plannedDate);

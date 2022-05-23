@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.Query;
 public class ContentMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button checklistButton, timetableGenerator, calendarButton;
+    private ImageButton signOutButton;
     private AnnouncementsAdapter taskListAdapter;
     private TextView wlcMsg;
     private User user;
@@ -58,6 +60,9 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
 
         calendarButton = findViewById(R.id.calendarImgView);
         calendarButton.setOnClickListener(this);
+
+        signOutButton = findViewById(R.id.logoutButton);
+        signOutButton.setOnClickListener(this);
     }
 
     private void initProfile() {
@@ -93,6 +98,11 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         recyclerView.setAdapter(taskListAdapter);
     }
 
+    private void logout() {
+        sessionManager.getAuth().signOut();
+        finish();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -113,8 +123,10 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
         } else if (v.getId() == R.id.nusModsImgView) {
             Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
+        } else if (v.getId() == R.id.logoutButton){
+            logout();
         } else {
-            
+
         }
     }
 

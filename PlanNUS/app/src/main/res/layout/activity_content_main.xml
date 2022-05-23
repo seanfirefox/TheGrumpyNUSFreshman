@@ -9,15 +9,15 @@
 
     <TextView
         android:id="@+id/hiName"
-        android:layout_width="401dp"
-        android:layout_height="62dp"
-        android:fontFamily="casual"
+        android:layout_width="362dp"
+        android:layout_height="61dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/hello"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,11 +25,11 @@
         android:id="@+id/welcomeBackMsg"
         android:layout_width="401dp"
         android:layout_height="62dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/WelcomeMsg"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hiName" />
@@ -140,5 +140,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/logoutButton"
+        android:layout_width="48dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/signout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toEndOf="@+id/hiName"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

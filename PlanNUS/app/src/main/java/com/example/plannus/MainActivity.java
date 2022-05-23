@@ -59,8 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
                         }
                     }

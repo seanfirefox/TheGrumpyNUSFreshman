@@ -31,7 +31,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     private EditText newTask, newStatus, newTag, dueDate, dueTime, plannedDate, plannedTime;
     private String userID;
     private SessionManager sessionManager;
-    private DateDialog datePicker;
+    private DateTimeDialog dateTimePicker;
     private int hour;
     private int min;
 
@@ -44,7 +44,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
 
     public void initVars() {
         sessionManager = SessionManager.get();
-        datePicker = DateDialog.getInstance();
+        dateTimePicker = DateTimeDialog.getInstance();
         userID = sessionManager.getAuth()
                 .getCurrentUser()
                 .getUid();
@@ -127,7 +127,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
                 String date = dayOfMonth + "/" + month + "/" + year;
                 dialog.setText(date);
             }
-        }, datePicker.getYear(), datePicker.getMonth(), datePicker.getDay());
+        }, dateTimePicker.getYear(), dateTimePicker.getMonth(), dateTimePicker.getDay());
         datePickerDialog.show();
     }
 

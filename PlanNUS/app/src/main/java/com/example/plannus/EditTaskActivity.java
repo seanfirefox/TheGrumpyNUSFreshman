@@ -30,7 +30,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     private String task;
     private SessionManager sessionManager;
     private EditText editTask, editStatus, editTag, editDueDate, editDueTime , editPlannedDate, editPlannedTime;
-    private DateDialog datePicker;
+    private DateTimeDialog dateTimePicker;
     private int hour;
     private int min;
 
@@ -61,7 +61,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     public void initVars() {
         sessionManager = SessionManager.get();
-        datePicker = DateDialog.getInstance();
+        dateTimePicker = DateTimeDialog.getInstance();
         userId = sessionManager.getAuth().getCurrentUser().getUid();
         taskInfo = getIntent().getStringArrayExtra("taskInfo");
         task = taskInfo[1];
@@ -154,7 +154,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
                 String date = dayOfMonth + "/" + month + "/" + year;
                 dialog.setText(date);
             }
-        }, datePicker.getYear(), datePicker.getMonth(), datePicker.getDay());
+        }, dateTimePicker.getYear(), dateTimePicker.getMonth(), dateTimePicker.getDay());
         datePickerDialog.show();
     }
 

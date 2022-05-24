@@ -21,7 +21,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
     private String userID;
     private CollectionReference taskRef;
     private ToDoListAdapter adapter;
-    private Button createTask;
+    private Button createTask, completedTask;
     private SessionManager sessionManager;
 
     @Override
@@ -42,6 +42,9 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
         createTask = findViewById(R.id.createTask);
         createTask.setOnClickListener(this);
 
+        completedTask = findViewById(R.id.completedTask);
+        completedTask.setOnClickListener(this);
+
         taskRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(this.userID)
@@ -49,7 +52,9 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void setUpRecyclerView() {
-        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING);
+        Query query = taskRef.orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("deadLineDateTime", Query.Direction.ASCENDING)
+                .whereNotEqualTo("status","100");
 
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)
@@ -98,6 +103,8 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         if (v.getId() == R.id.createTask) {
             startActivity(new Intent(this, AddTaskActivity.class));
+        } else if (v.getId() == R.id.completedTask) {
+            startActivity(new Intent(this, CompletedTaskActivity.class));
         }
     }
 }

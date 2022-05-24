@@ -58,7 +58,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
 
         RecyclerView recyclerView = findViewById(R.id.taskListAnnouncements);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
         slider().attachToRecyclerView(recyclerView);

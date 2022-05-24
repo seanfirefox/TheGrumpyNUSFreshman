@@ -24,8 +24,6 @@ import com.google.firebase.firestore.Query;
 
 import org.joda.time.DateTime;
 
-import java.time.LocalDate;
-
 public class ContentMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button checklistButton, timetableGenerator, calendarButton;
@@ -90,18 +88,16 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setUpRecyclerView() {
-        Query query = taskRef.orderBy("deadLineDate", Query.Direction.ASCENDING)
-                .whereGreaterThanOrEqualTo("deadLineDate", DateTime.now().toString("yyyyMMdd"))
-                .orderBy("deadLineTime", Query.Direction.ASCENDING)
-                .whereGreaterThanOrEqualTo("deadLineTime", DateTime.now().toString("HHmm"));
-        //Log.d("CHECK DATETIME QUERY", DateTime.now().toString("HH:mm"));
+        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING)
+                .whereGreaterThanOrEqualTo("deadLineDateTime", DateTime.now().toString("yyyyMMddHHmm"));
+        Log.d("CHECK DATETIME QUERY", DateTime.now().toString("yyyyMMddHHmm"));
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)
                 .build();
         taskListAdapter = new AnnouncementsAdapter(options);
         RecyclerView recyclerView = findViewById(R.id.mainTaskListAnnouncements);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(taskListAdapter);
     }
 

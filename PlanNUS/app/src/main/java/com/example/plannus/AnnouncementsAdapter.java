@@ -13,6 +13,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, AnnouncementsAdapter.AnnouncementsHolder> {
 
@@ -32,31 +37,31 @@ public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, Ann
     @Override
     protected void onBindViewHolder(@NonNull AnnouncementsAdapter.AnnouncementsHolder holder, int position, @NonNull ToDoTask model) {
         holder.taskName.setText(model.getTask());
-        holder.dueDuration.setText(getDuration(model.getDeadLineDate(), model.getDeadLineTime()));
+        holder.dueDuration.setText(getDuration(model.getDeadLineDateTime()));
         holder.typeName.setText(model.getModuleName());
     }
 
-    public String getDuration(String date, String time) {
-        // date is in the form DD/MM/YYYY
-        // time is in the form HH/MM
-        // output is Hrs Mins if date is the same
-        // or just Days Hrs if date is diff
-        int day = DateFormatter.getDay(date);
-        int month = DateFormatter.getMonth(date);
-        int year = DateFormatter.getYear(date);
-        int hour = Integer.valueOf(time.substring(0,2));
-        int min = Integer.valueOf(time.substring(3,5));
+    public String getDuration(String dateTime) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+        try {
+            Date deadLineD = format.parse(dateTime);
+            DateTime deadLine = new DateTime(deadLineD);
 
-        DateTime current = DateTime.now();
-        DateTime deadline = new DateTime(year, month, day, hour, min);
-        int days = Days.daysBetween(current, deadline).getDays();
-        if (days == 0) {
-            return String.format("%d hrs, %d mins", Math.abs(hour - current.getHourOfDay()) % 24, min);
-        } else if (days > 0) {
-            return String.format("%d days, %d hrs", days, Math.abs(hour - current.getHourOfDay()) % 24);
-        } else {
-            return "TASK EXPIRED";
+            DateTime current = DateTime.now();
+            int days = Days.daysBetween(current, deadLine).getDays();
+            int hours = Hours.hoursBetween(current, deadLine).getHours() % 24;
+            int minutes = Minutes.minutesBetween(current, deadLine).getMinutes() % 60;
+            if (days == 0) {
+                return hours + " hrs, " + minutes + " mins";
+            } else if (days > 0) {
+                return days + " days, " + hours + " hrs";
+            } else {
+                return "TASK EXPIRED";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return "TASK EXPIRED";
     }
 
 

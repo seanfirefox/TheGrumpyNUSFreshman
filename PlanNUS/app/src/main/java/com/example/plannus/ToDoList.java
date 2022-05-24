@@ -49,8 +49,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void setUpRecyclerView() {
-        Query query = taskRef.orderBy("deadLineDate", Query.Direction.ASCENDING)
-                .orderBy("deadLineTime", Query.Direction.ASCENDING);
+        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)
@@ -59,7 +58,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
 
         RecyclerView recyclerView = findViewById(R.id.taskListAnnouncements);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         slider().attachToRecyclerView(recyclerView);

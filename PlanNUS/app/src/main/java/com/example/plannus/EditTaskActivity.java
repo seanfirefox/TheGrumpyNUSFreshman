@@ -94,17 +94,26 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         String stats = editStatus.getText().toString().trim();
         String tag = editTag.getText().toString().trim();
         String deadlineDate = editDueDate.getText().toString().trim();
-        String deadlineDateStore = DateFormatter.dateToNumber(deadlineDate);
+        String deadLineDateStore = DateFormatter.dateToNumber(deadlineDate);
+
         String deadLineTime = editDueTime.getText().toString().trim();
+        String deadLineTimeStore = TimeFormatter.timeToNumber(deadLineTime);
+
+        String deadLineDateTime = deadLineDateStore + deadLineTimeStore;
+
         String planDate = editPlannedDate.getText().toString().trim();
         String planDateStore = DateFormatter.dateToNumber(planDate);
+
         String planTime = editPlannedTime.getText().toString().trim();
+        String planTimeStore = TimeFormatter.timeToNumber(planTime);
+
+        String planDateTime = planDateStore + planTimeStore;
 
         if (!(editedTask.equals(task))) {
             deleteTask();
         }
 
-        ToDoTask t = new ToDoTask(tag, editedTask, stats, deadlineDateStore, deadLineTime, planDateStore, planTime);
+        ToDoTask t = new ToDoTask(tag, editedTask, stats, deadLineDateTime, planDateTime);
         DocumentReference docRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(userId)

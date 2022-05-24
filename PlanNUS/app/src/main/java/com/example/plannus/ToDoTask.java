@@ -13,58 +13,40 @@ public class ToDoTask {
     @PropertyName("status")
     private String status;
 
-    @PropertyName("deadLineDate")
-    private String deadLineDate;
+    @PropertyName("deadLineDateTime")
+    private String deadLineDateTime;
 
-    @PropertyName("deadLineTime")
-    private String deadLineTime;
-
-    @PropertyName("plannedDate")
-    private String plannedDate;
-
-    @PropertyName("plannedTime")
-    private String plannedTime;
+    @PropertyName("plannedDateTime")
+    private String plannedDateTime;
 
     public ToDoTask() {
 
     }
 
-    public ToDoTask(String moduleName, String task, String status, String deadLineDate, String deadLineTime, String plannedDate, String plannedTime) {
+    public ToDoTask(String moduleName, String task, String status, String deadLineDateTime, String plannedDateTime) {
         this.moduleName = moduleName;
         this.task = task;
         this.status = status;
-        this.deadLineDate = deadLineDate;
-        this.deadLineTime = deadLineTime;
-        this.plannedDate = plannedDate;
-        this.plannedTime = plannedTime;
+        this.deadLineDateTime = deadLineDateTime;
+        this.plannedDateTime = plannedDateTime;
     }
 
-    @PropertyName("moduleName")
     public String getModuleName() {
         return moduleName;
     }
 
-    @PropertyName("task")
     public String getTask() {
         return task;
     }
 
-    @PropertyName("status")
     public String getStatus() {
         return status;
     }
 
-    @PropertyName("deadLineDate")
-    public String getDeadLineDate() {
-        return deadLineDate;
+    public String getDeadLineDateTime() {
+        return deadLineDateTime;
     }
 
-    @PropertyName("deadLineTime")
-    public String getDeadLineTime() { return deadLineTime; }
+    public String getPlannedDateTime() { return  plannedDateTime; }
 
-    @PropertyName("plannedDate")
-    public String getPlannedDate() { return  plannedDate; }
-
-    @PropertyName("plannedTime")
-    public String getPlannedTime() { return plannedTime; }
 }

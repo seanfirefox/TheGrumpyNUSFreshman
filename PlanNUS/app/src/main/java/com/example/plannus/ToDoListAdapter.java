@@ -28,10 +28,10 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         moduleName = model.getModuleName();
         task = model.getTask();
         status = model.getStatus();
-        deadlineDate = DateFormatter.numberToDate(model.getDeadLineDate());
-        deadlineTime = TimeFormatter.numberToTime(model.getDeadLineTime());
-        plannedDate = DateFormatter.numberToDate(model.getPlannedDate());
-        plannedTime = TimeFormatter.numberToTime(model.getPlannedTime());
+        deadlineDate = DateFormatter.numberToDate(model.getDeadLineDateTime().substring(0, 8));
+        deadlineTime = TimeFormatter.numberToTime(model.getDeadLineDateTime().substring(8, 12));
+        plannedDate = DateFormatter.numberToDate(model.getPlannedDateTime().substring(0, 8));
+        plannedTime = TimeFormatter.numberToTime(model.getPlannedDateTime().substring(8, 12));
 
 
         holder.taskName.setText(task);

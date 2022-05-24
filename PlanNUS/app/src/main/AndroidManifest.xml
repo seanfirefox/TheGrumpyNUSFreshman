@@ -13,20 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanNUS"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31"
-        tools:remove="android:appComponentFactory">
+        tools:remove="android:appComponentFactory"
+        tools:targetApi="31">
+        <activity
+            android:name=".CompletedTaskActivity"
+            android:exported="false" />
         <activity
             android:name=".EditTaskActivity"
             android:exported="false"
-            android:parentActivityName=".ToDoList"/>
+            android:parentActivityName=".ToDoList" />
         <activity
             android:name=".AddTaskActivity"
             android:exported="false"
-            android:parentActivityName=".ToDoList"/>
+            android:parentActivityName=".ToDoList" />
         <activity
             android:name=".ToDoList"
             android:exported="false"
-            android:parentActivityName=".ContentMainActivity"/>
+            android:parentActivityName=".ContentMainActivity" />
         <activity
             android:name=".ContentMainActivity"
             android:exported="false" />

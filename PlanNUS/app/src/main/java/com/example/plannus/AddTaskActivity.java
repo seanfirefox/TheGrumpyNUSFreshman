@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import android.app.DatePickerDialog;
 
@@ -90,14 +89,18 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String deadLineTime = dueTime.getText().toString().trim();
         String deadLineTimeStore = TimeFormatter.timeToNumber(deadLineTime);
 
+        String deadLineDateTime = deadLineDateStore + deadLineTimeStore;
+
         String planDate = plannedDate.getText().toString().trim();
         String planDateStore = DateFormatter.dateToNumber(planDate);
 
         String planTime = plannedTime.getText().toString().trim();
         String planTimeStore = TimeFormatter.timeToNumber(planTime);
 
+        String planDateTime = planDateStore + planTimeStore;
+
         Log.d("QUERY SUCCESS", "Query of Addition was successful");
-        ToDoTask newTask = new ToDoTask(tag, task, stats, deadLineDateStore, deadLineTimeStore, planDateStore, planTimeStore);
+        ToDoTask newTask = new ToDoTask(tag, task, stats, deadLineDateTime, planDateTime);
         DocumentReference docRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(userID)

@@ -92,7 +92,6 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
             dueTime = itemView.findViewById(R.id.deadlineTime);
             plannedDate = itemView.findViewById(R.id.PlannedDate);
             plannedTime = itemView.findViewById(R.id.PlannedTime);
-
         }
     }
 }

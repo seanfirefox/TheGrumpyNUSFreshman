@@ -11,4 +11,8 @@ public class CompletedTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_task);
     }
+
+    public void initVars() {
+
+    }
 }

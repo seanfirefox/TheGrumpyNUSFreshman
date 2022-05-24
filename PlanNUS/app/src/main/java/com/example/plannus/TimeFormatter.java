@@ -1,6 +1,6 @@
 package com.example.plannus;
 
-public class TimeFormatter {
+public class TimeFormatter extends DateTimeUtils {
 
     public static String timeToNumber(String time) {
         // 11:10 -> 1110

@@ -1,6 +1,6 @@
 package com.example.plannus;
 
-public class DateFormatter {
+public class DateFormatter extends DateTimeUtils {
     public static String dateToNumber(String date) {
         // 01/01/2022 -> 20220101
         String day = date.substring(0,2);

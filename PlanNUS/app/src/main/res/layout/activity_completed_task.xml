@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskListAnnouncements"
+        android:id="@+id/completedTaskList"
         android:layout_width="415dp"
         android:layout_height="672dp"
         app:layout_constraintBottom_toBottomOf="parent"

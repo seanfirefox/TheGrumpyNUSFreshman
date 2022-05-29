@@ -47,7 +47,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
         createTask = findViewById(R.id.createTask);
         createTask.setOnClickListener(this);
 
-        completedTask = findViewById(R.id.completedTask);
+        completedTask = findViewById(R.id.milestone);
         completedTask.setOnClickListener(this);
 
         taskRef = sessionManager.getFireStore()
@@ -108,7 +108,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         if (v.getId() == R.id.createTask) {
             startActivity(new Intent(this, AddTaskActivity.class));
-        } else if (v.getId() == R.id.completedTask) {
+        } else if (v.getId() == R.id.milestone) {
             startActivity(new Intent(this, CompletedTaskActivity.class));
         }
     }

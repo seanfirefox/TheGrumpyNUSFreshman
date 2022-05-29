@@ -3,7 +3,7 @@ from socket import timeout
 from z3 import *
 from NUSModule import *
 from NUSClass import *
-from Constraint import *
+from archive.SolverTester import *
 set_option(timeout = 10000)
 
 class TimeTableSchedulerZ3 :
@@ -13,13 +13,6 @@ class TimeTableSchedulerZ3 :
                 3 : "Wednesday",
                 4 : "Thursday",
                 5 : "Friday"}
-
-    OPTIONS = {
-        "OneFreeDay" : False,
-        "HaveLunchBreaks" : False,
-        "No8amLesson" : False,
-        "NoConsecutiveLessons" : False
-            }
 
     def __init__(self, dict) :
         self.semesterMods = dict
@@ -38,6 +31,12 @@ class TimeTableSchedulerZ3 :
 
     def initVariables(self) :
         for [key, value] in self.semesterMods.items() :
+            #print("In " + str(value) + " there are")
+            #print(str(len(value.lectures)) + " lectures")
+            #print(str(len(value.tutorials)) + " tutorials")
+            #print(str(len(value.recitations)) + " recitations")
+            #print(str(len(value.seminars)) + " seminars")
+            #print(str(len(value.labs)) + " labs\n")
             for l in value.lectures :
                 self.lessonsByDay[l.day - 1].append(l)
                 self.lecs.append(l)
@@ -138,20 +137,26 @@ class TimeTableSchedulerZ3 :
         for day in self.lessonsByDay :
             for NUSCLASS in day :
                 candidates =  list(filter(lambda x : x.willClash(NUSCLASS) and x is not NUSCLASS, day))
+                #print("\n")
+                #print(NUSCLASS)
+                #print(candidates)
+                #print("\n")
                 antecedant = self.StringToBoolLiteralHashMap[str(NUSCLASS)]
                 clashLiteral = list(map(lambda x : Not(self.StringToBoolLiteralHashMap[str(x)]), candidates))
                 self.s.add(Implies(antecedant, And(clashLiteral)))
         
 
-    def addOtherConstraints(self) :
-        allClasses = self.lecs + self.tuts + self.recs + self.sems + self.labs
-        for [constraint, boolean] in TimeTableSchedulerZ3.OPTIONS.items() :
-            if (boolean) :
-                if (constraint == "OneFreeDay") :
-                    c = OneDayFreeConstraint(allClasses, self.StringToBoolLiteralHashMap)
-                    c.enforce(self.s)
-
-
+    def addOtherConstraints(self, fn) :
+        '''
+        AtMost((MA2104 LEC 1 on Day 3 @ 1000 - 1200,
+        CM1102 LEC 1 on Day 3 @ 1200 - 1400,
+        CS2040S TUT 20 on Day 3 @ 1000 - 1200,
+        CS2040S TUT 29 on Day 3 @ 1200 - 1400,
+        CS2040S TUT 25 on Day 3 @ 1100 - 1300),
+       1)
+        
+        '''
+        raise NotImplementedError
 
     def anotherSolution(self) :
         literals = self.StringToBoolLiteralHashMap.values()
@@ -201,4 +206,3 @@ class TimeTableSchedulerZ3 :
                 continue
             for classes in self.finalTimetable[i] :
                 print(" " + str(classes))
-

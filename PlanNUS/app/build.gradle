@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.plannus"
-        minSdk 26
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.google.android.datatransport:transport-runtime:3.1.5'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation files('joda-time-2.10.14.jar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

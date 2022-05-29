@@ -25,7 +25,7 @@ public class CompletedTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_completed_task);
+        setContentView(R.layout.activity_milestones);
         initVars();
         setUpRecyclerView();
     }

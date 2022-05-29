@@ -93,3 +93,46 @@ No feasible timetable
 ```
 
 Note : Timetable generated can vary, but whether the generation was possible is deterministic.
+
+# Sample I/O (SAT but modules not offered in the semester)
+
+When no such module is offered for that semester, then the scheduler simply ignores and scrapes the rest. It will flag out any issues after the scraping is done as well.
+
+```bash
+python3 TimetableZ3run.py MA2101S CS2109S CS2040S ST2132 GEC1030 MA2002
+```
+CS2109S and MA2101S are not offered in the chosen Semester (Semester 1)
+```bash
+You have entered 6
+
+Enter Academic Year in the form 2021-2022
+2021-2022
+Input semester number
+1
+MA2101S not offered for chosen semester. Ignoring . . . .
+CS2109S not offered for chosen semester. Ignoring . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2132 offered for chosen semester. Processing . . . .
+GEC1030 offered for chosen semester. Processing . . . .
+MA2002 offered for chosen semester. Processing . . . .
+Scrapping Successful
+BUT scrapping received some issues. Please Check again
+SAT
+On Monday
+ MA2002 LEC 1 on Day 1 @ 1200 - 1400
+ MA2002 TUT 2 on Day 1 @ 1600 - 1700
+ CS2040S TUT 10 on Day 1 @ 1700 - 1800
+On Tuesday
+ ST2132 LEC 1 on Day 2 @ 800 - 1000
+On Wednesday
+ CS2040S LEC 1 on Day 3 @ 1000 - 1200
+On Thursday
+ GEC1030 LEC 1 on Day 4 @ 800 - 1000
+ CS2040S LAB 01 on Day 4 @ 1000 - 1200
+ MA2002 LEC 1 on Day 4 @ 1200 - 1400
+ ST2132 TUT 5 on Day 4 @ 1600 - 1700
+ CS2040S LEC 1 on Day 4 @ 1700 - 1800
+On Friday
+ ST2132 LEC 1 on Day 5 @ 800 - 1000
+ GEC1030 TUT D7 on Day 5 @ 1200 - 1400
+ ```

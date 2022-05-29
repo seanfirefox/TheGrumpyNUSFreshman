@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.Adaptors;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.plannus.utils.DateTimeUtils;
+import com.example.plannus.R;
+import com.example.plannus.Objects.ToDoTask;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 

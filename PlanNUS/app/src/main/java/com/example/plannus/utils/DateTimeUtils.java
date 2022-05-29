@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.utils;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;

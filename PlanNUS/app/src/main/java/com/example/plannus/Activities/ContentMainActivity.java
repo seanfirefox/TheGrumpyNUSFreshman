@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.plannus.Adaptors.AnnouncementsAdapter;
+import com.example.plannus.R;
+import com.example.plannus.SessionManager;
+import com.example.plannus.Objects.ToDoTask;
+import com.example.plannus.Objects.User;
+import com.example.plannus.WrapContentLinearLayoutManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

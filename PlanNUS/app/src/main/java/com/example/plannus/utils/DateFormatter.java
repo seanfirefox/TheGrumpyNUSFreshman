@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.utils;
 
 public class DateFormatter extends DateTimeUtils {
     public static String dateToNumber(String date) {

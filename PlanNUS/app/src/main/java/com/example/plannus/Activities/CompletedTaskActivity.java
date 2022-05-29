@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.plannus.Adaptors.CompletedTaskAdapter;
+import com.example.plannus.R;
+import com.example.plannus.SessionManager;
+import com.example.plannus.Objects.ToDoTask;
+import com.example.plannus.WrapContentLinearLayoutManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.Query;

@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.Objects;
 
 public class User {
     public String fullName;

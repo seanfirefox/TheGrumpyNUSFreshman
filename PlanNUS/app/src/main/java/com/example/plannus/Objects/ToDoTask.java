@@ -1,4 +1,4 @@
-package com.example.plannus;
+package com.example.plannus.Objects;
 
 import com.google.firebase.database.PropertyName;
 

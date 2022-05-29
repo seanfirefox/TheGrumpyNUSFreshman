@@ -1,10 +1,9 @@
-package com.example.plannus;
+package com.example.plannus.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -13,6 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.app.DatePickerDialog;
 
+import com.example.plannus.utils.DateFormatter;
+import com.example.plannus.utils.DateTimeDialog;
+import com.example.plannus.R;
+import com.example.plannus.SessionManager;
+import com.example.plannus.utils.TimeFormatter;
+import com.example.plannus.Objects.ToDoTask;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;

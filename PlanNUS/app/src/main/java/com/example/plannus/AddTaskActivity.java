@@ -105,12 +105,12 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
                 .collection("Users")
                 .document(userID)
                 .collection("Tasks")
-                .document(task);
+                .document(task + tag);
         docRef.set(newTask, SetOptions.merge())
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
             Log.d("TaskCreated", "onSuccess: Task is created");
             Toast.makeText(AddTaskActivity.this, "Task added Successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(AddTaskActivity.this, ToDoList.class));
+            finish();
         } ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {

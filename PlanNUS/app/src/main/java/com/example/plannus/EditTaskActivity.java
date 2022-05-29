@@ -24,7 +24,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     private Button editButton, editDueDate, editDueTime , editPlannedDate, editPlannedTime;
     private String userId;
     private String[] taskInfo;
-    private String task;
+    private String task, tagName;
     private SessionManager sessionManager;
     private EditText editTask, editStatus, editTag;
     private DateTimeDialog dateTimePicker;
@@ -43,7 +43,6 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == R.id.editButton) {
             editTask();
-            finish();
         } else if (v.getId() == R.id.editDueDateButton) {
             calendarDialog(editDueDate);
         } else if (v.getId() == R.id.editPlannedDateButton) {
@@ -61,6 +60,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         userId = sessionManager.getAuth().getCurrentUser().getUid();
         taskInfo = getIntent().getStringArrayExtra("taskInfo");
         task = taskInfo[1];
+        tagName = taskInfo[0];
         Log.e("check", Arrays.toString(taskInfo));
 
         editTask = findViewById(R.id.editTaskDesc);
@@ -118,9 +118,10 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
                 .collection("Users")
                 .document(userId)
                 .collection("Tasks")
-                .document(editedTask);
+                .document(editedTask + tag);
         docRef.set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
             Log.d("TaskCreated", "onSuccess: Task is created");
+            finish();
         } ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -134,7 +135,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
                 .collection("Users")
                 .document(userId)
                 .collection("Tasks")
-                .document(task)
+                .document(task + tagName)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

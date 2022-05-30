@@ -7,7 +7,7 @@ OPTIONS = [
 ]
 numMods = len(sys.argv) - 1
 
-print("You have entered " + str(numMods) + "\n") 
+print("You have entered " + str(numMods) + "modules\n") 
 AY = input("Enter Academic Year in the form 2021-2022\n")
 SEM = int(input("Input semester number\n"))
 modules = [sys.argv[i] for i in range(1, numMods + 1)]
@@ -18,7 +18,7 @@ scrapper.scrape()
 timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed)
 timetable.optimiseTimetable()
 
-if (timetable.lastSolnStatus == unsat) :
+if (timetable.last_solution_status() == unsat) :
     print("Terminating . . . \n")
 else :
     happy = False
@@ -28,7 +28,7 @@ else :
         print("Wrong input! \n")
     while(happy != True) :
         print("Regenerating timetable... \n")
-        timetable.anotherSolution()
+        timetable.another_solution()
         print("Are You Happy with this timetable? \n")
         happy = input("Yes or No only \n") == "Yes"
         if (happy != True and happy != False) :

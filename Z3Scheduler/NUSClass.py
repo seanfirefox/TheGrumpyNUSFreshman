@@ -1,5 +1,13 @@
 class NUSClass :
     
+    def __init__(self, slot, week, day, start, end, modCode) :
+        self.slot = slot
+        self.week = week
+        self.day = day
+        self.start = start
+        self.end = end
+        self.mod = modCode
+
     def willClash(self, b) :
         if (len(list(set(self.week) & set(b.week))) == 0) :
             # Case of no weeks that can clash
@@ -16,12 +24,7 @@ class NUSClass :
 class Seminar(NUSClass) :
 
     def __init__(self, slot, week, day, start, end, mod) :
-        self.slot = slot
-        self.day = day
-        self.week = week
-        self.start = start
-        self.end = end
-        self.mod = mod
+        super().__init__(slot, week, day, start, end, mod)
 
     def __str__(self) :
         return self.mod + " SEM " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)
@@ -38,12 +41,7 @@ class Seminar(NUSClass) :
 class Lecture(NUSClass) :
 
     def __init__(self, slot, week, day, start, end, mod) :
-        self.slot = slot
-        self.day = day
-        self.week = week
-        self.start = start
-        self.end = end
-        self.mod = mod
+        super().__init__(slot, week, day, start, end, mod)
 
     def __str__(self) :
         return self.mod + " LEC " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)
@@ -60,12 +58,7 @@ class Lecture(NUSClass) :
 class Lab(NUSClass) :
 
     def __init__(self, slot, week, day, start, end, mod) :
-        self.slot = slot
-        self.day = day
-        self.week = week
-        self.start = start
-        self.end = end
-        self.mod = mod
+        super().__init__(slot, week, day, start, end, mod)
 
     def __str__(self) :
         return self.mod + " LAB " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)
@@ -82,12 +75,7 @@ class Lab(NUSClass) :
 class Tutorial(NUSClass) :
 
     def __init__(self, slot, week, day, start, end, mod) :
-        self.slot = slot
-        self.day = day
-        self.week = week
-        self.start = start
-        self.end = end
-        self.mod = mod
+        super().__init__(slot, week, day, start, end, mod)
 
     def __str__(self) :
         return self.mod + " TUT " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)
@@ -104,12 +92,7 @@ class Tutorial(NUSClass) :
 class Recitation(NUSClass) :
 
     def __init__(self, slot, week, day, start, end, mod) :
-        self.slot = slot
-        self.day = day
-        self.week = week
-        self.start = start
-        self.end = end
-        self.mod = mod
+        super().__init__(slot, week, day, start, end, mod)
 
     def __str__(self) :
         return self.mod + " REC " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)

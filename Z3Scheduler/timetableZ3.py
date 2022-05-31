@@ -14,7 +14,7 @@ class TimeTableSchedulerZ3 :
                 4 : "Thursday",
                 5 : "Friday"}
 
-    def __init__(self, module_dict) :
+    def __init__(self, module_dict, print=True) :
         self.semesterMods = module_dict
         self.solver = Solver()
         self.lessons_by_day = [[], [], [], [], []]
@@ -23,8 +23,10 @@ class TimeTableSchedulerZ3 :
         self.recs = []
         self.labs = []
         self.sems = []
+        self.sects = []
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
+        self.print = print
         self.finalTimetable = [[], [], [], [], []]
 
     def init_variables(self) :
@@ -53,6 +55,9 @@ class TimeTableSchedulerZ3 :
             for seminar in value.seminars :
                 self.lessons_by_day[seminar.day - 1].append(seminar)
                 self.sems.append(seminar)
+            for sectional_lesson in value.sectionals :
+                self.lessons_by_day[sectional_lesson.day - 1].append(sectional_lesson)
+                self.sects.append(sectional_lesson)
 
             self.build_hashmaps()
 
@@ -90,9 +95,10 @@ class TimeTableSchedulerZ3 :
             SelectOnlyOneSlot(module.tutorials, self.string_to_bool_literal).enforce(self.solver)
             SelectOnlyOneSlot(module.labs, self.string_to_bool_literal).enforce(self.solver)
             SelectOnlyOneSlot(module.seminars, self.string_to_bool_literal).enforce(self.solver)
+            SelectOnlyOneSlot(module.sectionals, self.string_to_bool_literal).enforce(self.solver)
 
         # Resolve Time clash constraints
-        NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs, \
+        NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
 
     def add_other_constraints(self, fn) :
@@ -130,10 +136,12 @@ class TimeTableSchedulerZ3 :
         
         if (self.solver.check() == sat) :
             print("SAT")
-            self.printTimeTable()
+            if (self.print) :
+                self.printTimeTable()
         elif (self.solver.check() == unsat) :
             print("UNSAT")
             print("No feasible timetable")
+        return self.solver.check()
 
     def printTimeTable(self) :
         self.finalTimetable = [[], [], [], [], []]

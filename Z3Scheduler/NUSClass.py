@@ -21,6 +21,23 @@ class NUSClass :
             or (b.start <= self.start <= b.end and b.start <= self.end <= b.end)))
         #((self.start <= b.start < self.end) or (self.start < b.end <= self.end)) and (self.day == b.day)
 
+class Sectional_Teaching(NUSClass) :
+
+    def __init__(self, slot, week, day, start, end, mod) :
+        super().__init__(slot, week, day, start, end, mod)
+
+    def __str__(self) :
+        return self.mod + " SEC " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)
+
+    def __repr__(self) -> str:
+        return self.mod + " SEC " + str(self.slot) + " on Day " + str(self.day) + " @ " + str(self.start) + " - " + str(self.end)
+    
+    def isSameSlot(self, other) :
+        return isinstance(other, Sectional_Teaching) and (other.slot == self.slot)
+
+    def willClash(self, b):
+        return super().willClash(b)
+
 class Seminar(NUSClass) :
 
     def __init__(self, slot, week, day, start, end, mod) :

@@ -15,6 +15,47 @@ class Constraint(ABC) :
 
 # Below are the Constraints that will be used on the Solver.
 
+class No8AMLessonsConstraint(Constraint) :
+
+    def __init__(self, classes, string_to_bool_literal_dict, name="No 8am Lessons Constraint") :
+        super().__init__(classes, string_to_bool_literal_dict, name)
+
+    def __str__(self) :
+        return self.name
+
+    def __repr__(self) :
+        return self.name
+
+    def enforce(self, solver) :
+        morning_lessons = list(filter(lambda x : x.start <= 800, self.classes))
+        negated_variables = list(map(lambda x : Not(self.string_to_bool_literal_dict[str(x)]), morning_lessons))
+        solver.add(And(negated_variables))
+
+class NoConsecutiveLessonsConstraint(Constraint) :
+
+    def __init__(self, classes, string_to_bool_literal_dict, name="No Consecutive Lessons") :
+        super().__init__(classes, string_to_bool_literal_dict, name)
+        self.lessons_by_day = [[], [], [], [], []]
+
+    def __str__(self) :
+        return self.name
+
+    def __repr__(self) :
+        return self.name
+
+    def sort_by_days(self) :
+        for lesson in self.classes :
+            self.lessons_by_day[lesson.day - 1].append(lesson)
+
+    def enforce(self, solver) :
+        self.sort_by_days()
+        for day in self.lessons_by_day :
+            for nus_class in day :
+                candidates = list(filter(lambda x : x.start == nus_class.end, day))
+                antecedant = self.string_to_bool_literal_dict[str(nus_class)]
+                negated_lessons = list(map(lambda x : Not(self.string_to_bool_literal_dict[str(x)]), candidates))
+                solver.add(Implies(antecedant, And(negated_lessons)))
+
 class NoClashConstraint(Constraint) :
 
     def __init__(self, classes, string_to_bool_literal_dict, name="No Time Clash Constraint") :
@@ -101,14 +142,4 @@ class SelectOnlyOneSlot(Constraint) :
             solver.add(Or(literal_list))
             for group in list(combinations(literal_list, 2)) :
                 solver.add(Not(And(group)))
-
-
-
-
-
-
-
-
-
-
 

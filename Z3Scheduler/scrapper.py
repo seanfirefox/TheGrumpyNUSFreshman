@@ -68,6 +68,8 @@ class Scrapper :
                     nusMod.addLectures(Lecture(slot, weeks, day, start, end, mod))
                 elif (someClass['lessonType'] == 'Seminar-Style Module Class') :
                     nusMod.addSeminars(Seminar(slot, weeks, day, start, end, mod))
+                elif (someClass['lessonType'] == 'Sectional Teaching') :
+                    nusMod.addSectionalTeaching(Sectional_Teaching(slot, weeks, day, start, end, mod))
                 else :
                     print("Unknown Class Type Detected!")
                     self.hasIssues = True

@@ -15,7 +15,7 @@ modules = [sys.argv[i] for i in range(1, numMods + 1)]
 scrapper = Scrapper(modules, AY, SEM)
 scrapper.scrape()
 
-timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed)
+timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed, print=True)
 timetable.optimiseTimetable()
 
 if (timetable.last_solution_status() == unsat) :

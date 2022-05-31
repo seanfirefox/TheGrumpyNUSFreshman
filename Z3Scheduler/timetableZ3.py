@@ -1,6 +1,4 @@
 from itertools import combinations
-import builtins
-builtins.Z3_LIB_DIRS = [ '/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/z3/lib/libz3.dylib' ]
 from socket import timeout
 from z3 import *
 from utils import *

@@ -11,13 +11,13 @@ print(scrapper.semesterProcessed)
 timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed)
 timetable.optimiseTimetable()
 print('-----------------\n')
-timetable.anotherSolution()
+timetable.another_solution()
 
 print('-----------------\n')
-timetable.anotherSolution()
+timetable.another_solution()
 
 print('-----------------\n')
-timetable.anotherSolution()
+timetable.another_solution()
 
 print('-----------------\n')
-timetable.anotherSolution()
+timetable.another_solution()

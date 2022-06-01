@@ -1,0 +1,9 @@
+boto==2.49.0
+certifi==2021.10.8
+charset-normalizer==2.0.12
+idna==3.3
+numpy==1.21.4
+requests==2.27.1
+urllib3==1.26.9
+z3==0.2.0
+z3-solver==4.8.17.0

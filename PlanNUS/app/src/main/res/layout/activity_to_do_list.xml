@@ -5,42 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_colour"
-    tools:context=".ToDoList">
+    tools:context=".Activities.ToDoList">
 
     <TextView
         android:id="@+id/myTasks"
-        android:layout_width="261dp"
-        android:layout_height="73dp"
+        android:layout_width="404dp"
+        android:layout_height="72dp"
         android:text="My Tasks"
         android:textColor="#000000"
-        android:textSize="50sp"
+        android:autoSizeMaxTextSize="50sp"
+        android:autoSizeMinTextSize="40sp"
+        android:autoSizeTextType="uniform"
+        android:textAlignment="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:background="@drawable/backbutton"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp" />
 
     <Button
         android:id="@+id/createTask"
         android:layout_width="165dp"
         android:layout_height="48dp"
         android:layout_marginEnd="24dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="15sp"
+        android:autoSizeMinTextSize="8sp"
         android:text="Create Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/completedTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Completed Task"
+        android:id="@+id/milestone"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="15sp"
+        android:autoSizeMinTextSize="8sp"
+        android:text="Milestones"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/createTask"
         app:layout_constraintStart_toStartOf="parent" />

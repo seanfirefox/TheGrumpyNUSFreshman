@@ -3,15 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.42463582356770835" />
-        <entry key="app/src/main/res/layout/activity_content_main.xml" value="0.32461242675781254" />
+        <entry key="../../../../../layout/custom_preview.xml" value="0.15577507598784193" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_completed_task.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_content_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_contentmainactivity.xml" value="0.3075592041015625" />
+        <entry key="app/src/main/res/layout/activity_edit_task.xml" value="0.2631578947368421" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27684326171875" />
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.4562043795620438" />
-        <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.17844202898550723" />
+        <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.6708542713567839" />
+        <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.34251215838003846" />
+        <entry key="app/src/main/res/layout/completedtask.xml" value="0.18" />
         <entry key="app/src/main/res/layout/test1.xml" value="0.35517730712890627" />
-        <entry key="app/src/main/res/layout/todotask.xml" value="0.21354166666666666" />
+        <entry key="app/src/main/res/layout/todotask.xml" value="0.2533112582781457" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

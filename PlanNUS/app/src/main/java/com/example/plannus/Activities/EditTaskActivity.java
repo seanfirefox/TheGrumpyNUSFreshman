@@ -88,6 +88,25 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
         editPlannedTime = findViewById(R.id.editPlannedTimeButton);
         editPlannedTime.setOnClickListener(this);
+
+        editStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                statusValue = String.valueOf(i);
+                editStatusText.setText(statusValue);
+                Log.d("Edit Task Seek Bar Status Change", statusValue);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     public void renderVars() {
@@ -101,23 +120,6 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void editTask() {
-
-        editStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                statusValue = String.valueOf(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
         String editedTask = editTask.getText().toString().trim();
         String stats = statusValue;

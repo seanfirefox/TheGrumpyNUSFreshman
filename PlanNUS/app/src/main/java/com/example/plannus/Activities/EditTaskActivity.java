@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.plannus.R;
@@ -30,9 +31,11 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     private Button editButton, editDueDate, editDueTime , editPlannedDate, editPlannedTime;
     private String userId;
     private String[] taskInfo;
-    private String task, tagName;
+    private String task, tagName, statusValue;
     private SessionManager sessionManager;
-    private EditText editTask, editStatus, editTag;
+    private EditText editTask, editTag;
+    private TextView editStatusText;
+    private SeekBar editStatus;
     private DateTimeDialog dateTimePicker;
 
     @Override
@@ -69,8 +72,10 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         tagName = taskInfo[0];
         Log.e("check", Arrays.toString(taskInfo));
 
+        statusValue = findViewById(R.id.textViewStatus).toString();
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
+        editStatusText = findViewById(R.id.textViewStatus);
         editTag = findViewById(R.id.editTag);
         editDueDate = findViewById(R.id.editDueDateButton);
         editDueDate.setOnClickListener(this);
@@ -87,7 +92,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     public void renderVars() {
         editTask.setText(task, TextView.BufferType.EDITABLE);
-        editStatus.setText(taskInfo[2], TextView.BufferType.EDITABLE);
+        editStatusText.setText(taskInfo[2], TextView.BufferType.EDITABLE);
         editTag.setText(taskInfo[0], TextView.BufferType.EDITABLE);
         editDueDate.setText(taskInfo[3], TextView.BufferType.EDITABLE);
         editDueTime.setText(taskInfo[4], TextView.BufferType.EDITABLE);
@@ -96,8 +101,26 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void editTask() {
+
+        editStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                statusValue = String.valueOf(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         String editedTask = editTask.getText().toString().trim();
-        String stats = editStatus.getText().toString().trim();
+        String stats = statusValue;
         String tag = editTag.getText().toString().trim();
         String deadlineDate = editDueDate.getText().toString().trim();
         String deadLineDateStore = DateFormatter.dateToNumber(deadlineDate);

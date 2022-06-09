@@ -190,19 +190,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTasks" />
 
-    <EditText
+    <SeekBar
         android:id="@+id/editStatusDesc"
-        android:layout_width="285dp"
+        android:layout_width="214dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints="Status"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintEnd_toStartOf="@+id/textViewStatus"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskDesc" />
+
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="71dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:autofillHints="Status"
-        android:ems="10"
-        android:hint="% of work completed"
+        android:text="0"
         android:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="15sp"
-        android:autoSizeMinTextSize="7sp"
-        android:inputType="numberDecimal"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTaskDesc" />
 

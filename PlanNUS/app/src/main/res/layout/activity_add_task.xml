@@ -180,22 +180,31 @@
         app:layout_constraintStart_toEndOf="@+id/TaskTxTtextView"
         app:layout_constraintTop_toBottomOf="@+id/AddTasks" />
 
-    <EditText
+    <SeekBar
         android:id="@+id/taskDescEditStatus"
-        android:layout_width="285dp"
+        android:layout_width="214dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="Status"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintEnd_toStartOf="@+id/textViewNewStatus"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/statusTexTtextView"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescEditText" />
+
+    <TextView
+        android:id="@+id/textViewNewStatus"
+        android:layout_width="71dp"
         android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:autoSizeMaxTextSize="20sp"
         android:autoSizeMinTextSize="10sp"
         android:autoSizeTextType="uniform"
-        android:autofillHints="Status"
-        android:ems="10"
-        android:hint="% of work completed"
-        android:inputType="numberDecimal"
+        android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/statusTexTtextView"
         app:layout_constraintTop_toBottomOf="@+id/taskDescEditText" />
 
     <Button

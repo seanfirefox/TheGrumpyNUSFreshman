@@ -111,6 +111,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     public void renderVars() {
         editTask.setText(task, TextView.BufferType.EDITABLE);
+        editStatus.setProgress(Integer.valueOf(taskInfo[2]));
         editStatusText.setText(taskInfo[2], TextView.BufferType.EDITABLE);
         editTag.setText(taskInfo[0], TextView.BufferType.EDITABLE);
         editDueDate.setText(taskInfo[3], TextView.BufferType.EDITABLE);

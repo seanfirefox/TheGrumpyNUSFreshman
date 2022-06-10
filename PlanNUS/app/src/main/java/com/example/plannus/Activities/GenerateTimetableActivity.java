@@ -3,6 +3,7 @@ package com.example.plannus.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +27,16 @@ public class GenerateTimetableActivity extends AppCompatActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(GenerateTimetableActivity.this, "network not found", Toast.LENGTH_LONG).show();
+                Log.d("NETWORK_FAIL", "NETWORK FAIL");
+                TextView textView = findViewById(R.id.textView);
+                textView.setText("Network Fail");
+                // Toast.makeText(GenerateTimetableActivity.this, "network not found", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
                 TextView textView = findViewById(R.id.textView);
+                Log.d("RESPONSE_BODY", response.body().string());
                 textView.setText(response.body().string());
             }
         });

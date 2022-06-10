@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.DatePickerDialog;
 
@@ -27,7 +29,10 @@ import com.google.firebase.firestore.SetOptions;
 public class AddTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button saveTask, dueDate, dueTime, plannedDate, plannedTime;
-    private EditText newTask, newStatus, newTag;
+    private EditText newTask, newTag;
+    private TextView statusValue;
+    private SeekBar newStatus;
+    private String status_text;
     private String userID;
     private SessionManager sessionManager;
     private DateTimeDialog dateTimePicker;
@@ -64,6 +69,26 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         plannedTime = findViewById(R.id.plannedTimeButton);
         plannedTime.setOnClickListener(this);
 
+        statusValue = findViewById(R.id.textViewNewStatus);
+        status_text = statusValue.getText().toString();
+        newStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                statusValue.setText(String.valueOf(i));
+                status_text = String.valueOf(i);
+                Log.e("GET STATUS TEXT",status_text);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
@@ -84,8 +109,9 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void addTask() {
+
         String task = newTask.getText().toString().trim();
-        String stats = newStatus.getText().toString().trim();
+        String stats = status_text;
         String tag = newTag.getText().toString().trim();
 
         String deadlineDate = dueDate.getText().toString().trim();

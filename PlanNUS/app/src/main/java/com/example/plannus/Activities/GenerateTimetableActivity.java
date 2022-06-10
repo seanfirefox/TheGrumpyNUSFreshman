@@ -23,7 +23,7 @@ public class GenerateTimetableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_generate_timetable);
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        Request request = new Request.Builder().url("http://127.0.0.1:5000/").build();
+        Request request = new Request.Builder().url("https://plannus-sat-solver.herokuapp.com/").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

@@ -1,7 +1,27 @@
 from scrapper import *
 from timetableZ3 import *
-import sys
+from flask import Flask
+#import sys
 
+# Flask Constructor
+app = Flask(__name__)
+
+@app.route("/")
+def show_heroku_site() :
+    return "Heroku site"
+
+@app.route("/z3")
+def show_z3_stuff() :
+    modules = ["CS2030S", "CS2040S", "ST2334", "MA2104", "CM1102"]
+    scrapper = Scrapper(modules, "2021-2022", 2)
+    scrapper.scrape()
+    timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed, print=True)
+    return timetable.optimiseTimetable(to_string=True)
+
+if __name__ == "__main__" :
+    app.run()
+
+'''
 OPTIONS = [
 
 ]
@@ -35,4 +55,4 @@ else :
             print("Wrong input! ")
     if (happy) :
         print("Saving Timetable...\n")
-
+'''

@@ -1,6 +1,7 @@
 from itertools import combinations
 from socket import timeout
 from z3 import *
+import z3
 from utils import *
 from Constraint import *
 from NUSModule import *

@@ -1,7 +1,6 @@
 from itertools import combinations
 from socket import timeout
 from z3 import *
-from z3 import Solver
 from utils import *
 from Constraint import *
 from NUSModule import *
@@ -17,7 +16,7 @@ class TimeTableSchedulerZ3 :
 
     def __init__(self, module_dict, print=True) :
         self.semesterMods = module_dict
-        self.solver = Solver()
+        self.solver = z3.Solver()
         self.lessons_by_day = [[], [], [], [], []]
         self.lecs = []
         self.tuts = []

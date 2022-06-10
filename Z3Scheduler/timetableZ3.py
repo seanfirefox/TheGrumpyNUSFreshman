@@ -58,8 +58,8 @@ class TimeTableSchedulerZ3 :
             for sectional_lesson in value.sectionals :
                 self.lessons_by_day[sectional_lesson.day - 1].append(sectional_lesson)
                 self.sects.append(sectional_lesson)
-
-            self.build_hashmaps()
+            
+        self.build_hashmaps()
 
     def build_hashmaps(self) :
         '''
@@ -100,9 +100,6 @@ class TimeTableSchedulerZ3 :
         # Resolve Time clash constraints
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
-
-    def add_other_constraints(self, fn) :
-        raise NotImplementedError
 
     def another_solution(self) :
         '''

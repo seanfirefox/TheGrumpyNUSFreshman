@@ -16,6 +16,9 @@
         tools:remove="android:appComponentFactory"
         tools:targetApi="31">
         <activity
+            android:name=".GenerateTimetableActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.CompletedTaskActivity"
             android:exported="false"
             android:parentActivityName=".Activities.ToDoList" />

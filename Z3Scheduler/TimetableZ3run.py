@@ -10,7 +10,7 @@ app = Flask(__name__)
 def show_heroku_site() :
     return "Heroku site"
 
-@app.route("/z3")
+@app.route("/z3", methods=['GET'])
 def show_z3_stuff() :
     modules = ["CS2030S", "CS2040S", "ST2334", "MA2104", "CM1102"]
     scrapper = Scrapper(modules, "2021-2022", 2)

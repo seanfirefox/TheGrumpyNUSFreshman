@@ -1,1 +1,1 @@
-web: python3 TimetableZ3run.py
+web: gunicorn TimetableZ3run:app

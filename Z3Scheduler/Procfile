@@ -1,1 +1,1 @@
-worker: python3 Interface.py
+worker: python3 TimetableZ3run.py

@@ -101,9 +101,6 @@ class TimeTableSchedulerZ3 :
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
 
-    def add_other_constraints(self, fn) :
-        raise NotImplementedError
-
     def another_solution(self) :
         '''
         Simple implementation of #SAT. This function enumerates the next set of solutions

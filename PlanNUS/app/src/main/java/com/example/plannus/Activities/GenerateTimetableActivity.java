@@ -36,8 +36,9 @@ public class GenerateTimetableActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 TextView textView = findViewById(R.id.textView);
-                Log.d("RESPONSE_BODY", response.body().string());
-                textView.setText(response.body().string());
+                String text = response.body().string();
+                Log.d("RESPONSE_BODY", text);
+                textView.setText(text);
             }
         });
     }

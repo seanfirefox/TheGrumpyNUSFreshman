@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def show_heroku_site() :
-    return "<h1>Heroku site</h1>"
+    return "Heroku site"
 
 @app.route("/z3")
 def show_z3_stuff() :

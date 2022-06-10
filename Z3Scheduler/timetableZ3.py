@@ -58,8 +58,12 @@ class TimeTableSchedulerZ3 :
             for sectional_lesson in value.sectionals :
                 self.lessons_by_day[sectional_lesson.day - 1].append(sectional_lesson)
                 self.sects.append(sectional_lesson)
+            
+            # Build hashmaps to facilitate solving
 
             self.build_hashmaps()
+
+            # End
 
     def build_hashmaps(self) :
         '''

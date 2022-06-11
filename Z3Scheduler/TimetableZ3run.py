@@ -1,6 +1,4 @@
 from scrapper import *
-import sys
-sys.path.append("/app/.heroku/python/lib/python3.10/site-packages/z3/")
 from z3 import *
 from timetableZ3 import *
 from flask import Flask

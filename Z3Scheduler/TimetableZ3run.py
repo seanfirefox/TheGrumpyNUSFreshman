@@ -1,5 +1,6 @@
 from scrapper import *
 from z3 import *
+import z3
 from timetableZ3 import *
 from flask import Flask
 #import sys
@@ -21,7 +22,7 @@ def show_z3_stuff() :
 
 @app.route("/test")
 def test_one() :
-    x = Bool('x')
+    x = z3.Bool('x')
     return "Russell Test"
 
 if __name__ == "__main__" :

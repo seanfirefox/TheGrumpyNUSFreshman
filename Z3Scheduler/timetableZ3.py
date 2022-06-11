@@ -1,6 +1,6 @@
 from itertools import combinations
 import sys
-sys.path.append("app/.heroku/python/lib/python3.10/site-packages/z3/")
+sys.path.append("app/.heroku/python/lib/python3.10/site-packages/")
 from socket import timeout
 from z3 import *
 from utils import *

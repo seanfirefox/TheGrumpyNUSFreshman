@@ -1,4 +1,5 @@
 from scrapper import *
+from z3 import *
 from timetableZ3 import *
 from flask import Flask
 #import sys
@@ -17,6 +18,11 @@ def show_z3_stuff() :
     scrapper.scrape()
     timetable = TimeTableSchedulerZ3(scrapper.semesterProcessed, print=True)
     return timetable.optimiseTimetable(to_string=True)
+
+@app.route("/test")
+def test_one() :
+    x = Bool('x')
+    return "Russell Test"
 
 if __name__ == "__main__" :
     app.run()

@@ -33,7 +33,7 @@ def test_one() :
     x = z3.Bool('x')
     return "Russell Test"
 
-@app.route("/posttest")
+@app.route("/posttest", methods=['POST'])
 def post_from_android() :
     value = request.form['value']
     return (value)

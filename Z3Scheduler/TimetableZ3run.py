@@ -35,7 +35,7 @@ def test_one() :
 
 @app.route("/posttest")
 def post_from_android() :
-    value-request.form['value']
+    value = request.form['value']
     return (value)
 
 if __name__ == "__main__" :

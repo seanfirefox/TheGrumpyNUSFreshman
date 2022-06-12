@@ -28,10 +28,24 @@ def sat_stuff() :
     scrapper.scrape()
     return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
 
-@app.route("/test")
+@app.route("/run", methods=['POST'])
+def run() :
+    mods = [request.form['mod1'], request.form['mod2'], request.form['mod3']]
+    scrapper = Scrapper(mods, "2021-2022", 2)
+    scrapper.scrape()
+    return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
+
+@app.route("/test", methods=['POST'])
 def test_one() :
-    x = z3.Bool('x')
-    return "Russell Test"
+    num_mods = request.form['numMods']
+    mods = []
+    for i in range(num_mods) :
+        mods.append(request.form["mod" + str(i)])
+    AY = request.form["AY"]
+    SEM = request.form["Sem"]
+    scrapper = Scrapper(mods, AY, SEM)
+    scrapper.scrape()
+    return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
 
 @app.route("/posttest", methods=['POST'])
 def post_from_android() :

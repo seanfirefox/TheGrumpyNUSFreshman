@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.util.ArrayList;
+
 public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText moduleCode1, moduleCode2, moduleCode3;
     private Button saveGenerate;
@@ -50,15 +52,23 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         String module1 = moduleCode1.getText().toString().trim();
         String module2 = moduleCode2.getText().toString().trim();
         String module3 = moduleCode3.getText().toString().trim();
+        ArrayList<String> mods = new ArrayList<String>();
+        mods.add(module1);
+        mods.add(module2);
+        mods.add(module3);
+        TimetableSettings timetableSettings = new TimetableSettings(mods);
+        saveSettingsIntoFireStore(timetableSettings);
 
-        TimetableSettings timetableSettings = new TimetableSettings(module1, module2, module3);
+    }
+
+    private void saveSettingsIntoFireStore(TimetableSettings settings) {
         DocumentReference docRef = sessionManager.getFireStore()
                 .collection("Users")
                 .document(userID)
                 .collection("timetableSettings")
                 .document("timetableSettings");
 
-        docRef.set(timetableSettings)
+        docRef.set(settings)
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
                     Log.d("SaveCreated", "onSuccess: Settings is saved");
                     Toast.makeText(TimetableSettingsActivity.this, "Settings saved Successfully",Toast.LENGTH_LONG).show();
@@ -67,7 +77,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("SaveFail", "onFailure: "+ e);
-                        Toast.makeText(TimetableSettingsActivity.this, "Failed to save settomgs", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TimetableSettingsActivity.this, "Failed to save settings", Toast.LENGTH_LONG).show();
                     }
                 });
     }

@@ -7,10 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 //import com.squareup.okhttp.Callback;
 //import com.squareup.okhttp.OkHttpClient;
 //import com.squareup.okhttp.Request;
@@ -19,6 +25,7 @@ import com.example.plannus.SessionManager;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -31,25 +38,26 @@ import okhttp3.Response;
 public class GenerateTimetableActivity extends AppCompatActivity implements View.OnClickListener {
     private Button settings, generate;
     private SessionManager sessionManager;
+    private String userID;
+    private OkHttpClient okHttpClient;
+    private TimetableSettings timetableSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_timetable);
-        settings = findViewById(R.id.settingsButton);
-        settings.setOnClickListener(this);
-        generate = findViewById(R.id.generateButton);
-        generate.setOnClickListener(this);
+        initVars();
+        obtainSettings();
+        RequestBody requestBody = buildRequestBody();
+//        Request request = new Request.Builder()
+//                .url("https://plannus-sat-solver.herokuapp.com/test")
+//                .post(requestBody)
+//                .build();
+//
+//        getRequest(request);
+    }
 
-        sessionManager = SessionManager.get();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-
-        RequestBody requestBody = new FormBody.Builder()
-                .add("mod1", "CS2040S")
-                .add("mod2", "MA2104")
-                .add("mod3", "CS2030S").build();
-        Request request = new Request.Builder().url("https://plannus-sat-solver.herokuapp.com/run").post(requestBody).build();
+    private void getRequest(Request request) {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -68,6 +76,16 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         });
     }
 
+    private void initVars() {
+        settings = findViewById(R.id.settingsButton);
+        settings.setOnClickListener(this);
+        generate = findViewById(R.id.generateButton);
+        generate.setOnClickListener(this);
+
+        sessionManager = SessionManager.get();
+        userID = sessionManager.getAuth().getCurrentUser().getUid();
+        okHttpClient = new OkHttpClient();
+    }
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.settingsButton) {
@@ -75,5 +93,46 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         } else if (v.getId() == R.id.generateButton) {
 
         }
+
+    }
+
+    public void obtainSettings() {
+        DocumentReference docRef = sessionManager.getFireStore().collection("Users").document(userID).collection("timetableSettings").document("timetableSettings");
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
+                Log.d("toString Settings", timetableSettings.toString());
+                Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
+                Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore");
+            }
+        });
+    }
+
+    public RequestBody buildRequestBody() {
+        FormBody.Builder builder = new FormBody.Builder();
+        System.out.println(timetableSettings);
+        Log.d("REQUEST SIZE", ((Integer)timetableSettings.getSize()).toString());
+        Log.d("REQUEST MODULE LIST", timetableSettings.getModuleList().toString());
+        int numMods = timetableSettings.getSize();
+        ArrayList<String> mods = timetableSettings.getModuleList();
+        int actual_count = timetableSettings.getSize();
+        for (int i = 1, j = 0; i <= numMods; i++) {
+            if (mods.get(i - 1).isEmpty()) {
+                actual_count--;
+                continue;
+            }
+            builder.add("mod" + String.valueOf(j), mods.get(i - 1));
+            j++;
+        }
+        builder.add("numMods", String.valueOf(actual_count));
+        builder.add("AY", String.valueOf("2021-2022"));
+        builder.add("Sem", String.valueOf(2));
+        return builder.build();
     }
 }

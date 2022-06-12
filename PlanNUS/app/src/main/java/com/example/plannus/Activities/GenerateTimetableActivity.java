@@ -1,19 +1,21 @@
 package com.example.plannus.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.R;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+
+import okhttp3.FormBody;
 
 public class GenerateTimetableActivity extends AppCompatActivity {
 
@@ -23,7 +25,8 @@ public class GenerateTimetableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_generate_timetable);
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        Request request = new Request.Builder().url("https://plannus-sat-solver.herokuapp.com/").build();
+        RequestBody requestBody = new FormBody.Builder().add("value", "test succeedd").build();
+        Request request = new Request.Builder().url("https://plannus-sat-solver.herokuapp.com/").post(requestBody).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

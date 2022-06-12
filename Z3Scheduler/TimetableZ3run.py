@@ -3,6 +3,7 @@ from z3 import *
 import z3
 from timetableZ3 import *
 from flask import Flask
+from flask import request
 #import sys
 
 # Flask Constructor
@@ -31,6 +32,11 @@ def sat_stuff() :
 def test_one() :
     x = z3.Bool('x')
     return "Russell Test"
+
+@app.route("/posttest")
+def post_from_android() :
+    value-request.form['value']
+    return (value)
 
 if __name__ == "__main__" :
     app.run()

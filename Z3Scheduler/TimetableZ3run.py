@@ -9,8 +9,6 @@ from flask import request
 # Flask Constructor
 app = Flask(__name__)
 
-global scheduler = None
-
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
@@ -58,7 +56,7 @@ def alt_soln() :
     return str(scheduler)
 
 def set_Scheduler(saved_scheduler) :
-    scheduler = saved_scheduler
+    global scheduler = saved_scheduler
 
 @app.route("/userID", methods=["POST"])
 def test_two() :

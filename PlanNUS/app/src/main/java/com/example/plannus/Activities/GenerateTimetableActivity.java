@@ -87,6 +87,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         userID = sessionManager.getAuth().getCurrentUser().getUid();
         okHttpClient = new OkHttpClient();
     }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.settingsButton) {
@@ -96,7 +97,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
             } else {
                 RequestBody requestBody = buildRequestBody();
-                obtainSettings();
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {
@@ -110,6 +110,12 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             }
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        obtainSettings();
     }
 
     public void obtainSettings() {

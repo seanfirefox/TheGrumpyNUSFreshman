@@ -39,6 +39,8 @@ def run() :
 
 @app.route("/test", methods=['POST'])
 def test_one() :
+    global scheduler
+    scheduler = None
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :

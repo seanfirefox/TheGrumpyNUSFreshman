@@ -57,7 +57,6 @@ def test_one() :
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :
-    global scheduler
     if (scheduler is None) :
         return "Nothing generated yet! No other solution offered!"
     return scheduler.another_solution(to_string=True)

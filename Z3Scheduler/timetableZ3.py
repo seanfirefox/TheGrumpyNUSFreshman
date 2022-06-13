@@ -5,6 +5,7 @@ from utils import *
 from Constraint import *
 from NUSModule import *
 from NUSClass import *
+import sys
 
 class TimeTableSchedulerZ3 :
 
@@ -184,4 +185,4 @@ class TimeTableSchedulerZ3 :
                 print(" " + str(classes))
 
     def endProgram() :
-        exit()
+        sys.exit()

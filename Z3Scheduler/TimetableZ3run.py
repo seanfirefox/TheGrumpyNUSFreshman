@@ -54,9 +54,8 @@ def test_one() :
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :
-    #return scheduler.another_solution(to_string=True)
     global scheduler
-    return str(scheduler)
+    return scheduler.another_solution(to_string=True)
 
 def set_Scheduler(saved_scheduler) :
     global scheduler

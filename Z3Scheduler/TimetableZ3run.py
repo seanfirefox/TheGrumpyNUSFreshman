@@ -42,7 +42,6 @@ def test_one() :
     global scheduler
     if (scheduler is not None) :
         del globals()['scheduler']
-        global scheduler
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :

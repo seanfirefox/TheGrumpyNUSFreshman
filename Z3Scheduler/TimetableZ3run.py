@@ -9,7 +9,7 @@ from flask import request
 # Flask Constructor
 app = Flask(__name__)
 
-scheduler = None
+global scheduler = None
 
 @app.route("/")
 def show_heroku_site() :

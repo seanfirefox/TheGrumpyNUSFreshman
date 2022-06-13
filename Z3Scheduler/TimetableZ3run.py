@@ -39,10 +39,9 @@ def run() :
 
 @app.route("/test", methods=['POST'])
 def test_one() :
+    del globals()['scheduler']
     global scheduler
-    if (scheduler is not None) :
-        scheduler = None
-        del globals()['scheduler']
+    scheduler = None
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :

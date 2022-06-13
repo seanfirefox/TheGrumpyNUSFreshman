@@ -184,4 +184,4 @@ class TimeTableSchedulerZ3 :
                 print(" " + str(classes))
 
     def endProgram() :
-        quit()
+        exit()

@@ -37,12 +37,12 @@ def run() :
 
 @app.route("/test", methods=['POST'])
 def test_one() :
-    num_mods = request.form['numMods']
+    num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :
         mods.append(request.form["mod" + str(i)])
     AY = request.form["AY"]
-    SEM = request.form["Sem"]
+    SEM = int(request.form["Sem"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
     return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)

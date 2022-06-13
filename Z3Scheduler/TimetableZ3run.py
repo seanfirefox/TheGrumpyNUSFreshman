@@ -40,7 +40,9 @@ def run() :
 @app.route("/test", methods=['POST'])
 def test_one() :
     global scheduler
-    scheduler = None
+    if (scheduler is not None) :
+        del globals()['scheduler']
+        global scheduler
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :
@@ -49,14 +51,15 @@ def test_one() :
     SEM = int(request.form["Sem"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
-    obj = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
-    string = obj.optimiseTimetable(to_string=True)
-    set_Scheduler(obj)
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    string = scheduler.optimiseTimetable(to_string=True)
     return string
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :
     global scheduler
+    if (scheduler is None) :
+        return "Nothing generated yet! No other solution offered!"
     return scheduler.another_solution(to_string=True)
 
 def set_Scheduler(saved_scheduler) :

@@ -183,6 +183,3 @@ class TimeTableSchedulerZ3 :
                 continue
             for classes in self.finalTimetable[i] :
                 print(" " + str(classes))
-
-    def endProgram() :
-        sys.exit()

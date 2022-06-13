@@ -4,6 +4,7 @@ import z3
 from timetableZ3 import *
 from flask import Flask
 from flask import request
+import gc
 #import sys
 
 # Flask Constructor

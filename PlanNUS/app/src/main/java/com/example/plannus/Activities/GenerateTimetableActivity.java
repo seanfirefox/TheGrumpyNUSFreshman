@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private String userID;
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_generate_timetable);
         initVars();
         obtainSettings();
-        RequestBody requestBody = buildRequestBody();
+//        RequestBody requestBody = buildRequestBody();
 //        Request request = new Request.Builder()
 //                .url("https://plannus-sat-solver.herokuapp.com/test")
 //                .post(requestBody)
@@ -62,13 +64,11 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("NETWORK_FAIL", "NETWORK FAIL");
-                TextView textView = findViewById(R.id.textView);
                 textView.setText("Network Fail");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                TextView textView = findViewById(R.id.textView);
                 String text = response.body().string();
                 Log.d("RESPONSE_BODY", text);
                 textView.setText(text);
@@ -77,6 +77,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private void initVars() {
+        textView = findViewById(R.id.textView);
         settings = findViewById(R.id.settingsButton);
         settings.setOnClickListener(this);
         generate = findViewById(R.id.generateButton);
@@ -91,7 +92,21 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         if (v.getId() == R.id.settingsButton) {
             startActivity(new Intent(this, TimetableSettingsActivity.class));
         } else if (v.getId() == R.id.generateButton) {
+            if (timetableSettings == null) {
+                Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
+            } else {
+                RequestBody requestBody = buildRequestBody();
+                if (requestBody == null) {
+                    textView.setText("Settings page empty");
+                } else {
+                    Request request = new Request.Builder()
+                            .url("https://plannus-sat-solver.herokuapp.com/test")
+                            .post(requestBody)
+                            .build();
 
+                    getRequest(request);
+                }
+            }
         }
 
     }
@@ -130,9 +145,14 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             builder.add("mod" + String.valueOf(j), mods.get(i - 1));
             j++;
         }
-        builder.add("numMods", String.valueOf(actual_count));
-        builder.add("AY", String.valueOf("2021-2022"));
-        builder.add("Sem", String.valueOf(2));
-        return builder.build();
+        if (actual_count == 0) {
+            return null;
+        } else {
+            builder.add("numMods", String.valueOf(actual_count));
+            builder.add("AY", String.valueOf("2021-2022"));
+            builder.add("Sem", String.valueOf(2));
+            System.out.println(mods);
+            return builder.build();
+        }
     }
 }

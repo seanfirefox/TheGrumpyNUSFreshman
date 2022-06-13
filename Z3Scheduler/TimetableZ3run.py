@@ -4,6 +4,7 @@ import z3
 from timetableZ3 import *
 from flask import Flask
 from flask import request
+import gc
 #import sys
 
 # Flask Constructor
@@ -40,6 +41,7 @@ def run() :
 @app.route("/test", methods=['POST'])
 def test_one() :
     del globals()['scheduler']
+    gc.collect()
     global scheduler
     scheduler = None
     num_mods = int(request.form['numMods'])

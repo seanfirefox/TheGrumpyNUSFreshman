@@ -41,6 +41,7 @@ def run() :
 def test_one() :
     global scheduler
     if (scheduler is not None) :
+        scheduler.endProgram()
         del globals()['scheduler']
     num_mods = int(request.form['numMods'])
     mods = []

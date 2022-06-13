@@ -37,12 +37,13 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class GenerateTimetableActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button settings, generate;
+    private Button settings, generate, next;
     private SessionManager sessionManager;
     private String userID;
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView textView;
+    private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         settings.setOnClickListener(this);
         generate = findViewById(R.id.generateButton);
         generate.setOnClickListener(this);
+        next  = findViewById(R.id.nextButton);
+        next.setOnClickListener(this);
 
         sessionManager = SessionManager.get();
         userID = sessionManager.getAuth().getCurrentUser().getUid();
@@ -107,6 +110,16 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
                     getRequest(request);
                 }
+            }
+        } else if (v.getId() == R.id.nextButton) {
+            if (timetableSettings == null) {
+                Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
+            } else {
+                Request request = new Request.Builder()
+                        .url("https://plannus-sat-solver.herokuapp.com/alt_soln")
+                        .post(EMPTYREQUEST)
+                        .build();
+                getRequest(request);
             }
         }
 
@@ -162,4 +175,5 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             return builder.build();
         }
     }
+
 }

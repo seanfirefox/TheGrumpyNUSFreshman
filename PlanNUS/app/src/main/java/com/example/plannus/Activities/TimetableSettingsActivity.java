@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.plannus.Objects.TimetableSettings;
@@ -24,11 +26,29 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private Button saveTimetableSettings, addRow;
     private SessionManager sessionManager;
     private String userID;
+    private int numMods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetable_settings);
+        initVars();
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.saveTimetableSettingsButton) {
+            saveSettings();
+            finish();
+        } else if (v.getId() == R.id.addRow) {
+            EditText editText = new EditText(this);
+            editText.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        }
+    }
+
+    private void initVars() {
         sessionManager = SessionManager.get();
         userID = sessionManager.getAuth().getCurrentUser().getUid();
         moduleCode1 = findViewById(R.id.moduleCode1);
@@ -40,20 +60,10 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         saveTimetableSettings.setOnClickListener(this);
         addRow = findViewById(R.id.addRow);
         addRow.setOnClickListener(this);
-
+        numMods = 5;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.saveTimetableSettingsButton) {
-            saveGenerate();
-            finish();
-        } else if (v.getId() == R.id.addRow) {
-
-        }
-    }
-
-    private void saveGenerate() {
+    private void saveSettings() {
         String module1 = moduleCode1.getText().toString().trim();
         String module2 = moduleCode2.getText().toString().trim();
         String module3 = moduleCode3.getText().toString().trim();

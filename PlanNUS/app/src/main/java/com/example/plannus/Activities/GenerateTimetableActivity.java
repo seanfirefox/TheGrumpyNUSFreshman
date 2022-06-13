@@ -51,13 +51,59 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_generate_timetable);
         initVars();
         obtainSettings();
-//        RequestBody requestBody = buildRequestBody();
-//        Request request = new Request.Builder()
-//                .url("https://plannus-sat-solver.herokuapp.com/test")
-//                .post(requestBody)
-//                .build();
-//
-//        getRequest(request);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        obtainSettings();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.settingsButton) {
+            startActivity(new Intent(this, TimetableSettingsActivity.class));
+        } else if (v.getId() == R.id.generateButton) {
+            if (timetableSettings == null) {
+                Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
+            } else {
+                RequestBody requestBody = buildRequestBody();
+                if (requestBody == null) {
+                    textView.setText("Settings page empty");
+                } else {
+                    buildGetRequest("https://plannus-sat-solver.herokuapp.com/test", requestBody);
+                }
+            }
+        } else if (v.getId() == R.id.nextButton) {
+            if (timetableSettings == null) {
+                Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
+            } else {
+                buildGetRequest("https://plannus-sat-solver.herokuapp.com/alt_soln", EMPTYREQUEST);
+            }
+        }
+
+    }
+
+    private void buildGetRequest(String url, RequestBody requestBody) {
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        getRequest(request);
+    }
+
+    private void initVars() {
+        textView = findViewById(R.id.textView);
+        settings = findViewById(R.id.settingsButton);
+        settings.setOnClickListener(this);
+        generate = findViewById(R.id.generateButton);
+        generate.setOnClickListener(this);
+        next  = findViewById(R.id.nextButton);
+        next.setOnClickListener(this);
+
+        sessionManager = SessionManager.get();
+        userID = sessionManager.getAuth().getCurrentUser().getUid();
+        okHttpClient = new OkHttpClient();
     }
 
     private void getRequest(Request request) {
@@ -75,60 +121,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 textView.setText(text);
             }
         });
-    }
-
-    private void initVars() {
-        textView = findViewById(R.id.textView);
-        settings = findViewById(R.id.settingsButton);
-        settings.setOnClickListener(this);
-        generate = findViewById(R.id.generateButton);
-        generate.setOnClickListener(this);
-        next  = findViewById(R.id.nextButton);
-        next.setOnClickListener(this);
-
-        sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth().getCurrentUser().getUid();
-        okHttpClient = new OkHttpClient();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.settingsButton) {
-            startActivity(new Intent(this, TimetableSettingsActivity.class));
-        } else if (v.getId() == R.id.generateButton) {
-            if (timetableSettings == null) {
-                Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
-            } else {
-                RequestBody requestBody = buildRequestBody();
-                if (requestBody == null) {
-                    textView.setText("Settings page empty");
-                } else {
-                    Request request = new Request.Builder()
-                            .url("https://plannus-sat-solver.herokuapp.com/test")
-                            .post(requestBody)
-                            .build();
-
-                    getRequest(request);
-                }
-            }
-        } else if (v.getId() == R.id.nextButton) {
-            if (timetableSettings == null) {
-                Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
-            } else {
-                Request request = new Request.Builder()
-                        .url("https://plannus-sat-solver.herokuapp.com/alt_soln")
-                        .post(EMPTYREQUEST)
-                        .build();
-                getRequest(request);
-            }
-        }
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        obtainSettings();
     }
 
     public void obtainSettings() {

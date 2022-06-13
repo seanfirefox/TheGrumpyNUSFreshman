@@ -101,7 +101,7 @@ class TimeTableSchedulerZ3 :
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
 
-    def another_solution(self) :
+    def another_solution(self, to_string=True) :
         '''
         Simple implementation of #SAT. This function enumerates the next set of solutions
         that are possible given the current constraints.
@@ -115,8 +115,12 @@ class TimeTableSchedulerZ3 :
         self.solver.add(Or([literal != current_model.eval(literal, model_completion=True) for literal in literals]))
         if (self.solver.check() == sat) :
             print("SAT")
+            if (to_string) :
+                return self.string_timetable()
             self.printTimeTable()
         elif (self.solver.check() == unsat) :
+            if (to_string) :
+                return "No feasible Timetable."
             print("UNSAT")
             print("No feasible timetable")
     

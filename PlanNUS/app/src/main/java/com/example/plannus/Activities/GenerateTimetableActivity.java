@@ -96,6 +96,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
             } else {
                 RequestBody requestBody = buildRequestBody();
+                obtainSettings();
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {

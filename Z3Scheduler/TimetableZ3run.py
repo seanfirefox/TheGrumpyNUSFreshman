@@ -9,6 +9,8 @@ from flask import request
 # Flask Constructor
 app = Flask(__name__)
 
+scheduler = None
+
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
@@ -45,7 +47,22 @@ def test_one() :
     SEM = int(request.form["Sem"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
-    return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
+    obj = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    string = obj.optimiseTimetable(to_string=True)
+    set_Scheduler(obj)
+    return string
+
+@app.route("/alt_soln", methods=["POST"])
+def alt_soln() :
+    return scheduler.another_solution(to_string=True)
+
+def set_Scheduler(saved_scheduler) :
+    scheduler = saved_scheduler
+
+@app.route("/userID", methods=["POST"])
+def test_two() :
+    return
+
 
 @app.route("/posttest", methods=['POST'])
 def post_from_android() :

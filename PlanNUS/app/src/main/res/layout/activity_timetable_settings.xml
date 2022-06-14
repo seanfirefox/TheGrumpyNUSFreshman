@@ -70,13 +70,13 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout"
+                    android:id="@+id/linearLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/module"
+                        android:id="@+id/module1"
                         android:layout_width="82dp"
                         android:layout_height="46dp"
                         android:layout_marginStart="20dp"
@@ -87,7 +87,8 @@
                         android:textAlignment="center" />
 
                     <EditText
-                        android:id="@+id/moduleCode"
+                        android:id="@+id/moduleCode1"
+                        android:tag="moduleCode1"
                         android:layout_width="285dp"
                         android:layout_height="48dp"
                         android:autoSizeMaxTextSize="20sp"
@@ -122,6 +123,7 @@
 
                     <EditText
                         android:id="@+id/moduleCode2"
+                        android:tag="moduleCode2"
                         android:layout_width="285dp"
                         android:layout_height="48dp"
                         android:autoSizeMaxTextSize="20sp"
@@ -156,6 +158,7 @@
 
                     <EditText
                         android:id="@+id/moduleCode3"
+                        android:tag="moduleCode3"
                         android:layout_width="285dp"
                         android:layout_height="48dp"
                         android:autoSizeMaxTextSize="20sp"
@@ -188,6 +191,7 @@
 
                     <EditText
                         android:id="@+id/moduleCode4"
+                        android:tag="moduleCode4"
                         android:layout_width="285dp"
                         android:layout_height="48dp"
                         android:autoSizeMaxTextSize="20sp"
@@ -220,6 +224,7 @@
 
                     <EditText
                         android:id="@+id/moduleCode5"
+                        android:tag="moduleCode5"
                         android:layout_width="285dp"
                         android:layout_height="48dp"
                         android:autoSizeMaxTextSize="20sp"
@@ -233,172 +238,6 @@
 
                 </LinearLayout>
             </LinearLayout>
-            <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:orientation="vertical">-->
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/moduleCode1"-->
-            <!--                android:layout_width="285dp"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:autofillHints="Task"-->
-            <!--                android:ems="10"-->
-            <!--                android:hint="Enter module code"-->
-            <!--                android:inputType="none"-->
-            <!--                android:maxLength="30"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.468"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/module1"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/moduleCode2"-->
-            <!--                android:layout_width="285dp"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:autofillHints="Task"-->
-            <!--                android:ems="10"-->
-            <!--                android:hint="Enter module code"-->
-            <!--                android:inputType="none"-->
-            <!--                android:maxLength="30"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.428"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/module2"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/moduleCode1" />-->
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/moduleCode3"-->
-            <!--                android:layout_width="285dp"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:layout_marginStart="12dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:autofillHints="Task"-->
-            <!--                android:ems="10"-->
-            <!--                android:hint="Enter module code"-->
-            <!--                android:inputType="none"-->
-            <!--                android:maxLength="30"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.0"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/module3"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/moduleCode2" />-->
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/moduleCode4"-->
-            <!--                android:layout_width="285dp"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:layout_marginStart="12dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:autofillHints="Task"-->
-            <!--                android:ems="10"-->
-            <!--                android:hint="Enter module code"-->
-            <!--                android:inputType="none"-->
-            <!--                android:maxLength="30"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.0"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/module4"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/moduleCode3" />-->
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/moduleCode5"-->
-            <!--                android:layout_width="285dp"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:layout_marginStart="12dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:autofillHints="Task"-->
-            <!--                android:ems="10"-->
-            <!--                android:hint="Enter module code"-->
-            <!--                android:inputType="none"-->
-            <!--                android:maxLength="30"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.0"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/module5"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/moduleCode4" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/module3"-->
-            <!--                android:layout_width="82dp"-->
-            <!--                android:layout_height="46dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:text="Module 3: "-->
-            <!--                android:textAlignment="center"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/module2" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/module4"-->
-            <!--                android:layout_width="82dp"-->
-            <!--                android:layout_height="46dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:text="Module 4: "-->
-            <!--                android:textAlignment="center"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/module3" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/module5"-->
-            <!--                android:layout_width="82dp"-->
-            <!--                android:layout_height="46dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:text="Module 5: "-->
-            <!--                android:textAlignment="center"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/module4" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/module2"-->
-            <!--                android:layout_width="82dp"-->
-            <!--                android:layout_height="46dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:text="Module 2: "-->
-            <!--                android:textAlignment="center"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/module1" />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/module1"-->
-            <!--                android:layout_width="82dp"-->
-            <!--                android:layout_height="46dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:autoSizeMaxTextSize="20sp"-->
-            <!--                android:autoSizeMinTextSize="10sp"-->
-            <!--                android:autoSizeTextType="uniform"-->
-            <!--                android:text="Module 1: "-->
-            <!--                android:textAlignment="center"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
-            <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

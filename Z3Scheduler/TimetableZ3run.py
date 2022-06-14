@@ -58,6 +58,7 @@ def delete_scheduler() :
     global scheduler
     scheduler = None
     gc.collect()
+    return
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :

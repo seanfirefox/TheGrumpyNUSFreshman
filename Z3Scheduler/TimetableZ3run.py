@@ -53,6 +53,11 @@ def test_one() :
     string = scheduler.optimiseTimetable(to_string=True)
     return string
 
+@app.route("/delete", methods=["POST"])
+def delete_scheduler()
+    global scheduler
+    scheduler = None
+
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :
     if (scheduler is None) :

@@ -71,6 +71,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {
+                    buildGetRequest("https://plannus-sat-solver.herokuapp.com/delete", EMPTYREQUEST);
                     buildGetRequest("https://plannus-sat-solver.herokuapp.com/test", requestBody);
                 }
             }

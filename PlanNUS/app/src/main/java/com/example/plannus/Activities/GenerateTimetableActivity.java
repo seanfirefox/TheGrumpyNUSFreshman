@@ -71,21 +71,21 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {
-                    buildGetRequest("https://plannus-sat-solver.herokuapp.com/delete", EMPTYREQUEST);
-                    buildGetRequest("https://plannus-sat-solver.herokuapp.com/test", requestBody);
+                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/delete", EMPTYREQUEST);
+                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/test", requestBody);
                 }
             }
         } else if (v.getId() == R.id.nextButton) {
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
             } else {
-                buildGetRequest("https://plannus-sat-solver.herokuapp.com/alt_soln", EMPTYREQUEST);
+                buildPostRequest("https://plannus-sat-solver.herokuapp.com/alt_soln", EMPTYREQUEST);
             }
         }
 
     }
 
-    private void buildGetRequest(String url, RequestBody requestBody) {
+    private void buildPostRequest(String url, RequestBody requestBody) {
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -130,6 +130,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
+                if (timetableSettings == null) {
+                    return;
+                }
                 Log.d("toString Settings", timetableSettings.toString());
                 Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
                 Log.d("MODULE LIST", timetableSettings.getModuleList().toString());

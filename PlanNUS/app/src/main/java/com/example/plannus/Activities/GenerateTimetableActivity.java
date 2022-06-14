@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -44,6 +45,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private TimetableSettings timetableSettings;
     private TextView textView;
     private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
+    private Call call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {
-                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/delete", EMPTYREQUEST);
+                    if (call != null) {
+                        call.cancel();
+                    }
                     buildPostRequest("https://plannus-sat-solver.herokuapp.com/test", requestBody);
                 }
             }
@@ -108,7 +112,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private void getRequest(Request request) {
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("NETWORK_FAIL", "NETWORK FAIL");
@@ -116,12 +121,22 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String text = response.body().string();
-                Log.d("RESPONSE_BODY", text);
-                textView.setText(text);
+            public void onResponse(Call call, Response response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String text = response.body().string();
+                            Log.d("RESPONSE_BODY", text);
+                            textView.setText(text);
+                        } catch (IOException e) {
+                            e.getStackTrace();
+                        }
+                    }
+                });
             }
         });
+
     }
 
     public void obtainSettings() {

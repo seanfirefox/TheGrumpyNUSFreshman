@@ -62,7 +62,6 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private void generateRow() {
         LinearLayout linearLayout = new LinearLayout(TimetableSettingsActivity.this);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        linearLayout.setGravity(Gravity.CENTER);
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         TextView textView = new TextView(TimetableSettingsActivity.this);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(convertDpToPixel(82), convertDpToPixel(46));

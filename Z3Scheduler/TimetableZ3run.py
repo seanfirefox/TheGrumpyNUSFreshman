@@ -54,9 +54,10 @@ def test_one() :
     return string
 
 @app.route("/delete", methods=["POST"])
-def delete_scheduler()
+def delete_scheduler() :
     global scheduler
     scheduler = None
+    gc.collect()
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :

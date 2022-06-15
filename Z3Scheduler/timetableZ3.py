@@ -101,6 +101,24 @@ class TimeTableSchedulerZ3 :
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
 
+    def clear_settings(self) :
+        self.semesterMods = {}
+        self.solver = Solver()
+        self.lessons_by_day = [[], [], [], [], []]
+        self.lecs = []
+        self.tuts = []
+        self.recs = []
+        self.labs = []
+        self.sems = []
+        self.sects = []
+        self.string_to_bool_literal = {}
+        self.literal_to_object = {}
+        self.print = print
+        self.finalTimetable = [[], [], [], [], []]
+
+    def input_new_modules(self, module_dict) :
+        self.semesterMods = module_dict
+
     def another_solution(self, to_string=True) :
         '''
         Simple implementation of #SAT. This function enumerates the next set of solutions

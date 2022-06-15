@@ -10,7 +10,7 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 
-scheduler = TimeTableScheduler(None, True)
+scheduler = TimeTableSchedulerZ3(None, True)
 
 @app.route("/")
 def show_heroku_site() :

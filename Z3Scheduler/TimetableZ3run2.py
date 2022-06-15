@@ -41,7 +41,8 @@ def run() :
 @app.route("/test", methods=['POST'])
 def test_one() :
     global scheduler
-    scheduler = TimeTableSchedulerZ3(None, True)
+    if (scheduler is None) :
+        scheduler = TimeTableSchedulerZ3(None, True)
     scheduler = scheduler.clear_settings()
     num_mods = int(request.form['numMods'])
     mods = []

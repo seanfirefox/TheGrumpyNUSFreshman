@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/oneFreeDay" />
 
     <Button
         android:id="@+id/addRow"
@@ -245,7 +245,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/no8amLessons"
+        android:onClick="onCheckboxClicked"
         android:layout_width="216dp"
         android:layout_height="64dp"
         android:layout_marginTop="12dp"
@@ -259,9 +260,10 @@
         app:layout_constraintTop_toBottomOf="@+id/addRow" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/oneFreeDay"
         android:layout_width="217dp"
         android:layout_height="57dp"
+        android:onClick="onCheckboxClicked"
         android:autoSizeMaxTextSize="20sp"
         android:autoSizeMinTextSize="10sp"
         android:autoSizeTextType="uniform"
@@ -269,7 +271,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/no8amLessons" />
 
     <TextView
         android:id="@+id/ay"

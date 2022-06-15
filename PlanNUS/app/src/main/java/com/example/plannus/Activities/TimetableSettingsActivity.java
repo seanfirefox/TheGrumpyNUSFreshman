@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private SessionManager sessionManager;
     private String userID;
     private int numMods;
+    private CheckBox no8amConstraint, oneFreeDayConstraint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,18 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         addRow = findViewById(R.id.addRow);
         addRow.setOnClickListener(this);
         numMods = 5;
+        oneFreeDayConstraint = findViewById(R.id.oneFreeDay);
+        oneFreeDayConstraint.setOnClickListener(this);
+        no8amConstraint = findViewById(R.id.no8amLessons);
+        no8amConstraint.setOnClickListener(this);
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        if (!checked) {
+            return;
+        }
+
     }
 
     private void saveSettings() {

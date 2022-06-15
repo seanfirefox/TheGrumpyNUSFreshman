@@ -39,12 +39,13 @@ def run() :
 @app.route("/test", methods=['POST'])
 def test_one() :
     global scheduler
+    scheduler = TimeTableSchedulerZ3(None, True)
     print("THIS is after global Scheduler was called" + str(scheduler))
-    if (scheduler is None) :
-        print("INSIDE IF BLOCK :")
-        scheduler = TimeTableSchedulerZ3(None, True)
-        print(str(scheduler))
-    print(str(scheduler))
+    #if (scheduler is None) :
+     #   print("INSIDE IF BLOCK :")
+      #  scheduler = TimeTableSchedulerZ3(None, True)
+       # print(str(scheduler))
+    #print(str(scheduler))
     scheduler.clear_settings()
     print("AFTER CLEAR SETTINGS" + str(scheduler))
     num_mods = int(request.form['numMods'])

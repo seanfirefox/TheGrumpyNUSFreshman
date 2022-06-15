@@ -113,7 +113,6 @@ class TimeTableSchedulerZ3 :
         self.sects = []
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
-        self.print = print
         self.finalTimetable = [[], [], [], [], []]
 
     def input_new_modules(self, module_dict) :

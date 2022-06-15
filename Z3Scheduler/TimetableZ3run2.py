@@ -82,4 +82,6 @@ def post_from_android() :
     return (value)
 
 if __name__ == "__main__" :
+    scheduler = TimeTableSchedulerZ3(None, True)
     app.run()
+

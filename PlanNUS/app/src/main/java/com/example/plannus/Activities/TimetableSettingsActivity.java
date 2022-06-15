@@ -9,10 +9,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +29,16 @@ import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
 
-public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private Button saveTimetableSettings, addRow;
     private LinearLayout wrappingLayout;
     private SessionManager sessionManager;
     private String userID;
     private int numMods;
     private CheckBox no8amConstraint, oneFreeDayConstraint;
+    private Spinner aySpinner, semesterSpinner;
+    private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
+    private String ay, semester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,21 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         } else if (v.getId() == R.id.addRow) {
             generateRow();
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        if (view.getId() == R.id.aySpinner) {
+            ay = (String) adapterView.getItemAtPosition(position);
+        } else if (view.getId() == R.id.semesterSpinner) {
+            semester = (String) adapterView.getItemAtPosition(position);
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     @SuppressLint("NewApi")
@@ -82,27 +103,52 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         wrappingLayout = findViewById(R.id.wrappingLayout);
         sessionManager = SessionManager.get();
         userID = sessionManager.getAuth().getCurrentUser().getUid();
+        numMods = 5;
+
         saveTimetableSettings = findViewById(R.id.saveTimetableSettingsButton);
         saveTimetableSettings.setOnClickListener(this);
+
         addRow = findViewById(R.id.addRow);
         addRow.setOnClickListener(this);
-        numMods = 5;
+
         oneFreeDayConstraint = findViewById(R.id.oneFreeDay);
         oneFreeDayConstraint.setOnClickListener(this);
+
         no8amConstraint = findViewById(R.id.no8amLessons);
         no8amConstraint.setOnClickListener(this);
+
+        aySpinner = findViewById(R.id.aySpinner);
+        aySpinner.setOnItemSelectedListener(this);
+        ayAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.AY_array, android.R.layout.simple_spinner_item);
+        ayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aySpinner.setAdapter(ayAdapter);
+
+        semesterSpinner = findViewById(R.id.semesterSpinner);
+        semesterSpinner.setOnItemSelectedListener(this);
+        semAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.SEM_array, android.R.layout.simple_spinner_item);
+        semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        semesterSpinner.setAdapter(semAdapter);
     }
+
+
+
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        if (!checked) {
-            return;
+        if (view.getId() == R.id.oneFreeDay) {
+            if (!checked) {
+                return;
+            }
+        } else if (view.getId() == R.id.no8amLessons) {
+            if (!checked) {
+                return;
+            }
         }
 
     }
 
     private void saveSettings() {
-        ArrayList<String> mods = new ArrayList<String>();
+        ArrayList<String> mods = new ArrayList<>();
         for (int i = 0; i < numMods; i++) {
             int moduleCodeNumber = i + 1;
             EditText moduleCode = wrappingLayout.findViewWithTag("moduleCode" + moduleCodeNumber);

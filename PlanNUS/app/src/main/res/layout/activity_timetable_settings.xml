@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner">
+        app:layout_constraintTop_toBottomOf="@+id/aySpinner">
 
                 <ScrollView
                     android:id="@+id/scrollView2"
@@ -302,7 +302,7 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsPage" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/aySpinner"
         android:layout_width="183dp"
         android:layout_height="27dp"
         android:layout_marginStart="10dp"
@@ -310,12 +310,12 @@
         app:layout_constraintTop_toBottomOf="@+id/ay" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/semesterSpinner"
         android:layout_width="194dp"
         android:layout_height="27dp"
         android:layout_marginStart="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toEndOf="@+id/aySpinner"
         app:layout_constraintTop_toBottomOf="@+id/semester" />
 
 

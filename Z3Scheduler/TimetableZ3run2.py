@@ -57,7 +57,7 @@ def test_one() :
     SEM = int(request.form["Sem"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
-    scheduler = scheduler.input_new_modules(scrapper.semesterProcessed)
+    scheduler.input_new_modules(scrapper.semesterProcessed)
     string = scheduler.optimiseTimetable(to_string=True)
     return string
 

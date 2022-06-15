@@ -1,1 +1,2 @@
 web: gunicorn TimetableZ3run2:app
+worker: python3 timetableZ3.py

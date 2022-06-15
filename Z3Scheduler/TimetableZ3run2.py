@@ -41,9 +41,14 @@ def run() :
 @app.route("/test", methods=['POST'])
 def test_one() :
     global scheduler
+    print("THIS is after global Scheduler was called" + str(scheduler))
     if (scheduler is None) :
+        print("INSIDE IF BLOCK :")
         scheduler = TimeTableSchedulerZ3(None, True)
+        print(str(scheduler))
+    print(str(scheduler))
     scheduler = scheduler.clear_settings()
+    print("AFTER CLEAR SETTINGS" + str(scheduler))
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :

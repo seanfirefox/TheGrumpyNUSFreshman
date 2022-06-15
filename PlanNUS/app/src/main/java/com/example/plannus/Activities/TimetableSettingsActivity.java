@@ -1,25 +1,19 @@
 package com.example.plannus.Activities;
 
+import static com.example.plannus.utils.MetricsConverter.convertDpToPixel;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.util.Xml;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
 
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
@@ -28,14 +22,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 
-import androidx.legacy.widget.*;
 
 import java.util.ArrayList;
 
 public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText moduleCode1, moduleCode2, moduleCode3, moduleCode4, moduleCode5;
     private Button saveTimetableSettings, addRow;
-    private LinearLayout layoutAttributeGenerator, wrappingLayout;
+    private LinearLayout wrappingLayout;
     private SessionManager sessionManager;
     private String userID;
     private int numMods;
@@ -60,38 +52,34 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
 
     @SuppressLint("NewApi")
     private void generateRow() {
+        numMods++;
         LinearLayout linearLayout = new LinearLayout(TimetableSettingsActivity.this);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
         TextView textView = new TextView(TimetableSettingsActivity.this);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(convertDpToPixel(82), convertDpToPixel(46));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(convertDpToPixel(82), convertDpToPixel(46));
+        params.setMargins(convertDpToPixel(20),0, 0, 0);
         textView.setLayoutParams(params);
         textView.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
-        textView.setText("module6");
+        textView.setText(String.format("Module %s:", numMods));
         linearLayout.addView(textView);
+
+        EditText editText = new EditText(TimetableSettingsActivity.this);
+        LinearLayout.LayoutParams editParams = new LinearLayout.LayoutParams(convertDpToPixel(285), convertDpToPixel(48));
+        editText.setLayoutParams(editParams);
+        editText.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
+        editText.setHint("Enter module code");
+        editText.setTag("moduleCode" + numMods);
+        linearLayout.addView(editText);
+
         wrappingLayout.addView(linearLayout);
-        EditText editText = new EditText(this);
-        editText.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-    }
-
-    public static int convertDpToPixel(float dp){
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        float px = dp * (metrics.densityDpi / 160f);
-        return Math.round(px);
     }
 
     private void initVars() {
-        layoutAttributeGenerator = findViewById(R.id.linearLayout);
         wrappingLayout = findViewById(R.id.wrappingLayout);
         sessionManager = SessionManager.get();
         userID = sessionManager.getAuth().getCurrentUser().getUid();
-        layoutAttributeGenerator = findViewById(R.id.wrappingLayout);
-        moduleCode1 = findViewById(R.id.moduleCode);
-        moduleCode2 = findViewById(R.id.moduleCode2);
-        moduleCode3 = findViewById(R.id.moduleCode3);
-        moduleCode4 = findViewById(R.id.moduleCode4);
-        moduleCode5 = findViewById(R.id.moduleCode5);
         saveTimetableSettings = findViewById(R.id.saveTimetableSettingsButton);
         saveTimetableSettings.setOnClickListener(this);
         addRow = findViewById(R.id.addRow);
@@ -100,17 +88,14 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     }
 
     private void saveSettings() {
-        String module1 = moduleCode1.getText().toString().trim();
-        String module2 = moduleCode2.getText().toString().trim();
-        String module3 = moduleCode3.getText().toString().trim();
-        String module4 = moduleCode4.getText().toString().trim();
-        String module5 = moduleCode5.getText().toString().trim();
         ArrayList<String> mods = new ArrayList<String>();
-        mods.add(module1);
-        mods.add(module2);
-        mods.add(module3);
-        mods.add(module4);
-        mods.add(module5);
+        for (int i = 0; i < numMods; i++) {
+            int moduleCodeNumber = i + 1;
+            EditText moduleCode = wrappingLayout.findViewWithTag("moduleCode" + moduleCodeNumber);
+            String module = moduleCode.getText().toString().trim();
+            mods.add(module);
+        }
+
         TimetableSettings timetableSettings = new TimetableSettings(mods);
         saveSettingsIntoFireStore(timetableSettings);
 

@@ -47,7 +47,7 @@ def test_one() :
         scheduler = TimeTableSchedulerZ3(None, True)
         print(str(scheduler))
     print(str(scheduler))
-    scheduler = scheduler.clear_settings()
+    scheduler.clear_settings()
     print("AFTER CLEAR SETTINGS" + str(scheduler))
     num_mods = int(request.form['numMods'])
     mods = []

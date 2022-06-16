@@ -63,10 +63,12 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        if (view.getId() == R.id.aySpinner) {
-            ay = (String) adapterView.getItemAtPosition(position);
-        } else if (view.getId() == R.id.semesterSpinner) {
-            semester = (String) adapterView.getItemAtPosition(position);
+        if (adapterView.getId() == R.id.aySpinner) {
+            ay = adapterView.getItemAtPosition(position).toString();
+            Log.d("AY spinner check", ay);
+        } else if (adapterView.getId() == R.id.semesterSpinner) {
+            semester = adapterView.getItemAtPosition(position).toString();
+            Log.d("Semester spinner check", semester);
         }
 
     }

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.DocumentReference;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private Button saveTimetableSettings, addRow;
@@ -39,6 +41,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private Spinner aySpinner, semesterSpinner;
     private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
     private String ay, semester;
+    private HashMap<String, Boolean> constraints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +114,16 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         addRow = findViewById(R.id.addRow);
         addRow.setOnClickListener(this);
 
-        oneFreeDayConstraint = findViewById(R.id.oneFreeDay);
-        oneFreeDayConstraint.setOnClickListener(this);
+        init_checkboxes();
 
-        no8amConstraint = findViewById(R.id.no8amLessons);
-        no8amConstraint.setOnClickListener(this);
+        init_spinners();
 
+        constraints = new HashMap<String, Boolean>();
+        constraints.put("no8amLessons", false);
+        constraints.put("oneFreeDay", false);
+    }
+
+    public void init_spinners() {
         aySpinner = findViewById(R.id.aySpinner);
         aySpinner.setOnItemSelectedListener(this);
         ayAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.AY_array, android.R.layout.simple_spinner_item);
@@ -130,21 +137,22 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         semesterSpinner.setAdapter(semAdapter);
     }
 
-
-
-
-    public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        if (view.getId() == R.id.oneFreeDay) {
-            if (!checked) {
-                return;
+    public void init_checkboxes() {
+        oneFreeDayConstraint = findViewById(R.id.oneFreeDay);
+        oneFreeDayConstraint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                constraints.put("oneFreeDay", b);
             }
-        } else if (view.getId() == R.id.no8amLessons) {
-            if (!checked) {
-                return;
-            }
-        }
+        });
 
+        no8amConstraint = findViewById(R.id.no8amLessons);
+        no8amConstraint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                constraints.put("no8amLessons", b);
+            }
+        });
     }
 
     private void saveSettings() {
@@ -155,8 +163,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
             String module = moduleCode.getText().toString().trim();
             mods.add(module);
         }
-
-        TimetableSettings timetableSettings = new TimetableSettings(mods);
+        TimetableSettings timetableSettings = new TimetableSettings(mods, constraints, ay, semester);
         saveSettingsIntoFireStore(timetableSettings);
 
     }

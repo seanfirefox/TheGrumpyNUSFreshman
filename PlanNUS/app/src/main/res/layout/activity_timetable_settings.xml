@@ -246,7 +246,6 @@
 
     <CheckBox
         android:id="@+id/no8amLessons"
-        android:onClick="onCheckboxClicked"
         android:layout_width="216dp"
         android:layout_height="64dp"
         android:layout_marginTop="12dp"
@@ -263,7 +262,6 @@
         android:id="@+id/oneFreeDay"
         android:layout_width="217dp"
         android:layout_height="57dp"
-        android:onClick="onCheckboxClicked"
         android:autoSizeMaxTextSize="20sp"
         android:autoSizeMinTextSize="10sp"
         android:autoSizeTextType="uniform"

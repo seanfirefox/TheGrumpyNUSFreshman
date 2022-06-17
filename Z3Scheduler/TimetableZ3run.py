@@ -26,7 +26,7 @@ def login():
         print(session["num_mods"])
         session["AY"] = request.form["AY"]
         session["SEM"] = int(request.form["Sem"])
-        return redirect(url_for("user"))
+        return redirect("/get_soln")
     else:
         return "Login failed"
 

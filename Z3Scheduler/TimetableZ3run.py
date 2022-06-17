@@ -41,6 +41,7 @@ def user():
 @app.route("/get_soln", methods=['GET'])
 def get_soln() :
     mods = []
+    print(session.num_mods)
     num_mods = session["num_mods"]
     for i in range(num_mods) :
         mods.append(session["mod" + str(i)])

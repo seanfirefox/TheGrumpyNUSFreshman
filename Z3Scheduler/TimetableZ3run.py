@@ -2,12 +2,14 @@ from scrapper import *
 from z3 import *
 from timetableZ3 import *
 from flask import Flask, request, session, redirect, url_for
+from flask.ext.session import Session
 import gc
 #import sys
 
 # Flask Constructor
 app = Flask(__name__)
 app.secret_key = "SATSolver"
+Session(app)
 
 @app.route("/")
 def show_heroku_site() :

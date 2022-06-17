@@ -2,8 +2,9 @@ from scrapper import *
 from z3 import *
 from timetableZ3 import *
 from flask import Flask, request, session, redirect, url_for
-from flask_session import Session
+#from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from flask_kvsession import KVSessionExtension
 import gc
 #import sys
 
@@ -17,7 +18,8 @@ db = SQLAlchemy(app)
 
 app.config['SESSION_SQLALCHEMY'] = db
 
-sess = Session(app)
+KVSessionExtension(db, app)
+#sess = Session(app)
 
 @app.before_first_request
 def create_tables():

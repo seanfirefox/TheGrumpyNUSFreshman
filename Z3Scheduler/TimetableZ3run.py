@@ -2,7 +2,6 @@ from scrapper import *
 from z3 import *
 from timetableZ3 import *
 from flask import Flask, request, session, redirect, url_for
-from flask.ext.session import Session
 import gc
 #import sys
 

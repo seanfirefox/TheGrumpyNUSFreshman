@@ -8,7 +8,6 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 app.secret_key = "SATSolver"
-Session(app)
 
 @app.route("/")
 def show_heroku_site() :

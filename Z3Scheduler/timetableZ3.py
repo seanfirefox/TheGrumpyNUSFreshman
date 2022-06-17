@@ -101,7 +101,24 @@ class TimeTableSchedulerZ3 :
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
 
-    def another_solution(self) :
+    def clear_settings(self) :
+        self.semesterMods = {}
+        self.solver = Solver()
+        self.lessons_by_day = [[], [], [], [], []]
+        self.lecs = []
+        self.tuts = []
+        self.recs = []
+        self.labs = []
+        self.sems = []
+        self.sects = []
+        self.string_to_bool_literal = {}
+        self.literal_to_object = {}
+        self.finalTimetable = [[], [], [], [], []]
+
+    def input_new_modules(self, module_dict) :
+        self.semesterMods = module_dict
+
+    def another_solution(self, to_string=True) :
         '''
         Simple implementation of #SAT. This function enumerates the next set of solutions
         that are possible given the current constraints.
@@ -115,8 +132,12 @@ class TimeTableSchedulerZ3 :
         self.solver.add(Or([literal != current_model.eval(literal, model_completion=True) for literal in literals]))
         if (self.solver.check() == sat) :
             print("SAT")
+            if (to_string) :
+                return self.string_timetable()
             self.printTimeTable()
         elif (self.solver.check() == unsat) :
+            if (to_string) :
+                return "No feasible Timetable."
             print("UNSAT")
             print("No feasible timetable")
     
@@ -127,18 +148,41 @@ class TimeTableSchedulerZ3 :
         for item in lst :
             self.solver.add(self.string_to_bool_literal[str(item)] == True)
 
-    def optimiseTimetable(self) :
+    def optimiseTimetable(self, to_string=False) :
         self.init_variables()
         self.add_basic_constraints()
-        
+        strings = ""
         if (self.solver.check() == sat) :
             print("SAT")
+            if (to_string) :
+                return self.string_timetable()
             if (self.print) :
                 self.printTimeTable()
         elif (self.solver.check() == unsat) :
             print("UNSAT")
+            if (to_string) :
+                return "No Feasible Timetable!"
             print("No feasible timetable")
         return self.solver.check()
+
+    def string_timetable(self) :
+        string = ""
+        self.finalTimetable = [[], [], [], [], []]
+        for item in self.solver.model() :
+            if (self.solver.model()[item]) :
+                pp = self.string_to_bool_literal[str(item)]
+                l = self.literal_to_object[pp]
+                self.finalTimetable[l.day - 1].append(l)
+        for i in range(5) :
+            self.finalTimetable[i] = sorted(self.finalTimetable[i], key=lambda x : x.start)
+            string = string + ("On " + TimeTableSchedulerZ3.WEEKDAYS[i + 1]) + "\n"
+            if (len(self.finalTimetable[i]) == 0) :
+                string = string + (" Hooray! You CAN Have No Classes On that Day!\n")
+                continue
+            for classes in self.finalTimetable[i] :
+                string = string + (" " + str(classes) + "\n")
+        # print(string)
+        return string
 
     def printTimeTable(self) :
         self.finalTimetable = [[], [], [], [], []]

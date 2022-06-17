@@ -41,18 +41,19 @@ android {
 dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:30.0.0')
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'com.google.firebase:firebase-auth:21.0.4'
+    implementation 'com.google.firebase:firebase-auth:21.0.5'
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'androidx.navigation:navigation-fragment:2.4.2'
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.google.android.datatransport:transport-runtime:3.1.5'
     implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation files('joda-time-2.10.14.jar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

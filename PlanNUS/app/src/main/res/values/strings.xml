@@ -40,4 +40,20 @@
     <string name="WelcomeMsg">Welcome Back !</string>
     <string name="appIcon">App Icon</string>
 
+    <!-- Strings used for Settings Activity-->
+    <string-array name="AY_array">
+        <item>2016-2017</item>
+        <item>2017-2018</item>
+        <item>2018-2019</item>
+        <item>2019-2020</item>
+        <item>2020-2021</item>
+        <item>2021-2022</item>
+        <item>2022-2023</item>
+    </string-array>
+
+    <string-array name="SEM_array">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

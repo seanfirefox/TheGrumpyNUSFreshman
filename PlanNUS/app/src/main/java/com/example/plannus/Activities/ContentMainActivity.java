@@ -63,7 +63,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         checklistButton = findViewById(R.id.checklistImgView);
         checklistButton.setOnClickListener(this);
 
-        timetableGenerator = findViewById(R.id.nusModsImgView);
+        timetableGenerator = findViewById(R.id.generateTimetableButton);
         timetableGenerator.setOnClickListener(this);
 
         calendarButton = findViewById(R.id.calendarImgView);
@@ -127,9 +127,9 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v.getId() == R.id.checklistImgView) {
             startActivity(new Intent(this, ToDoList.class));
+        } else if (v.getId() == R.id.generateTimetableButton) {
+            startActivity(new Intent(this, GenerateTimetableActivity.class));
         } else if (v.getId() == R.id.calendarImgView) {
-            Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.nusModsImgView) {
             Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
         } else if (v.getId() == R.id.logoutButton){
             logout();

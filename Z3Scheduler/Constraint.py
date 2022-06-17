@@ -125,6 +125,13 @@ class SelectOnlyOneSlot(Constraint) :
                 candidates = list(filter(lambda x : x.slot == nus_class.slot, self.classes))
                 converts = frozenset(map(lambda x : self.string_to_bool_literal_dict[str(x)], candidates))
                 set_of_common_slots.add(converts)
+
+                '''
+                All with different slots will be negated
+                '''
+                different_slots = list(filter(lambda x : x.slot != nus_class.slot, self.classes))
+                change = frozenset(map(lambda x : Not(self.string_to_bool_literal_dict[str(x)]), different_slots))
+                solver.add(Implies(self.string_to_bool_literal_dict[str(nus_class)], And(list(change))))
             for group in set_of_common_slots :
                 if (len(group) == 1) :
                     literal_list.append(list(group)[0])

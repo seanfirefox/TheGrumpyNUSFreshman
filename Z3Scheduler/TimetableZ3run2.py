@@ -10,8 +10,6 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 
-scheduler = None
-
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
@@ -41,6 +39,15 @@ def run() :
 @app.route("/test", methods=['POST'])
 def test_one() :
     global scheduler
+    scheduler = TimeTableSchedulerZ3(None, True)
+    print("THIS is after global Scheduler was called" + str(scheduler))
+    #if (scheduler is None) :
+     #   print("INSIDE IF BLOCK :")
+      #  scheduler = TimeTableSchedulerZ3(None, True)
+       # print(str(scheduler))
+    #print(str(scheduler))
+    scheduler.clear_settings()
+    print("AFTER CLEAR SETTINGS" + str(scheduler))
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :
@@ -49,7 +56,7 @@ def test_one() :
     SEM = int(request.form["Sem"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
-    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    scheduler.input_new_modules(scrapper.semesterProcessed)
     string = scheduler.optimiseTimetable(to_string=True)
     return string
 
@@ -81,4 +88,6 @@ def post_from_android() :
     return (value)
 
 if __name__ == "__main__" :
+    scheduler = TimeTableSchedulerZ3(None, True)
     app.run()
+

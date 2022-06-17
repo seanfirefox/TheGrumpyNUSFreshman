@@ -1,20 +1,69 @@
 from scrapper import *
 from z3 import *
-import z3
 from timetableZ3 import *
-from flask import Flask
-from flask import request
+from flask import Flask, request, session, redirect, url_for
 import gc
 #import sys
 
 # Flask Constructor
 app = Flask(__name__)
-
-scheduler = None
+app.secret_key = "SATSolver"
 
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
+
+@app.route("/login", methods=['POST'])
+def login():
+    user=request.form["userID"]
+    session["user"] = user
+    return redirect(url_for("user"))
+
+@app.route("/user")
+def user():
+    if "user" in session:
+        return redirect(url_for("test_one"))
+    else:
+        return redirect(url_for("login"))
+
+@app.route("/test", methods=['POST'])
+def test_one() :
+    num_mods = int(request.form['numMods'])
+    mods = []
+    for i in range(num_mods) :
+        mods.append(request.form["mod" + str(i)])
+    AY = request.form["AY"]
+    SEM = int(request.form["Sem"])
+    scrapper = Scrapper(mods, AY, SEM)
+    scrapper.scrape()
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    string = scheduler.optimiseTimetable(to_string=True)
+    session["constraints"] = scheduler.solver.to_smt2()
+    session["literal_hashmap"] = scheduler.string_to_bool_literal
+    session["nus_class_hashmap"] = scheduler.literal_to_object
+    return string
+
+@app.route("/alt_soln", methods=["POST"])
+def alt_soln() :
+    if "constraints" and "literal_hashmap" and "nus_class_hashmap" in session:
+        saved_constraints_string = session["constraints"]
+        saved_constraints = parse_smt2_string(saved_constraints_string, sorts = {}, decls = {})
+        literal_hashmap = session["literal_hashmap"]
+        nus_class_hashmap = session["nus_class_hashmap"]
+        scheduler = TimeTableSchedulerZ3(None, print=True)
+        scheduler.solver.add(saved_constraints)
+        scheduler.string_to_bool_literal = literal_hashmap
+        scheduler.literal_to_object = nus_class_hashmap
+        return scheduler.another_solution(to_string=True)
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
+
+@app.route("/userID", methods=["POST"])
+def test_two() :
+    return
 
 @app.route("/z3", methods=['GET'])
 def show_z3_stuff() :
@@ -38,47 +87,6 @@ def run() :
     scrapper.scrape()
     return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
 
-@app.route("/test", methods=['POST'])
-def test_one() :
-    global scheduler
-    num_mods = int(request.form['numMods'])
-    mods = []
-    for i in range(num_mods) :
-        mods.append(request.form["mod" + str(i)])
-    AY = request.form["AY"]
-    SEM = int(request.form["Sem"])
-    scrapper = Scrapper(mods, AY, SEM)
-    scrapper.scrape()
-    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
-    string = scheduler.optimiseTimetable(to_string=True)
-    return string
-
-@app.route("/delete", methods=["POST"])
-def delete_scheduler() :
-    global scheduler
-    scheduler = None
-    gc.collect()
-    return "Deleting previous settings..."
-
-@app.route("/alt_soln", methods=["POST"])
-def alt_soln() :
-    if (scheduler is None) :
-        return "Nothing generated yet! No other solution offered!"
-    return scheduler.another_solution(to_string=True)
-
-def set_Scheduler(saved_scheduler) :
-    global scheduler
-    scheduler = saved_scheduler
-
-@app.route("/userID", methods=["POST"])
-def test_two() :
-    return
-
-
-@app.route("/posttest", methods=['POST'])
-def post_from_android() :
-    value = request.form['value']
-    return (value)
 
 if __name__ == "__main__" :
     app.run()

@@ -76,7 +76,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     if (call != null) {
                         call.cancel();
                     }
-                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/test", requestBody);
+                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/login", requestBody);
                 }
             }
         } else if (v.getId() == R.id.nextButton) {
@@ -182,6 +182,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             builder.add("numMods", String.valueOf(actual_count));
             builder.add("AY", String.valueOf("2021-2022"));
             builder.add("Sem", String.valueOf(2));
+            builder.add("userID", userID);
             System.out.println(mods);
             return builder.build();
         }

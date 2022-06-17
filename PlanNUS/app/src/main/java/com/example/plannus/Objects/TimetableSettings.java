@@ -13,7 +13,6 @@ public class TimetableSettings {
     @PropertyName("size")
     private int size;
 
-
     @PropertyName("constraints")
     private HashMap<String, Boolean> constraints;
 

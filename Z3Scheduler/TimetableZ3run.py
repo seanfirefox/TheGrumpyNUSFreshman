@@ -17,10 +17,13 @@ def show_heroku_site() :
 def login():
     if request.method == "POST":
         session["user"] = request.form["userID"]
+        print(session["user"])
         num_mods = int(request.form["numMods"])
+        print(num_mods)
         for i in range(num_mods) :
             session["mod" + str(i)] = request.form["mod" + str(i)]
         session["num_mods"] = num_mods
+        print(session["num_mods"])
         session["AY"] = request.form["AY"]
         session["SEM"] = int(request.form["Sem"])
         return redirect(url_for("user"))

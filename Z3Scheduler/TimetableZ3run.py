@@ -17,10 +17,9 @@ def show_heroku_site() :
 def login():
     session["user"] = request.form["userID"]
     num_mods = request.form["numMods"]
-    mods = []
     for i in range(num_mods) :
-        mods.append(request.form["mod" + str(i)])
-    session["mods"] = mods
+        session["mod" + str(i)] = request.form["mod" + str(i)]
+    session["num_mods"] = num_mods
     session["AY"] = request.form["AY"]
     session["SEM"] = int(request.form["Sem"])
     return redirect(url_for("user"))
@@ -34,7 +33,10 @@ def user():
 
 @app.route("/test", methods=['POST'])
 def test_one() :
-    mods = session["mods"]
+    mods = []
+    num_mods = session["num_mods"]
+    for i in range(num_mods) :
+        mods.append(session["mod" + str(i)])
     AY = session["AY"]
     SEM = session["SEM"]
     scrapper = Scrapper(mods, AY, SEM)

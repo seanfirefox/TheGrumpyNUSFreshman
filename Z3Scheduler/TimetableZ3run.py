@@ -16,7 +16,7 @@ def show_heroku_site() :
 @app.route("/login", methods=['POST'])
 def login():
     session["user"] = request.form["userID"]
-    num_mods = request.form["numMods"]
+    num_mods = int(request.form["numMods"])
     for i in range(num_mods) :
         session["mod" + str(i)] = request.form["mod" + str(i)]
     session["num_mods"] = num_mods
@@ -33,21 +33,20 @@ def user():
 
 @app.route("/test", methods=['POST'])
 def test_one() :
-    if "num_mods" and "AY" and "SEM" in session:
-        mods = []
-        num_mods = session["num_mods"]
-        for i in range(num_mods) :
-            mods.append(session["mod" + str(i)])
-        AY = session["AY"]
-        SEM = session["SEM"]
-        scrapper = Scrapper(mods, AY, SEM)
-        scrapper.scrape()
-        scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
-        string = scheduler.optimiseTimetable(to_string=True)
-        session["constraints"] = scheduler.solver.to_smt2()
-        session["literal_hashmap"] = scheduler.string_to_bool_literal
-        session["nus_class_hashmap"] = scheduler.literal_to_object
-        return string
+    mods = []
+    num_mods = session["num_mods"]
+    for i in range(num_mods) :
+        mods.append(session["mod" + str(i)])
+    AY = session["AY"]
+    SEM = session["SEM"]
+    scrapper = Scrapper(mods, AY, SEM)
+    scrapper.scrape()
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    string = scheduler.optimiseTimetable(to_string=True)
+    session["constraints"] = scheduler.solver.to_smt2()
+    session["literal_hashmap"] = scheduler.string_to_bool_literal
+    session["nus_class_hashmap"] = scheduler.literal_to_object
+    return string
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :

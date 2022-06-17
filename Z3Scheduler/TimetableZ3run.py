@@ -31,7 +31,7 @@ def user():
     else:
         return redirect(url_for("login"))
 
-@app.route("/test", methods=['POST'])
+@app.route("/test", methods=['GET'])
 def test_one() :
     mods = []
     num_mods = session["num_mods"]

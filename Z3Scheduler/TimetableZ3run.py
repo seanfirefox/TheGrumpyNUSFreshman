@@ -7,7 +7,7 @@ import gc
 
 # Flask Constructor
 app = Flask(__name__)
-app.secret_key = "SATSolver"
+app.config['SECRET_KEY'] = "SATSolver"
 
 @app.route("/")
 def show_heroku_site() :
@@ -41,7 +41,7 @@ def user():
 @app.route("/get_soln", methods=['GET'])
 def get_soln() :
     mods = []
-    print(session.num_mods)
+    print(session.get("num_mods"))
     num_mods = session["num_mods"]
     for i in range(num_mods) :
         mods.append(session["mod" + str(i)])

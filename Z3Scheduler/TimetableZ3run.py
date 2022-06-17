@@ -15,8 +15,14 @@ def show_heroku_site() :
 
 @app.route("/login", methods=['POST'])
 def login():
-    user=request.form["userID"]
-    session["user"] = user
+    session["user"] = request.form["userID"]
+    num_mods = request.form["numMods"]
+    mods = []
+    for i in range(num_mods) :
+        mods.append(request.form["mod" + str(i)])
+    session["mods"] = mods
+    session["AY"] = request.form["AY"]
+    session["SEM"] = int(request.form["Sem"])
     return redirect(url_for("user"))
 
 @app.route("/user")
@@ -28,12 +34,9 @@ def user():
 
 @app.route("/test", methods=['POST'])
 def test_one() :
-    num_mods = int(request.form['numMods'])
-    mods = []
-    for i in range(num_mods) :
-        mods.append(request.form["mod" + str(i)])
-    AY = request.form["AY"]
-    SEM = int(request.form["Sem"])
+    mods = session["mods"]
+    AY = session["AY"]
+    SEM = session["SEM"]
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
     scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)

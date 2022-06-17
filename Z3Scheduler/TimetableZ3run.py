@@ -2,12 +2,22 @@ from scrapper import *
 from z3 import *
 from timetableZ3 import *
 from flask import Flask, request, session, redirect, url_for
+from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
 import gc
 #import sys
 
 # Flask Constructor
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SATSolver"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
+app.config['SESSION_TYPE'] = "sqlalchemy"
+
+db = SQLAlchemy(app)
+
+app.config['SESSION_SQLALCHEMY'] = db
+
+sess = Session(app)
 
 @app.route("/")
 def show_heroku_site() :
@@ -103,3 +113,4 @@ def run() :
 
 if __name__ == "__main__" :
     app.run()
+    db.create_all()

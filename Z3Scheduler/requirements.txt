@@ -13,4 +13,5 @@ requests==2.27.1
 urllib3==1.26.9
 Werkzeug==2.1.2
 z3-solver
-Flask-Session
+flask-session
+flask-sqlalchemy

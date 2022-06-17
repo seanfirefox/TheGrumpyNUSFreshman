@@ -19,6 +19,10 @@ app.config['SESSION_SQLALCHEMY'] = db
 
 sess = Session(app)
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
@@ -112,5 +116,4 @@ def run() :
 
 
 if __name__ == "__main__" :
-    db.create_all()
     app.run()

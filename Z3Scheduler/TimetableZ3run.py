@@ -13,7 +13,7 @@ app.secret_key = "SATSolver"
 def show_heroku_site() :
     return "Heroku site"
 
-@app.route("/login", methods=['POST'])
+@app.route("/login", methods=["POST", "GET"])
 def login():
     session["user"] = request.form["userID"]
     num_mods = int(request.form["numMods"])
@@ -27,12 +27,12 @@ def login():
 @app.route("/user")
 def user():
     if "user" in session:
-        return redirect(url_for("test_one"))
+        return redirect(url_for("get_soln"))
     else:
         return redirect(url_for("login"))
 
-@app.route("/test", methods=['GET'])
-def test_one() :
+@app.route("/get_soln", methods=['GET'])
+def get_soln() :
     mods = []
     num_mods = session["num_mods"]
     for i in range(num_mods) :

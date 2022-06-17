@@ -33,20 +33,21 @@ def user():
 
 @app.route("/test", methods=['POST'])
 def test_one() :
-    mods = []
-    num_mods = session["num_mods"]
-    for i in range(num_mods) :
-        mods.append(session["mod" + str(i)])
-    AY = session["AY"]
-    SEM = session["SEM"]
-    scrapper = Scrapper(mods, AY, SEM)
-    scrapper.scrape()
-    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
-    string = scheduler.optimiseTimetable(to_string=True)
-    session["constraints"] = scheduler.solver.to_smt2()
-    session["literal_hashmap"] = scheduler.string_to_bool_literal
-    session["nus_class_hashmap"] = scheduler.literal_to_object
-    return string
+    if "num_mods" and "AY" and "SEM" in session:
+        mods = []
+        num_mods = session["num_mods"]
+        for i in range(num_mods) :
+            mods.append(session["mod" + str(i)])
+        AY = session["AY"]
+        SEM = session["SEM"]
+        scrapper = Scrapper(mods, AY, SEM)
+        scrapper.scrape()
+        scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+        string = scheduler.optimiseTimetable(to_string=True)
+        session["constraints"] = scheduler.solver.to_smt2()
+        session["literal_hashmap"] = scheduler.string_to_bool_literal
+        session["nus_class_hashmap"] = scheduler.literal_to_object
+        return string
 
 @app.route("/alt_soln", methods=["POST"])
 def alt_soln() :

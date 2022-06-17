@@ -15,17 +15,21 @@ def show_heroku_site() :
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    session["user"] = request.form["userID"]
-    num_mods = int(request.form["numMods"])
-    for i in range(num_mods) :
-        session["mod" + str(i)] = request.form["mod" + str(i)]
-    session["num_mods"] = num_mods
-    session["AY"] = request.form["AY"]
-    session["SEM"] = int(request.form["Sem"])
-    return redirect(url_for("user"))
+    if request.method == "POST":
+        session["user"] = request.form["userID"]
+        num_mods = int(request.form["numMods"])
+        for i in range(num_mods) :
+            session["mod" + str(i)] = request.form["mod" + str(i)]
+        session["num_mods"] = num_mods
+        session["AY"] = request.form["AY"]
+        session["SEM"] = int(request.form["Sem"])
+        return redirect(url_for("user"))
+    else:
+        return "Login failed"
 
 @app.route("/user")
 def user():
+    print(session["user"])
     if "user" in session:
         return redirect(url_for("get_soln"))
     else:

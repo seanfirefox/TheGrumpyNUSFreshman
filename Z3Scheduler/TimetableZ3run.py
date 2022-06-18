@@ -2,8 +2,8 @@ from scrapper import *
 from z3 import *
 from timetableZ3 import *
 from flask import Flask, request, session, redirect, url_for
-from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
+#from flask_session import Session
+#from flask_sqlalchemy import SQLAlchemy
 #from flask_kvsession import KVSessionExtension
 import gc
 #import sys
@@ -11,22 +11,22 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SATSolver"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SESSION_PERMANENT'] = True
-app.config['SESSION_TYPE'] = "sqlalchemy"
-app.config.from_object(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SESSION_PERMANENT'] = True
+#app.config['SESSION_TYPE'] = "sqlalchemy"
+#app.config.from_object(__name__)
 
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
-app.config['SESSION_SQLALCHEMY'] = db
+#app.config['SESSION_SQLALCHEMY'] = db
 
 #KVSessionExtension(db, app)
-sess = Session(app)
+#sess = Session(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+#@app.before_first_request
+#def create_tables():
+ #   db.create_all()
 
 @app.route("/")
 def show_heroku_site() :

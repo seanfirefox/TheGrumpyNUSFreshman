@@ -127,4 +127,4 @@ def run() :
 
 if __name__ == "__main__" :
     #app.secret_key = "SATSolver"
-    app.run()
+    app.run(debug=True)

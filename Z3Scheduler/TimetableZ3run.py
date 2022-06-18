@@ -36,7 +36,7 @@ def show_heroku_site() :
 def login():
     if request.method == "POST":
         session["user"] = request.form["userID"]
-        print(session["user"])
+        #print(session["user"])
         #num_mods = int(request.form["numMods"])
         #print(num_mods)
         #for i in range(num_mods) :
@@ -51,11 +51,13 @@ def login():
 
 @app.route("/user")
 def user():
-    print(session.get("user"))
     if "user" in session:
-        return redirect(url_for("get_soln"))
+        user = session['user']
+        return "test succeeded"
+        #return redirect(url_for("get_soln"))
     else:
-        return redirect(url_for("login"))
+        return "test failed"
+        #return redirect(url_for("login"))
 
 @app.route("/get_soln", methods=['GET'])
 def get_soln() :

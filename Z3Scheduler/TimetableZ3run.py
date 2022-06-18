@@ -51,7 +51,7 @@ def login():
 
 @app.route("/user")
 def user():
-    print(session["user"])
+    print(session.get("user"))
     if "user" in session:
         return redirect(url_for("get_soln"))
     else:

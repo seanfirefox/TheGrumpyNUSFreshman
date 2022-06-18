@@ -10,6 +10,7 @@ import gc
 
 # Flask Constructor
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "SATSolver"
 #app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
@@ -125,5 +126,5 @@ def run() :
 
 
 if __name__ == "__main__" :
-    app.secret_key = "SATSolver"
+    #app.secret_key = "SATSolver"
     app.run()

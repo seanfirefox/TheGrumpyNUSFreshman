@@ -11,6 +11,8 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SATSolver"
+app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
+
 #app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SESSION_PERMANENT'] = True

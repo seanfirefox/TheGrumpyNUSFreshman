@@ -12,6 +12,7 @@ import gc
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SATSolver"
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite3"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_TYPE'] = "sqlalchemy"
 
 db = SQLAlchemy(app)

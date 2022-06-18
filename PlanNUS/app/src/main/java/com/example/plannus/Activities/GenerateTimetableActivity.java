@@ -44,7 +44,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView textView;
-    private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
+    //private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
+    private static int iterations = 0;
     private Call call;
 
     @Override
@@ -69,32 +70,37 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
             } else {
-                RequestBody requestBody = buildRequestBody();
+                iterations = 0;
+                RequestBody requestBody = buildRequestBody(timetableSettings);
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {
                     if (call != null) {
                         call.cancel();
                     }
-                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/login", requestBody);
+                    Request built_Request = buildPostRequest("https://plannus-sat-solver.herokuapp.com/z3runner", requestBody);
+                    getRequest(built_Request);
                 }
             }
         } else if (v.getId() == R.id.nextButton) {
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
             } else {
-                buildPostRequest("https://plannus-sat-solver.herokuapp.com/alt_soln", EMPTYREQUEST);
+                iterations++;
+                RequestBody nextRequestBody = buildRequestBody(timetableSettings);
+                Request nextSolutionRequest = buildPostRequest("https://plannus-sat-solver.herokuapp.com/z3runner", nextRequestBody);
+                getRequest(nextSolutionRequest);
             }
         }
 
     }
 
-    private void buildPostRequest(String url, RequestBody requestBody) {
+    private Request buildPostRequest(String url, RequestBody requestBody) {
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
                 .build();
-        getRequest(request);
+        return request;
     }
 
     private void initVars() {
@@ -160,14 +166,14 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         });
     }
 
-    public RequestBody buildRequestBody() {
+    public RequestBody buildRequestBody(TimetableSettings settings) {
         FormBody.Builder builder = new FormBody.Builder();
-        System.out.println(timetableSettings);
-        Log.d("REQUEST SIZE", ((Integer)timetableSettings.getSize()).toString());
-        Log.d("REQUEST MODULE LIST", timetableSettings.getModuleList().toString());
-        int numMods = timetableSettings.getSize();
-        ArrayList<String> mods = timetableSettings.getModuleList();
-        int actual_count = timetableSettings.getSize();
+        System.out.println(settings);
+        Log.d("REQUEST SIZE", ((Integer)settings.getSize()).toString());
+        Log.d("REQUEST MODULE LIST", settings.getModuleList().toString());
+        int numMods = settings.getSize();
+        ArrayList<String> mods = settings.getModuleList();
+        int actual_count = settings.getSize();
         for (int i = 1, j = 0; i <= numMods; i++) {
             if (mods.get(i - 1).isEmpty()) {
                 actual_count--;
@@ -180,9 +186,10 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             return null;
         } else {
             builder.add("numMods", String.valueOf(actual_count));
-            builder.add("AY", String.valueOf("2021-2022"));
-            builder.add("Sem", String.valueOf(2));
+            builder.add("AY", settings.getAcademicYear());
+            builder.add("Sem", settings.getSem());
             builder.add("userID", userID);
+            builder.add("iter", String.valueOf(iterations));
             System.out.println(mods);
             return builder.build();
         }

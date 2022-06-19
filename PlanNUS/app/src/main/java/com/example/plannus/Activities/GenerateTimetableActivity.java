@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 
 import okhttp3.Call;
@@ -47,6 +48,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     //private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
     private static int iterations = 0;
     private Call call;
+    private ArrayList<String> constraintStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,10 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         sessionManager = SessionManager.get();
         userID = sessionManager.getAuth().getCurrentUser().getUid();
         okHttpClient = new OkHttpClient();
+
+        constraintStrings = new ArrayList<>();
+        constraintStrings.add("no8amLessons");
+        constraintStrings.add("oneFreeDay");
     }
 
     private void getRequest(Request request) {
@@ -169,30 +175,56 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     public RequestBody buildRequestBody(TimetableSettings settings) {
         FormBody.Builder builder = new FormBody.Builder();
         System.out.println(settings);
-        Log.d("REQUEST SIZE", ((Integer)settings.getSize()).toString());
-        Log.d("REQUEST MODULE LIST", settings.getModuleList().toString());
-        int numMods = settings.getSize();
-        ArrayList<String> mods = settings.getModuleList();
-        int actual_count = settings.getSize();
-        for (int i = 1, j = 0; i <= numMods; i++) {
-            if (mods.get(i - 1).isEmpty()) {
-                actual_count--;
-                continue;
-            }
-            builder.add("mod" + String.valueOf(j), mods.get(i - 1));
-            j++;
-        }
+        //Log.d("REQUEST SIZE", ((Integer)settings.getSize()).toString());
+        //Log.d("REQUEST MODULE LIST", settings.getModuleList().toString());
+        int actual_count = actualNumberOfMods(settings);
+        builder = buildRequestFromMods(settings, builder);
         if (actual_count == 0) {
             return null;
         } else {
-            builder.add("numMods", String.valueOf(actual_count));
-            builder.add("AY", settings.getAcademicYear());
-            builder.add("Sem", settings.getSem());
-            builder.add("userID", userID);
-            builder.add("iter", String.valueOf(iterations));
-            System.out.println(mods);
+            builder = buildRequestFromBasicData(settings, builder, actual_count);
+            builder = buildRequestFromConstraints(settings, builder);
+            //System.out.println(mods);
             return builder.build();
         }
     }
 
+    public FormBody.Builder buildRequestFromMods(TimetableSettings settings, FormBody.Builder builder) {
+        int actualNumber = actualNumberOfMods(settings);
+        ArrayList<String> mods = settings.getModuleList();
+        for(int i = 0; i < actualNumber; i++) {
+            builder.add("mod" + String.valueOf(i), mods.get(i));
+        }
+        return builder;
+    }
+
+    public int actualNumberOfMods(TimetableSettings settings) {
+        int actualCount = settings.getSize();
+        ArrayList<String> mods = settings.getModuleList();
+        for (int i = 1, j = 0; i <= settings.getSize(); i++) {
+            if (mods.get(i - 1).isEmpty()) {
+                actualCount--;
+                continue;
+            }
+            j++;
+        }
+        return actualCount;
+    }
+
+    public FormBody.Builder buildRequestFromBasicData(TimetableSettings settings, FormBody.Builder builder, int count) {
+        builder.add("numMods", String.valueOf(count));
+        builder.add("AY", settings.getAcademicYear());
+        builder.add("Sem", settings.getSem());
+        builder.add("userID", userID);
+        builder.add("iter", String.valueOf(iterations));
+        return builder;
+    }
+
+    public FormBody.Builder buildRequestFromConstraints(TimetableSettings settings, FormBody.Builder builder) {
+        HashMap<String, Boolean> constraints = settings.getConstraints();
+        for(String constraint : constraintStrings) {
+            builder.add(constraint, String.valueOf(constraints.get(constraint)));
+        }
+        return builder;
+    }
 }

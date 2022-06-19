@@ -37,6 +37,7 @@ def run() :
 
 @app.route("/z3runner", methods=['POST'])
 def test_one() :
+    '''Get basic data'''
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :
@@ -46,7 +47,10 @@ def test_one() :
     n_th = int(request.form["iter"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
-    scheduler.input_new_modules(scrapper.semesterProcessed)
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
+            'oneFreeDay' : bool(request.form['oneFreeDay'])}
+    scheduler.addConstraint(constraints)
     string = scheduler.optimiseTimetable(to_string=True)
     for i in range(n_th) :
         string = scheduler.another_solution()

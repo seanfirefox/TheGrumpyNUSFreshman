@@ -24,6 +24,7 @@ class TimeTableSchedulerZ3 :
         self.labs = []
         self.sems = []
         self.sects = []
+        self.allLessons = []
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
         self.print = print
@@ -58,7 +59,7 @@ class TimeTableSchedulerZ3 :
             for sectional_lesson in value.sectionals :
                 self.lessons_by_day[sectional_lesson.day - 1].append(sectional_lesson)
                 self.sects.append(sectional_lesson)
-            
+        self.allLessons = self.sects + self.sems + self.labs + self.recs + self.tuts + self.lecs
         self.build_hashmaps()
 
     def build_hashmaps(self) :
@@ -100,6 +101,12 @@ class TimeTableSchedulerZ3 :
         # Resolve Time clash constraints
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
+    
+    def addConstraint(self, constraint_list) :
+        if "no8amLessons" in constraint_list :
+            No8AMLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
+        if "oneFreeDay" in constraint_list :
+            NoConsecutiveLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
 
     def clear_settings(self) :
         self.semesterMods = {}

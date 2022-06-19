@@ -17,9 +17,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_TYPE'] = "sqlalchemy"
+app.config['SESSION_SQLALCHEMY_TABLE'] = "sessions"
 #app.config.from_object(__name__)
-sess = Session(app)
 db = SQLAlchemy(app)
+Session(app)
 
 app.config['SESSION_SQLALCHEMY'] = db
 

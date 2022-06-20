@@ -50,6 +50,7 @@ def test_one() :
     scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
     constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
             'oneFreeDay' : bool(request.form['oneFreeDay'])}
+    print(constraints)
     scheduler.add_constraint_dict(constraints)
     string = scheduler.optimiseTimetable(to_string=True)
     for i in range(n_th) :

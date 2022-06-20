@@ -112,7 +112,7 @@ class TimeTableSchedulerZ3 :
             No8AMLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
         if self.custom_constraints["oneFreeDay"] :
             print("One Free Day Lesson Activated")
-            NoConsecutiveLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
+            OneDayFreeConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
 
     def clear_settings(self) :
         self.semesterMods = {}

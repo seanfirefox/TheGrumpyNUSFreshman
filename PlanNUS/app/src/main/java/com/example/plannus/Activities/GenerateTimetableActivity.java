@@ -8,27 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-//import com.squareup.okhttp.Callback;
-//import com.squareup.okhttp.OkHttpClient;
-//import com.squareup.okhttp.Request;
-//import com.squareup.okhttp.RequestBody;
-//import com.squareup.okhttp.Response;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.CompletableFuture;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -98,11 +87,10 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private Request buildPostRequest(String url, RequestBody requestBody) {
-        Request request = new Request.Builder()
+        return new Request.Builder()
                 .url(url)
                 .post(requestBody)
                 .build();
-        return request;
     }
 
     private void initVars() {
@@ -134,16 +122,13 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
             @Override
             public void onResponse(Call call, Response response) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String text = response.body().string();
-                            Log.d("RESPONSE_BODY", text);
-                            textView.setText(text);
-                        } catch (IOException e) {
-                            e.getStackTrace();
-                        }
+                runOnUiThread(() -> {
+                    try {
+                        String text = response.body().string();
+                        Log.d("RESPONSE_BODY", text);
+                        textView.setText(text);
+                    } catch (IOException e) {
+                        e.getStackTrace();
                     }
                 });
             }
@@ -153,23 +138,15 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
     public void obtainSettings() {
         DocumentReference docRef = sessionManager.getFireStore().collection("Users").document(userID).collection("timetableSettings").document("timetableSettings");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
-                if (timetableSettings == null) {
-                    return;
-                }
-                Log.d("toString Settings", timetableSettings.toString());
-                Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
-                Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
+            if (timetableSettings == null) {
+                return;
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore");
-            }
-        });
+            Log.d("toString Settings", timetableSettings.toString());
+            Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
+            Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+        }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore"));
     }
 
     public RequestBody buildRequestBody(TimetableSettings settings) {
@@ -201,12 +178,10 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     public int actualNumberOfMods(TimetableSettings settings) {
         int actualCount = settings.getSize();
         ArrayList<String> mods = settings.getModuleList();
-        for (int i = 1, j = 0; i <= settings.getSize(); i++) {
+        for (int i = 1; i <= settings.getSize(); i++) {
             if (mods.get(i - 1).isEmpty()) {
                 actualCount--;
-                continue;
             }
-            j++;
         }
         return actualCount;
     }

@@ -62,6 +62,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
             } else {
                 iterations = 0;
+                obtainSettings();
                 RequestBody requestBody = buildRequestBody(timetableSettings);
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
@@ -146,6 +147,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             Log.d("toString Settings", timetableSettings.toString());
             Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
             Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+            Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
         }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore"));
     }
 
@@ -197,8 +199,12 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
     public FormBody.Builder buildRequestFromConstraints(TimetableSettings settings, FormBody.Builder builder) {
         HashMap<String, Boolean> constraints = settings.getConstraints();
-        for(String constraint : constraintStrings) {
-            builder.add(constraint, String.valueOf(constraints.get(constraint)));
+        System.out.println("BUILD REQUEST FROM CONSTRAINTS : ");
+        System.out.println(constraints);
+        for(String constraint : constraints.keySet()) {
+            System.out.println(constraint);
+            System.out.println(constraints.get(constraint));
+            builder.add(constraint, constraints.get(constraint) ? "true" : "");
         }
         return builder;
     }

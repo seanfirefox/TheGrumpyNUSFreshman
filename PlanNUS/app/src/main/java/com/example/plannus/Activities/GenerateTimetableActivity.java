@@ -80,7 +80,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     if (call != null) {
                         call.cancel();
                     }
-                    Request built_Request = buildPostRequest("https://plannus-sat-solver.herokuapp.com/z3runner", requestBody);
+                    Request built_Request = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", requestBody);
                     getRequest(built_Request);
                 }
             }
@@ -90,7 +90,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             } else {
                 iterations++;
                 RequestBody nextRequestBody = buildRequestBody(timetableSettings);
-                Request nextSolutionRequest = buildPostRequest("https://plannus-sat-solver.herokuapp.com/z3runner", nextRequestBody);
+                Request nextSolutionRequest = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", nextRequestBody);
                 getRequest(nextSolutionRequest);
             }
         }

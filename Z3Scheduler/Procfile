@@ -1,1 +1,1 @@
-web: gunicorn TimetableZ3run:app
+web: flask db upgrade; gunicorn Z3Schedule:'create_app()'

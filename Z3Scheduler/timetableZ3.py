@@ -28,6 +28,7 @@ class TimeTableSchedulerZ3 :
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
         self.print = print
+        self.custom_constraints = {}
         self.finalTimetable = [[], [], [], [], []]
 
     def init_variables(self) :
@@ -62,6 +63,9 @@ class TimeTableSchedulerZ3 :
         self.allLessons = self.sects + self.sems + self.labs + self.recs + self.tuts + self.lecs
         self.build_hashmaps()
 
+    def add_constraint_dict(self, constraint_dict) :
+        self.custom_constraints = constraint_dict
+    
     def build_hashmaps(self) :
         '''
         Builds the following hash maps :
@@ -102,10 +106,12 @@ class TimeTableSchedulerZ3 :
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
     
-    def addConstraint(self, constraint_list) :
-        if "no8amLessons" in constraint_list :
+    def add_custom_constraints(self) :
+        if self.custom_constraits["no8amLessons"]:
+            print("No 8am Lesson Constraint Activated")
             No8AMLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
-        if "oneFreeDay" in constraint_list :
+        if self.custom_constraints["oneFreeDay"] :
+            print("One Free Day Lesson Activated")
             NoConsecutiveLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
 
     def clear_settings(self) :
@@ -158,6 +164,7 @@ class TimeTableSchedulerZ3 :
     def optimiseTimetable(self, to_string=False) :
         self.init_variables()
         self.add_basic_constraints()
+        self.add_custom_constraints()
         strings = ""
         if (self.solver.check() == sat) :
             print("SAT")

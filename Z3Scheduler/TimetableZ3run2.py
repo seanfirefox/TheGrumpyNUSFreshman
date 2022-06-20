@@ -50,7 +50,7 @@ def test_one() :
     scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
     constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
             'oneFreeDay' : bool(request.form['oneFreeDay'])}
-    scheduler.addConstraint(constraints)
+    scheduler.add_constraint_dict(constraints)
     string = scheduler.optimiseTimetable(to_string=True)
     for i in range(n_th) :
         string = scheduler.another_solution()
@@ -62,6 +62,5 @@ def post_from_android() :
     return (value)
 
 if __name__ == "__main__" :
-    scheduler = TimeTableSchedulerZ3(None, True)
     app.run()
 

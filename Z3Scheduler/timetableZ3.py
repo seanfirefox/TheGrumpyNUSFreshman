@@ -107,7 +107,7 @@ class TimeTableSchedulerZ3 :
                 self.string_to_bool_literal).enforce(self.solver)
     
     def add_custom_constraints(self) :
-        if self.custom_constraits["no8amLessons"]:
+        if self.custom_constraints["no8amLessons"]:
             print("No 8am Lesson Constraint Activated")
             No8AMLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
         if self.custom_constraints["oneFreeDay"] :

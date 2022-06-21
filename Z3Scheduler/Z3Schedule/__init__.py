@@ -20,4 +20,7 @@ def create_app():
 
     from . import models
 
+    from . import Z3Schedule
+    app.register_blueprint(Z3Schedule.bp)
+
     return app

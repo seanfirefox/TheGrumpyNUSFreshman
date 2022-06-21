@@ -35,7 +35,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView textView;
-    //private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
     private static int iterations = 0;
     private Call call;
     private ArrayList<String> constraintStrings;
@@ -154,19 +153,18 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
             if (timetableSettings == null) {
                 return;
+            } else {
+                Log.d("toString Settings", timetableSettings.toString());
+                Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
+                Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+                Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
             }
-            Log.d("toString Settings", timetableSettings.toString());
-            Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
-            Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
-            Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
         }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore"));
     }
 
     public RequestBody buildRequestBody(TimetableSettings settings) {
         FormBody.Builder builder = new FormBody.Builder();
         System.out.println(settings);
-        //Log.d("REQUEST SIZE", ((Integer)settings.getSize()).toString());
-        //Log.d("REQUEST MODULE LIST", settings.getModuleList().toString());
         int actual_count = actualNumberOfMods(settings);
         builder = buildRequestFromMods(settings, builder);
         if (actual_count == 0) {
@@ -174,7 +172,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         } else {
             builder = buildRequestFromBasicData(settings, builder, actual_count);
             builder = buildRequestFromConstraints(settings, builder);
-            //System.out.println(mods);
             return builder.build();
         }
     }
@@ -210,11 +207,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
     public FormBody.Builder buildRequestFromConstraints(TimetableSettings settings, FormBody.Builder builder) {
         HashMap<String, Boolean> constraints = settings.getConstraints();
-        System.out.println("BUILD REQUEST FROM CONSTRAINTS : ");
-        System.out.println(constraints);
         for(String constraint : constraints.keySet()) {
-            System.out.println(constraint);
-            System.out.println(constraints.get(constraint));
             builder.add(constraint, constraints.get(constraint) ? "true" : "");
         }
         return builder;

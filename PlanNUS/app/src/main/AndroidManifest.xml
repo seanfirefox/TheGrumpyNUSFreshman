@@ -16,13 +16,16 @@
         tools:remove="android:appComponentFactory"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.TimetableSettingsActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.GenerateTimetableActivity"/>
+            android:parentActivityName=".Activities.GenerateTimetableActivity" />
         <activity
             android:name=".Activities.GenerateTimetableActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.ContentMainActivity"/>
+            android:parentActivityName=".Activities.ContentMainActivity" />
         <activity
             android:name=".Activities.CompletedTaskActivity"
             android:exported="false"

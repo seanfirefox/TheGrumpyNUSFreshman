@@ -130,7 +130,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         } else if (v.getId() == R.id.generateTimetableButton) {
             startActivity(new Intent(this, GenerateTimetableActivity.class));
         } else if (v.getId() == R.id.calendarImgView) {
-            Toast.makeText(this, "Coming Soon !", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, CalendarActivity.class));
         } else if (v.getId() == R.id.logoutButton){
             logout();
         } else {

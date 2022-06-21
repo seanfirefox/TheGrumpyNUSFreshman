@@ -13,7 +13,6 @@ public class TimetableSettings {
     @PropertyName("size")
     private int size;
 
-
     @PropertyName("constraints")
     private HashMap<String, Boolean> constraints;
 
@@ -49,6 +48,10 @@ public class TimetableSettings {
 
     public String getSem() {
         return sem;
+    }
+
+    public void setConstraints(HashMap<String, Boolean> constraints) {
+        this.constraints = constraints;
     }
 
     public String getAcademicYear() {

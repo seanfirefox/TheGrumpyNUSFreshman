@@ -24,9 +24,11 @@ class TimeTableSchedulerZ3 :
         self.labs = []
         self.sems = []
         self.sects = []
+        self.allLessons = []
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
         self.print = print
+        self.custom_constraints = {}
         self.finalTimetable = [[], [], [], [], []]
 
     def init_variables(self) :
@@ -58,9 +60,12 @@ class TimeTableSchedulerZ3 :
             for sectional_lesson in value.sectionals :
                 self.lessons_by_day[sectional_lesson.day - 1].append(sectional_lesson)
                 self.sects.append(sectional_lesson)
-            
+        self.allLessons = self.sects + self.sems + self.labs + self.recs + self.tuts + self.lecs
         self.build_hashmaps()
 
+    def add_constraint_dict(self, constraint_dict) :
+        self.custom_constraints = constraint_dict
+    
     def build_hashmaps(self) :
         '''
         Builds the following hash maps :
@@ -100,6 +105,14 @@ class TimeTableSchedulerZ3 :
         # Resolve Time clash constraints
         NoClashConstraint(self.lecs + self.tuts + self.recs + self.sems + self.labs + self.sects, \
                 self.string_to_bool_literal).enforce(self.solver)
+    
+    def add_custom_constraints(self) :
+        if self.custom_constraints["no8amLessons"]:
+            print("No 8am Lesson Constraint Activated")
+            No8AMLessonsConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
+        if self.custom_constraints["oneFreeDay"] :
+            print("One Free Day Lesson Activated")
+            OneDayFreeConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
 
     def clear_settings(self) :
         self.semesterMods = {}
@@ -151,6 +164,7 @@ class TimeTableSchedulerZ3 :
     def optimiseTimetable(self, to_string=False) :
         self.init_variables()
         self.add_basic_constraints()
+        self.add_custom_constraints()
         strings = ""
         if (self.solver.check() == sat) :
             print("SAT")

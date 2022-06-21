@@ -35,51 +35,27 @@ def run() :
     scrapper.scrape()
     return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
 
-@app.route("/test", methods=['POST'])
+@app.route("/z3runner", methods=['POST'])
 def test_one() :
-    global scheduler
-    scheduler = TimeTableSchedulerZ3(None, True)
-    print("THIS is after global Scheduler was called" + str(scheduler))
-    #if (scheduler is None) :
-     #   print("INSIDE IF BLOCK :")
-      #  scheduler = TimeTableSchedulerZ3(None, True)
-       # print(str(scheduler))
-    #print(str(scheduler))
-    scheduler.clear_settings()
-    print("AFTER CLEAR SETTINGS" + str(scheduler))
+    '''Get basic data'''
     num_mods = int(request.form['numMods'])
     mods = []
     for i in range(num_mods) :
         mods.append(request.form["mod" + str(i)])
     AY = request.form["AY"]
     SEM = int(request.form["Sem"])
+    n_th = int(request.form["iter"])
     scrapper = Scrapper(mods, AY, SEM)
     scrapper.scrape()
-    scheduler.input_new_modules(scrapper.semesterProcessed)
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
+            'oneFreeDay' : bool(request.form['oneFreeDay'])}
+    print(constraints)
+    scheduler.add_constraint_dict(constraints)
     string = scheduler.optimiseTimetable(to_string=True)
+    for i in range(n_th) :
+        string = scheduler.another_solution()
     return string
-
-@app.route("/delete", methods=["POST"])
-def delete_scheduler() :
-    global scheduler
-    scheduler = None
-    gc.collect()
-    return "Deleting previous settings..."
-
-@app.route("/alt_soln", methods=["POST"])
-def alt_soln() :
-    if (scheduler is None) :
-        return "Nothing generated yet! No other solution offered!"
-    return scheduler.another_solution(to_string=True)
-
-def set_Scheduler(saved_scheduler) :
-    global scheduler
-    scheduler = saved_scheduler
-
-@app.route("/userID", methods=["POST"])
-def test_two() :
-    return
-
 
 @app.route("/posttest", methods=['POST'])
 def post_from_android() :
@@ -87,6 +63,5 @@ def post_from_android() :
     return (value)
 
 if __name__ == "__main__" :
-    scheduler = TimeTableSchedulerZ3(None, True)
     app.run()
 

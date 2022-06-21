@@ -140,6 +140,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     }
 
     public void init_checkboxes() {
+
         oneFreeDayConstraint = findViewById(R.id.oneFreeDay);
         oneFreeDayConstraint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

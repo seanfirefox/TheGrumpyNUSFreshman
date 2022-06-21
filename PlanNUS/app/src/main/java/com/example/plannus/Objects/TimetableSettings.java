@@ -50,6 +50,10 @@ public class TimetableSettings {
         return sem;
     }
 
+    public void setConstraints(HashMap<String, Boolean> constraints) {
+        this.constraints = constraints;
+    }
+
     public String getAcademicYear() {
         return academicYear;
     }

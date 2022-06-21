@@ -8,26 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-//import com.squareup.okhttp.Callback;
-//import com.squareup.okhttp.OkHttpClient;
-//import com.squareup.okhttp.Request;
-//import com.squareup.okhttp.RequestBody;
-//import com.squareup.okhttp.Response;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -44,8 +34,10 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView textView;
-    private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
+    //private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
+    private static int iterations = 0;
     private Call call;
+    private ArrayList<String> constraintStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,32 +61,37 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
             } else {
-                RequestBody requestBody = buildRequestBody();
+                iterations = 0;
+                obtainSettings();
+                RequestBody requestBody = buildRequestBody(timetableSettings);
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                 } else {
                     if (call != null) {
                         call.cancel();
                     }
-                    buildPostRequest("https://plannus-sat-solver.herokuapp.com/login", requestBody);
+                    Request built_Request = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", requestBody);
+                    getRequest(built_Request);
                 }
             }
         } else if (v.getId() == R.id.nextButton) {
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
             } else {
-                buildPostRequest("https://plannus-sat-solver.herokuapp.com/alt_soln", EMPTYREQUEST);
+                iterations++;
+                RequestBody nextRequestBody = buildRequestBody(timetableSettings);
+                Request nextSolutionRequest = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", nextRequestBody);
+                getRequest(nextSolutionRequest);
             }
         }
 
     }
 
-    private void buildPostRequest(String url, RequestBody requestBody) {
-        Request request = new Request.Builder()
+    private Request buildPostRequest(String url, RequestBody requestBody) {
+        return new Request.Builder()
                 .url(url)
                 .post(requestBody)
                 .build();
-        getRequest(request);
     }
 
     private void initVars() {
@@ -109,6 +106,10 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         sessionManager = SessionManager.get();
         userID = sessionManager.getAuth().getCurrentUser().getUid();
         okHttpClient = new OkHttpClient();
+
+        constraintStrings = new ArrayList<>();
+        constraintStrings.add("no8amLessons");
+        constraintStrings.add("oneFreeDay");
     }
 
     private void getRequest(Request request) {
@@ -122,16 +123,13 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
             @Override
             public void onResponse(Call call, Response response) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String text = response.body().string();
-                            Log.d("RESPONSE_BODY", text);
-                            textView.setText(text);
-                        } catch (IOException e) {
-                            e.getStackTrace();
-                        }
+                runOnUiThread(() -> {
+                    try {
+                        String text = response.body().string();
+                        Log.d("RESPONSE_BODY", text);
+                        textView.setText(text);
+                    } catch (IOException e) {
+                        e.getStackTrace();
                     }
                 });
             }
@@ -141,51 +139,73 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
     public void obtainSettings() {
         DocumentReference docRef = sessionManager.getFireStore().collection("Users").document(userID).collection("timetableSettings").document("timetableSettings");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
-                if (timetableSettings == null) {
-                    return;
-                }
-                Log.d("toString Settings", timetableSettings.toString());
-                Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
-                Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
+            if (timetableSettings == null) {
+                return;
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore");
-            }
-        });
+            Log.d("toString Settings", timetableSettings.toString());
+            Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
+            Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+            Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
+        }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore"));
     }
 
-    public RequestBody buildRequestBody() {
+    public RequestBody buildRequestBody(TimetableSettings settings) {
         FormBody.Builder builder = new FormBody.Builder();
-        System.out.println(timetableSettings);
-        Log.d("REQUEST SIZE", ((Integer)timetableSettings.getSize()).toString());
-        Log.d("REQUEST MODULE LIST", timetableSettings.getModuleList().toString());
-        int numMods = timetableSettings.getSize();
-        ArrayList<String> mods = timetableSettings.getModuleList();
-        int actual_count = timetableSettings.getSize();
-        for (int i = 1, j = 0; i <= numMods; i++) {
-            if (mods.get(i - 1).isEmpty()) {
-                actual_count--;
-                continue;
-            }
-            builder.add("mod" + String.valueOf(j), mods.get(i - 1));
-            j++;
-        }
+        System.out.println(settings);
+        //Log.d("REQUEST SIZE", ((Integer)settings.getSize()).toString());
+        //Log.d("REQUEST MODULE LIST", settings.getModuleList().toString());
+        int actual_count = actualNumberOfMods(settings);
+        builder = buildRequestFromMods(settings, builder);
         if (actual_count == 0) {
             return null;
         } else {
-            builder.add("numMods", String.valueOf(actual_count));
-            builder.add("AY", String.valueOf("2021-2022"));
-            builder.add("Sem", String.valueOf(2));
-            builder.add("userID", userID);
-            System.out.println(mods);
+            builder = buildRequestFromBasicData(settings, builder, actual_count);
+            builder = buildRequestFromConstraints(settings, builder);
+            //System.out.println(mods);
             return builder.build();
         }
     }
 
+    public FormBody.Builder buildRequestFromMods(TimetableSettings settings, FormBody.Builder builder) {
+        int actualNumber = actualNumberOfMods(settings);
+        ArrayList<String> mods = settings.getModuleList();
+        for(int i = 0; i < actualNumber; i++) {
+            builder.add("mod" + String.valueOf(i), mods.get(i));
+        }
+        return builder;
+    }
+
+    public int actualNumberOfMods(TimetableSettings settings) {
+        int actualCount = settings.getSize();
+        ArrayList<String> mods = settings.getModuleList();
+        for (int i = 1; i <= settings.getSize(); i++) {
+            if (mods.get(i - 1).isEmpty()) {
+                actualCount--;
+            }
+        }
+        return actualCount;
+    }
+
+    public FormBody.Builder buildRequestFromBasicData(TimetableSettings settings, FormBody.Builder builder, int count) {
+        builder.add("numMods", String.valueOf(count));
+        builder.add("AY", settings.getAcademicYear());
+        builder.add("Sem", settings.getSem());
+        builder.add("userID", userID);
+        builder.add("iter", String.valueOf(iterations));
+        return builder;
+    }
+
+    public FormBody.Builder buildRequestFromConstraints(TimetableSettings settings, FormBody.Builder builder) {
+        HashMap<String, Boolean> constraints = settings.getConstraints();
+        System.out.println("BUILD REQUEST FROM CONSTRAINTS : ");
+        System.out.println(constraints);
+        for(String constraint : constraints.keySet()) {
+            System.out.println(constraint);
+            System.out.println(constraints.get(constraint));
+            builder.add(constraint, constraints.get(constraint) ? "true" : "");
+        }
+        return builder;
+    }
 }

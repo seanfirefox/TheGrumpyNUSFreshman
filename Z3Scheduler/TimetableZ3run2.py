@@ -1,7 +1,7 @@
 from scrapper import *
 from z3 import *
 from timetableZ3 import *
-from flask import Flask
+from flask import Flask, jsonify
 from flask import request
 import gc
 #import sys
@@ -36,8 +36,7 @@ def test_one() :
     for i in range(n_th) :
         string = scheduler.another_solution()
     print(string)
-    process_string_to_json(string)
-    return string
+    return process_string_to_json(string)
 
 def process_string_to_json(string) :
     dictionary = {"MON" : [], "TUE" : [], "WED" : [], "THUR" : [], "FRI" : []}
@@ -50,11 +49,12 @@ def process_string_to_json(string) :
         elif string_item == "" :
             continue
         else :
-            dictionary[DISCARD[key_]].append(clean_string(string_item))
+            dictionary[DISCARD[key_]].append(clean_string(string_item)[1:])
     print(dictionary)
     print("STRING LEFT")
     print(string)
     dictionary["string"] = string 
+    return jsonify(dictionary)
 
 def clean_string(string_item) :
     string_copy = ""

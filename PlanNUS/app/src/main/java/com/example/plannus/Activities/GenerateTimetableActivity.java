@@ -8,12 +8,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.plannus.Objects.NUSTimetable;
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,9 +41,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView textView;
-    //private final RequestBody EMPTYREQUEST = new FormBody.Builder().build();
     private static int iterations = 0;
     private Call call;
+    private NUSTimetable nusTimetable;
     private ArrayList<String> constraintStrings;
 
     @Override
@@ -83,8 +90,36 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 Request nextSolutionRequest = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", nextRequestBody);
                 getRequest(nextSolutionRequest);
             }
+        } else if (v.getId() == R.id.saveTimetableButton) {
+            saveTimeTableButton(nusTimetable);
         }
 
+    }
+
+    private void saveTimeTableButton(NUSTimetable timetable) {
+        if (timetable == null) {
+            Log.d("Timetable NULL", "Timetable is Null, Not saving it");
+            return;
+        }
+        sessionManager.getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("NUS_Schedule")
+                .document("NUS_Schedule")
+                .set(nusTimetable)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(GenerateTimetableActivity.this, "Timetable Saved Successfully",Toast.LENGTH_LONG).show();
+                        Log.d("SAVE SUCCESS", "Timetable Saved successfully!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GenerateTimetableActivity.this, "Timetable did not save", Toast.LENGTH_LONG).show();
+                        Log.d("SAVE FAIL", "Timetable Did NOT Save !");
+                    }
+                });
     }
 
     private Request buildPostRequest(String url, RequestBody requestBody) {
@@ -110,6 +145,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         constraintStrings = new ArrayList<>();
         constraintStrings.add("no8amLessons");
         constraintStrings.add("oneFreeDay");
+
+        nusTimetable = new NUSTimetable();
     }
 
     private void getRequest(Request request) {
@@ -125,11 +162,16 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             public void onResponse(Call call, Response response) {
                 runOnUiThread(() -> {
                     try {
-                        String text = response.body().string();
-                        Log.d("RESPONSE_BODY", text);
-                        textView.setText(text);
+                        String jsonReturnString = response.body().string();
+                        JSONObject jsonObject = new JSONObject(jsonReturnString);
+                        String displayText = (String) jsonObject.get("string");
+                        nusTimetable = new NUSTimetable(jsonObject);
+                        Log.d("RESPONSE_BODY", displayText);
+                        textView.setText(nusTimetable.getStringRep());
                     } catch (IOException e) {
                         e.getStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 });
             }
@@ -154,8 +196,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     public RequestBody buildRequestBody(TimetableSettings settings) {
         FormBody.Builder builder = new FormBody.Builder();
         System.out.println(settings);
-        //Log.d("REQUEST SIZE", ((Integer)settings.getSize()).toString());
-        //Log.d("REQUEST MODULE LIST", settings.getModuleList().toString());
         int actual_count = actualNumberOfMods(settings);
         builder = buildRequestFromMods(settings, builder);
         if (actual_count == 0) {
@@ -163,7 +203,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         } else {
             builder = buildRequestFromBasicData(settings, builder, actual_count);
             builder = buildRequestFromConstraints(settings, builder);
-            //System.out.println(mods);
             return builder.build();
         }
     }

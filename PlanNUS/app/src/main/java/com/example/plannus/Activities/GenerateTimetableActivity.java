@@ -46,7 +46,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private TextView textView;
     private static int iterations = 0;
     private Call call;
-    private NUSTimetable nusTimetable;
+    private NUSTimetable nusTimetable, oldNusTimetable;
     private ArrayList<String> constraintStrings;
     private ProgressBar progressBar;
 
@@ -98,6 +98,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
+            deleteOldTimeTable();
             saveTimeTable(nusTimetable.getMondayClass(), "mondayClass");
             saveTimeTable(nusTimetable.getTuesdayClass(), "tuesdayClass");
             saveTimeTable(nusTimetable.getWednesdayClass(), "wednesdayClass");
@@ -105,6 +106,63 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             saveTimeTable(nusTimetable.getFridayClass(), "fridayClass");
         }
 
+    }
+
+    private void deleteOldTimeTable() {
+        DocumentReference docRef = sessionManager
+                .getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("NUS_Schedule")
+                .document("NUS_Schedule");
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            oldNusTimetable = documentSnapshot.toObject(NUSTimetable.class);
+            if (oldNusTimetable == null) {
+                return;
+            }
+        }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get oldTimetable from Firestore"));
+        if (oldNusTimetable != null) {
+            deleteCollectionInFireStore(oldNusTimetable.getMondayClass(), "mondayClass");
+            deleteCollectionInFireStore(oldNusTimetable.getTuesdayClass(), "tuesdayClass");
+            deleteCollectionInFireStore(oldNusTimetable.getWednesdayClass(), "wednesdayClass");
+            deleteCollectionInFireStore(oldNusTimetable.getThursdayClass(), "thursdayClass");
+            deleteCollectionInFireStore(oldNusTimetable.getFridayClass(), "fridayClass");
+        }
+    }
+
+    private void deleteCollectionInFireStore(ArrayList<String> classList, String collectionPath) {
+        if (classList == null) {
+            Log.d("Timetable NULL", "No Old Class in FireStore");
+            return;
+        }
+        for (int i = 0; i < classList.size(); i++) {
+            String s = classList.get(i);
+            deleteClassInFireStore(s, collectionPath);
+        }
+    }
+
+    private void deleteClassInFireStore(String documentName, String collectionName) {
+        sessionManager
+                .getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("NUS_Schedule")
+                .document("NUS_Schedule")
+                .collection(collectionName)
+                .document(documentName)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Success", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Failure", "Error deleting document", e);
+                    }
+                });
     }
 
     private void saveTimeTable(ArrayList<String> classList, String collectionPath) {
@@ -117,7 +175,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             NUSClass nusClass = new NUSClass(s);
             saveClassIntoFireStore(nusClass, s, collectionPath);
         }
-        /*
+
         sessionManager.getFireStore()
                 .collection("Users")
                 .document(userID)
@@ -138,7 +196,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     }
                 });
 
-         */
+
     }
 
     private void saveClassIntoFireStore(NUSClass nusClass, String s, String collectionPath) {
@@ -234,7 +292,12 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     public void obtainSettings() {
-        DocumentReference docRef = sessionManager.getFireStore().collection("Users").document(userID).collection("timetableSettings").document("timetableSettings");
+        DocumentReference docRef = sessionManager
+                .getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("timetableSettings")
+                .document("timetableSettings");
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
             if (timetableSettings == null) {

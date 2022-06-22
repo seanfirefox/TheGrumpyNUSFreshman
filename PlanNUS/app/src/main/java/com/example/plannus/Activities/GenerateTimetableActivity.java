@@ -9,12 +9,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.plannus.Objects.NUSTimetable;
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +36,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class GenerateTimetableActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button settings, generate, next;
+    private Button settings, generate, next, save;
     private SessionManager sessionManager;
     private String userID;
     private OkHttpClient okHttpClient;
@@ -37,6 +44,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private TextView textView;
     private static int iterations = 0;
     private Call call;
+    private NUSTimetable nusTimetable;
     private ArrayList<String> constraintStrings;
     private ProgressBar progressBar;
 
@@ -87,8 +95,36 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 Request nextSolutionRequest = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", nextRequestBody);
                 getRequest(nextSolutionRequest);
             }
+        } else if (v.getId() == R.id.saveTimetableButton) {
+            saveTimeTableButton(nusTimetable);
         }
 
+    }
+
+    private void saveTimeTableButton(NUSTimetable timetable) {
+        if (timetable == null) {
+            Log.d("Timetable NULL", "Timetable is Null, Not saving it");
+            return;
+        }
+        sessionManager.getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("NUS_Schedule")
+                .document("NUS_Schedule")
+                .set(nusTimetable)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(GenerateTimetableActivity.this, "Timetable Saved Successfully",Toast.LENGTH_LONG).show();
+                        Log.d("SAVE SUCCESS", "Timetable Saved successfully!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GenerateTimetableActivity.this, "Timetable did not save", Toast.LENGTH_LONG).show();
+                        Log.d("SAVE FAIL", "Timetable Did NOT Save !");
+                    }
+                });
     }
 
     private Request buildPostRequest(String url, RequestBody requestBody) {
@@ -115,6 +151,11 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         constraintStrings = new ArrayList<>();
         constraintStrings.add("no8amLessons");
         constraintStrings.add("oneFreeDay");
+
+        nusTimetable = new NUSTimetable();
+
+        save = findViewById(R.id.saveTimetableButton);
+        save.setOnClickListener(this);
     }
 
     private void getRequest(Request request) {
@@ -133,11 +174,21 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             public void onResponse(Call call, Response response) {
                 runOnUiThread(() -> {
                     try {
-                        String text = response.body().string();
-                        Log.d("RESPONSE_BODY", text);
-                        textView.setText(text);
+                        String jsonReturnString = response.body().string();
+                        System.out.println(jsonReturnString);
+                        if (jsonReturnString.equals("No Feasible Timetable!")) {
+                            textView.setText("No Feasible Timetable!\n Change your study plan in Settings!");
+                        } else {
+                            JSONObject jsonObject = new JSONObject(jsonReturnString);
+                            String displayText = (String) jsonObject.get("string");
+                            nusTimetable = new NUSTimetable(jsonObject);
+                            Log.d("RESPONSE_BODY", displayText);
+                            textView.setText(nusTimetable.getStringRep());
+                        }
                     } catch (IOException e) {
                         e.getStackTrace();
+                    } catch (JSONException e) {
+                        textView.setText("Invalid Combination!\n There is NO OTHER solution!");
                     } finally {
                         disableButtonBlocker(true);
                     }

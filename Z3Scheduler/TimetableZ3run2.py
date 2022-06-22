@@ -1,7 +1,7 @@
 from scrapper import *
 from z3 import *
 from timetableZ3 import *
-from flask import Flask
+from flask import Flask, jsonify
 from flask import request
 import gc
 #import sys
@@ -9,9 +9,63 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 
+DISCARD = {"On Monday": "MON", "On Tuesday" : "TUE", "On Wednesday" : "WED" , "On Thursday" : "THUR", "On Friday" : "FRI"}
+
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
+
+@app.route("/z3runner", methods=['POST'])
+def test_one() :
+    '''Get basic data'''
+    num_mods = int(request.form['numMods'])
+    mods = []
+    for i in range(num_mods) :
+        mods.append(request.form["mod" + str(i)])
+    AY = request.form["AY"]
+    SEM = int(request.form["Sem"])
+    n_th = int(request.form["iter"])
+    scrapper = Scrapper(mods, AY, SEM)
+    scrapper.scrape()
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
+            'oneFreeDay' : bool(request.form['oneFreeDay'])}
+    print(constraints)
+    scheduler.add_constraint_dict(constraints)
+    string = scheduler.optimiseTimetable(to_string=True)
+    for i in range(n_th) :
+        string = scheduler.another_solution()
+    print(string)
+    if (string == "No Feasible Timetable!") :
+        return string
+    return process_string_to_json(string)
+
+def process_string_to_json(string) :
+    dictionary = {"MON" : [], "TUE" : [], "WED" : [], "THUR" : [], "FRI" : []}
+    a = string.split("\n")
+    print(a)
+    key_ = None
+    for string_item in a :
+        if string_item in DISCARD :
+            key_ = string_item
+        elif string_item == "" :
+            continue
+        else :
+            dictionary[DISCARD[key_]].append(clean_string(string_item)[1:])
+    print(dictionary)
+    print("STRING LEFT")
+    print(string)
+    dictionary["string"] = string 
+    return jsonify(dictionary)
+
+def clean_string(string_item) :
+    string_copy = ""
+    for i in range(len(string_item)) :
+        if string_item[i] == "[" :
+            return string_copy
+        else :
+            string_copy = string_copy + string_item[i]
+
 
 @app.route("/z3", methods=['GET'])
 def show_z3_stuff() :
@@ -34,28 +88,6 @@ def run() :
     scrapper = Scrapper(mods, "2021-2022", 2)
     scrapper.scrape()
     return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
-
-@app.route("/z3runner", methods=['POST'])
-def test_one() :
-    '''Get basic data'''
-    num_mods = int(request.form['numMods'])
-    mods = []
-    for i in range(num_mods) :
-        mods.append(request.form["mod" + str(i)])
-    AY = request.form["AY"]
-    SEM = int(request.form["Sem"])
-    n_th = int(request.form["iter"])
-    scrapper = Scrapper(mods, AY, SEM)
-    scrapper.scrape()
-    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
-    constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
-            'oneFreeDay' : bool(request.form['oneFreeDay'])}
-    print(constraints)
-    scheduler.add_constraint_dict(constraints)
-    string = scheduler.optimiseTimetable(to_string=True)
-    for i in range(n_th) :
-        string = scheduler.another_solution()
-    return string
 
 @app.route("/posttest", methods=['POST'])
 def post_from_android() :

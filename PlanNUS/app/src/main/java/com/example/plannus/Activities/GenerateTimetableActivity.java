@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.plannus.Objects.NUSClass;
 import com.example.plannus.Objects.NUSTimetable;
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
@@ -19,6 +20,7 @@ import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.SetOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,16 +98,26 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
-            saveTimeTableButton(nusTimetable);
+            saveTimeTable(nusTimetable.getMondayClass(), "mondayClass");
+            saveTimeTable(nusTimetable.getTuesdayClass(), "tuesdayClass");
+            saveTimeTable(nusTimetable.getWednesdayClass(), "wednesdayClass");
+            saveTimeTable(nusTimetable.getThursdayClass(), "thursdayClass");
+            saveTimeTable(nusTimetable.getFridayClass(), "fridayClass");
         }
 
     }
 
-    private void saveTimeTableButton(NUSTimetable timetable) {
-        if (timetable == null) {
+    private void saveTimeTable(ArrayList<String> classList, String collectionPath) {
+        if (classList == null) {
             Log.d("Timetable NULL", "Timetable is Null, Not saving it");
             return;
         }
+        for (int i = 0; i < classList.size(); i++) {
+            String s = classList.get(i);
+            NUSClass nusClass = new NUSClass(s);
+            saveClassIntoFireStore(nusClass, s, collectionPath);
+        }
+        /*
         sessionManager.getFireStore()
                 .collection("Users")
                 .document(userID)
@@ -125,8 +137,31 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         Log.d("SAVE FAIL", "Timetable Did NOT Save !");
                     }
                 });
+
+         */
     }
 
+    private void saveClassIntoFireStore(NUSClass nusClass, String s, String collectionPath) {
+        sessionManager.getFireStore()
+                .collection("Users")
+                .document(userID)
+                .collection("NUS_Schedule")
+                .document("NUS_Schedule")
+                .collection(collectionPath)
+                .document(s)
+                .set(nusClass, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("CLASS SAVED", "onSuccess: Class is saved");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("CLASS UNSAVED", "onFailure : Class not saved!");
+                    }
+                });
+    }
     private Request buildPostRequest(String url, RequestBody requestBody) {
         return new Request.Builder()
                 .url(url)

@@ -17,6 +17,7 @@ import com.example.plannus.Objects.NUSTimetable;
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.example.plannus.utils.RequestBuilder;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -44,6 +45,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView textView;
+    private final String URL = "https://plannus-satsolver-backup.herokuapp.com/z3runner";
     private static int iterations = 0;
     private Call call;
     private NUSTimetable nusTimetable, oldNusTimetable;
@@ -75,7 +77,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 disableButtonBlocker(false);
                 iterations = 0;
                 obtainSettings();
-                RequestBody requestBody = buildRequestBody(timetableSettings);
+                RequestBody requestBody = new RequestBuilder(timetableSettings, userID, URL)
+                        .buildRequestBody(iterations);
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
                     disableButtonBlocker(true);
@@ -83,8 +86,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     if (call != null) {
                         call.cancel();
                     }
-                    Request built_Request = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", requestBody);
-                    getRequest(built_Request);
+                    Request builtRequest = new RequestBuilder(timetableSettings, userID, URL)
+                            .buildPostRequest(URL, iterations);
+                    getRequest(builtRequest);
                 }
             }
         } else if (v.getId() == R.id.nextButton) {
@@ -93,8 +97,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             } else {
                 disableButtonBlocker(false);
                 iterations++;
-                RequestBody nextRequestBody = buildRequestBody(timetableSettings);
-                Request nextSolutionRequest = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", nextRequestBody);
+                Request nextSolutionRequest = new RequestBuilder(timetableSettings, userID, URL)
+                        .buildPostRequest(URL, iterations);
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
@@ -195,8 +199,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         Log.d("SAVE FAIL", "Timetable Did NOT Save !");
                     }
                 });
-
-
     }
 
     private void saveClassIntoFireStore(NUSClass nusClass, String s, String collectionPath) {
@@ -219,12 +221,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         Log.d("CLASS UNSAVED", "onFailure : Class not saved!");
                     }
                 });
-    }
-    private Request buildPostRequest(String url, RequestBody requestBody) {
-        return new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
     }
 
     private void initVars() {
@@ -309,57 +305,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
             }
         }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore"));
-    }
-
-    public RequestBody buildRequestBody(TimetableSettings settings) {
-        FormBody.Builder builder = new FormBody.Builder();
-        System.out.println(settings);
-        int actual_count = actualNumberOfMods(settings);
-        builder = buildRequestFromMods(settings, builder);
-        if (actual_count == 0) {
-            return null;
-        } else {
-            builder = buildRequestFromBasicData(settings, builder, actual_count);
-            builder = buildRequestFromConstraints(settings, builder);
-            return builder.build();
-        }
-    }
-
-    public FormBody.Builder buildRequestFromMods(TimetableSettings settings, FormBody.Builder builder) {
-        int actualNumber = actualNumberOfMods(settings);
-        ArrayList<String> mods = settings.getModuleList();
-        for(int i = 0; i < actualNumber; i++) {
-            builder.add("mod" + String.valueOf(i), mods.get(i));
-        }
-        return builder;
-    }
-
-    public int actualNumberOfMods(TimetableSettings settings) {
-        int actualCount = settings.getSize();
-        ArrayList<String> mods = settings.getModuleList();
-        for (int i = 1; i <= settings.getSize(); i++) {
-            if (mods.get(i - 1).isEmpty()) {
-                actualCount--;
-            }
-        }
-        return actualCount;
-    }
-
-    public FormBody.Builder buildRequestFromBasicData(TimetableSettings settings, FormBody.Builder builder, int count) {
-        builder.add("numMods", String.valueOf(count));
-        builder.add("AY", settings.getAcademicYear());
-        builder.add("Sem", settings.getSem());
-        builder.add("userID", userID);
-        builder.add("iter", String.valueOf(iterations));
-        return builder;
-    }
-
-    public FormBody.Builder buildRequestFromConstraints(TimetableSettings settings, FormBody.Builder builder) {
-        HashMap<String, Boolean> constraints = settings.getConstraints();
-        for(String constraint : constraints.keySet()) {
-            builder.add(constraint, constraints.get(constraint) ? "true" : "");
-        }
-        return builder;
     }
 
     public void disableButtonBlocker(boolean b) {

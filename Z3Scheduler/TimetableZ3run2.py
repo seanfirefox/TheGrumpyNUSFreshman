@@ -50,7 +50,7 @@ def process_string_to_json(string) :
         elif string_item == "" :
             continue
         else :
-            dictionary[key_].append(string_item)
+            dictionary[DISCARD[key_]].append(string_item)
     print(dictionary)
     print("STRING LEFT")
     print(string)

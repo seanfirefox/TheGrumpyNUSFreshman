@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/monButton"
+        android:icon="@drawable/ic_monday"
+        android:title="Monday"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/tueButton"
+        android:icon="@drawable/ic_tuesday"
+        android:title="Tuesday"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/wedButton"
+        android:icon="@drawable/ic_wednesday"
+        android:title="Wednesday"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/thursButton"
+        android:icon="@drawable/ic_thursday"
+        android:title="Thursday"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/friButton"
+        android:icon="@drawable/ic_friday"
+        android:title="Friday"
+        android:enabled="true"/>
+
+</menu>

@@ -175,7 +175,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 runOnUiThread(() -> {
                     try {
                         String jsonReturnString = response.body().string();
-                        if (jsonReturnString == "No Feasible Timetable!") {
+                        System.out.println(jsonReturnString);
+                        if (jsonReturnString.equals("No Feasible Timetable!")) {
                             textView.setText("No Feasible Timetable!\n Change your study plan in Settings!");
                         } else {
                             JSONObject jsonObject = new JSONObject(jsonReturnString);
@@ -187,7 +188,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     } catch (IOException e) {
                         e.getStackTrace();
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        textView.setText("Invalid Combination!\n There is NO OTHER solution!");
                     } finally {
                         disableButtonBlocker(true);
                     }

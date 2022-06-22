@@ -164,7 +164,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("Failure", "Error deleting document", e);
+                        Log.d("Failure", "Error deleting document", e);
                     }
                 });
     }

@@ -36,6 +36,8 @@ def test_one() :
     for i in range(n_th) :
         string = scheduler.another_solution()
     print(string)
+    if (string == "No Feasible Timetable!") :
+        return string
     return process_string_to_json(string)
 
 def process_string_to_json(string) :

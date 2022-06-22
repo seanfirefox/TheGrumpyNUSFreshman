@@ -36,7 +36,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class GenerateTimetableActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button settings, generate, next;
+    private Button settings, generate, next, save;
     private SessionManager sessionManager;
     private String userID;
     private OkHttpClient okHttpClient;
@@ -153,6 +153,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         constraintStrings.add("oneFreeDay");
 
         nusTimetable = new NUSTimetable();
+
+        save = findViewById(R.id.saveTimetableButton);
+        save.setOnClickListener(this);
     }
 
     private void getRequest(Request request) {
@@ -172,11 +175,15 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 runOnUiThread(() -> {
                     try {
                         String jsonReturnString = response.body().string();
-                        JSONObject jsonObject = new JSONObject(jsonReturnString);
-                        String displayText = (String) jsonObject.get("string");
-                        nusTimetable = new NUSTimetable(jsonObject);
-                        Log.d("RESPONSE_BODY", displayText);
-                        textView.setText(nusTimetable.getStringRep());
+                        if (jsonReturnString == "No Feasible Timetable!") {
+                            textView.setText("No Feasible Timetable!\n Change your study plan in Settings!");
+                        } else {
+                            JSONObject jsonObject = new JSONObject(jsonReturnString);
+                            String displayText = (String) jsonObject.get("string");
+                            nusTimetable = new NUSTimetable(jsonObject);
+                            Log.d("RESPONSE_BODY", displayText);
+                            textView.setText(nusTimetable.getStringRep());
+                        }
                     } catch (IOException e) {
                         e.getStackTrace();
                     } catch (JSONException e) {

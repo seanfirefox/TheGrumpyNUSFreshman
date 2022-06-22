@@ -9,6 +9,8 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 
+DISCARD = {"On Monday": "MON", "On Tuesday" : "TUE", "On Wednesday" : "WED" , "On Thursday" : "THUR", "On Friday" : "FRI"}
+
 @app.route("/")
 def show_heroku_site() :
     return "Heroku site"
@@ -33,6 +35,7 @@ def test_one() :
     string = scheduler.optimiseTimetable(to_string=True)
     for i in range(n_th) :
         string = scheduler.another_solution()
+    print(string)
     process_string_to_json(string)
     return string
 
@@ -40,6 +43,17 @@ def process_string_to_json(string) :
     dictionary = {"MON" : [], "TUE" : [], "WED" : [], "THUR" : [], "FRI" : []}
     a = string.split("\n")
     print(a)
+    key_ = None
+    for string_item in a :
+        if string_item in DISCARD :
+            key_ = string_item
+        elif string_item == "" :
+            continue
+        else :
+            dictionary[key_].append(string_item)
+    print(dictionary)
+    print("STRING LEFT")
+    print(string)
 
 
 @app.route("/z3", methods=['GET'])

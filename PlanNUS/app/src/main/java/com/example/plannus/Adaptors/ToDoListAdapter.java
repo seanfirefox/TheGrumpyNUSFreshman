@@ -80,13 +80,7 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
     }
 
     class TaskHolder extends RecyclerView.ViewHolder {
-        TextView taskName;
-        TextView tagName;
-        TextView status;
-        TextView dueDate;
-        TextView dueTime;
-        TextView plannedDate;
-        TextView plannedTime;
+        private TextView taskName, tagName, status, dueDate, dueTime, plannedDate, plannedTime;
 
         public TaskHolder(View itemView) {
             super(itemView);

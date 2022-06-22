@@ -13,6 +13,35 @@ app = Flask(__name__)
 def show_heroku_site() :
     return "Heroku site"
 
+@app.route("/z3runner", methods=['POST'])
+def test_one() :
+    '''Get basic data'''
+    num_mods = int(request.form['numMods'])
+    mods = []
+    for i in range(num_mods) :
+        mods.append(request.form["mod" + str(i)])
+    AY = request.form["AY"]
+    SEM = int(request.form["Sem"])
+    n_th = int(request.form["iter"])
+    scrapper = Scrapper(mods, AY, SEM)
+    scrapper.scrape()
+    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
+    constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
+            'oneFreeDay' : bool(request.form['oneFreeDay'])}
+    print(constraints)
+    scheduler.add_constraint_dict(constraints)
+    string = scheduler.optimiseTimetable(to_string=True)
+    for i in range(n_th) :
+        string = scheduler.another_solution()
+    process_string_to_json(string)
+    return string
+
+def process_string_to_json(string) :
+    dictionary = {"MON" : [], "TUE" : [], "WED" : [], "THUR" : [], "FRI" : []}
+    a = string.split("\n")
+    print(a)
+
+
 @app.route("/z3", methods=['GET'])
 def show_z3_stuff() :
     modules = ["CS2030S", "CS2040S", "ST2334", "MA2104", "CM1102"]
@@ -34,28 +63,6 @@ def run() :
     scrapper = Scrapper(mods, "2021-2022", 2)
     scrapper.scrape()
     return TimeTableSchedulerZ3(scrapper.semesterProcessed, True).optimiseTimetable(to_string=True)
-
-@app.route("/z3runner", methods=['POST'])
-def test_one() :
-    '''Get basic data'''
-    num_mods = int(request.form['numMods'])
-    mods = []
-    for i in range(num_mods) :
-        mods.append(request.form["mod" + str(i)])
-    AY = request.form["AY"]
-    SEM = int(request.form["Sem"])
-    n_th = int(request.form["iter"])
-    scrapper = Scrapper(mods, AY, SEM)
-    scrapper.scrape()
-    scheduler = TimeTableSchedulerZ3(scrapper.semesterProcessed, True)
-    constraints = {'no8amLessons' : bool(request.form['no8amLessons']),\
-            'oneFreeDay' : bool(request.form['oneFreeDay'])}
-    print(constraints)
-    scheduler.add_constraint_dict(constraints)
-    string = scheduler.optimiseTimetable(to_string=True)
-    for i in range(n_th) :
-        string = scheduler.another_solution()
-    return string
 
 @app.route("/posttest", methods=['POST'])
 def post_from_android() :

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private Call call;
     private NUSTimetable nusTimetable;
     private ArrayList<String> constraintStrings;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +70,13 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Settings page empty/ still getting rendering data, please wait...", Toast.LENGTH_LONG).show();
             } else {
+                disableButtonBlocker(false);
                 iterations = 0;
                 obtainSettings();
                 RequestBody requestBody = buildRequestBody(timetableSettings);
                 if (requestBody == null) {
                     textView.setText("Settings page empty");
+                    disableButtonBlocker(true);
                 } else {
                     if (call != null) {
                         call.cancel();
@@ -85,6 +89,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             if (timetableSettings == null) {
                 Toast.makeText(GenerateTimetableActivity.this, "Please click generate button first", Toast.LENGTH_LONG).show();
             } else {
+                disableButtonBlocker(false);
                 iterations++;
                 RequestBody nextRequestBody = buildRequestBody(timetableSettings);
                 Request nextSolutionRequest = buildPostRequest("https://plannus-satsolver-backup.herokuapp.com/z3runner", nextRequestBody);
@@ -131,6 +136,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
     private void initVars() {
         textView = findViewById(R.id.textView);
+        progressBar = findViewById(R.id.progressBar2);
         settings = findViewById(R.id.settingsButton);
         settings.setOnClickListener(this);
         generate = findViewById(R.id.generateButton);
@@ -156,6 +162,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             public void onFailure(Call call, IOException e) {
                 Log.d("NETWORK_FAIL", "NETWORK FAIL");
                 textView.setText("Network Fail");
+                runOnUiThread(() -> {
+                    disableButtonBlocker(true);
+                });
             }
 
             @Override
@@ -172,6 +181,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         e.getStackTrace();
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    } finally {
+                        disableButtonBlocker(true);
                     }
                 });
             }
@@ -185,11 +196,12 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
             if (timetableSettings == null) {
                 return;
+            } else {
+                Log.d("toString Settings", timetableSettings.toString());
+                Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
+                Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
+                Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
             }
-            Log.d("toString Settings", timetableSettings.toString());
-            Log.d("SETTINGS SIZE", ((Integer)timetableSettings.getSize()).toString());
-            Log.d("MODULE LIST", timetableSettings.getModuleList().toString());
-            Log.d("CONSTRAINTS", timetableSettings.getConstraints().toString());
         }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get settings from Firestore"));
     }
 
@@ -238,13 +250,15 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
     public FormBody.Builder buildRequestFromConstraints(TimetableSettings settings, FormBody.Builder builder) {
         HashMap<String, Boolean> constraints = settings.getConstraints();
-        System.out.println("BUILD REQUEST FROM CONSTRAINTS : ");
-        System.out.println(constraints);
         for(String constraint : constraints.keySet()) {
-            System.out.println(constraint);
-            System.out.println(constraints.get(constraint));
             builder.add(constraint, constraints.get(constraint) ? "true" : "");
         }
         return builder;
+    }
+
+    public void disableButtonBlocker(boolean b) {
+        next.setEnabled(b);
+        generate.setEnabled(b);
+        progressBar.setVisibility(b ? View.GONE : View.VISIBLE);
     }
 }

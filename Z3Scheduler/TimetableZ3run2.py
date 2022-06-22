@@ -50,10 +50,19 @@ def process_string_to_json(string) :
         elif string_item == "" :
             continue
         else :
-            dictionary[DISCARD[key_]].append(string_item)
+            dictionary[DISCARD[key_]].append(clean_string(string_item))
     print(dictionary)
     print("STRING LEFT")
     print(string)
+    dictionary["string"] = string 
+
+def clean_string(string_item) :
+    string_copy = ""
+    for i in range(len(string_item)) :
+        if string_item[i] == "[" :
+            return string_copy
+        else :
+            string_copy = string_copy + string_item[i]
 
 
 @app.route("/z3", methods=['GET'])

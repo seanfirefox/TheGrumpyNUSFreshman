@@ -191,7 +191,7 @@ class TimeTableSchedulerZ3 :
             self.finalTimetable[i] = sorted(self.finalTimetable[i], key=lambda x : x.start)
             string = string + ("On " + TimeTableSchedulerZ3.WEEKDAYS[i + 1]) + "\n"
             if (len(self.finalTimetable[i]) == 0) :
-                string = string + (" Hooray! You CAN Have No Classes On that Day!\n")
+                string = string + (" No Classes On that Day!\n")
                 continue
             for classes in self.finalTimetable[i] :
                 string = string + (" " + str(classes) + "\n")
@@ -209,7 +209,7 @@ class TimeTableSchedulerZ3 :
             self.finalTimetable[i] = sorted(self.finalTimetable[i], key=lambda x : x.start)
             print("On " + TimeTableSchedulerZ3.WEEKDAYS[i + 1])
             if (len(self.finalTimetable[i]) == 0) :
-                print(" Hooray! You CAN Have No Classes On that Day!")
+                print(" No Classes On that Day!")
                 continue
             for classes in self.finalTimetable[i] :
                 print(" " + str(classes))

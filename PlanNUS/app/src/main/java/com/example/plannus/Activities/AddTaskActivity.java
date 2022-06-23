@@ -47,9 +47,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     public void initVars() {
         sessionManager = SessionManager.get();
         dateTimePicker = DateTimeDialog.getInstance();
-        userID = sessionManager.getAuth()
-                .getCurrentUser()
-                .getUid();
+        userID = sessionManager.getUserID();
 
         saveTask = findViewById(R.id.saveButton);
         saveTask.setOnClickListener(this);
@@ -132,10 +130,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
 
         Log.d("QUERY SUCCESS", "Query of Addition was successful");
         ToDoTask newTask = new ToDoTask(tag, task, stats, deadLineDateTime, planDateTime);
-        DocumentReference docRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("Tasks")
+        DocumentReference docRef = sessionManager.getTaskColRef(userID)
                 .document(task + tag);
         docRef.set(newTask, SetOptions.merge())
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {

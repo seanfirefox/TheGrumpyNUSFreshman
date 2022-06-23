@@ -107,7 +107,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private void initVars() {
         wrappingLayout = findViewById(R.id.wrappingLayout);
         sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth().getCurrentUser().getUid();
+        userID = sessionManager.getUserID();
         numMods = 5;
 
         saveTimetableSettings = findViewById(R.id.saveTimetableSettingsButton);
@@ -172,13 +172,8 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     }
 
     private void saveSettingsIntoFireStore(TimetableSettings settings) {
-        DocumentReference docRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("timetableSettings")
-                .document("timetableSettings");
-
-        docRef.set(settings)
+        sessionManager.getSettingsDocRef(userID)
+                .set(settings)
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
                     Log.d("SaveCreated", "onSuccess: Settings is saved");
                     Toast.makeText(TimetableSettingsActivity.this, "Settings saved Successfully",Toast.LENGTH_LONG).show();

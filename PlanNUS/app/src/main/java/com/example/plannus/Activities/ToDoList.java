@@ -40,9 +40,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
     public void initVars() {
 
         sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth()
-                .getCurrentUser()
-                .getUid();
+        userID = sessionManager.getUserID();
 
         createTask = findViewById(R.id.createTask);
         createTask.setOnClickListener(this);
@@ -50,10 +48,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
         completedTask = findViewById(R.id.milestone);
         completedTask.setOnClickListener(this);
 
-        taskRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(this.userID)
-                .collection("Tasks");
+        taskRef = sessionManager.getTaskColRef(userID);
     }
 
     private void setUpRecyclerView() {

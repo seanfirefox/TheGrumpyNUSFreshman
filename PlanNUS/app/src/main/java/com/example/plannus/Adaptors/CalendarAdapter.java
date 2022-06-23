@@ -39,7 +39,7 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<NUSClass, Calendar
     public CalendarHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.nus_class, parent, false);
-        return CalendarHolder(v);
+        return new CalendarHolder(v);
     }
 
     public class CalendarHolder extends RecyclerView.ViewHolder {

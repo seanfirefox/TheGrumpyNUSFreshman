@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -99,6 +100,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         editText.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         editText.setHint("Enter module code");
         editText.setTag("moduleCode" + numMods);
+        editText.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         linearLayout.addView(editText);
 
         wrappingLayout.addView(linearLayout);

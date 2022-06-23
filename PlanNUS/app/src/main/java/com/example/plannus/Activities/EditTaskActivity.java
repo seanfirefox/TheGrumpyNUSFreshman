@@ -73,7 +73,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         Log.e("check", Arrays.toString(taskInfo));
 
         editStatusText = findViewById(R.id.textViewStatus);
-        statusValue = editStatusText.toString();
+        statusValue = editStatusText.getText().toString();
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
         editTag = findViewById(R.id.editTag);
@@ -140,8 +140,9 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         String planTimeStore = TimeFormatter.timeToNumber(planTime);
 
         String planDateTime = planDateStore + planTimeStore;
-
-        if (!(editedTask.equals(task))) {
+        String editedTaskHeader = editedTask + tag;
+        String oldTaskHeader = task + tagName;
+        if (!editedTaskHeader.equals(oldTaskHeader)) {
             deleteTask();
         }
 

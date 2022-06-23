@@ -48,7 +48,7 @@ def process_string_to_json(string) :
     for string_item in a :
         if string_item in DISCARD :
             key_ = string_item
-        elif string_item == "" :
+        elif string_item == "" or string_item == " No Classes On that Day!":
             continue
         else :
             dictionary[DISCARD[key_]].append(clean_string(string_item)[1:])

@@ -16,26 +16,27 @@
 
         <TextView
             android:id="@+id/nusCLassModule"
-            android:layout_width="236dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="252dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:autoSizeMaxTextSize="26sp"
             android:autoSizeMinTextSize="16sp"
             android:autoSizeTextType="uniform"
             android:text="CS1231S"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/nusClassModuleCode"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.96" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nusCLassClass"
             android:layout_width="236dp"
-            android:layout_height="34dp"
+            android:layout_height="38dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:autoSizeMaxTextSize="26sp"
             android:autoSizeMinTextSize="16sp"
             android:autoSizeTextType="uniform"
@@ -49,8 +50,9 @@
         <TextView
             android:id="@+id/nusCLassTiming"
             android:layout_width="236dp"
-            android:layout_height="34dp"
+            android:layout_height="38dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:autoSizeMaxTextSize="26sp"
             android:autoSizeMinTextSize="16sp"
             android:autoSizeTextType="uniform"
@@ -65,10 +67,10 @@
 
         <TextView
             android:id="@+id/nusClassTime"
-            android:layout_width="85dp"
-            android:layout_height="34dp"
+            android:layout_width="80dp"
+            android:layout_height="39dp"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:autoSizeMaxTextSize="26sp"
             android:autoSizeMinTextSize="16sp"
             android:autoSizeTextType="uniform"
@@ -82,10 +84,10 @@
 
         <TextView
             android:id="@+id/nusClassClassCode"
-            android:layout_width="85dp"
-            android:layout_height="34dp"
+            android:layout_width="86dp"
+            android:layout_height="38dp"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="26dp"
             android:autoSizeMaxTextSize="26sp"
             android:autoSizeMinTextSize="16sp"
             android:autoSizeTextType="uniform"
@@ -97,18 +99,17 @@
 
         <TextView
             android:id="@+id/nusClassModuleCode"
-            android:layout_width="85dp"
-            android:layout_height="34dp"
+            android:layout_width="111dp"
+            android:layout_height="38dp"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Module :"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
             android:autoSizeMaxTextSize="26sp"
             android:autoSizeMinTextSize="16sp"
+            android:autoSizeTextType="uniform"
+            android:text="Module :"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.236"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

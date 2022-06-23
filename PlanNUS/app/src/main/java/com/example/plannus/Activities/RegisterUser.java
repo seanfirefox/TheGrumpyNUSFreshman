@@ -68,7 +68,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     sessionManager.getdRef()
-                                            .child(sessionManager.getUID())
+                                            .child(sessionManager.getUserID())
                                             .setValue(new User(fullName, age, email, password))
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override

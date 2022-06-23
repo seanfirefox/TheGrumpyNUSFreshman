@@ -48,7 +48,7 @@ public class ToDoList extends AppCompatActivity implements View.OnClickListener 
         completedTask = findViewById(R.id.milestone);
         completedTask.setOnClickListener(this);
 
-        taskRef = sessionManager.getTaskColRef(userID);
+        taskRef = sessionManager.getColRef(userID, "Tasks");
     }
 
     private void setUpRecyclerView() {

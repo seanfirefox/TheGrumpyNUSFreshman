@@ -56,7 +56,7 @@
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="@string/RegisterAge"
         android:autofillHints="age"
         android:autoSizeTextType="uniform"

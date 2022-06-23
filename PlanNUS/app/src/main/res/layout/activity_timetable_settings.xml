@@ -99,7 +99,7 @@
                                 android:autofillHints="Task"
                                 android:ems="10"
                                 android:hint="Enter module code"
-                                android:inputType="none"
+                                android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode1"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
                                 android:autofillHints="Task"
                                 android:ems="10"
                                 android:hint="Enter module code"
-                                android:inputType="none"
+                                android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode2"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +169,7 @@
                                 android:autofillHints="Task"
                                 android:ems="10"
                                 android:hint="Enter module code"
-                                android:inputType="none"
+                                android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode3" />
 
@@ -202,7 +202,7 @@
                                 android:autofillHints="Task"
                                 android:ems="10"
                                 android:hint="Enter module code"
-                                android:inputType="none"
+                                android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode4" />
 
@@ -235,7 +235,7 @@
                                 android:autofillHints="Task"
                                 android:ems="10"
                                 android:hint="Enter module code"
-                                android:inputType="none"
+                                android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode5" />
 

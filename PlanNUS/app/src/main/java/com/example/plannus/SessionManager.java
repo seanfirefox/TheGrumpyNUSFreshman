@@ -63,24 +63,17 @@ public class SessionManager {
                 .orderBy("end", Query.Direction.ASCENDING);
     }
 
-    public DocumentReference getTimetableDocRef(String userID) {
+    public DocumentReference getDocRef(String userID, String collectionPath, String documentPath) {
         return fireStore.collection("Users")
                 .document(userID)
-                .collection("NUS_Schedule")
-                .document("NUS_Schedule");
+                .collection(collectionPath)
+                .document(documentPath);
     }
 
-    public DocumentReference getSettingsDocRef(String userID) {
+    public CollectionReference getColRef(String userID, String collectionPath) {
         return fireStore.collection("Users")
                 .document(userID)
-                .collection("timetableSettings")
-                .document("timetableSettings");
-    }
-
-    public CollectionReference getTaskColRef(String userID) {
-        return fireStore.collection("Users")
-                .document(userID)
-                .collection("Tasks");
+                .collection(collectionPath);
     }
 
 }

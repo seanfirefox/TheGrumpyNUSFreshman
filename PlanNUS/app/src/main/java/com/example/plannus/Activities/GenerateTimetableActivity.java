@@ -247,8 +247,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
         sessionManager = SessionManager.get();
         userID = sessionManager.getUserID();
-        timetableDocRef = sessionManager.getTimetableDocRef(userID);
-        settingsDocRef = sessionManager.getSettingsDocRef(userID);
+        timetableDocRef = sessionManager.getDocRef(userID,"NUS_Schedule", "NUS_Schedule");
+        settingsDocRef = sessionManager.getDocRef(userID, "timetableSettings", "timetableSettings");
         okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)

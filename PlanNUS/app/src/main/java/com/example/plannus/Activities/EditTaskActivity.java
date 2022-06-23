@@ -147,28 +147,20 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         }
 
         ToDoTask t = new ToDoTask(tag, editedTask, stats, deadLineDateTime, planDateTime);
-        DocumentReference docRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userId)
-                .collection("Tasks")
-                .document(editedTask + tag);
-        docRef.set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
-            Log.d("TaskCreated", "onSuccess: Task is created");
-            finish();
-        } ).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("TaskFail", "onFailure: "+ e);
-            }
-        });
-    }
+        sessionManager.getDocRef(userId, "Tasks", editedTaskHeader)
+                .set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
+                    Log.d("TaskCreated", "onSuccess: Task is created");
+                    finish();
+                } ).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TaskFail", "onFailure: "+ e);
+                    }
+                });
+        }
 
     private void deleteTask() {
-        sessionManager.getFireStore()
-                .collection("Users")
-                .document(userId)
-                .collection("Tasks")
-                .document(task + tagName)
+        sessionManager.getDocRef(userId, "Tasks", task + tagName)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

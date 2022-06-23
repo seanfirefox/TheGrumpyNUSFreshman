@@ -55,7 +55,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
         sessionManager = SessionManager.get();
         userID = sessionManager.getUserID();
 
-        taskRef = sessionManager.getTaskColRef(userID);
+        taskRef = sessionManager.getColRef(userID, "Tasks");
 
         checklistButton = findViewById(R.id.checklistImgView);
         checklistButton.setOnClickListener(this);

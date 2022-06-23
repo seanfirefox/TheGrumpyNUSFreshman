@@ -146,9 +146,8 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
 
         Log.d("QUERY SUCCESS", "Query of Addition was successful");
         ToDoTask newTask = new ToDoTask(tag, task, stats, deadLineDateTime, planDateTime);
-        DocumentReference docRef = sessionManager.getTaskColRef(userID)
-                .document(task + tag);
-        docRef.set(newTask, SetOptions.merge())
+        sessionManager.getDocRef(userID, "Tasks", task + tag)
+                .set(newTask, SetOptions.merge())
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
             Log.d("TaskCreated", "onSuccess: Task is created");
             Toast.makeText(AddTaskActivity.this, "Task added Successfully",Toast.LENGTH_LONG).show();

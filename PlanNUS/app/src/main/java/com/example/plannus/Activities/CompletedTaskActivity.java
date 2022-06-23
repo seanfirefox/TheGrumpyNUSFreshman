@@ -33,7 +33,7 @@ public class CompletedTaskActivity extends AppCompatActivity {
     public void initVars() {
         sessionManager = SessionManager.get();
         userID = sessionManager.getUserID();
-        taskRef = sessionManager.getTaskColRef(userID);
+        taskRef = sessionManager.getColRef(userID, "Tasks");
     }
 
     private void setUpRecyclerView() {

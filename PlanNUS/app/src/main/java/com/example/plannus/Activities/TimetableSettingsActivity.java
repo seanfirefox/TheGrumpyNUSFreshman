@@ -26,7 +26,6 @@ import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 
 
 import java.util.ArrayList;
@@ -174,7 +173,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     }
 
     private void saveSettingsIntoFireStore(TimetableSettings settings) {
-        sessionManager.getSettingsDocRef(userID)
+        sessionManager.getDocRef(userID, "timetableSettings", "timetableSettings")
                 .set(settings)
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
                     Log.d("SaveCreated", "onSuccess: Settings is saved");

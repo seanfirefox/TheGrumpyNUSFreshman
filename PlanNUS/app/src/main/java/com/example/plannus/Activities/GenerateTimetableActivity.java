@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.RequestBody;
@@ -248,7 +249,11 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         userID = sessionManager.getUserID();
         timetableDocRef = sessionManager.getTimetableDocRef(userID);
         settingsDocRef = sessionManager.getSettingsDocRef(userID);
-        okHttpClient = new OkHttpClient();
+        okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
 
         constraintStrings = new ArrayList<>();
         constraintStrings.add("no8amLessons");

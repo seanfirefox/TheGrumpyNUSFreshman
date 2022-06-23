@@ -113,17 +113,33 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String tag = newTag.getText().toString().trim();
 
         String deadlineDate = dueDate.getText().toString().trim();
+        if (deadlineDate.equals("Due Date Here")) {
+            Toast.makeText(this, "DUE DATE EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String deadLineDateStore = DateFormatter.dateToNumber(deadlineDate);
 
         String deadLineTime = dueTime.getText().toString().trim();
+        if (deadLineTime.equals("Due Time Here")) {
+            Toast.makeText(this, "DUE TIME EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String deadLineTimeStore = TimeFormatter.timeToNumber(deadLineTime);
 
         String deadLineDateTime = deadLineDateStore + deadLineTimeStore;
 
         String planDate = plannedDate.getText().toString().trim();
+        if (planDate.equals("Planned Date Here")) {
+            Toast.makeText(this, "PLANNED DATE EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String planDateStore = DateFormatter.dateToNumber(planDate);
 
         String planTime = plannedTime.getText().toString().trim();
+        if (planTime.equals("Planned Time Here")) {
+            Toast.makeText(this, "PLANNED Time EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String planTimeStore = TimeFormatter.timeToNumber(planTime);
 
         String planDateTime = planDateStore + planTimeStore;

@@ -38,20 +38,12 @@ public class MondayFragment extends Fragment {
 
     private void initVars(View view) {
         sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth()
-                .getCurrentUser()
-                .getUid();
+        userID = sessionManager.getUserID();
         recyclerView = view.findViewById(R.id.mondayRecyclerVIew);
     }
 
     private void setupRecyclerView(View view) {
-        Query query = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("NUS_Schedule")
-                .document("NUS_Schedule")
-                .collection("mondayClass")
-                .orderBy("end", Query.Direction.ASCENDING);
+        Query query = sessionManager.getTimetableQuery(userID, "mondayClass");
         FirestoreRecyclerOptions<NUSClass> options = new FirestoreRecyclerOptions.Builder<NUSClass>()
                 .setQuery(query, NUSClass.class)
                 .build();

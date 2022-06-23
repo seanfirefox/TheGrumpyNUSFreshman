@@ -60,22 +60,22 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
             timeDialog(editDueTime);
         } else if (v.getId() == R.id.editPlannedTimeButton) {
             timeDialog(editPlannedTime);
-        } else {}
+        }
     }
 
     public void initVars() {
         sessionManager = SessionManager.get();
         dateTimePicker = DateTimeDialog.getInstance();
-        userId = sessionManager.getAuth().getCurrentUser().getUid();
+        userId = sessionManager.getUserID();
         taskInfo = getIntent().getStringArrayExtra("taskInfo");
         task = taskInfo[1];
         tagName = taskInfo[0];
         Log.e("check", Arrays.toString(taskInfo));
 
-        statusValue = findViewById(R.id.textViewStatus).toString();
+        editStatusText = findViewById(R.id.textViewStatus);
+        statusValue = editStatusText.toString();
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
-        editStatusText = findViewById(R.id.textViewStatus);
         editTag = findViewById(R.id.editTag);
         editDueDate = findViewById(R.id.editDueDateButton);
         editDueDate.setOnClickListener(this);

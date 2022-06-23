@@ -28,10 +28,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import okhttp3.Call;
-import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Request;
 import okhttp3.OkHttpClient;
@@ -51,6 +49,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private NUSTimetable nusTimetable, oldNusTimetable;
     private ArrayList<String> constraintStrings;
     private ProgressBar progressBar;
+    private DocumentReference timetableDocRef, settingsDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,13 +112,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private void deleteOldTimeTable() {
-        DocumentReference docRef = sessionManager
-                .getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("NUS_Schedule")
-                .document("NUS_Schedule");
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
+        timetableDocRef.get().addOnSuccessListener(documentSnapshot -> {
             oldNusTimetable = documentSnapshot.toObject(NUSTimetable.class);
             if (oldNusTimetable == null) {
                 return;
@@ -146,13 +139,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private void deleteClassInFireStore(String documentName, String collectionName) {
-        sessionManager
-                .getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("NUS_Schedule")
-                .document("NUS_Schedule")
-                .collection(collectionName)
+        timetableDocRef.collection(collectionName)
                 .document(documentName)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -180,12 +167,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             saveClassIntoFireStore(nusClass, s, collectionPath);
         }
 
-        sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("NUS_Schedule")
-                .document("NUS_Schedule")
-                .set(nusTimetable)
+        timetableDocRef.set(nusTimetable)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -202,12 +184,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private void saveClassIntoFireStore(NUSClass nusClass, String s, String collectionPath) {
-        sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("NUS_Schedule")
-                .document("NUS_Schedule")
-                .collection(collectionPath)
+        timetableDocRef.collection(collectionPath)
                 .document(s)
                 .set(nusClass, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -234,7 +211,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         next.setOnClickListener(this);
 
         sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth().getCurrentUser().getUid();
+        userID = sessionManager.getUserID();
+        timetableDocRef = sessionManager.getTimetableDocRef(userID);
+        settingsDocRef = sessionManager.getSettingsDocRef(userID);
         okHttpClient = new OkHttpClient();
 
         constraintStrings = new ArrayList<>();
@@ -288,13 +267,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     public void obtainSettings() {
-        DocumentReference docRef = sessionManager
-                .getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("timetableSettings")
-                .document("timetableSettings");
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
+        settingsDocRef.get().addOnSuccessListener(documentSnapshot -> {
             timetableSettings = documentSnapshot.toObject(TimetableSettings.class);
             if (timetableSettings == null) {
                 return;

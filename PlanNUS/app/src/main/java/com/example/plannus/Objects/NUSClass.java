@@ -4,6 +4,9 @@ import com.google.firebase.database.PropertyName;
 
 public class NUSClass {
 
+    @PropertyName("string")
+    private String classString;
+
     @PropertyName("module")
     private String module;
 
@@ -22,6 +25,7 @@ public class NUSClass {
     public NUSClass() {}
 
     public NUSClass(String classString) {
+        this.classString = classString;
         String[] tokens = classString.split(" ");
         // ["CS2030S", "LEC", "01", "@", "0800", "-", "1000"]
         this.module = tokens[0];
@@ -49,5 +53,9 @@ public class NUSClass {
 
     public String getEnd() {
         return end;
+    }
+
+    public String getClassString() {
+        return classString;
     }
 }

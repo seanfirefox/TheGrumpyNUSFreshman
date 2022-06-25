@@ -18,9 +18,13 @@ import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.example.plannus.utils.RequestBuilder;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import org.json.JSONException;
@@ -28,6 +32,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.RequestBody;
@@ -50,6 +56,11 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private ArrayList<String> constraintStrings;
     private ProgressBar progressBar;
     private DocumentReference timetableDocRef, settingsDocRef;
+    private ArrayList<String> mondayDocumentNames;
+    private ArrayList<String> tuesdayDocumentNames;
+    private ArrayList<String> wednesdayDocumentNames;
+    private ArrayList<String> thursdayDocumentNames;
+    private ArrayList<String> fridayDocumentNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,30 +112,46 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
+            getAllDocumentNames();
             deleteOldTimeTable();
-            saveTimeTable(nusTimetable.getMondayClass(), "mondayClass");
-            saveTimeTable(nusTimetable.getTuesdayClass(), "tuesdayClass");
-            saveTimeTable(nusTimetable.getWednesdayClass(), "wednesdayClass");
-            saveTimeTable(nusTimetable.getThursdayClass(), "thursdayClass");
-            saveTimeTable(nusTimetable.getFridayClass(), "fridayClass");
+            saveTimeTable();
         }
 
     }
 
+    private void getAllDocumentNames() {
+        CompletableFuture.runAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames)).join();
+        CompletableFuture.runAsync(() -> getDocumentNames("tuesdayClass", tuesdayDocumentNames)).join();
+        CompletableFuture.runAsync(() -> getDocumentNames("wednesdayClass", wednesdayDocumentNames)).join();
+        CompletableFuture.runAsync(() -> getDocumentNames("thursdayClass", thursdayDocumentNames)).join();
+        CompletableFuture.runAsync(() -> getDocumentNames("fridayClass", fridayDocumentNames)).join();
+    }
+
+    private void getDocumentNames(String collectionPath, ArrayList<String> arrayList) {
+        timetableDocRef.collection(collectionPath)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                NUSClass nusClass = document.toObject(NUSClass.class);
+                                arrayList.add(nusClass.getClassString());
+                                Log.d("Success", "Class: " + nusClass.getClassString());
+                            }
+                        } else {
+                            Log.d("Fail", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
     private void deleteOldTimeTable() {
-        timetableDocRef.get().addOnSuccessListener(documentSnapshot -> {
-            oldNusTimetable = documentSnapshot.toObject(NUSTimetable.class);
-            if (oldNusTimetable == null) {
-                return;
-            }
-        }).addOnFailureListener(e -> Log.d("SETTINGS FAILURE", "Not able to get oldTimetable from Firestore"));
-        if (oldNusTimetable != null) {
-            deleteCollectionInFireStore(oldNusTimetable.getMondayClass(), "mondayClass");
-            deleteCollectionInFireStore(oldNusTimetable.getTuesdayClass(), "tuesdayClass");
-            deleteCollectionInFireStore(oldNusTimetable.getWednesdayClass(), "wednesdayClass");
-            deleteCollectionInFireStore(oldNusTimetable.getThursdayClass(), "thursdayClass");
-            deleteCollectionInFireStore(oldNusTimetable.getFridayClass(), "fridayClass");
-        }
+        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass")).join();
+        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass")).join();
+        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass")).join();
+        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass")).join();
+        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass")).join();
     }
 
     private void deleteCollectionInFireStore(ArrayList<String> classList, String collectionPath) {
@@ -156,7 +183,15 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 });
     }
 
-    private void saveTimeTable(ArrayList<String> classList, String collectionPath) {
+    private void saveTimeTable() {
+        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getMondayClass(), "mondayClass")).join();
+        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getTuesdayClass(), "tuesdayClass")).join();
+        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getWednesdayClass(), "wednesdayClass")).join();
+        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getThursdayClass(), "thursdayClass")).join();
+        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getFridayClass(), "fridayClass")).join();
+    }
+
+    private void saveTimeTableClass(ArrayList<String> classList, String collectionPath) {
         if (classList == null) {
             Log.d("Timetable NULL", "Timetable is Null, Not saving it");
             return;
@@ -212,13 +247,22 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
 
         sessionManager = SessionManager.get();
         userID = sessionManager.getUserID();
-        timetableDocRef = sessionManager.getTimetableDocRef(userID);
-        settingsDocRef = sessionManager.getSettingsDocRef(userID);
-        okHttpClient = new OkHttpClient();
+        timetableDocRef = sessionManager.getDocRef(userID,"NUS_Schedule", "NUS_Schedule");
+        settingsDocRef = sessionManager.getDocRef(userID, "timetableSettings", "timetableSettings");
+        okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
 
         constraintStrings = new ArrayList<>();
         constraintStrings.add("no8amLessons");
         constraintStrings.add("oneFreeDay");
+        mondayDocumentNames = new ArrayList<>();
+        tuesdayDocumentNames = new ArrayList<>();
+        wednesdayDocumentNames = new ArrayList<>();
+        thursdayDocumentNames = new ArrayList<>();
+        fridayDocumentNames = new ArrayList<>();
 
         nusTimetable = new NUSTimetable();
 

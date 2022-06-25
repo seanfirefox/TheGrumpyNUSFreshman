@@ -11,22 +11,22 @@
         android:id="@+id/loginButton"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/Login"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMinTextSize="2sp"
+        android:layout_marginTop="72dp"
         android:autoSizeMaxTextSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/register"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="@string/Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passWord"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintTop_toBottomOf="@+id/passWord" />
 
     <EditText
         android:id="@+id/emailAddress"
         android:layout_width="294dp"
         android:layout_height="48dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:autoSizeMaxTextSize="18sp"
@@ -37,12 +37,14 @@
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/emailIcon"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/passWord"
         android:layout_width="294dp"
         android:layout_height="48dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:autoSizeMaxTextSize="18sp"
@@ -72,17 +74,21 @@
 
     <Button
         android:id="@+id/register"
-        android:layout_width="128dp"
-        android:layout_height="49dp"
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="188dp"
-        android:text="@string/Register"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMinTextSize="2sp"
         android:autoSizeMaxTextSize="18sp"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="@string/Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -101,8 +107,6 @@
         android:id="@+id/imageView2"
         android:layout_width="89dp"
         android:layout_height="71dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:contentDescription="@string/pwdIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailIcon"
@@ -113,10 +117,10 @@
         android:id="@+id/emailIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:contentDescription="@string/emailIcon"
-        app:layout_constraintEnd_toStartOf="@+id/emailAddress"
         app:layout_constraintHorizontal_bias="0.807"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"

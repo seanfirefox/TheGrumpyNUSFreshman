@@ -60,22 +60,22 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
             timeDialog(editDueTime);
         } else if (v.getId() == R.id.editPlannedTimeButton) {
             timeDialog(editPlannedTime);
-        } else {}
+        }
     }
 
     public void initVars() {
         sessionManager = SessionManager.get();
         dateTimePicker = DateTimeDialog.getInstance();
-        userId = sessionManager.getAuth().getCurrentUser().getUid();
+        userId = sessionManager.getUserID();
         taskInfo = getIntent().getStringArrayExtra("taskInfo");
         task = taskInfo[1];
         tagName = taskInfo[0];
         Log.e("check", Arrays.toString(taskInfo));
 
-        statusValue = findViewById(R.id.textViewStatus).toString();
+        editStatusText = findViewById(R.id.textViewStatus);
+        statusValue = editStatusText.getText().toString();
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
-        editStatusText = findViewById(R.id.textViewStatus);
         editTag = findViewById(R.id.editTag);
         editDueDate = findViewById(R.id.editDueDateButton);
         editDueDate.setOnClickListener(this);
@@ -140,34 +140,27 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         String planTimeStore = TimeFormatter.timeToNumber(planTime);
 
         String planDateTime = planDateStore + planTimeStore;
-
-        if (!(editedTask.equals(task))) {
+        String editedTaskHeader = editedTask + tag;
+        String oldTaskHeader = task + tagName;
+        if (!editedTaskHeader.equals(oldTaskHeader)) {
             deleteTask();
         }
 
         ToDoTask t = new ToDoTask(tag, editedTask, stats, deadLineDateTime, planDateTime);
-        DocumentReference docRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userId)
-                .collection("Tasks")
-                .document(editedTask + tag);
-        docRef.set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
-            Log.d("TaskCreated", "onSuccess: Task is created");
-            finish();
-        } ).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("TaskFail", "onFailure: "+ e);
-            }
-        });
-    }
+        sessionManager.getDocRef(userId, "Tasks", editedTaskHeader)
+                .set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
+                    Log.d("TaskCreated", "onSuccess: Task is created");
+                    finish();
+                } ).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TaskFail", "onFailure: "+ e);
+                    }
+                });
+        }
 
     private void deleteTask() {
-        sessionManager.getFireStore()
-                .collection("Users")
-                .document(userId)
-                .collection("Tasks")
-                .document(task + tagName)
+        sessionManager.getDocRef(userId, "Tasks", task + tagName)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

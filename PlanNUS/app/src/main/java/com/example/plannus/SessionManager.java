@@ -4,7 +4,10 @@ package com.example.plannus;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class SessionManager {
 
@@ -43,12 +46,34 @@ public class SessionManager {
         return database;
     }
 
-    public String getUID() {
+    public String getUserID() {
         return fAuth.getCurrentUser().getUid();
     }
 
     public DatabaseReference getdRef() {
         return dRef;
+    }
+
+    public Query getTimetableQuery(String userID, String collectionPath) {
+        return fireStore.collection("Users")
+                .document(userID)
+                .collection("NUS_Schedule")
+                .document("NUS_Schedule")
+                .collection(collectionPath)
+                .orderBy("end", Query.Direction.ASCENDING);
+    }
+
+    public DocumentReference getDocRef(String userID, String collectionPath, String documentPath) {
+        return fireStore.collection("Users")
+                .document(userID)
+                .collection(collectionPath)
+                .document(documentPath);
+    }
+
+    public CollectionReference getColRef(String userID, String collectionPath) {
+        return fireStore.collection("Users")
+                .document(userID)
+                .collection(collectionPath);
     }
 
 }

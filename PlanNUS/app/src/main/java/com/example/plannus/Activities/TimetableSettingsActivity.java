@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +26,6 @@ import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 
 
 import java.util.ArrayList;
@@ -99,6 +99,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         editText.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         editText.setHint("Enter module code");
         editText.setTag("moduleCode" + numMods);
+        editText.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         linearLayout.addView(editText);
 
         wrappingLayout.addView(linearLayout);
@@ -107,7 +108,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private void initVars() {
         wrappingLayout = findViewById(R.id.wrappingLayout);
         sessionManager = SessionManager.get();
-        userID = sessionManager.getAuth().getCurrentUser().getUid();
+        userID = sessionManager.getUserID();
         numMods = 5;
 
         saveTimetableSettings = findViewById(R.id.saveTimetableSettingsButton);
@@ -172,13 +173,8 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     }
 
     private void saveSettingsIntoFireStore(TimetableSettings settings) {
-        DocumentReference docRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("timetableSettings")
-                .document("timetableSettings");
-
-        docRef.set(settings)
+        sessionManager.getDocRef(userID, "timetableSettings", "timetableSettings")
+                .set(settings)
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
                     Log.d("SaveCreated", "onSuccess: Settings is saved");
                     Toast.makeText(TimetableSettingsActivity.this, "Settings saved Successfully",Toast.LENGTH_LONG).show();

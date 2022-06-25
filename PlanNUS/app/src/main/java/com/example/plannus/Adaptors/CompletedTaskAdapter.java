@@ -51,13 +51,7 @@ public class CompletedTaskAdapter extends FirestoreRecyclerAdapter<ToDoTask, Com
 
     public static class FinishedTaskHolder extends RecyclerView.ViewHolder {
 
-        TextView taskName;
-        TextView tagName;
-        TextView status;
-        TextView dueDate;
-        TextView dueTime;
-        TextView plannedDate;
-        TextView plannedTime;
+        private TextView taskName, tagName, status, dueDate, dueTime, plannedDate, plannedTime;
 
         public FinishedTaskHolder(View itemView) {
             super(itemView);

@@ -47,9 +47,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     public void initVars() {
         sessionManager = SessionManager.get();
         dateTimePicker = DateTimeDialog.getInstance();
-        userID = sessionManager.getAuth()
-                .getCurrentUser()
-                .getUid();
+        userID = sessionManager.getUserID();
 
         saveTask = findViewById(R.id.saveButton);
         saveTask.setOnClickListener(this);
@@ -115,29 +113,41 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String tag = newTag.getText().toString().trim();
 
         String deadlineDate = dueDate.getText().toString().trim();
+        if (deadlineDate.equals("Due Date Here")) {
+            Toast.makeText(this, "DUE DATE EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String deadLineDateStore = DateFormatter.dateToNumber(deadlineDate);
 
         String deadLineTime = dueTime.getText().toString().trim();
+        if (deadLineTime.equals("Due Time Here")) {
+            Toast.makeText(this, "DUE TIME EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String deadLineTimeStore = TimeFormatter.timeToNumber(deadLineTime);
 
         String deadLineDateTime = deadLineDateStore + deadLineTimeStore;
 
         String planDate = plannedDate.getText().toString().trim();
+        if (planDate.equals("Planned Date Here")) {
+            Toast.makeText(this, "PLANNED DATE EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String planDateStore = DateFormatter.dateToNumber(planDate);
 
         String planTime = plannedTime.getText().toString().trim();
+        if (planTime.equals("Planned Time Here")) {
+            Toast.makeText(this, "PLANNED Time EMPTY", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String planTimeStore = TimeFormatter.timeToNumber(planTime);
 
         String planDateTime = planDateStore + planTimeStore;
 
         Log.d("QUERY SUCCESS", "Query of Addition was successful");
         ToDoTask newTask = new ToDoTask(tag, task, stats, deadLineDateTime, planDateTime);
-        DocumentReference docRef = sessionManager.getFireStore()
-                .collection("Users")
-                .document(userID)
-                .collection("Tasks")
-                .document(task + tag);
-        docRef.set(newTask, SetOptions.merge())
+        sessionManager.getDocRef(userID, "Tasks", task + tag)
+                .set(newTask, SetOptions.merge())
                 .addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
             Log.d("TaskCreated", "onSuccess: Task is created");
             Toast.makeText(AddTaskActivity.this, "Task added Successfully",Toast.LENGTH_LONG).show();

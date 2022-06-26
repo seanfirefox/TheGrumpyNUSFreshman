@@ -36,6 +36,7 @@
             android:layout_marginTop="10dp"
             android:text="Task: "
             android:textAlignment="center"
+            android:textColor="#808080"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
@@ -50,6 +51,7 @@
             android:layout_marginTop="12dp"
             android:text="Status: "
             android:textAlignment="center"
+            android:textColor="#808080"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
@@ -64,6 +66,7 @@
             android:layout_marginTop="12dp"
             android:text="Tag: "
             android:textAlignment="center"
+            android:textColor="#808080"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
@@ -79,6 +82,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="#808080"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/taskTypeEditText" />
@@ -92,6 +96,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="#808080"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dueTimeButton" />
@@ -107,6 +112,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="#808080"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deadLineTexTtextView" />
 
@@ -121,6 +127,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="#808080"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plannedTexTtextView" />
 
@@ -135,6 +142,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="#808080"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateDuetextView" />
 
@@ -149,24 +157,9 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="#808080"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/datePlannedtextView" />
-
-        <EditText
-            android:id="@+id/taskTypeEditText"
-            android:layout_width="285dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:autofillHints="Tag"
-            android:ems="10"
-            android:hint="e.g CS1101S/Personal"
-            android:inputType="none"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="20sp"
-            android:autoSizeMinTextSize="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tagTexTtextView"
-            app:layout_constraintTop_toBottomOf="@+id/taskDescEditStatus" />
 
         <EditText
             android:id="@+id/taskDescEditText"
@@ -181,10 +174,28 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.468"
             app:layout_constraintStart_toEndOf="@+id/TaskTxTtextView"
             app:layout_constraintTop_toBottomOf="@+id/AddTasks" />
+
+        <EditText
+            android:id="@+id/taskTypeEditText"
+            android:layout_width="285dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="Tag"
+            android:ems="10"
+            android:hint="e.g CS1101S/Personal"
+            android:inputType="none"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="10sp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tagTexTtextView"
+            app:layout_constraintTop_toBottomOf="@+id/taskDescEditStatus" />
 
         <SeekBar
             android:id="@+id/taskDescEditStatus"
@@ -210,6 +221,7 @@
             android:autoSizeMinTextSize="10sp"
             android:autoSizeTextType="uniform"
             android:text="0"
+            android:textColor="#808080"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/taskDescEditText" />
 

@@ -15,13 +15,12 @@
         <entry key="app/src/main/res/layout/activity_content_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_contentmainactivity.xml" value="0.3075592041015625" />
         <entry key="app/src/main/res/layout/activity_edit_task.xml" value="0.2631578947368421" />
-        <entry key="app/src/main/res/layout/activity_generate_timetable.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_generate_timetable.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27684326171875" />
-        <entry key="app/src/main/res/layout/activity_milestones.xml" value="0.1859375" />
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_time_tabler.xml" value="0.12082066869300911" />
         <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.23796791443850268" />
-        <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.6708542713567839" />
         <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.34251215838003846" />
         <entry key="app/src/main/res/layout/completedtask.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_friday.xml" value="0.1" />

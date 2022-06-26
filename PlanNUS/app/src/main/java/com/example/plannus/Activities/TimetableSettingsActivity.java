@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
@@ -92,7 +91,6 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         textView.setLayoutParams(params);
         textView.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         textView.setText(String.format("Module %s:", numMods));
-        textView.setTextColor(Color.parseColor("#808080"));
         linearLayout.addView(textView);
 
         EditText editText = new EditText(TimetableSettingsActivity.this);
@@ -101,7 +99,6 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         editText.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         editText.setHint("Enter module code");
         editText.setTag("moduleCode" + numMods);
-        editText.setTextColor(Color.parseColor("#808080"));
         editText.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         linearLayout.addView(editText);
 

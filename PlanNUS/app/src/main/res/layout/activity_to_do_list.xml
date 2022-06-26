@@ -31,6 +31,7 @@
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
         android:text="Create Task"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -42,6 +43,7 @@
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
         android:text="Milestones"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/createTask"
         app:layout_constraintStart_toStartOf="parent" />

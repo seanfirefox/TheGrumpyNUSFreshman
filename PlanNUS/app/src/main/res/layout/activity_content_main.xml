@@ -126,6 +126,7 @@
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="12sp"
                 android:textStyle="bold"
+                android:textColor="#404040"
                 app:layout_constraintBottom_toTopOf="@+id/calendarImgView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +144,7 @@
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="12sp"
                 android:textStyle="bold"
+                android:textColor="#404040"
                 app:layout_constraintBottom_toTopOf="@+id/generateTimetableButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -159,6 +161,7 @@
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="12sp"
                 android:textStyle="bold"
+                android:textColor="#404040"
                 app:layout_constraintBottom_toTopOf="@+id/checklistImgView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

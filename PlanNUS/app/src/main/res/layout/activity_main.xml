@@ -78,8 +78,6 @@
         android:id="@+id/register"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="188dp"
         android:autoSizeMaxTextSize="18sp"
         android:autoSizeMinTextSize="2sp"
         android:autoSizeTextType="uniform"
@@ -90,7 +88,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <ImageView
         android:id="@+id/imageView"

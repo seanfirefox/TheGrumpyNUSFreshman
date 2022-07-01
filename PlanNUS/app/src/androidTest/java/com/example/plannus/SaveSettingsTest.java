@@ -40,7 +40,7 @@ import com.example.plannus.Activities.TimetableSettingsActivity;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SaveSettings {
+public class SaveSettingsTest {
 
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =

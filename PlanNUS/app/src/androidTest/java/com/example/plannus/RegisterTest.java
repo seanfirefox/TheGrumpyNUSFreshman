@@ -1,5 +1,4 @@
 package com.example.plannus;
-
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.platform.app.InstrumentationRegistry;
 import static androidx.test.espresso.Espresso.onView;
@@ -26,9 +25,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
@@ -37,20 +38,19 @@ import com.example.plannus.Activities.ContentMainActivity;
 import com.example.plannus.Activities.MainActivity;
 import com.example.plannus.Activities.RegisterUser;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LoginTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class RegisterTest {
+
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
-    private String email = "admin2@gmail.com";
-    private String password = "1234567";
+    private String fullName = "DEADBEEF";
+    private String age = "12";
+    private String email = "deadbeef@gmail.com";
+    private String password = "deadbeef1234";
 
     @Before
     public void setUp() throws Exception{
@@ -58,6 +58,37 @@ public class LoginTest {
     }
 
     @Test
+    public void B_clickOnRegisterButton() {
+        intending(hasComponent(MainActivity.class.getName()));
+        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
+        intending(hasComponent(RegisterUser.class.getName()));
+        fillInDetails();
+        goBackToMainActivity();
+    }
+
+    public void fillInDetails() {
+        onView(withId(R.id.password)).perform(ViewActions.typeText(password));
+        onView(withId(R.id.age)).perform(ViewActions.typeText(age));
+        onView(withId(R.id.email)).perform(ViewActions.typeText(email));
+        onView(withId(R.id.fullName)).perform(ViewActions.typeText(fullName));
+        onView(withId(R.id.registerUser)).perform(ViewActions.scrollTo(),ViewActions.click());
+    }
+
+    public void goBackToMainActivity() {
+        onView(withId(R.id.password)).perform(ViewActions.pressBack());
+        intending(hasComponent(MainActivity.class.getName()));
+        //checkLoginPageDisplayed();
+    }
+
+    @Test
+    public void A_isBackToMain() {
+        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
+        intending(hasComponent(RegisterUser.class.getName()));
+        onView(withId(R.id.password)).perform(ViewActions.pressBack());
+        intending(hasComponent(MainActivity.class.getName()));
+        checkLoginPageDisplayed();
+    }
+
     public void checkLoginPageDisplayed() {
         onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
         onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
@@ -66,31 +97,30 @@ public class LoginTest {
         onView(withId(R.id.imageView)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView2)).check(matches(isDisplayed()));
         onView(withId(R.id.emailIcon)).check(matches(isDisplayed()));
+        B_clickOnRegisterButton();
     }
 
     @Test
-    public void clickRegisterButton() {
-        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
-        intending(hasComponent(RegisterUser.class.getName()));
-    }
-
-    @Test
-    public void failedLoginCheck() {
-        String expectedWarning = "Invalid Credentials";
-        onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
-        checkLoginPageDisplayed();
-    }
-
-    @Test
-    public void successfulLoginCheck() {
+    public void C_AttemptToLoginNewUser() throws InterruptedException {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
+//        checkSuccessfulLoginOfNewUser();
+        Thread.sleep(1000);
+        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
+    }
+
+    public void checkSuccessfulLoginOfNewUser() {
+        intending(hasComponent(ContentMainActivity.class.getName()));
+        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
     }
 
     @After
     public void tearDown() throws Exception {
         Intents.release();
     }
+
 }

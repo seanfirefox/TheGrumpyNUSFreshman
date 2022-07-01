@@ -31,7 +31,7 @@
         android:layout_width="401dp"
         android:layout_height="62dp"
         android:fontFamily="@font/roboto_regular"
-        android:text="@string/WelcomeMsg"
+        android:text="Welcome Back!"
         android:textAlignment="center"
         android:textColor="#000000"
         android:gravity="center"

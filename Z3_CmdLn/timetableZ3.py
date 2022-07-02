@@ -29,6 +29,7 @@ class TimeTableSchedulerZ3 :
         self.print = yesPrint
         self.literal_to_object = {}
         self.finalTimetable = [[], [], [], [], []]
+        self.string = ""
 
     def init_variables(self) :
         '''
@@ -121,13 +122,15 @@ class TimeTableSchedulerZ3 :
                 print("SAT")
                 self.printTimeTable()
             else :
-                return self.string_timetable()
+                self.string = self.string_timetable()
+                return self.string
         elif (self.solver.check() == unsat) :
             if (self.print == True) :
                 print("UNSAT")
                 print("No feasible timetable")
             else :
-                return "No feasible timetable"
+                self.string = "No feasible timetable"
+                return self.string
     
     def last_solution_status(self) :
         return self.solver.check()
@@ -152,13 +155,15 @@ class TimeTableSchedulerZ3 :
                 self.printTimeTable()
             else :
                 self.printTimeTable()
-                return self.string_timetable()
+                self.string = self.string_timetable()
+                return self.string
         elif (self.solver.check() == unsat) :
             if (self.print == True) :
                 print("UNSAT")
                 print("No feasible timetable")
             else :
-                return "No feasible timetable"
+                self.string = "No feasible timetable"
+                return self.string
 
     def optimiseTimetable(self) :
         self.init_variables()

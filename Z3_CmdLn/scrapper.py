@@ -33,8 +33,8 @@ class Scrapper :
     def scrape(self) :
         for mod in self.modList :
             URL = Scrapper.URL_FRONT + self.AY + Scrapper.URL_MIDDLE + mod + Scrapper.URL_END
-            req = json.loads(requests.get(URL).content.decode('utf-8'))
-            #print(req)
+            print(mod)
+            req = json.loads(requests.get(URL).content)
 
             nusMod = NUSModule(mod)
             #print(self.semester)

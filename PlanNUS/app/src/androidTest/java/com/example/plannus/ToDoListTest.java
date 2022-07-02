@@ -4,15 +4,19 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.action.ViewActions;
-//import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -38,8 +42,8 @@ public class ToDoListTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
-    private String email = "admin2@gmail.com";
-    private String password = "1234567";
+    private String email = "deadbeef@gmail.com";
+    private String password = "deadbeef1234";
     private String task = "Milestone 3";
     private String tag = "CP2106";
     private int status = 50;
@@ -78,10 +82,24 @@ public class ToDoListTest {
         intending(hasComponent(AddTaskActivity.class.getName()));
         onView(withId(R.id.taskDescEditText)).perform(ViewActions.typeText(task));
         onView(withId(R.id.taskDescEditStatus)).perform(ProgressBarSetter.scrubSeekBarAction(status));
-        Thread.sleep(1000);
         onView(withId(R.id.taskTypeEditText)).perform(ViewActions.typeText(tag), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.dueDateButton)).perform(ViewActions.click());
-//        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 01, 02));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 01, 02));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.dueTimeButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(00, 00));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.plannedDateButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 01, 01));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.plannedTimeButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(12, 00));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.saveButton)).perform(ViewActions.click());
+        onView(withId(R.id.taskListAnnouncements)).perform(RecyclerViewActions.scrollTo(
+                hasDescendant(withText("Milestone 3"))));
+
+
 
     }
 

@@ -133,7 +133,7 @@ public class Z3SchedulerTest {
         onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
-        Thread.sleep(7000);
+        Thread.sleep(10000);
         onView(withId(R.id.textView)).check(matches(withSubstring("Monday")));
     }
 

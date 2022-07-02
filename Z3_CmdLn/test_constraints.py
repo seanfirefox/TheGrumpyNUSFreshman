@@ -79,6 +79,35 @@ class Test_Constraint(unittest.TestCase) :
         scrapper = Scrapper(mods, "2021-2022", 1)
         scrapper.scrape()
         a = TimeTableSchedulerZ3(scrapper.semesterProcessed, False)
+        outPut = a.optimiseTimetableWithConstraints("8amLessons")
+        timetable = a.finalTimetable
+        for i in range(5) :
+            dayLessons = timetable[i]
+            for j in range(len(dayLessons) - 1) :
+                for k in range(j + 1, len(dayLessons)) :
+                    self.assertFalse(dayLessons[j].willClash(dayLessons[k]))
+        print("============================================================")
+    
+    def test_noClash_3(self) :
+        mods = ["LAG1201", "ACC1701", "GE4217"]
+        scrapper = Scrapper(mods, "2022-2023", 1)
+        scrapper.scrape()
+        a = TimeTableSchedulerZ3(scrapper.semesterProcessed, False)
+        outPut = a.optimiseTimetableWithConstraints("8amLessons")
+        timetable = a.finalTimetable
+        for i in range(5) :
+            dayLessons = timetable[i]
+            for j in range(len(dayLessons) - 1) :
+                for k in range(j + 1, len(dayLessons)) :
+                    self.assertFalse(dayLessons[j].willClash(dayLessons[k]))
+        print("============================================================")
+
+    def test_noClash_4(self) :
+        mods = ["MA3252", "MA2108S", "USE2325", "CS4268", "CS4243"]
+        scrapper = Scrapper(mods, "2021-2022", 2)
+        scrapper.scrape()
+        a = TimeTableSchedulerZ3(scrapper.semesterProcessed, False)
+        outPut = a.optimiseTimetableWithConstraints(["8amLessons", "oneFreeDay"])
         timetable = a.finalTimetable
         for i in range(5) :
             dayLessons = timetable[i]

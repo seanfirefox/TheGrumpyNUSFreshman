@@ -8,3 +8,6 @@ python3 test_unsat.py
 
 echo "STRESS TEST 1 : SEE IF IT IS GOOD UNDER HEAVY WORKLOAD"
 python3 stress_test.py
+
+echo "CONSTRAINT TEST 1"
+python3 test_constraints.py

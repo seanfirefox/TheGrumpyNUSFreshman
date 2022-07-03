@@ -10,6 +10,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static com.example.plannus.utils.RecyclerViewChecker.hasItem;
+
+import static org.hamcrest.CoreMatchers.not;
+
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -24,6 +28,7 @@ import androidx.test.filters.LargeTest;
 
 import com.example.plannus.Activities.AddTaskActivity;
 import com.example.plannus.Activities.ContentMainActivity;
+import com.example.plannus.Activities.EditTaskActivity;
 import com.example.plannus.Activities.MainActivity;
 import com.example.plannus.Activities.ToDoList;
 import com.example.plannus.utils.ProgressBarSetter;
@@ -47,10 +52,9 @@ public class ToDoListTest {
     private String task = "Milestone 3";
     private String tag = "CP2106";
     private int status = 50;
-    private String deadlineDate = "02/01/2023";
-    private String deadlineTime = "00:00";
-    private String plannedDate = "01/01/2023";
-    private String plannedTime = "12:00";
+    private String newTask = "Assignment 1";
+    private String newTag = "MA2101";
+    private int newStatus = 90;
 
     @Before
     public void setUp() throws Exception {
@@ -68,6 +72,8 @@ public class ToDoListTest {
         intending(hasComponent(ToDoList.class.getName()));
         recyclerViewDisplayed();
         addTask();
+        editTask();
+        deleteTask();
     }
 
     public void recyclerViewDisplayed() {
@@ -77,29 +83,74 @@ public class ToDoListTest {
         onView(withId(R.id.createTask)).check(matches(isDisplayed()));
     }
 
-    public void addTask() throws InterruptedException {
+    public void addTask() {
         onView(withId(R.id.createTask)).perform(ViewActions.click());
         intending(hasComponent(AddTaskActivity.class.getName()));
         onView(withId(R.id.taskDescEditText)).perform(ViewActions.typeText(task));
         onView(withId(R.id.taskDescEditStatus)).perform(ProgressBarSetter.scrubSeekBarAction(status));
         onView(withId(R.id.taskTypeEditText)).perform(ViewActions.typeText(tag), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.dueDateButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 01, 02));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 2));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.dueTimeButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(00, 00));
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(0, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.plannedDateButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 01, 01));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 1));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.plannedTimeButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(12, 00));
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(12, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.saveButton)).perform(ViewActions.click());
+
+        onView(withText(task)).check(matches(isDisplayed()));
+        onView(withId(R.id.taskListAnnouncements)).perform(ViewActions.pressBack());
+        intending(hasComponent(ContentMainActivity.class.getName()));
+        onView(withText(task)).check(matches(isDisplayed()));
+        onView(withId(R.id.checklistImgView)).perform(ViewActions.click());
+        intending(hasComponent(ToDoList.class.getName()));
+
+    }
+
+    public void editTask() {
         onView(withId(R.id.taskListAnnouncements)).perform(RecyclerViewActions.scrollTo(
-                hasDescendant(withText("Milestone 3"))));
+                hasDescendant(withText(task))));
+        onView(withText(task)).perform(ViewActions.click());
+        intending(hasComponent(EditTaskActivity.class.getName()));
+        onView(withId(R.id.editTaskDesc)).perform(ViewActions.clearText(), ViewActions.typeText(newTask));
+        onView(withId(R.id.editStatusDesc)).perform(ProgressBarSetter.scrubSeekBarAction(newStatus));
+        onView(withId(R.id.editTag)).perform(ViewActions.clearText(), ViewActions.typeText(newTag), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.editDueDateButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022, 10, 15));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.editDueTimeButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(23, 59));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.editPlannedDateButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022, 10, 1));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.editPlannedTimeButton)).perform(ViewActions.click());
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(20, 0));
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+        onView(withId(R.id.editButton)).perform(ViewActions.click());
+        onView(withId(R.id.taskListAnnouncements)).perform(RecyclerViewActions.scrollTo(
+                hasDescendant(withText(newTask))));
 
+        onView(withText(newTask)).check(matches(isDisplayed()));
+        onView(withId(R.id.taskListAnnouncements)).perform(ViewActions.pressBack());
+        intending(hasComponent(ContentMainActivity.class.getName()));
+        onView(withText(newTask)).check(matches(isDisplayed()));
+        onView(withId(R.id.checklistImgView)).perform(ViewActions.click());
+        intending(hasComponent(ToDoList.class.getName()));
 
+    }
+
+    public void deleteTask() {
+        onView(withText(newTask)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.taskListAnnouncements)).check(matches(not(hasItem(hasDescendant(withText(newTask))))));
+        onView(withId(R.id.taskListAnnouncements)).perform(ViewActions.pressBack());
+        intending(hasComponent(ContentMainActivity.class.getName()));
+        onView(withId(R.id.mainTaskListAnnouncements)).check(matches(not(hasItem(hasDescendant(withText(newTask))))));
 
     }
 

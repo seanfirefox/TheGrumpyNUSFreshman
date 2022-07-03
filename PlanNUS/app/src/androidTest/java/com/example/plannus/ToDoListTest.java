@@ -118,6 +118,7 @@ public class ToDoListTest {
         onView(withId(R.id.taskDescEditStatus)).perform(ProgressBarSetter.scrubSeekBarAction(status));
         onView(withId(R.id.taskTypeEditText)).perform(ViewActions.typeText(tag), ViewActions.closeSoftKeyboard());
 
+        // Test saving without defining date and time
         onView(withId(R.id.saveButton)).perform(ViewActions.click());
         onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
 
@@ -125,6 +126,7 @@ public class ToDoListTest {
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 2));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
+        // Test saving without defining date and time
         onView(withId(R.id.saveButton)).perform(ViewActions.click());
         onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
 
@@ -132,6 +134,7 @@ public class ToDoListTest {
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(0, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
+        // Test saving without defining date and time
         onView(withId(R.id.saveButton)).perform(ViewActions.click());
         onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
 
@@ -139,6 +142,7 @@ public class ToDoListTest {
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 1));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
+        // Test saving without defining date and time
         onView(withId(R.id.saveButton)).perform(ViewActions.click());
         onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
 

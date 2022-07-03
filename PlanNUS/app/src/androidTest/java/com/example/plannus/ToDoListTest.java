@@ -14,10 +14,10 @@ import static com.example.plannus.utils.RecyclerViewChecker.hasItem;
 
 import static org.hamcrest.CoreMatchers.not;
 
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -36,25 +36,28 @@ import com.example.plannus.utils.ProgressBarSetter;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ToDoListTest {
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
-    private String email = "deadbeef@gmail.com";
-    private String password = "deadbeef1234";
-    private String task = "Milestone 3";
-    private String tag = "CP2106";
-    private int status = 50;
-    private String newTask = "Assignment 1";
-    private String newTag = "MA2101";
-    private int newStatus = 90;
+    private final String email = "deadbeef@gmail.com";
+    private final String password = "deadbeef1234";
+    private final String task = "Milestone 3";
+    private final String tag = "CP2106";
+    private final int status = 50;
+    private final String newTask = "Assignment 1";
+    private final String newTag = "MA2101";
+    private final int newStatus = 90;
 
     @Before
     public void setUp() throws Exception {
@@ -62,7 +65,36 @@ public class ToDoListTest {
     }
 
     @Test
-    public void somthing() throws InterruptedException {
+    public void A_createTaskTest() throws InterruptedException  {
+        login();
+        recyclerViewDisplayed();
+        addTask();
+    }
+
+    @Test
+    public void B_editTaskTest() throws InterruptedException {
+        login();
+        recyclerViewDisplayed();
+        editTask();
+    }
+
+    @Test
+    public void C_deleteTaskTest() throws InterruptedException {
+        login();
+        recyclerViewDisplayed();
+        deleteTask();
+    }
+
+    @Test
+    public void D_fullTestSequence() throws InterruptedException {
+        login();
+        recyclerViewDisplayed();
+        addTask();
+        editTask();
+        deleteTask();
+    }
+
+    public void login() throws InterruptedException {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -70,10 +102,6 @@ public class ToDoListTest {
         Thread.sleep(1000);
         onView(withId(R.id.checklistImgView)).perform(ViewActions.click());
         intending(hasComponent(ToDoList.class.getName()));
-        recyclerViewDisplayed();
-        addTask();
-        editTask();
-        deleteTask();
     }
 
     public void recyclerViewDisplayed() {
@@ -89,15 +117,31 @@ public class ToDoListTest {
         onView(withId(R.id.taskDescEditText)).perform(ViewActions.typeText(task));
         onView(withId(R.id.taskDescEditStatus)).perform(ProgressBarSetter.scrubSeekBarAction(status));
         onView(withId(R.id.taskTypeEditText)).perform(ViewActions.typeText(tag), ViewActions.closeSoftKeyboard());
+
+        onView(withId(R.id.saveButton)).perform(ViewActions.click());
+        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+
         onView(withId(R.id.dueDateButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 2));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
+
+        onView(withId(R.id.saveButton)).perform(ViewActions.click());
+        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+
         onView(withId(R.id.dueTimeButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(0, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
+
+        onView(withId(R.id.saveButton)).perform(ViewActions.click());
+        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+
         onView(withId(R.id.plannedDateButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 1));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
+
+        onView(withId(R.id.saveButton)).perform(ViewActions.click());
+        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+
         onView(withId(R.id.plannedTimeButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(12, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());

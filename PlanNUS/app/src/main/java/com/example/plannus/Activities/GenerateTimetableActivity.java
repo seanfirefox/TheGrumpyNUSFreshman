@@ -112,22 +112,25 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
-            getAllDocumentNames();
-            deleteOldTimeTable();
-            saveTimeTable();
+            CompletableFuture.supplyAsync(() -> getAllDocumentNames())
+                    .thenAccept(x -> deleteOldTimeTable())
+                    .thenAccept(x -> saveTimeTable())
+                    .join();
         }
 
     }
 
-    private void getAllDocumentNames() {
-        CompletableFuture.runAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames)).join();
-        CompletableFuture.runAsync(() -> getDocumentNames("tuesdayClass", tuesdayDocumentNames)).join();
-        CompletableFuture.runAsync(() -> getDocumentNames("wednesdayClass", wednesdayDocumentNames)).join();
-        CompletableFuture.runAsync(() -> getDocumentNames("thursdayClass", thursdayDocumentNames)).join();
-        CompletableFuture.runAsync(() -> getDocumentNames("fridayClass", fridayDocumentNames)).join();
+    private int getAllDocumentNames() {
+        CompletableFuture.supplyAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames))
+                .thenAcceptAsync(x -> getDocumentNames("tuesdayClass", tuesdayDocumentNames))
+                .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
+                .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
+                .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
+                .join();
+        return 1;
     }
 
-    private void getDocumentNames(String collectionPath, ArrayList<String> arrayList) {
+    private int getDocumentNames(String collectionPath, ArrayList<String> arrayList) {
         timetableDocRef.collection(collectionPath)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -144,25 +147,29 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         }
                     }
                 });
+        return 1;
     }
 
-    private void deleteOldTimeTable() {
-        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass")).join();
-        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass")).join();
-        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass")).join();
-        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass")).join();
-        CompletableFuture.runAsync(() -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass")).join();
+    private int deleteOldTimeTable() {
+        CompletableFuture.supplyAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass"))
+                .thenAcceptAsync(x -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass"))
+                .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
+                .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
+                .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
+                .join();
+        return 1;
     }
 
-    private void deleteCollectionInFireStore(ArrayList<String> classList, String collectionPath) {
+    private int deleteCollectionInFireStore(ArrayList<String> classList, String collectionPath) {
         if (classList == null) {
             Log.d("Timetable NULL", "No Old Class in FireStore");
-            return;
+            return 1;
         }
         for (int i = 0; i < classList.size(); i++) {
             String s = classList.get(i);
             deleteClassInFireStore(s, collectionPath);
         }
+        return 1;
     }
 
     private void deleteClassInFireStore(String documentName, String collectionName) {
@@ -183,18 +190,20 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 });
     }
 
-    private void saveTimeTable() {
-        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getMondayClass(), "mondayClass")).join();
-        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getTuesdayClass(), "tuesdayClass")).join();
-        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getWednesdayClass(), "wednesdayClass")).join();
-        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getThursdayClass(), "thursdayClass")).join();
-        CompletableFuture.runAsync(() -> saveTimeTableClass(nusTimetable.getFridayClass(), "fridayClass")).join();
+    private int saveTimeTable() {
+        CompletableFuture.supplyAsync(() -> saveTimeTableClass(nusTimetable.getMondayClass(), "mondayClass"))
+                .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getTuesdayClass(), "tuesdayClass"))
+                .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getWednesdayClass(), "wednesdayClass"))
+                .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getThursdayClass(), "thursdayClass"))
+                .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getFridayClass(), "fridayClass"))
+                .join();
+        return 1;
     }
 
-    private void saveTimeTableClass(ArrayList<String> classList, String collectionPath) {
+    private int saveTimeTableClass(ArrayList<String> classList, String collectionPath) {
         if (classList == null) {
             Log.d("Timetable NULL", "Timetable is Null, Not saving it");
-            return;
+            return 1;
         }
         for (int i = 0; i < classList.size(); i++) {
             String s = classList.get(i);
@@ -216,6 +225,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         Log.d("SAVE FAIL", "Timetable Did NOT Save !");
                     }
                 });
+        return 1;
     }
 
     private void saveClassIntoFireStore(NUSClass nusClass, String s, String collectionPath) {

@@ -1,27 +1,22 @@
 package com.example.plannus;
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.platform.app.InstrumentationRegistry;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.view.View;
-
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.filters.LargeTest;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import com.example.plannus.Activities.ContentMainActivity;
+import com.example.plannus.Activities.MainActivity;
+import com.example.plannus.Activities.RegisterUser;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,13 +25,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.*;
-
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.RegisterUser;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest

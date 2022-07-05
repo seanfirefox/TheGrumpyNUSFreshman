@@ -11,7 +11,7 @@
         android:id="@+id/fragmentContainerView"
         android:name="com.example.plannus.Fragments.MondayFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="675dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,14 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/weekday"
-        app:labelVisibilityMode="unlabeled"
         app:itemIconTint="@drawable/icon_color_selector"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/weekday" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

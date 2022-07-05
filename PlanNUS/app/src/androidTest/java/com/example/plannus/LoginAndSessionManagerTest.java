@@ -44,7 +44,7 @@ import com.example.plannus.Activities.RegisterUser;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LoginTest {
+public class LoginAndSessionManagerTest {
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
@@ -82,11 +82,14 @@ public class LoginTest {
     }
 
     @Test
-    public void successfulLoginCheck() {
+    public void successfulLoginAndSessionManagerSingletonStatusCheck() {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
+        SessionManager a = SessionManager.get();
+        SessionManager b = SessionManager.get();
+        assertEquals(a, b);
     }
 
     @After

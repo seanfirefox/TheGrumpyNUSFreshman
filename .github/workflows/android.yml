@@ -25,7 +25,7 @@ jobs:
         cache: gradle
     
     - name: Grant execute permission for gradlew
-      run: cd PlanNUS && chmod +x gradlew
+      run: cd PlanNUS && ls && chmod +x gradlew
     - name: Build with Gradle
       run: cd PlanNUS && ./gradlew build
     - name: Upload APK

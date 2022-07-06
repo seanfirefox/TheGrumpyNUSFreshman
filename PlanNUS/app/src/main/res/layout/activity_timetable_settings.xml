@@ -87,7 +87,8 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeTextType="uniform"
                                 android:text="Module 1: "
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textColor="#808080"/>
 
                             <EditText
                                 android:id="@+id/moduleCode1"
@@ -102,8 +103,7 @@
                                 android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode1"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.468" />
+                                android:textColor="#808080" />
 
                         </LinearLayout>
 
@@ -122,7 +122,8 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeTextType="uniform"
                                 android:text="Module 2: "
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textColor="#808080"/>
 
                             <EditText
                                 android:id="@+id/moduleCode2"
@@ -137,8 +138,7 @@
                                 android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
                                 android:tag="moduleCode2"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.428" />
+                                android:textColor="#808080" />
 
                         </LinearLayout>
 
@@ -157,7 +157,8 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeTextType="uniform"
                                 android:text="Module 3: "
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textColor="#808080"/>
 
                             <EditText
                                 android:id="@+id/moduleCode3"
@@ -171,7 +172,8 @@
                                 android:hint="Enter module code"
                                 android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
-                                android:tag="moduleCode3" />
+                                android:tag="moduleCode3"
+                                android:textColor="#808080"/>
 
                         </LinearLayout>
 
@@ -190,7 +192,8 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeTextType="uniform"
                                 android:text="Module 4: "
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textColor="#808080"/>
 
                             <EditText
                                 android:id="@+id/moduleCode4"
@@ -204,7 +207,8 @@
                                 android:hint="Enter module code"
                                 android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
-                                android:tag="moduleCode4" />
+                                android:tag="moduleCode4"
+                                android:textColor="#808080"/>
 
                         </LinearLayout>
 
@@ -223,7 +227,8 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeTextType="uniform"
                                 android:text="Module 5: "
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textColor="#808080"/>
 
                             <EditText
                                 android:id="@+id/moduleCode5"
@@ -237,7 +242,8 @@
                                 android:hint="Enter module code"
                                 android:inputType="none|textCapCharacters"
                                 android:maxLength="30"
-                                android:tag="moduleCode5" />
+                                android:tag="moduleCode5"
+                                android:textColor="#808080"/>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -253,6 +259,7 @@
         android:autoSizeMinTextSize="10sp"
         android:autoSizeTextType="uniform"
         android:text="No 8am Lessons"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
@@ -266,6 +273,7 @@
         android:autoSizeMinTextSize="10sp"
         android:autoSizeTextType="uniform"
         android:text="1 Free Day"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
@@ -281,6 +289,7 @@
         android:autoSizeTextType="uniform"
         android:text="AY"
         android:textStyle="bold"
+        android:textColor="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsPage" />
 
@@ -294,6 +303,7 @@
         android:autoSizeTextType="uniform"
         android:text="Semester"
         android:textStyle="bold"
+        android:textColor="#808080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.305"
         app:layout_constraintStart_toEndOf="@+id/ay"
@@ -304,6 +314,7 @@
         android:layout_width="183dp"
         android:layout_height="27dp"
         android:layout_marginStart="10dp"
+        android:textColor="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ay" />
 
@@ -312,6 +323,7 @@
         android:layout_width="194dp"
         android:layout_height="27dp"
         android:layout_marginStart="4dp"
+        android:textColor="#808080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/aySpinner"
         app:layout_constraintTop_toBottomOf="@+id/semester" />

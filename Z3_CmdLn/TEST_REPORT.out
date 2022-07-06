@@ -1,0 +1,397 @@
+BIG TEST 1 : TO DETECT POSSIBLE TIMETABLES
+CS1101S offered for chosen semester. Processing . . . .
+CS1231S offered for chosen semester. Processing . . . .
+MA1521 offered for chosen semester. Processing . . . .
+MA2001 offered for chosen semester. Processing . . . .
+GEC1030 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA2001 TUT 1 @ 900 - 1000[MON]
+ CS1101S TUT 02E @ 1000 - 1200[MON]
+ GEC1030 TUT D2 @ 1400 - 1600[MON]
+ MA1521 TUT 2 @ 1600 - 1700[MON]
+On Tuesday
+ Hooray! You CAN Have No Classes On that Day!
+On Wednesday
+ CS1101S LEC 1 @ 1000 - 1200[WED]
+ MA1521 LEC 1 @ 1800 - 2000[WED]
+On Thursday
+ GEC1030 LEC 1 @ 800 - 1000[THURS]
+ CS1101S REC 03D @ 1000 - 1100[THURS]
+ CS1231S LEC 1 @ 1200 - 1400[THURS]
+On Friday
+ CS1231S TUT 21 @ 800 - 1000[FRI]
+ CS1101S LEC 1 @ 1000 - 1200[FRI]
+ MA2001 LEC 2 @ 1200 - 1400[FRI]
+ CS1231S LEC 1 @ 1500 - 1600[FRI]
+ MA1521 LEC 1 @ 1800 - 2000[FRI]
+============================================================
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2334 offered for chosen semester. Processing . . . .
+IS1103 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+GESS1027 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ CS2030S LEC 1 @ 1200 - 1400[MON]
+ ST2334 TUT 7 @ 1500 - 1600[MON]
+ CS2040S LEC 1 @ 1600 - 1800[MON]
+On Tuesday
+ ST2334 LEC 3 @ 800 - 1000[TUES]
+ CS2040S TUT 02 @ 1000 - 1200[TUES]
+ GEA1000 TUT D16 @ 1200 - 1500[TUES]
+ GESS1027 TUT E5 @ 1600 - 1800[TUES]
+On Wednesday
+ CS2030S REC 02 @ 900 - 1000[WED]
+ GESS1027 LEC 1 @ 1000 - 1200[WED]
+ CS2040S LEC 1 @ 1400 - 1500[WED]
+On Thursday
+ CS2030S LAB 10A @ 1000 - 1200[THURS]
+On Friday
+ ST2334 LEC 3 @ 800 - 1000[FRI]
+ CS2040S REC 11 @ 1000 - 1100[FRI]
+============================================================
+IS1103 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2131 offered for chosen semester. Processing . . . .
+MA2104 offered for chosen semester. Processing . . . .
+SP1541 offered for chosen semester. Processing . . . .
+HSS1000 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA2104 TUT 1 @ 900 - 1000[MON]
+ CS2030S LEC 1 @ 1200 - 1400[MON]
+ CS2040S LEC 1 @ 1600 - 1800[MON]
+On Tuesday
+ HSS1000 TUT W11 @ 800 - 900[TUES]
+ GEA1000 TUT D23 @ 900 - 1200[TUES]
+ SP1541 SEC 17 @ 1200 - 1400[TUES]
+ CS2040S TUT 16 @ 1600 - 1800[TUES]
+ ST2131 LEC 1 @ 1800 - 2000[TUES]
+On Wednesday
+ HSS1000 LEC 1 @ 800 - 1000[WED]
+ MA2104 LEC 1 @ 1000 - 1200[WED]
+ CS2030S REC 05 @ 1200 - 1300[WED]
+ CS2040S LEC 1 @ 1400 - 1500[WED]
+On Thursday
+ CS2030S LAB 10A @ 1000 - 1200[THURS]
+ CS2040S REC 04 @ 1200 - 1300[THURS]
+ ST2131 TUT 2 @ 1300 - 1400[THURS]
+On Friday
+ MA2104 LEC 1 @ 1000 - 1200[FRI]
+ SP1541 SEC 17 @ 1200 - 1400[FRI]
+ ST2131 LEC 1 @ 1800 - 2000[FRI]
+============================================================
+IS1103 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2334 offered for chosen semester. Processing . . . .
+MA2104 offered for chosen semester. Processing . . . .
+CM1102 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA2104 TUT 2 @ 1000 - 1100[MON]
+ CS2030S LEC 1 @ 1200 - 1400[MON]
+ CM1102 TUT 2 @ 1400 - 1500[MON]
+ CS2040S LEC 1 @ 1600 - 1800[MON]
+On Tuesday
+ ST2334 LEC 3 @ 800 - 1000[TUES]
+ ST2334 TUT 11 @ 1000 - 1100[TUES]
+ CS2040S TUT 07 @ 1100 - 1300[TUES]
+On Wednesday
+ CS2030S REC 02 @ 900 - 1000[WED]
+ MA2104 LEC 1 @ 1000 - 1200[WED]
+ CM1102 LEC 1 @ 1200 - 1400[WED]
+ CS2040S LEC 1 @ 1400 - 1500[WED]
+On Thursday
+ CS2030S LAB 10A @ 1000 - 1200[THURS]
+ CS2040S REC 04 @ 1200 - 1300[THURS]
+On Friday
+ ST2334 LEC 3 @ 800 - 1000[FRI]
+ MA2104 LEC 1 @ 1000 - 1200[FRI]
+ CM1102 LEC 1 @ 1200 - 1400[FRI]
+============================================================
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+MA2001 offered for chosen semester. Processing . . . .
+ST2334 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA2001 LEC 1 @ 800 - 1000[MON]
+ ST2334 TUT 3 @ 1100 - 1200[MON]
+ CS2030S LEC 1 @ 1200 - 1400[MON]
+ CS2040S LEC 1 @ 1600 - 1800[MON]
+On Tuesday
+ ST2334 LEC 3 @ 800 - 1000[TUES]
+ GEA1000 TUT D16 @ 1200 - 1500[TUES]
+ CS2040S TUT 15 @ 1500 - 1700[TUES]
+On Wednesday
+ MA2001 LEC 1 @ 800 - 1000[WED]
+ CS2030S REC 04 @ 1100 - 1200[WED]
+ CS2040S LEC 1 @ 1400 - 1500[WED]
+On Thursday
+ CS2030S LAB 10A @ 1000 - 1200[THURS]
+On Friday
+ ST2334 LEC 3 @ 800 - 1000[FRI]
+ CS2040S REC 13 @ 1200 - 1300[FRI]
+ MA2001 TUT 10 @ 1300 - 1400[FRI]
+============================================================
+CS3230 offered for chosen semester. Processing . . . .
+MA4211 offered for chosen semester. Processing . . . .
+CS2100 offered for chosen semester. Processing . . . .
+MA5203 offered for chosen semester. Processing . . . .
+CS2103 offered for chosen semester. Processing . . . .
+MA4262 offered for chosen semester. Processing . . . .
+MA4235 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA4262 LEC 1 @ 1200 - 1400[MON]
+ CS2100 TUT 04 @ 1500 - 1600[MON]
+ CS3230 TUT 06 @ 1600 - 1700[MON]
+On Tuesday
+ CS3230 LEC 1 @ 1000 - 1200[TUES]
+ MA4235 LEC 1 @ 1200 - 1400[TUES]
+ MA4211 LEC 1 @ 1400 - 1600[TUES]
+ CS2100 LEC 1 @ 1600 - 1800[TUES]
+On Wednesday
+ CS2100 LEC 1 @ 900 - 1000[WED]
+ MA5203 LEC 1 @ 1000 - 1200[WED]
+ CS2103 TUT 01 @ 1400 - 1500[WED]
+ CS2100 LAB 06 @ 1500 - 1600[WED]
+On Thursday
+ MA4211 TUT 1 @ 900 - 1000[THURS]
+ MA4235 TUT 1 @ 1100 - 1200[THURS]
+ MA4262 LEC 1 @ 1200 - 1400[THURS]
+On Friday
+ MA4262 TUT 1 @ 900 - 1000[FRI]
+ MA5203 LEC 1 @ 1000 - 1200[FRI]
+ MA4235 LEC 1 @ 1200 - 1400[FRI]
+ MA4211 LEC 1 @ 1400 - 1600[FRI]
+ CS2103 LEC 1 @ 1600 - 1800[FRI]
+============================================================
+CS3230 offered for chosen semester. Processing . . . .
+MA4211 offered for chosen semester. Processing . . . .
+CS2100 offered for chosen semester. Processing . . . .
+MA5203 offered for chosen semester. Processing . . . .
+CS2103 offered for chosen semester. Processing . . . .
+MA4262 offered for chosen semester. Processing . . . .
+MA4235 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA4262 LEC 1 @ 1200 - 1400[MON]
+ CS2100 TUT 03 @ 1400 - 1500[MON]
+ CS3230 TUT 06 @ 1600 - 1700[MON]
+On Tuesday
+ CS3230 LEC 1 @ 1000 - 1200[TUES]
+ MA4235 LEC 1 @ 1200 - 1400[TUES]
+ MA4211 LEC 1 @ 1400 - 1600[TUES]
+ CS2100 LEC 1 @ 1600 - 1800[TUES]
+On Wednesday
+ CS2100 LEC 1 @ 900 - 1000[WED]
+ MA5203 LEC 1 @ 1000 - 1200[WED]
+ CS2103 TUT 01 @ 1400 - 1500[WED]
+ CS2100 LAB 06 @ 1500 - 1600[WED]
+On Thursday
+ MA4211 TUT 1 @ 900 - 1000[THURS]
+ MA4235 TUT 1 @ 1100 - 1200[THURS]
+ MA4262 LEC 1 @ 1200 - 1400[THURS]
+On Friday
+ MA4262 TUT 1 @ 900 - 1000[FRI]
+ MA5203 LEC 1 @ 1000 - 1200[FRI]
+ MA4235 LEC 1 @ 1200 - 1400[FRI]
+ MA4211 LEC 1 @ 1400 - 1600[FRI]
+ CS2103 LEC 1 @ 1600 - 1800[FRI]
+============================================================
+UTC1114 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+ENV2102 offered for chosen semester. Processing . . . .
+UTC1404 offered for chosen semester. Processing . . . .
+MA2101S offered for chosen semester. Processing . . . .
+ST2131 offered for chosen semester. Processing . . . .
+MA2108S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2132 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA2101S TUT 1 @ 800 - 1000[MON]
+ CS2030S LEC 1 @ 1200 - 1400[MON]
+ MA2108S TUT 1 @ 1400 - 1600[MON]
+ CS2040S LEC 1 @ 1600 - 1800[MON]
+ ENV2102 SEM 1 @ 1800 - 2200[MON]
+On Tuesday
+ MA2108S LEC 1 @ 800 - 1000[TUES]
+ MA2101S LEC 1 @ 1200 - 1400[TUES]
+ ST2132 LEC 1 @ 1400 - 1600[TUES]
+ CS2040S TUT 17 @ 1600 - 1800[TUES]
+ ST2131 LEC 1 @ 1800 - 2000[TUES]
+On Wednesday
+ CS2030S REC 01 @ 800 - 900[WED]
+ ST2132 TUT 2 @ 1300 - 1400[WED]
+ CS2040S LEC 1 @ 1400 - 1500[WED]
+ GEA1000 TUT D53 @ 1500 - 1800[WED]
+On Thursday
+ MA2108S LEC 1 @ 800 - 1000[THURS]
+ CS2030S LAB 10A @ 1000 - 1200[THURS]
+ MA2101S LEC 1 @ 1200 - 1400[THURS]
+ UTC1404 SEM 1 @ 1700 - 2000[THURS]
+On Friday
+ CS2040S REC 10 @ 900 - 1000[FRI]
+ UTC1114 SEM 3 @ 1000 - 1300[FRI]
+ ST2132 LEC 1 @ 1400 - 1600[FRI]
+ ST2131 TUT 11 @ 1600 - 1700[FRI]
+ ST2131 LEC 1 @ 1800 - 2000[FRI]
+============================================================
+HSA1000 offered for chosen semester. Processing . . . .
+HSS1000 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+ST2131 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+MA1100 offered for chosen semester. Processing . . . .
+CS2103T offered for chosen semester. Processing . . . .
+MA2104 offered for chosen semester. Processing . . . .
+IS1103 offered for chosen semester. Processing . . . .
+Scrapping Successful
+SAT
+On Monday
+ MA2104 TUT 1 @ 900 - 1000[MON]
+ HSA1000 LEC 1 @ 1000 - 1200[MON]
+ CS2030S LEC 1 @ 1200 - 1400[MON]
+ MA1100 LEC 1 @ 1600 - 1800[MON]
+On Tuesday
+ GEA1000 TUT D31 @ 900 - 1200[TUES]
+ HSA1000 TUT E5 @ 1000 - 1200[TUES]
+ CS2103T LEC G06 @ 1200 - 1400[TUES]
+ MA1100 TUT 3 @ 1400 - 1500[TUES]
+ HSS1000 TUT W50 @ 1500 - 1600[TUES]
+ ST2131 LEC 1 @ 1800 - 2000[TUES]
+On Wednesday
+ HSS1000 LEC 1 @ 800 - 1000[WED]
+ MA2104 LEC 1 @ 1000 - 1200[WED]
+ CS2030S REC 08 @ 1500 - 1600[WED]
+ MA1100 LEC 1 @ 1600 - 1800[WED]
+On Thursday
+ CS2030S LAB 10A @ 1000 - 1200[THURS]
+ CS2103T LEC G06 @ 1200 - 1300[THURS]
+ ST2131 TUT 2 @ 1300 - 1400[THURS]
+On Friday
+ MA2104 LEC 1 @ 1000 - 1200[FRI]
+ CS2103T LEC G06 @ 1200 - 1400[FRI]
+ CS2103T LEC G06 @ 1400 - 1600[FRI]
+ ST2131 LEC 1 @ 1800 - 2000[FRI]
+============================================================
+BIG TEST 2 : TO DETECT IMPOSSIBLE TIMETABLES
+CS1101S offered for chosen semester. Processing . . . .
+CS1231S offered for chosen semester. Processing . . . .
+MA2002 offered for chosen semester. Processing . . . .
+MA2001 offered for chosen semester. Processing . . . .
+GEC1030 offered for chosen semester. Processing . . . .
+Scrapping Successful
+UNSAT
+No feasible timetable
+============================================================
+IS1103 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2131 offered for chosen semester. Processing . . . .
+MA2104 offered for chosen semester. Processing . . . .
+SP1541 offered for chosen semester. Processing . . . .
+HSS1000 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+GESS1027 offered for chosen semester. Processing . . . .
+Scrapping Successful
+UNSAT
+No feasible timetable
+============================================================
+IS1103 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2334 offered for chosen semester. Processing . . . .
+MA2104 offered for chosen semester. Processing . . . .
+CM1102 offered for chosen semester. Processing . . . .
+GESS1027 offered for chosen semester. Processing . . . .
+Scrapping Successful
+UNSAT
+No feasible timetable
+============================================================
+CS2030S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+MA2001 offered for chosen semester. Processing . . . .
+ST2334 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+DSA1101 offered for chosen semester. Processing . . . .
+GESS1027 offered for chosen semester. Processing . . . .
+Scrapping Successful
+UNSAT
+No feasible timetable
+============================================================
+CS3230 offered for chosen semester. Processing . . . .
+MA4211 offered for chosen semester. Processing . . . .
+CS2100 offered for chosen semester. Processing . . . .
+MA5203 offered for chosen semester. Processing . . . .
+CS2103 offered for chosen semester. Processing . . . .
+MA4262 offered for chosen semester. Processing . . . .
+MA4235 offered for chosen semester. Processing . . . .
+DSA1101 offered for chosen semester. Processing . . . .
+GESS1027 not offered for chosen semester. Ignoring . . . . 
+Scrapping Successful
+BUT scrapping received some issues. Please Check again
+UNSAT
+No feasible timetable
+============================================================
+CS3230 offered for chosen semester. Processing . . . .
+MA4211 offered for chosen semester. Processing . . . .
+CS2100 offered for chosen semester. Processing . . . .
+MA5203 offered for chosen semester. Processing . . . .
+CS2103 offered for chosen semester. Processing . . . .
+MA4262 offered for chosen semester. Processing . . . .
+MA4235 offered for chosen semester. Processing . . . .
+DSA1101 offered for chosen semester. Processing . . . .
+GESS1027 not offered for chosen semester. Ignoring . . . . 
+Scrapping Successful
+BUT scrapping received some issues. Please Check again
+UNSAT
+No feasible timetable
+============================================================
+UTC1114 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+ENV2102 offered for chosen semester. Processing . . . .
+UTC1404 offered for chosen semester. Processing . . . .
+MA2101S offered for chosen semester. Processing . . . .
+ST2131 offered for chosen semester. Processing . . . .
+MA2108S offered for chosen semester. Processing . . . .
+CS2040S offered for chosen semester. Processing . . . .
+ST2132 offered for chosen semester. Processing . . . .
+CS2103T offered for chosen semester. Processing . . . .
+Scrapping Successful
+UNSAT
+No feasible timetable
+============================================================
+HSA1000 offered for chosen semester. Processing . . . .
+HSS1000 offered for chosen semester. Processing . . . .
+GEA1000 offered for chosen semester. Processing . . . .
+ST2131 offered for chosen semester. Processing . . . .
+CS2030S offered for chosen semester. Processing . . . .
+MA1100 offered for chosen semester. Processing . . . .
+CS2103T offered for chosen semester. Processing . . . .
+MA2104 offered for chosen semester. Processing . . . .
+IS1103 offered for chosen semester. Processing . . . .
+DSA1101 offered for chosen semester. Processing . . . .
+GESS1027 offered for chosen semester. Processing . . . .
+Scrapping Successful
+UNSAT
+No feasible timetable
+============================================================

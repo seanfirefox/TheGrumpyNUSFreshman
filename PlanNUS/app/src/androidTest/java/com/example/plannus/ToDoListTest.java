@@ -9,12 +9,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import static com.example.plannus.utils.RecyclerViewChecker.hasItem;
-
 import static org.hamcrest.CoreMatchers.not;
 
-import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 

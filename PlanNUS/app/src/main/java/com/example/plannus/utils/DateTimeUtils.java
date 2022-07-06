@@ -22,7 +22,7 @@ public class DateTimeUtils {
             int minutes = Minutes.minutesBetween(current, deadLine).getMinutes() % 60;
             if (days == 0) {
                 return hours <= 0 && minutes <= 0
-                        ? "Task Expired"
+                        ? "TASK EXPIRED"
                         : hours > 0
                         ? String.format("%d hrs, %d mins", hours, minutes)
                         : String.format("%d mins", minutes);

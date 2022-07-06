@@ -14,12 +14,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.filters.LargeTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import com.example.plannus.Activities.ContentMainActivity;
+import com.example.plannus.Activities.GenerateTimetableActivity;
+import com.example.plannus.Activities.MainActivity;
+import com.example.plannus.Activities.TimetableSettingsActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,20 +37,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-
-import android.view.View;
-import android.widget.TextView;
-
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.GenerateTimetableActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.TimetableSettingsActivity;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest

@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Create file
-       run: touch /home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/google-services.json
+      run: touch /home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/google-services.json
     - name: Creating google-services.json
       id: write_file
       uses: timheuer/base64-to-file@v1.1

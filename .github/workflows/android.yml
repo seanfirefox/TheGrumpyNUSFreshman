@@ -19,12 +19,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: Create file
-      run: cat /home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/google-services.json | base64
-    - name: Putting data
-      env:
-        DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-      run: echo $DATA | base64 --decode > /home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/google-services.json
+    - name: Creating google-services.json
+      id: write_file
+      uses: timheuer/base64-to-file@v1.1
+      with:
+        fileName: 'google-services.json'
+        fileDir: '/home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/'
+        encodedString: ${{ secrets.GOOGLE_SERVICES_JSON }}
     - name: Grant execute permission for gradlew
       run: cd PlanNUS && ls && chmod +x gradlew
     - name: Build with Gradle

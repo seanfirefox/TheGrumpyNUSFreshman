@@ -56,13 +56,13 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation files('joda-time-2.10.14.jar')
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:4.6.1'
-    testImplementation group: 'org.powermock', name: 'powermock-api-support', version: '2.0.9'
-    testImplementation ('org.powermock:powermock-api-mockito2:2.0.9') {
+    testImplementation 'org.mockito:mockito-core:2.10.0'
+//    testImplementation group: 'org.powermock', name: 'powermock-api-support', version: '2.0.9'
+    testImplementation ('org.powermock:powermock-api-mockito2:2.0.2') {
         exclude module: 'hamcrest-core'
         exclude module: 'objenesis'
     }
-    testImplementation ('org.powermock:powermock-module-junit4:2.0.9') {
+    testImplementation ('org.powermock:powermock-module-junit4:2.0.2') {
         exclude module: 'hamcrest-core'
         exclude module: 'objenesis'
     }
@@ -80,3 +80,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.test.espresso:espresso-intents:3.4.0"
 }
+

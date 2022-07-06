@@ -5,12 +5,11 @@ on:
     branches: [ "SATSolverAltSolnFix" ]
   pull_request:
     branches: [ "SATSolverAltSolnFix" ]
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK 11
@@ -19,15 +18,14 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: Create file
-      run: touch /home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/google-services.json
-    - name: Creating google-services.json
-      id: write_file
-      uses: timheuer/base64-to-file@v1.1
-      with:
-        fileName: 'google-services.json'
-        fileDir: '/home/runner/work/TheGrumpyNUSFreshman/TheGrumpyNUSFreshman/PlanNUS/app/'
-        encodedString: ${{ secrets.GOOGLE_SERVICES_JSON }}
+    - name: Export Google Services Json
+      env:
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: echo $GOOGLE_SERVICES_JSON | base64 --decode > ./PlanNUS/app/google-services.json
+    - name: Cat JSON File
+      env:
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: cat ./PlanNUS/app/google-services.json
     - name: Grant execute permission for gradlew
       run: cd PlanNUS && ls && chmod +x gradlew
     - name: Build with Gradle

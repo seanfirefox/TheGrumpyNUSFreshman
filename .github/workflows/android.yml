@@ -23,9 +23,9 @@ jobs:
         distribution: 'temurin'
         path: PlanNUS
         cache: gradle
-
+    
     - name: Grant execute permission for gradlew
-      run: chmod +x PlanNUS/gradlew
+      run: ls && chmod +x /PlanNUS/gradlew
     - name: Build with Gradle
       run: ./PlanNUS/gradlew build
     - name: Upload APK

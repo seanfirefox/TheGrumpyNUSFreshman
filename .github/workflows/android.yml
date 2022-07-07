@@ -2,9 +2,9 @@ name: PlanNUS CI
 
 on:
   push:
-    branches: [ "SATSolverAltSolnFix" ]
+    branches: [ "main", "SATSolverPlanNUS", "SATSolverAltSolnFix" ]
   pull_request:
-    branches: [ "SATSolverAltSolnFix" ]
+    branches: [ "main", "SATSolverPlanNUS", "SATSolverAltSolnFix" ]
   workflow_dispatch:
 
 jobs:

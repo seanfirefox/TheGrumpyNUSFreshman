@@ -35,7 +35,7 @@ jobs:
     - name: UI Test
       run: cd PlanNUS && ./gradlew test --stacktrace
     - name: Some Test
-      uses: faruktoptas/android-github-actions-emulator@latest
+      uses: faruktoptas/android-github-actions-emulator@1.1.0
     - name: Upload APK
       uses: actions/upload-artifact@v3.1.0
       with:

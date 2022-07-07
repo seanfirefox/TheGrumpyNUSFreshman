@@ -119,7 +119,7 @@ public class ToDoListTest {
         onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
-        onView(withId(R.id.dueDateButton)).perform(ViewActions.scrollTo(), ViewActions.click());
+        onView(withId(R.id.dueDateButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 2));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 

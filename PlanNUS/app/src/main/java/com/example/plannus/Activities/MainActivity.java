@@ -16,14 +16,15 @@ import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
-    private EditText emailAddress;
-    private EditText passWord;
+    private TextInputEditText emailAddress;
+    private TextInputEditText passWord;
     private ProgressBar progressBar;
     private Button loginButton;
     private SessionManager sessionManager;
@@ -85,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
 
-        emailAddress = findViewById(R.id.emailAddress);
-        passWord = findViewById(R.id.passWord);
+        emailAddress = findViewById(R.id.emailAddress1);
+        passWord = findViewById(R.id.passWord1);
         progressBar = findViewById(R.id.progressBar);
     }
 

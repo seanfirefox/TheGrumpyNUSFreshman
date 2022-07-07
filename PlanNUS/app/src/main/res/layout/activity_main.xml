@@ -90,6 +90,7 @@
             app:startIconDrawable="@android:drawable/ic_dialog_email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailAddress1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autoSizeMaxTextSize="18sp"
@@ -118,6 +119,7 @@
             app:startIconDrawable="@android:drawable/ic_lock_lock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passWord1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="25dp"

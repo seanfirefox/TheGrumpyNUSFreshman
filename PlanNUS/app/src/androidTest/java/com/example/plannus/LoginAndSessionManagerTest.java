@@ -46,14 +46,12 @@ public class LoginAndSessionManagerTest {
 
     @Test
     public void checkLoginPageDisplayed() {
-        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.emailAddress1)).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
-        onView(withId(R.id.passWord)).check(matches(isDisplayed()));
+        onView(withId(R.id.emailAddress1)).check(matches(isDisplayed()));
+        onView(withId(R.id.passWord1)).check(matches(isDisplayed()));
         onView(withId(R.id.register)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView)).check(matches(isDisplayed()));
-        onView(withId(R.id.imageView2)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailIcon)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -71,8 +69,8 @@ public class LoginAndSessionManagerTest {
 
     @Test
     public void successfulLoginAndSessionManagerSingletonStatusCheck() {
-        onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
+        onView(withId(R.id.emailAddress1)).perform(ViewActions.typeText(email));
+        onView(withId(R.id.passWord1)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
         SessionManager a = SessionManager.get();

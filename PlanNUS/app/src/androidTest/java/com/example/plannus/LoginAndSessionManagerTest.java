@@ -46,6 +46,7 @@ public class LoginAndSessionManagerTest {
 
     @Test
     public void checkLoginPageDisplayed() {
+        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
         onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
         onView(withId(R.id.passWord)).check(matches(isDisplayed()));

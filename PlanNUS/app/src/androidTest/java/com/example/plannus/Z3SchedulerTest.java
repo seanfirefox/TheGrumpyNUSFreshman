@@ -72,7 +72,7 @@ public class Z3SchedulerTest {
         onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
 
         // Go to Settings Activity
-        onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
         onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));

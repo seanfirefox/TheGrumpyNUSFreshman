@@ -40,8 +40,8 @@ jobs:
        api-level: 29
        script: cd PlanNUS && ./gradlew connectedCheck
     - name: Android Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }}
+      uses: asadmansr/android-test-report-action@v1.2.0
+      if: ${{ always() }}
     - name: Upload APK
       uses: actions/upload-artifact@v3.1.0
       with:

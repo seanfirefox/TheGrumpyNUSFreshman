@@ -80,11 +80,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginTop="144dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
             android:hint="@string/Email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passWord"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:startIconDrawable="@android:drawable/ic_dialog_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,8 +98,8 @@
                 android:autofillHints="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="#808080"
-
-                />
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,20 +108,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
             android:hint="@string/Password"
-            app:startIconDrawable="@android:drawable/ic_lock_lock"
-            app:endIconMode="password_toggle">
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailAddress"
+            app:startIconDrawable="@android:drawable/ic_lock_lock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
                 android:autoSizeMaxTextSize="18sp"
                 android:autoSizeMinTextSize="2sp"
                 android:autoSizeTextType="uniform"
-                android:inputType="textPassword"
                 android:autofillHints="password"
-                android:textColor="#808080"
-                />
+                android:inputType="textPassword"
+                android:textColor="#808080" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

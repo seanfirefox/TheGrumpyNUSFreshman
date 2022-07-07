@@ -56,7 +56,7 @@ public class SaveSettingsTest {
         Intents.init();
         // Login First
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
+        onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
         Thread.sleep(1000);
@@ -74,17 +74,16 @@ public class SaveSettingsTest {
 
     @Test
     public void A_CanAccessActivity() throws Exception {
-        onView(withId(R.id.settingsButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.settingsButton)).check(matches(isDisplayed())).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
+        onView(withId(R.id.settingsPage)).perform(ViewActions.closeSoftKeyboard()).check(matches(isDisplayed()));
     }
 
 
    @Test
    public void B_CanSave5Modules() throws Exception {
-       onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+       onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
        intending(hasComponent(TimetableSettingsActivity.class.getName()));
        Thread.sleep(1000);
        onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
@@ -117,7 +116,7 @@ public class SaveSettingsTest {
    }
    @Test
    public void C_CanSaveModulesWithConstraints() throws Exception {
-       onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+       onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
        intending(hasComponent(TimetableSettingsActivity.class.getName()));
        Thread.sleep(1000);
        onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
@@ -161,7 +160,7 @@ public class SaveSettingsTest {
 
     @Test
     public void E_CanSave7ModulesWithConstraints() throws Exception {
-        onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
         onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
@@ -215,7 +214,7 @@ public class SaveSettingsTest {
 
     @Test
     public void D_CanSave6Modules() throws Exception {
-        onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
         onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));

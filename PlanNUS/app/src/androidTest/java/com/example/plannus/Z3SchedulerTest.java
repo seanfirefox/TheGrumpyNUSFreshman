@@ -14,12 +14,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.filters.LargeTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import com.example.plannus.Activities.ContentMainActivity;
+import com.example.plannus.Activities.GenerateTimetableActivity;
+import com.example.plannus.Activities.MainActivity;
+import com.example.plannus.Activities.TimetableSettingsActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,20 +37,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-
-import android.view.View;
-import android.widget.TextView;
-
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.GenerateTimetableActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.TimetableSettingsActivity;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -62,7 +57,7 @@ public class Z3SchedulerTest {
         Intents.init();
         // Login First
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
+        onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
         Thread.sleep(1000);
@@ -77,7 +72,7 @@ public class Z3SchedulerTest {
         onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
 
         // Go to Settings Activity
-        onView(withId(R.id.settingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
         onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
@@ -92,7 +87,7 @@ public class Z3SchedulerTest {
     @Test
     public void B_EmptySettingsTimetable() throws Exception {
         // Go into settings and zero out the settings
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.closeSoftKeyboard(), ViewActions.click());
 
         // Click on generate and it fails
         intended(hasComponent(GenerateTimetableActivity.class.getName()));

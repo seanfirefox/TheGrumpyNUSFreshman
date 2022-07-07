@@ -23,49 +23,12 @@
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="@string/Login"
+            android:backgroundTint="@color/button_colour"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passWord" />
 
-        <EditText
-            android:id="@+id/emailAddress"
-            android:layout_width="294dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:autoSizeMaxTextSize="18sp"
-            android:autoSizeMinTextSize="2sp"
-            android:autoSizeTextType="uniform"
-            android:autofillHints="emailAddress"
-            android:ems="10"
-            android:hint="@string/Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/emailIcon"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <EditText
-            android:id="@+id/passWord"
-            android:layout_width="294dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:autoSizeMaxTextSize="18sp"
-            android:autoSizeMinTextSize="2sp"
-            android:autoSizeTextType="uniform"
-            android:autofillHints="password"
-            android:ems="10"
-            android:hint="@string/Password"
-            android:inputType="textPassword"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -89,6 +52,7 @@
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="@string/Register"
+            android:backgroundTint="@color/button_colour"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -109,29 +73,56 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/plannus_logo_color" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="89dp"
-            android:layout_height="71dp"
-            android:contentDescription="@string/pwdIcon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailIcon"
-            app:srcCompat="@android:drawable/ic_lock_lock"
-            app:tint="#5089fa" />
 
-        <ImageView
-            android:id="@+id/emailIcon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="24dp"
-            android:background="#FFFFFF"
-            android:contentDescription="@string/emailIcon"
-            app:layout_constraintHorizontal_bias="0.807"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginTop="144dp"
+            android:hint="@string/Email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:srcCompat="@android:drawable/ic_dialog_email"
-            app:tint="#5089fa" />
+            app:layout_constraintTop_toBottomOf="@+id/passWord"
+            app:startIconDrawable="@android:drawable/ic_dialog_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeMaxTextSize="18sp"
+                android:autoSizeMinTextSize="2sp"
+                android:autoSizeTextType="uniform"
+                android:autofillHints="Email"
+                android:inputType="textEmailAddress"
+                android:textColor="#808080"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/Password"
+            app:startIconDrawable="@android:drawable/ic_lock_lock"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeMaxTextSize="18sp"
+                android:autoSizeMinTextSize="2sp"
+                android:autoSizeTextType="uniform"
+                android:inputType="textPassword"
+                android:autofillHints="password"
+                android:textColor="#808080"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

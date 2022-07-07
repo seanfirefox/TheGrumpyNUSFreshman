@@ -70,12 +70,11 @@ public class RegisterTest {
     }
 
     @Test
-    public void A_isBackToMain() throws InterruptedException {
+    public void A_isBackToMain() {
         onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(RegisterUser.class.getName()));
-        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.pressBack());
+        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.closeSoftKeyboard(), ViewActions.pressBack());
         intending(hasComponent(MainActivity.class.getName()));
-        Thread.sleep(10000);
         checkLoginPageDisplayed();
     }
 

@@ -31,9 +31,9 @@ jobs:
     - name: Build with Gradle
       run: cd PlanNUS && ./gradlew build
     - name: Unit Test
-      run: ./gradlew testDebugUnitTest --stacktrace
+      run: cd PlanNUS && ./gradlew testDebugUnitTest --stacktrace
     - name: UI Test
-      run: ./gradlew test --stacktrace
+      run: cd PlanNUS && ./gradlew test --stacktrace
     - name: Upload APK
       uses: actions/upload-artifact@v3.1.0
       with:

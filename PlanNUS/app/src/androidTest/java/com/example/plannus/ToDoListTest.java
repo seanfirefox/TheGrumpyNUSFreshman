@@ -93,7 +93,7 @@ public class ToDoListTest {
 
     public void login() throws InterruptedException {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
+        onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
         Thread.sleep(1000);
@@ -116,37 +116,37 @@ public class ToDoListTest {
         onView(withId(R.id.taskTypeEditText)).perform(ViewActions.typeText(tag), ViewActions.closeSoftKeyboard());
 
         // Test saving without defining date and time
-        onView(withId(R.id.saveButton)).perform(ViewActions.click());
-        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+        onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
+        onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
         onView(withId(R.id.dueDateButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 2));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
         // Test saving without defining date and time
-        onView(withId(R.id.saveButton)).perform(ViewActions.click());
-        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+        onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
+        onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
-        onView(withId(R.id.dueTimeButton)).perform(ViewActions.click());
+        onView(withId(R.id.dueTimeButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(0, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
         // Test saving without defining date and time
-        onView(withId(R.id.saveButton)).perform(ViewActions.click());
-        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+        onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
+        onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
-        onView(withId(R.id.plannedDateButton)).perform(ViewActions.click());
+        onView(withId(R.id.plannedDateButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 1));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
         // Test saving without defining date and time
-        onView(withId(R.id.saveButton)).perform(ViewActions.click());
-        onView(withId(R.id.AddTasks)).check(matches(isDisplayed()));
+        onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
+        onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
-        onView(withId(R.id.plannedTimeButton)).perform(ViewActions.click());
+        onView(withId(R.id.plannedTimeButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(12, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
-        onView(withId(R.id.saveButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
 
         onView(withText(task)).check(matches(isDisplayed()));
         onView(withId(R.id.taskListAnnouncements)).perform(ViewActions.pressBack());

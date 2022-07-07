@@ -14,6 +14,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+
 import com.example.plannus.Activities.ContentMainActivity;
 import com.example.plannus.Activities.MainActivity;
 import com.example.plannus.Activities.RegisterUser;
@@ -55,29 +56,31 @@ public class RegisterTest {
     }
 
     public void fillInDetails() {
-        onView(withId(R.id.password)).perform(ViewActions.typeText(password));
-        onView(withId(R.id.age)).perform(ViewActions.typeText(age));
-        onView(withId(R.id.email)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.fullName)).perform(ViewActions.typeText(fullName));
+        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
+        onView(withId(R.id.age)).perform(ViewActions.scrollTo(), ViewActions.typeText(age));
+        onView(withId(R.id.email)).perform(ViewActions.scrollTo(), ViewActions.typeText(email));
+        onView(withId(R.id.fullName)).perform(ViewActions.scrollTo(), ViewActions.typeText(fullName));
         onView(withId(R.id.registerUser)).perform(ViewActions.scrollTo(),ViewActions.click());
     }
 
     public void goBackToMainActivity() {
-        onView(withId(R.id.password)).perform(ViewActions.pressBack());
+        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.pressBack());
         intending(hasComponent(MainActivity.class.getName()));
         //checkLoginPageDisplayed();
     }
 
     @Test
-    public void A_isBackToMain() {
+    public void A_isBackToMain() throws InterruptedException {
         onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(RegisterUser.class.getName()));
-        onView(withId(R.id.password)).perform(ViewActions.pressBack());
+        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.pressBack());
         intending(hasComponent(MainActivity.class.getName()));
+        Thread.sleep(10000);
         checkLoginPageDisplayed();
     }
 
     public void checkLoginPageDisplayed() {
+        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
         onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
         onView(withId(R.id.passWord)).check(matches(isDisplayed()));
@@ -91,7 +94,7 @@ public class RegisterTest {
     @Test
     public void C_AttemptToLoginNewUser() throws InterruptedException {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.passWord)).perform(ViewActions.typeText(password));
+        onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
 //        checkSuccessfulLoginOfNewUser();

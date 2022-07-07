@@ -35,7 +35,7 @@ jobs:
     - name: UI Test
       run: cd PlanNUS && ./gradlew test --stacktrace
     - name: Some Test
-      name: reactivecircus/android-emulator-runner@v2
+      uses: reactivecircus/android-emulator-runner@v2
       with: 
         api-level: 24
         script: cd PlanNUS && ./gradlew connectedCheck

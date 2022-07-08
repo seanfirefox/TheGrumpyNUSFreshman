@@ -79,10 +79,10 @@ public class RegisterTest {
     }
 
     public void checkLoginPageDisplayed() {
-        onView(withId(R.id.emailAddress1)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailAddress1)).check(matches(isDisplayed()));
-        onView(withId(R.id.passWord1)).check(matches(isDisplayed()));
+        onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
+        onView(withId(R.id.passWord)).check(matches(isDisplayed()));
         onView(withId(R.id.register)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView)).check(matches(isDisplayed()));
         B_clickOnRegisterButton();
@@ -90,8 +90,8 @@ public class RegisterTest {
 
     @Test
     public void C_AttemptToLoginNewUser() throws InterruptedException {
-        onView(withId(R.id.emailAddress1)).perform(ViewActions.typeText(email));
-        onView(withId(R.id.passWord1)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
+        onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
+        onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
 //        checkSuccessfulLoginOfNewUser();

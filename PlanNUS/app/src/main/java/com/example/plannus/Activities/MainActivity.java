@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Button;
 
@@ -86,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
 
-        emailAddress = findViewById(R.id.emailAddress1);
-        passWord = findViewById(R.id.passWord1);
+        emailAddress = findViewById(R.id.emailAddress);
+        passWord = findViewById(R.id.passWord);
         progressBar = findViewById(R.id.progressBar);
     }
 

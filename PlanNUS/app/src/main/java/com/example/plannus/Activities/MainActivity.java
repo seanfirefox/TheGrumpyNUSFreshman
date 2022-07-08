@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Button;
@@ -22,8 +23,8 @@ import com.google.firebase.auth.AuthResult;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
-    private TextInputEditText emailAddress;
-    private TextInputEditText passWord;
+    private EditText emailAddress;
+    private EditText passWord;
     private ProgressBar progressBar;
     private Button loginButton;
     private SessionManager sessionManager;

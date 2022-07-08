@@ -7,7 +7,6 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/ic_plannusnobg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_color_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/scrollviewborder.xml" value="0.148" />
         <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.25" />
@@ -17,9 +16,9 @@
         <entry key="app/src/main/res/layout/activity_contentmainactivity.xml" value="0.3075592041015625" />
         <entry key="app/src/main/res/layout/activity_edit_task.xml" value="0.2631578947368421" />
         <entry key="app/src/main/res/layout/activity_generate_timetable.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.44467315673828134" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.27684326171875" />
         <entry key="app/src/main/res/layout/activity_milestones.xml" value="0.14221014492753623" />
-        <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.3316708229426434" />
         <entry key="app/src/main/res/layout/activity_time_tabler.xml" value="0.12082066869300911" />
         <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.23796791443850268" />
         <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.18" />

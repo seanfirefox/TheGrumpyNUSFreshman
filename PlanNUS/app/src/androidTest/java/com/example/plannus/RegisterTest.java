@@ -96,13 +96,13 @@ public class RegisterTest {
         intending(hasComponent(ContentMainActivity.class.getName()));
 //        checkSuccessfulLoginOfNewUser();
         Thread.sleep(1000);
-        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
     }
 
     public void checkSuccessfulLoginOfNewUser() {
         intending(hasComponent(ContentMainActivity.class.getName()));
-        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
     }
 

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.plannus.Adaptors.AnnouncementsAdapter;
 import com.example.plannus.R;
@@ -31,8 +32,7 @@ import org.joda.time.DateTime;
 
 public class ContentMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button checklistButton, timetableGenerator, calendarButton;
-    private ImageButton signOutButton;
+    private Button checklistButton, timetableGenerator, calendarButton, signOutButton;
     private AnnouncementsAdapter taskListAdapter;
     private TextView wlcMsg;
     private User user;
@@ -44,6 +44,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_main);
+//        setSupportActionBar(findViewById(R.id.toolbar));
 
         initVars();
         initProfile();
@@ -98,7 +99,7 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
                 .build();
         taskListAdapter = new AnnouncementsAdapter(options);
         RecyclerView recyclerView = findViewById(R.id.mainTaskListAnnouncements);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(taskListAdapter);
     }

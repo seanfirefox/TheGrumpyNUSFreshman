@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_colour"
+    android:background="@drawable/marble"
     tools:context=".Activities.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_colour">
+        android:background="@drawable/marble">
 
         <Button
             android:id="@+id/loginButton"
@@ -65,13 +65,12 @@
             android:layout_width="368dp"
             android:layout_height="191dp"
             android:layout_marginTop="40dp"
-            android:background="#F0EDE0"
             android:contentDescription="@string/plannus_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/plannus_logo_color" />
+            app:srcCompat="@drawable/ic_plannusnobg" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -98,7 +97,8 @@
                 android:autoSizeTextType="uniform"
                 android:autofillHints="Email"
                 android:inputType="textEmailAddress"
-                android:textColor="#808080"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:layout_marginEnd="25dp"
                 android:layout_marginStart="25dp" />
 
@@ -126,10 +126,11 @@
                 android:layout_marginStart="25dp"
                 android:autoSizeMaxTextSize="18sp"
                 android:autoSizeMinTextSize="2sp"
+                android:background="@color/white"
                 android:autoSizeTextType="uniform"
                 android:autofillHints="password"
                 android:inputType="textPassword"
-                android:textColor="#808080" />
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

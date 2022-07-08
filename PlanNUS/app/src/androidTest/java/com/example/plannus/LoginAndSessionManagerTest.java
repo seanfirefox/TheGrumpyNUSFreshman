@@ -40,7 +40,7 @@ public class LoginAndSessionManagerTest {
     private String password = "1234567";
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() {
         Intents.init();
     }
 
@@ -79,7 +79,7 @@ public class LoginAndSessionManagerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Intents.release();
     }
 }

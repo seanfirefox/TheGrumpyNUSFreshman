@@ -16,14 +16,15 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            app:contentScrim="@color/design_default_color_primary"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed|snap"
-            app:toolbarId="@id/toolbar">
+            android:layout_height="460dp"
+            app:contentScrim="@color/colorPrimaryContrast"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@id/toolbar"
+            app:titleCollapseMode="fade">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="460dp"
                 android:background="@color/backGroundColor">
 
                 <TextView
@@ -39,7 +40,6 @@
                     android:text="@string/hello"
                     android:textAlignment="center"
                     android:textColor="#000000"
-
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
                     android:layout_width="163dp"
                     android:layout_height="131dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="28dp"
                     android:autoSizeMaxTextSize="18sp"
                     android:autoSizeMinTextSize="8sp"
                     android:autoSizeTextType="uniform"
@@ -88,7 +88,7 @@
                     android:layout_width="163dp"
                     android:layout_height="131dp"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="28dp"
                     android:autoSizeMaxTextSize="18sp"
                     android:autoSizeMinTextSize="8sp"
                     android:autoSizeTextType="uniform"
@@ -102,7 +102,7 @@
                     app:iconSize="70dp"
                     app:iconTint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.238"
+                    app:layout_constraintHorizontal_bias="0.108"
                     app:layout_constraintStart_toEndOf="@+id/calendarImgView"
                     app:layout_constraintTop_toBottomOf="@+id/hiName"
                     app:strokeColor="@color/black"
@@ -129,8 +129,33 @@
                     app:iconTint="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/calendarImgView"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="3dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:autoSizeMaxTextSize="25sp"
+                    android:autoSizeMinTextSize="20sp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@color/backGroundColorContrast"
+                    android:drawableStart="@drawable/ic_baseline_pending_actions_24"
+                    android:drawablePadding="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:text="Upcoming Due Tasks"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/generateTimetableButton"
+                    app:layout_constraintVertical_bias="1.0"
                     app:strokeColor="@color/black"
                     app:strokeWidth="3dp" />
 
@@ -147,7 +172,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
+                app:collapseIcon="@drawable/ic_baseline_pending_actions_24"
+                app:layout_collapseMode="parallax"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -162,30 +188,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="365dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:autoSizeMaxTextSize="25sp"
-                android:autoSizeMinTextSize="20sp"
-                android:autoSizeTextType="uniform"
-                android:background="@color/backGroundColorContrast"
-                android:drawableStart="@drawable/ic_baseline_pending_actions_24"
-                android:drawablePadding="2dp"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="center"
-                android:text="Upcoming Due Tasks"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/mainTaskListAnnouncements"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:strokeColor="@color/black"
-                app:strokeWidth="3dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mainTaskListAnnouncements"

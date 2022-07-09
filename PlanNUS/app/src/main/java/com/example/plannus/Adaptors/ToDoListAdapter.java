@@ -56,8 +56,6 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         holder.taskName.setText(task);
         holder.tagName.setText(moduleName);
 //        holder.status.setChart(pie);
-        holder.status.setVisibility(ProgressBar.VISIBLE);
-        holder.status.setIndeterminate(false);
         holder.status.setProgress(statInt);
         holder.dueDate.setText(deadlineDate);
         holder.dueTime.setText(deadlineTime);

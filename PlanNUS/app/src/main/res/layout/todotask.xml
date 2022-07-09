@@ -131,12 +131,14 @@
 <!--            </com.anychart.AnyChartView>-->
             <ProgressBar
                 android:id="@+id/statusInt"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="50%"
                 android:indeterminate="false"
                 android:max="100"
-                android:progress="50"/>
+                android:progress="50"
+                android:progressDrawable="@drawable/custom_progress"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

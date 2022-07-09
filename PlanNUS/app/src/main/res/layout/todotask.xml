@@ -28,15 +28,35 @@
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <TextView
-            android:id="@+id/tagName"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:autoSizeMaxTextSize="19sp"
-            android:autoSizeMinTextSize="12sp"
-            android:autoSizeTextType="uniform"
-            android:text="CS2030S"
-            android:textColor="@color/black" />
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/tagName"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:autoSizeMaxTextSize="19sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform"
+                android:layout_alignParentStart="true"
+                android:text="CS2030S"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/statusTag"
+                android:layout_width="130dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:autoSizeMaxTextSize="26sp"
+                android:autoSizeMinTextSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="Status:"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

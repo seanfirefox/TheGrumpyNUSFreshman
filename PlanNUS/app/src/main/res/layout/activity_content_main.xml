@@ -170,7 +170,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
+                android:layout_width="359dp"
                 android:layout_height="?attr/actionBarSize"
                 app:collapseIcon="@drawable/ic_baseline_pending_actions_24"
                 app:layout_collapseMode="parallax"

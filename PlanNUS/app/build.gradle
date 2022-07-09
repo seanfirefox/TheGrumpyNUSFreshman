@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.4.2'
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation 'javax.inject:javax.inject:1'
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'com.google.android.datatransport:transport-runtime:3.1.5'
     implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'

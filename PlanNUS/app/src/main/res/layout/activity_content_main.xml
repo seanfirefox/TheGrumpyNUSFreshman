@@ -57,7 +57,7 @@
                     app:layout_constraintStart_toEndOf="@+id/hiName"
                     app:layout_constraintTop_toTopOf="parent"
                     app:strokeColor="@color/black"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="3dp" />
 
                 <Button
                     android:id="@+id/calendarImgView"
@@ -74,14 +74,14 @@
                     android:text="My Calendar"
                     android:textColor="@color/black"
                     app:backgroundTint="@color/backGroundColorContrast"
-                    app:icon="@drawable/ic_monday"
+                    app:icon="@drawable/ic_baseline_calendar_month_24"
                     app:iconGravity="top"
                     app:iconSize="70dp"
                     app:iconTint="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/hiName"
                     app:strokeColor="@color/black"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="3dp" />
 
                 <Button
                     android:id="@+id/checklistImgView"
@@ -97,7 +97,7 @@
                     android:text="My Tasks"
                     android:textColor="@color/black"
                     app:backgroundTint="@color/backGroundColorContrast"
-                    app:icon="@drawable/ic_monday"
+                    app:icon="@drawable/ic_baseline_checklist_24"
                     app:iconGravity="top"
                     app:iconSize="70dp"
                     app:iconTint="@color/black"
@@ -106,7 +106,7 @@
                     app:layout_constraintStart_toEndOf="@+id/calendarImgView"
                     app:layout_constraintTop_toBottomOf="@+id/hiName"
                     app:strokeColor="@color/black"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="3dp" />
 
                 <Button
                     android:id="@+id/generateTimetableButton"
@@ -132,7 +132,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/calendarImgView"
                     app:strokeColor="@color/black"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="3dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline2"
@@ -163,6 +163,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="365dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:autoSizeMaxTextSize="25sp"
+                android:autoSizeMinTextSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:background="@color/backGroundColorContrast"
+                android:drawableStart="@drawable/ic_baseline_pending_actions_24"
+                android:drawablePadding="2dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:text="Upcoming Due Tasks"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/mainTaskListAnnouncements"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:strokeColor="@color/black"
+                app:strokeWidth="3dp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mainTaskListAnnouncements"
                 android:layout_width="match_parent"
@@ -173,7 +197,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/black"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="3dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

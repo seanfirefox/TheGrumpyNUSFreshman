@@ -6,12 +6,15 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.15577507598784193" />
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_alarmclocksquare.xml" value="0.1375" />
         <entry key="app/src/main/res/drawable/ic_baseline_pending_actions_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_happyface.xml" value="0.2395" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_monday.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/ic_nusmods_adobe_express.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/ic_nusmods_long_adobe_express.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/ic_signout_adobe_express.xml" value="0.2025" />
+        <entry key="app/src/main/res/drawable/ic_stopwatch_adobe_express.xml" value="0.1375" />
         <entry key="app/src/main/res/drawable/ic_thursday.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/icon_color_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/scrollviewborder.xml" value="0.148" />

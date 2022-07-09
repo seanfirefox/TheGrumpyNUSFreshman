@@ -31,8 +31,14 @@ public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, Ann
 
     @Override
     protected void onBindViewHolder(@NonNull AnnouncementsAdapter.AnnouncementsHolder holder, int position, @NonNull ToDoTask model) {
+        String time = DateTimeUtils.getDuration(model.getDeadLineDateTime());
+
+        holder.taskName.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,
+                time.contains("days")
+                        ? R.drawable.ic_happyface
+                        : R.drawable.ic_alarmclocksquare, 0);
         holder.taskName.setText(model.getTask());
-        holder.dueDuration.setText(DateTimeUtils.getDuration(model.getDeadLineDateTime()));
+        holder.dueDuration.setText(time);
         holder.typeName.setText(model.getModuleName());
     }
 

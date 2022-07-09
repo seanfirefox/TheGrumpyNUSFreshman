@@ -57,6 +57,7 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         holder.tagName.setText(moduleName);
 //        holder.status.setChart(pie);
         holder.status.setProgress(statInt);
+        holder.statusText.setText(status +"%");
         holder.dueDate.setText(deadlineDate);
         holder.dueTime.setText(deadlineTime);
         holder.plannedDate.setText(plannedDate);
@@ -95,7 +96,7 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
     }
 
     class TaskHolder extends RecyclerView.ViewHolder {
-        private TextView taskName, tagName, dueDate, dueTime, plannedDate, plannedTime;
+        private TextView taskName, tagName, dueDate, dueTime, plannedDate, plannedTime, statusText;
         //private AnyChartView status;
         private ProgressBar status;
 
@@ -103,7 +104,8 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
             super(itemView);
             taskName = itemView.findViewById(R.id.toDoTaskName);
             tagName = itemView.findViewById(R.id.tagName);
-            status = itemView.findViewById(R.id.statusInt);
+            status = itemView.findViewById(R.id.statusProgress);
+            statusText = itemView.findViewById(R.id.statusInt);
             dueDate = itemView.findViewById(R.id.deadlineDate);
             dueTime = itemView.findViewById(R.id.deadlineTime);
             plannedDate = itemView.findViewById(R.id.PlannedDate);

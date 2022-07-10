@@ -61,10 +61,12 @@ public class LoginAndSessionManagerTest {
     }
 
     @Test
-    public void failedLoginCheck() {
+    public void failedLoginCheck() throws Exception {
+        Thread.sleep(1000);
         String expectedWarning = "Invalid Credentials";
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
-        checkLoginPageDisplayed();
+        Thread.sleep(1000);
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
     }
 
     @Test

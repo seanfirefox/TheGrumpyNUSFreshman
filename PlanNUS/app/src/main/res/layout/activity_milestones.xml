@@ -26,11 +26,8 @@
         android:id="@+id/completedTaskList"
         android:layout_width="409dp"
         android:layout_height="608dp"
-        android:padding="15dp"
-        android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myCompletedTasks"
         app:layout_constraintVertical_bias="0.0" />

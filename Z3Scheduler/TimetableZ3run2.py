@@ -47,10 +47,15 @@ def process_string_to_json(string) :
     key_ = None
     for string_item in a :
         if string_item in DISCARD :
+            print(string_item + " is in DISCARD") 
             key_ = string_item
         elif string_item == "" or string_item == " No Classes On that Day!":
+            print(string_item + " is an EMPTY string or No Class Comment")
             continue
         else :
+            print(" ON THE ELSE STATEMENT")
+            print(key_)
+            print(string_item)
             dictionary[DISCARD[key_]].append(clean_string(string_item)[1:])
     print(dictionary)
     print("STRING LEFT")

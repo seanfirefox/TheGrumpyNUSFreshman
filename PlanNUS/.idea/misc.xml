@@ -34,7 +34,7 @@
         <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.23796791443850268" />
         <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.13989637305699482" />
         <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.34251215838003846" />
-        <entry key="app/src/main/res/layout/completedtask.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/completedtask.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_friday.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_monday.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_thursday.xml" value="0.1" />

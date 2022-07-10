@@ -114,6 +114,14 @@ class TimeTableSchedulerZ3 :
             print("One Free Day Lesson Activated")
             OneDayFreeConstraint(self.allLessons, self.string_to_bool_literal).enforce(self.solver)
 
+    def clean_string(self, string_item) :
+        string_copy = ""
+        for i in range(len(string_item)) :
+            if string_item[i] == "[" :
+                return string_copy
+            else :
+                string_copy = string_copy + string_item[i]
+
     def clear_settings(self) :
         self.semesterMods = {}
         self.solver = Solver()
@@ -194,8 +202,8 @@ class TimeTableSchedulerZ3 :
                 string = string + (" No Classes On that Day!\n")
                 continue
             for classes in self.finalTimetable[i] :
-                string = string + (" " + str(classes) + "\n")
-        # print(string)
+                string = string + (" " + self.clean_string(str(classes)) + "\n")
+        print("In String Timetable, processed class is \n" + string)
         return string
 
     def printTimeTable(self) :

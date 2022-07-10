@@ -26,8 +26,6 @@
         android:id="@+id/createTask"
         android:layout_width="170dp"
         android:layout_height="120dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="16dp"
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
         android:autoSizeTextType="uniform"
@@ -35,8 +33,11 @@
         android:drawableTop="@drawable/ic_baseline_post_add_24"
         android:text="Create Task"
         android:textColor="@color/black"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/milestone"
+        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
         app:strokeColor="@color/black"
         app:strokeWidth="3dp" />
 
@@ -44,7 +45,6 @@
         android:id="@+id/milestone"
         android:layout_width="170dp"
         android:layout_height="120dp"
-        android:layout_marginBottom="16dp"
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
         android:autoSizeTextType="uniform"
@@ -52,18 +52,17 @@
         android:drawableTop="@drawable/conquer_mountain"
         android:text="Milestones"
         android:textColor="@color/black"
-        app:strokeColor="@color/black"
-        app:strokeWidth="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/createTask"
-        app:layout_constraintHorizontal_bias="0.307"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/createTask"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskListAnnouncements"
         android:layout_width="409dp"
         android:layout_height="508dp"
-        app:layout_constraintBottom_toTopOf="@+id/createTask"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myTasks" />

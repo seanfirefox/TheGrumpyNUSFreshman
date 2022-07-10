@@ -40,8 +40,6 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
 
         String moduleName, task, status, deadlineDate, deadlineTime, plannedDate, plannedTime;
         String[] taskInfo;
-//        List<DataEntry> dataEntries = new ArrayList<>();
-//        Pie pie = AnyChart.pie();
 
         moduleName = model.getModuleName();
         task = model.getTask();
@@ -52,18 +50,11 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         plannedTime = TimeFormatter.numberToTime(model.getPlannedDateTime().substring(8, 12));
 
         int statInt = Integer.valueOf(status);
-//        dataEntries.add(new ValueDataEntry("Completed", statInt));
-//        dataEntries.add(new ValueDataEntry("Uncompleted", 100 - statInt));
-//        pie.data(dataEntries);
         holder.taskName.setText(task);
         holder.tagName.setText(moduleName);
-//        holder.status.setChart(pie);
         holder.status.setProgress(statInt);
-        holder.status.setProgressTintList(statInt < 50 ?
-                ColorStateList.valueOf(Color.RED)
-                : statInt < 75 ?
-                ColorStateList.valueOf(Color.rgb(255,165,0))
-                : ColorStateList.valueOf(Color.GREEN));
+        holder.status.setProgressTintList(ColorStateList.valueOf(
+                Color.rgb(255 - (255 / 100) * statInt,((255 / 100) * statInt),0)));
         holder.statusText.setText(status +"%");
         holder.dueDate.setText(deadlineDate);
         holder.dueTime.setText(deadlineTime);

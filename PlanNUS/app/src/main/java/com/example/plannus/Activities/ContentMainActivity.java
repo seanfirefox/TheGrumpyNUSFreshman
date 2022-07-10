@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,18 +22,19 @@ import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.Objects.User;
 import com.example.plannus.WrapContentLinearLayoutManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 
 import org.joda.time.DateTime;
 
 public class ContentMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button checklistButton, timetableGenerator, calendarButton;
-    private ImageButton signOutButton;
+    private Button checklistButton, timetableGenerator, calendarButton, signOutButton;
     private AnnouncementsAdapter taskListAdapter;
     private TextView wlcMsg;
     private User user;
@@ -44,6 +46,9 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_main);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setIcon(getDrawable(R.drawable.ic_baseline_pending_actions_24));
 
         initVars();
         initProfile();
@@ -90,15 +95,15 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setUpRecyclerView() {
-        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING)
-                .whereGreaterThanOrEqualTo("deadLineDateTime", DateTime.now().toString("yyyyMMddHHmm"));
+        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING);
+//                .whereGreaterThanOrEqualTo("deadLineDateTime", DateTime.now().toString("yyyyMMddHHmm"));
         Log.d("CHECK DATETIME QUERY", DateTime.now().toString("yyyyMMddHHmm"));
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)
                 .build();
         taskListAdapter = new AnnouncementsAdapter(options);
         RecyclerView recyclerView = findViewById(R.id.mainTaskListAnnouncements);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(taskListAdapter);
     }

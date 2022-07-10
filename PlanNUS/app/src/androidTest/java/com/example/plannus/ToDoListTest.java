@@ -62,28 +62,28 @@ public class ToDoListTest {
     }
 
     @Test
-    public void A_createTaskTest() throws InterruptedException  {
+    public void A_createTaskTest() throws Exception  {
         login();
         recyclerViewDisplayed();
         addTask();
     }
 
     @Test
-    public void B_editTaskTest() throws InterruptedException {
+    public void B_editTaskTest() throws Exception {
         login();
         recyclerViewDisplayed();
         editTask();
     }
 
     @Test
-    public void C_deleteTaskTest() throws InterruptedException {
+    public void C_deleteTaskTest() throws Exception {
         login();
         recyclerViewDisplayed();
         deleteTask();
     }
 
     @Test
-    public void D_fullTestSequence() throws InterruptedException {
+    public void D_fullTestSequence() throws Exception {
         login();
         recyclerViewDisplayed();
         addTask();
@@ -91,7 +91,7 @@ public class ToDoListTest {
         deleteTask();
     }
 
-    public void login() throws InterruptedException {
+    public void login() throws Exception {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -108,7 +108,7 @@ public class ToDoListTest {
         onView(withId(R.id.createTask)).check(matches(isDisplayed()));
     }
 
-    public void addTask() {
+    public void addTask() throws Exception {
         onView(withId(R.id.createTask)).perform(ViewActions.click());
         intending(hasComponent(AddTaskActivity.class.getName()));
         onView(withId(R.id.taskDescEditText)).perform(ViewActions.typeText(task));
@@ -120,7 +120,7 @@ public class ToDoListTest {
         onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
         onView(withId(R.id.dueDateButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 2));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2024, 1, 2));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
         // Test saving without defining date and time
@@ -136,7 +136,7 @@ public class ToDoListTest {
         onView(withId(R.id.AddTasks)).perform(ViewActions.scrollTo()).check(matches(isDisplayed()));
 
         onView(withId(R.id.plannedDateButton)).perform(ViewActions.scrollTo(), ViewActions.click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 1, 1));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2024, 1, 1));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
         // Test saving without defining date and time
@@ -147,9 +147,9 @@ public class ToDoListTest {
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(12, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.saveButton)).perform(ViewActions.scrollTo(), ViewActions.click());
-
-        onView(withText(task)).check(matches(isDisplayed()));
-        onView(withId(R.id.taskListAnnouncements)).perform(ViewActions.pressBack());
+        Thread.sleep(2000);
+        onView(withText(task)).check(matches(isDisplayed()))
+                .perform(ViewActions.pressBack());
         intending(hasComponent(ContentMainActivity.class.getName()));
         onView(withText(task)).check(matches(isDisplayed()));
         onView(withId(R.id.checklistImgView)).perform(ViewActions.click());
@@ -157,7 +157,7 @@ public class ToDoListTest {
 
     }
 
-    public void editTask() {
+    public void editTask() throws Exception {
         onView(withId(R.id.taskListAnnouncements)).perform(RecyclerViewActions.scrollTo(
                 hasDescendant(withText(task))));
         onView(withText(task)).perform(ViewActions.click());
@@ -166,13 +166,13 @@ public class ToDoListTest {
         onView(withId(R.id.editStatusDesc)).perform(ProgressBarSetter.scrubSeekBarAction(newStatus));
         onView(withId(R.id.editTag)).perform(ViewActions.clearText(), ViewActions.typeText(newTag), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editDueDateButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022, 10, 15));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 10, 15));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.editDueTimeButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(23, 59));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.editPlannedDateButton)).perform(ViewActions.click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022, 10, 1));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2023, 10, 1));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
         onView(withId(R.id.editPlannedTimeButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(20, 0));
@@ -180,7 +180,7 @@ public class ToDoListTest {
         onView(withId(R.id.editButton)).perform(ViewActions.click());
         onView(withId(R.id.taskListAnnouncements)).perform(RecyclerViewActions.scrollTo(
                 hasDescendant(withText(newTask))));
-
+        Thread.sleep(2000);
         onView(withText(newTask)).check(matches(isDisplayed()));
         onView(withId(R.id.taskListAnnouncements)).perform(ViewActions.pressBack());
         intending(hasComponent(ContentMainActivity.class.getName()));

@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_colour"
+    android:background="@color/backGroundColor"
     tools:context=".Activities.AddTaskActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_colour">
+        android:background="@color/backGroundColor">
 
         <TextView
             android:id="@+id/AddTasks"
@@ -36,7 +36,7 @@
             android:layout_marginTop="10dp"
             android:text="Task: "
             android:textAlignment="center"
-            android:textColor="#808080"
+            android:textColor="#404040"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
@@ -51,7 +51,7 @@
             android:layout_marginTop="12dp"
             android:text="Status: "
             android:textAlignment="center"
-            android:textColor="#808080"
+            android:textColor="#404040"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
@@ -66,7 +66,7 @@
             android:layout_marginTop="12dp"
             android:text="Tag: "
             android:textAlignment="center"
-            android:textColor="#808080"
+            android:textColor="#404040"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
@@ -82,7 +82,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-            android:textColor="#808080"
+            android:textColor="#404040"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/taskTypeEditText" />
@@ -96,7 +96,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-            android:textColor="#808080"
+            android:textColor="#404040"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dueTimeButton" />
@@ -112,7 +112,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-            android:textColor="#808080"
+            android:textColor="#404040"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deadLineTexTtextView" />
 
@@ -127,7 +127,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-            android:textColor="#808080"
+            android:textColor="#404040"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plannedTexTtextView" />
 
@@ -142,7 +142,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-            android:textColor="#808080"
+            android:textColor="#404040"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateDuetextView" />
 
@@ -157,7 +157,7 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-            android:textColor="#808080"
+            android:textColor="#404040"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/datePlannedtextView" />
 
@@ -169,6 +169,7 @@
             android:autofillHints="Task"
             android:ems="10"
             android:hint="Enter description of task"
+            android:textColorHint="#404040"
             android:maxLength="30"
             android:inputType="none"
             android:autoSizeTextType="uniform"
@@ -193,6 +194,7 @@
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
             android:textColor="@color/black"
+            android:textColorHint="#404040"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tagTexTtextView"
             app:layout_constraintTop_toBottomOf="@+id/taskDescEditStatus" />
@@ -206,6 +208,8 @@
             android:autofillHints="Status"
             android:max="100"
             android:progress="0"
+            android:progressTint="#25FA72"
+            android:thumbTint="#F80404"
             app:layout_constraintEnd_toStartOf="@+id/textViewNewStatus"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/statusTexTtextView"
@@ -221,7 +225,7 @@
             android:autoSizeMinTextSize="10sp"
             android:autoSizeTextType="uniform"
             android:text="0"
-            android:textColor="#808080"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/taskDescEditText" />
 
@@ -230,10 +234,10 @@
             android:layout_width="285dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#DCCFB5"
+            android:backgroundTint="@color/backGroundColorContrast"
             android:ems="8"
             android:text="Due Date Here"
-            android:textColor="#6E6464"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="14sp"
@@ -247,10 +251,10 @@
             android:layout_width="285dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#DCCFB5"
+            android:backgroundTint="@color/backGroundColorContrast"
             android:ems="10"
             android:text="Planned Date Here"
-            android:textColor="#6E6464"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="14sp"
@@ -264,10 +268,10 @@
             android:layout_width="285dp"
             android:layout_height="48dp"
             android:layout_marginTop="14dp"
-            android:backgroundTint="#DCCFB5"
+            android:backgroundTint="@color/backGroundColorContrast"
             android:ems="8"
             android:text="Due Time Here"
-            android:textColor="#6E6464"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="14sp"
@@ -281,10 +285,10 @@
             android:layout_width="285dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#DCCFB5"
+            android:backgroundTint="@color/backGroundColorContrast"
             android:ems="10"
             android:text="Planned Time Here"
-            android:textColor="#6E6464"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="14sp"
@@ -295,12 +299,15 @@
 
         <Button
             android:id="@+id/saveButton"
-            android:layout_width="119dp"
+            android:layout_width="150dp"
             android:layout_height="51dp"
             android:text="Save Task"
+            android:textColor="@color/white"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="15sp"
             android:autoSizeMinTextSize="8sp"
+            android:backgroundTint="@color/button_colour"
+            app:icon="@drawable/ic_baseline_save_alt_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_colour"
+    android:background="@color/backGroundColor"
     tools:context=".Activities.ToDoList">
 
     <TextView
@@ -24,33 +24,45 @@
 
     <Button
         android:id="@+id/createTask"
-        android:layout_width="165dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="24dp"
-        android:autoSizeTextType="uniform"
+        android:layout_width="170dp"
+        android:layout_height="120dp"
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/backGroundColorContrast"
+        android:drawableTop="@drawable/ic_baseline_post_add_24"
         android:text="Create Task"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/milestone"
+        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/milestone"
         android:layout_width="170dp"
-        android:layout_height="48dp"
-        android:autoSizeTextType="uniform"
+        android:layout_height="120dp"
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/backGroundColorContrast"
+        android:drawableTop="@drawable/conquer_mountain"
         android:text="Milestones"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/createTask"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/createTask"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskListAnnouncements"
         android:layout_width="409dp"
-        android:layout_height="608dp"
-        app:layout_constraintBottom_toTopOf="@+id/createTask"
+        android:layout_height="508dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myTasks" />

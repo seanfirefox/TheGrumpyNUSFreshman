@@ -45,7 +45,9 @@
             android:parentActivityName=".Activities.ContentMainActivity" />
         <activity
             android:name=".Activities.ContentMainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.PlanNUS.NoActionBar"
+            android:label=""/>
         <activity
             android:name=".Activities.RegisterUser"
             android:exported="false"

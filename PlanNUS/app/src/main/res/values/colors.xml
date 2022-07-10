@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg_colour">#F0EBE0</color>
     <color name="button_colour">#E36178</color>
+    <color name="colorPrimary">#7EA6C6</color>
+    <color name="colorPrimaryContrast">#C69E7E</color>
+    <color name="lightBrown">#DCC3AF</color>
+    <color name="backGroundColor">#95B4DE</color>
+    <color name="backGroundColorContrast">#DEBf95</color>
 </resources>

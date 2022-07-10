@@ -57,7 +57,6 @@ def process_string_to_json(string) :
             print(key_)
             print(string_item)
             print(DISCARD[key_])
-            print(ss)
             dictionary[DISCARD[key_]].append(string_item)
     print(dictionary)
     print("STRING LEFT")

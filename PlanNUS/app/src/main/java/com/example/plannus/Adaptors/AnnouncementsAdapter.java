@@ -35,6 +35,17 @@ public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, Ann
 
     @Override
     protected void onBindViewHolder(@NonNull AnnouncementsAdapter.AnnouncementsHolder holder, int position, @NonNull ToDoTask model) {
+        String status = model.getStatus();
+        if (status.equals("100")) {
+            RecyclerView.LayoutParams param = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+            param.height = 0;
+            param.bottomMargin = 0;
+            param.topMargin = 0;
+            param.width = LinearLayout.LayoutParams.MATCH_PARENT;
+            holder.itemView.setVisibility(View.VISIBLE);
+            return;
+        }
+
         String currentTime = DateTime.now().toString("yyyyMMddHHmm");
         String time = model.getDeadLineDateTime();
         if (currentTime.compareTo(time) == 1) {
@@ -54,15 +65,7 @@ public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, Ann
         holder.dueDuration.setText(processedTime);
         holder.typeName.setText(model.getModuleName());
 
-        String status = model.getStatus();
-        if (status.equals("100")) {
-            RecyclerView.LayoutParams param = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
-            param.height = 0;
-            param.bottomMargin = 0;
-            param.topMargin = 0;
-            param.width = LinearLayout.LayoutParams.MATCH_PARENT;
-            holder.itemView.setVisibility(View.VISIBLE);
-        }
+
 
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_colour"
+    android:background="@color/backGroundColor"
     tools:context=".Activities.ToDoList">
 
     <TextView
@@ -31,6 +31,8 @@
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
         android:text="Create Task"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/backGroundColorContrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -42,6 +44,8 @@
         android:autoSizeMaxTextSize="15sp"
         android:autoSizeMinTextSize="8sp"
         android:text="Milestones"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/backGroundColorContrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/createTask"
         app:layout_constraintStart_toStartOf="parent" />

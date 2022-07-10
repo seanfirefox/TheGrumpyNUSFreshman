@@ -2,6 +2,8 @@ package com.example.plannus.Adaptors;
 
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,11 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         holder.tagName.setText(moduleName);
 //        holder.status.setChart(pie);
         holder.status.setProgress(statInt);
+        holder.status.setProgressTintList(statInt < 50 ?
+                ColorStateList.valueOf(Color.RED)
+                : statInt < 75 ?
+                ColorStateList.valueOf(Color.rgb(255,165,0))
+                : ColorStateList.valueOf(Color.GREEN));
         holder.statusText.setText(status +"%");
         holder.dueDate.setText(deadlineDate);
         holder.dueTime.setText(deadlineTime);

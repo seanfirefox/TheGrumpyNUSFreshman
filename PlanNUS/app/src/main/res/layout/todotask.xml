@@ -162,18 +162,19 @@
                     android:indeterminate="false"
                     android:max="100"
                     android:progress="50"
+                    android:progressTint="#00962A"
                     android:progressDrawable="@drawable/custom_progress"
                     android:text="50%" />
 
                 <TextView
                     android:id="@+id/statusInt"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:textColor="@color/black"
                     android:text="50%"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

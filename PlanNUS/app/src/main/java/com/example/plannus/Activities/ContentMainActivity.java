@@ -22,10 +22,12 @@ import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.Objects.User;
 import com.example.plannus.WrapContentLinearLayoutManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 
 import org.joda.time.DateTime;
@@ -93,8 +95,8 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setUpRecyclerView() {
-        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING)
-                .whereGreaterThanOrEqualTo("deadLineDateTime", DateTime.now().toString("yyyyMMddHHmm"));
+        Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING);
+//                .whereGreaterThanOrEqualTo("deadLineDateTime", DateTime.now().toString("yyyyMMddHHmm"));
         Log.d("CHECK DATETIME QUERY", DateTime.now().toString("yyyyMMddHHmm"));
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)

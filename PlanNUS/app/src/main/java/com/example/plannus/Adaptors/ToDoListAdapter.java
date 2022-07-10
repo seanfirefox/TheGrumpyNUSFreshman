@@ -13,21 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
 import com.example.plannus.Activities.EditTaskActivity;
-import com.example.plannus.R;
 import com.example.plannus.Objects.ToDoTask;
+import com.example.plannus.R;
 import com.example.plannus.utils.DateFormatter;
 import com.example.plannus.utils.TimeFormatter;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoListAdapter.TaskHolder> {
 
@@ -54,7 +46,9 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         holder.tagName.setText(moduleName);
         holder.status.setProgress(statInt);
         holder.status.setProgressTintList(ColorStateList.valueOf(
-                Color.rgb(255 - (255 / 100) * statInt,((255 / 100) * statInt),0)));
+                Color.rgb(statInt < 51 ? 255 : (int) (255 - (statInt - 50) * 255 / 50),
+                        (int) (statInt * 255 / 100),
+                        0)));
         holder.statusText.setText(status +"%");
         holder.dueDate.setText(deadlineDate);
         holder.dueTime.setText(deadlineTime);

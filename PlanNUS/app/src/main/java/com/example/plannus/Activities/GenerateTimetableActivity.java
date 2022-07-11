@@ -50,7 +50,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
     private TextView mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, nothingTextView;
-    private final String URL = "https://plannus-sat-solver.herokuapp.com/z3runner";
+    private final String actualURL = "https://plannus-sat-solver.herokuapp.com/z3runner";
+    private final String URL = "https://plannus-satsolver-backup.herokuapp.com/z3runner";
     private static int iterations = 0;
     private Call call;
     private NUSTimetable nusTimetable, oldNusTimetable;

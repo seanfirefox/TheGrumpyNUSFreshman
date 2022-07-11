@@ -102,4 +102,24 @@ public class NUSTimetable {
     public ArrayList<String> getFridayClass() {
         return fridayClass;
     }
+
+    public String getMonClass() {
+        return monClass;
+    }
+
+    public String getTueClass() {
+        return tueClass;
+    }
+
+    public String getWedClass() {
+        return wedClass;
+    }
+
+    public String getThurClass() {
+        return thurClass;
+    }
+
+    public String getFriClass() {
+        return friClass;
+    }
 }

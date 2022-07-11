@@ -5,78 +5,187 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_colour"
+    android:background="@color/backGroundColor"
     tools:context=".Activities.GenerateTimetableActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_colour">
+        android:background="@color/backGroundColor">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView3"
             android:layout_width="match_parent"
             android:layout_height="485dp"
+            android:background="@drawable/bg_outline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Timetable not yet generated"
-                android:textColor="#404040"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mondayClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="On Monday \n CS2100 LEC 1 @ 0800 - 1000\n CS3230 TUT 7 @ 1100 - 1200"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tuesdayClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="On Tuesday \n CS2100 LEC 1 @ 0800 - 1000\n CS3230 TUT 7 @ 1100 - 1200"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/wednesdayClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="On Wednesday \n CS2100 LEC 1 @ 0800 - 1000\n CS3230 TUT 7 @ 1100 - 1200"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/thursdayClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="On Thursday \n CS2100 LEC 1 @ 0800 - 1000\n CS3230 TUT 7 @ 1100 - 1200"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/fridayClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="On Friday \n CS2100 LEC 1 @ 0800 - 1000\n CS3230 TUT 7 @ 1100 - 1200"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/nothingCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="No Timetable Generated"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+                </com.google.android.material.textview.MaterialTextView>
+            </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <Button
-            android:id="@+id/generateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="Generate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nextButton" />
-
-        <Button
-            android:id="@+id/settingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Settings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/generateButton" />
-
-        <Button
-            android:id="@+id/saveTimetableButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settingsButton"
-            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:text="Next"
+            android:backgroundTint="@color/backGroundColorContrast"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:iconTint="@color/black"
+            app:icon="@drawable/ic_outline_arrow_circle_rightnext_24"
+            app:iconGravity="end"
+            app:strokeWidth="3dp"
+            app:strokeColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.984"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+        <Button
+            android:id="@+id/generateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/backGroundColorContrast"
+            android:text="Generate NUS Timetable"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_outline_generate_24"
+            app:iconTint="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/nextButton"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp"
+            tools:layout_editor_absoluteX="136dp" />
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/backGroundColorContrast"
+            android:text="Settings"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_baseline_settings_24"
+            app:iconSize="40dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/saveTimetableButton"
+            app:layout_constraintTop_toBottomOf="@+id/generateButton"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
+
+        <Button
+            android:id="@+id/saveTimetableButton"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/backGroundColorContrast"
+            android:text="SAVE"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:icon="@drawable/ic_baseline_save_alt_24"
+            app:iconSize="40dp"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/settingsButton"
+            app:layout_constraintTop_toBottomOf="@+id/generateButton"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
 
         <ProgressBar
             android:id="@+id/progressBar2"

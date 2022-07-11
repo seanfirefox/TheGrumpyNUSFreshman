@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Button;
 
@@ -16,6 +16,7 @@ import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 
 
@@ -102,6 +103,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return passwordCheck(password) && emailCheck(email);
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (sessionManager.getAuth().getCurrentUser() != null) {
+            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
+        }
+    }
 
 }

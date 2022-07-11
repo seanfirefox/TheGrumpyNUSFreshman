@@ -85,8 +85,6 @@ public class RegisterTest {
         onView(withId(R.id.passWord)).check(matches(isDisplayed()));
         onView(withId(R.id.register)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView)).check(matches(isDisplayed()));
-        onView(withId(R.id.imageView2)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailIcon)).check(matches(isDisplayed()));
         B_clickOnRegisterButton();
     }
 
@@ -98,13 +96,13 @@ public class RegisterTest {
         intending(hasComponent(ContentMainActivity.class.getName()));
 //        checkSuccessfulLoginOfNewUser();
         Thread.sleep(1000);
-        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
     }
 
     public void checkSuccessfulLoginOfNewUser() {
         intending(hasComponent(ContentMainActivity.class.getName()));
-        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
     }
 

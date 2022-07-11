@@ -61,7 +61,7 @@ public class Z3SchedulerTest {
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(ContentMainActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.welcomeBackMsg)).check(matches(withText("Welcome Back!")));
+        onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
 
         // Go to Generator Activity

@@ -14,4 +14,8 @@
     <color name="lightBrown">#DCC3AF</color>
     <color name="backGroundColor">#95B4DE</color>
     <color name="backGroundColorContrast">#DEBf95</color>
+
+    <color name="seek_bar_background">#ababab</color>
+    <color name="seek_bar_progress">#ffb600</color>
+    <color name="seek_bar_secondary_progress">#3399CC</color>
 </resources>

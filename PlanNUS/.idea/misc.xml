@@ -24,7 +24,9 @@
         <entry key="app/src/main/res/drawable/icon_color_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/layout_rounded.xml" value="0.198" />
         <entry key="app/src/main/res/drawable/scrollviewborder.xml" value="0.148" />
-        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/seek_bar.xml" value="0.1335" />
+        <entry key="app/src/main/res/drawable/seek_thumb.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.4500274658203125" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_completed_task.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_content_main.xml" value="0.1" />

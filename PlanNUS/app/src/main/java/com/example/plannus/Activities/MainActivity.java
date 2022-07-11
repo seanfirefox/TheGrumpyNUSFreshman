@@ -103,6 +103,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return passwordCheck(password) && emailCheck(email);
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (sessionManager.getAuth().getCurrentUser() != null) {
+            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
+        }
+    }
 
 }

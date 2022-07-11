@@ -53,7 +53,7 @@
                 android:autoSizeTextType="uniform"
                 android:autofillHints="name"
                 android:inputType="textPersonName"
-                android:maxLength="30"
+                android:maxLength="50"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
@@ -123,18 +123,18 @@
                 android:text="Status : "
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-
+            <!--                android:progressTint="#880808"-->
             <SeekBar
                 android:id="@+id/taskDescEditStatus"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-
                 android:autofillHints="Status"
+                android:background="@color/white"
                 android:max="100"
                 android:progress="0"
-                android:progressTint="#880808"
-                android:thumbTint="#F80404"
-                android:background="@color/white" />
+                android:progressDrawable="@drawable/seek_bar"
+                android:thumb="@drawable/seek_thumb"
+                android:thumbTint="#F80404" />
         </LinearLayout>
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/deadLineTexTtextView"

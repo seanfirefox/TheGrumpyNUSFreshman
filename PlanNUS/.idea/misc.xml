@@ -6,6 +6,7 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.15577507598784193" />
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bg_outline.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/custom_progress.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/custom_progress_bar.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/ic_alarmclocksquare.xml" value="0.1375" />
@@ -17,11 +18,13 @@
         <entry key="app/src/main/res/drawable/ic_nusmods_adobe_express.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/ic_nusmods_long_adobe_express.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/ic_signout_adobe_express.xml" value="0.2025" />
+        <entry key="app/src/main/res/drawable/ic_statuscomp_adobe_express.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/ic_stopwatch_adobe_express.xml" value="0.1375" />
         <entry key="app/src/main/res/drawable/ic_thursday.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/icon_color_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/layout_rounded.xml" value="0.198" />
         <entry key="app/src/main/res/drawable/scrollviewborder.xml" value="0.148" />
-        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_completed_task.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_content_main.xml" value="0.1" />
@@ -34,6 +37,7 @@
         <entry key="app/src/main/res/layout/activity_time_tabler.xml" value="0.12082066869300911" />
         <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.23796791443850268" />
         <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/addnewtasktest.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.34251215838003846" />
         <entry key="app/src/main/res/layout/completedtask.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_friday.xml" value="0.1" />

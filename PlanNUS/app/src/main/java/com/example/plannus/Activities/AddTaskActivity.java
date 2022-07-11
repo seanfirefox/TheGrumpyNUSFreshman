@@ -72,7 +72,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         newStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                statusValue.setText(String.valueOf(i));
+                statusValue.setText(String.valueOf(i) + " %");
                 status_text = String.valueOf(i);
                 Log.e("GET STATUS TEXT",status_text);
             }

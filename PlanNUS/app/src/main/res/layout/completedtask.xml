@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/toDoTaskNameCompleted"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
             android:autoSizeMaxTextSize="32sp"
             android:autoSizeMinTextSize="22sp"
             android:autoSizeTextType="uniform"

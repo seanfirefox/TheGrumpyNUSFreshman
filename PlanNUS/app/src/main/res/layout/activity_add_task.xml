@@ -53,7 +53,7 @@
                 android:autoSizeTextType="uniform"
                 android:autofillHints="name"
                 android:inputType="textPersonName"
-                android:maxLength="30"
+                android:maxLength="50"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout

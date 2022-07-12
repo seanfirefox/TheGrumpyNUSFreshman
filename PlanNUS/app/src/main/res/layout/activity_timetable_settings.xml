@@ -23,6 +23,8 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textStyle="bold"
+            android:paddingLeft="16dp"
+            android:paddingRight="60dp"
             android:drawableStart="@drawable/ic_baseline_settings_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +38,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:boxStrokeWidth="5dp"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/semesterSpinner1"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -60,6 +64,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:hint="SEMESTER"
+            app:boxStrokeWidth="5dp"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/aySpinner1"
             app:layout_constraintTop_toBottomOf="@+id/settingsPage">
@@ -95,15 +101,15 @@
 
                 <TextView
                     android:id="@+id/module1"
-                    android:layout_width="82dp"
+                    android:layout_width="95dp"
                     android:layout_height="46dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
                     android:text="Module 1: "
                     android:textAlignment="center"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
                 <EditText
                     android:id="@+id/moduleCode1"
@@ -112,13 +118,14 @@
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
+                    android:layout_marginEnd="20dp"
                     android:autofillHints="Task"
                     android:ems="10"
                     android:hint="Enter module code"
                     android:inputType="none|textCapCharacters"
                     android:maxLength="30"
                     android:tag="moduleCode1"
-                    android:textColor="#808080" />
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -130,20 +137,21 @@
 
                 <TextView
                     android:id="@+id/module2"
-                    android:layout_width="82dp"
+                    android:layout_width="95dp"
                     android:layout_height="46dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
                     android:text="Module 2: "
                     android:textAlignment="center"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
                 <EditText
                     android:id="@+id/moduleCode2"
                     android:layout_width="285dp"
                     android:layout_height="48dp"
+                    android:layout_marginEnd="20dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
@@ -153,7 +161,7 @@
                     android:inputType="none|textCapCharacters"
                     android:maxLength="30"
                     android:tag="moduleCode2"
-                    android:textColor="#808080" />
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -165,20 +173,21 @@
 
                 <TextView
                     android:id="@+id/module3"
-                    android:layout_width="82dp"
+                    android:layout_width="95dp"
                     android:layout_height="46dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
                     android:text="Module 3: "
                     android:textAlignment="center"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
                 <EditText
                     android:id="@+id/moduleCode3"
                     android:layout_width="285dp"
                     android:layout_height="48dp"
+                    android:layout_marginEnd="20dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
@@ -188,7 +197,7 @@
                     android:inputType="none|textCapCharacters"
                     android:maxLength="30"
                     android:tag="moduleCode3"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -200,15 +209,15 @@
 
                 <TextView
                     android:id="@+id/module4"
-                    android:layout_width="82dp"
+                    android:layout_width="95dp"
                     android:layout_height="46dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
                     android:text="Module 4: "
                     android:textAlignment="center"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
                 <EditText
                     android:id="@+id/moduleCode4"
@@ -217,13 +226,14 @@
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
+                    android:layout_marginEnd="20dp"
                     android:autofillHints="Task"
                     android:ems="10"
                     android:hint="Enter module code"
                     android:inputType="none|textCapCharacters"
                     android:maxLength="30"
                     android:tag="moduleCode4"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -235,20 +245,21 @@
 
                 <TextView
                     android:id="@+id/module5"
-                    android:layout_width="82dp"
+                    android:layout_width="95dp"
                     android:layout_height="46dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
                     android:text="Module 5: "
                     android:textAlignment="center"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
                 <EditText
                     android:id="@+id/moduleCode5"
                     android:layout_width="285dp"
                     android:layout_height="48dp"
+                    android:layout_marginEnd="20dp"
                     android:autoSizeMaxTextSize="20sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
@@ -258,7 +269,7 @@
                     android:inputType="none|textCapCharacters"
                     android:maxLength="30"
                     android:tag="moduleCode5"
-                    android:textColor="#808080"/>
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -268,9 +279,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
             android:text="Add Row"
             android:textColor="@color/black"
             android:backgroundTint="@color/backGroundColorContrast"
+            app:icon="@drawable/ic_baseline_add_circle_outline_24"
+            app:iconTint="@color/black"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.993"
             app:layout_constraintStart_toStartOf="parent"
@@ -278,15 +294,17 @@
 
         <CheckBox
             android:id="@+id/no8amLessons"
-            android:layout_width="216dp"
+            android:layout_width="217dp"
             android:layout_height="64dp"
             android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
             android:autoSizeTextType="uniform"
             android:text="No 8am Lessons"
             android:textColor="@color/black"
             android:background="@drawable/bg_outline_thin"
+            android:buttonTint="#00357C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.112"
             app:layout_constraintStart_toStartOf="parent"
@@ -295,15 +313,18 @@
         <CheckBox
             android:id="@+id/oneFreeDay"
             android:layout_width="217dp"
-            android:layout_height="57dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
             android:autoSizeTextType="uniform"
+            android:background="@drawable/bg_outline_thin"
+            android:buttonTint="#00357C"
             android:text="1 Free Day"
             android:textColor="@color/black"
-            android:background="@drawable/bg_outline_thin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.115"
+            app:layout_constraintHorizontal_bias="0.113"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/no8amLessons" />
 
@@ -312,10 +333,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"
             android:textColor="@color/black"
             android:backgroundTint="@color/backGroundColorContrast"
             app:icon="@drawable/ic_baseline_save_alt_24"
             app:iconTint="@color/black"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

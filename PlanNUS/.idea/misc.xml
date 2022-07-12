@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_outline.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/bg_outline_thin.xml" value="0.273" />
+        <entry key="app/src/main/res/drawable/checkbox_selector.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_color_selector.xml" value="0.1" />
@@ -23,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_milestones.xml" value="0.14221014492753623" />
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.4425925925925926" />
         <entry key="app/src/main/res/layout/activity_time_tabler.xml" value="0.12082066869300911" />
-        <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.18" />
         <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.34251215838003846" />
         <entry key="app/src/main/res/layout/completedtask.xml" value="0.18" />

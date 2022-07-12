@@ -71,21 +71,22 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         TextView textView = new TextView(TimetableSettingsActivity.this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(convertDpToPixel(82), convertDpToPixel(46));
-        params.setMargins(convertDpToPixel(20),0, 0, 0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(convertDpToPixel(95), convertDpToPixel(46));
+        params.setMargins(convertDpToPixel(15),0, 0, 0);
         textView.setLayoutParams(params);
         textView.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         textView.setText(String.format("Module %s:", numMods));
-        textView.setTextColor(Color.parseColor("#808080"));
+        textView.setTextColor(Color.parseColor("#FF000000"));
         linearLayout.addView(textView);
 
         EditText editText = new EditText(TimetableSettingsActivity.this);
         LinearLayout.LayoutParams editParams = new LinearLayout.LayoutParams(convertDpToPixel(285), convertDpToPixel(48));
+        editParams.setMargins(0,0, convertDpToPixel(20), 0);
         editText.setLayoutParams(editParams);
         editText.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         editText.setHint("Enter module code");
         editText.setTag("moduleCode" + numMods);
-        editText.setTextColor(Color.parseColor("#808080"));
+        editText.setTextColor(Color.parseColor("#FF000000"));
         editText.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         linearLayout.addView(editText);
 

@@ -18,6 +18,7 @@ import com.example.plannus.Objects.NUSTimetable;
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.example.plannus.utils.MetricsConverter;
 import com.example.plannus.utils.RequestBuilder;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -297,24 +298,38 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     @SafeVarargs
     private final void deflateTextViews(TextView... textViews) {
         for (TextView t : textViews) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
-            params.bottomMargin = 0;
-            params.topMargin = 0;
-            params.height = 0;
-            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
+//            if (params.height == 0) {
+//                continue;
+//            } else {
+//                Log.d("Grep Id", String.valueOf(t.getId()));
+//                params.bottomMargin = 0;
+//                params.topMargin = 0;
+//                params.height = 0;
+//                params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+//            }
+            t.setVisibility(View.GONE);
         }
     }
 
     @SafeVarargs
     private final void inflateTextViews(TextView... textViews) {
         for (TextView t : textViews) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
-            params.topMargin = 18;
-            params.bottomMargin = 18;
-            params.leftMargin = 10;
-            params.rightMargin = 10;
-            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
+//            int pixel = MetricsConverter.convertDpToPixel(8);
+//            if (params.height == LinearLayout.LayoutParams.WRAP_CONTENT) {
+//                continue;
+//            } else {
+//                Log.d("Attempt", "Attempting to inflate");
+//                t.setPadding(pixel,pixel,pixel,pixel);
+//                params.topMargin = pixel;
+//                params.bottomMargin = pixel;
+//                params.leftMargin = pixel;
+//                params.rightMargin = pixel;
+//                params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+//                params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+//            }
+            t.setVisibility(View.VISIBLE);
         }
     }
 

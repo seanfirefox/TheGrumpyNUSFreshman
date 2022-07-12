@@ -2,9 +2,6 @@ package com.example.plannus.Activities;
 
 import static com.example.plannus.utils.MetricsConverter.convertDpToPixel;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,14 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
@@ -28,18 +28,19 @@ import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener    {
     private Button saveTimetableSettings, addRow;
     private LinearLayout wrappingLayout;
     private SessionManager sessionManager;
     private String userID;
     private int numMods;
     private CheckBox no8amConstraint, oneFreeDayConstraint;
-    private Spinner aySpinner, semesterSpinner;
+//    private Spinner aySpinner, semesterSpinner;
+//    private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
+    private AutoCompleteTextView aySpinner, semesterSpinner;
     private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
     private String ay, semester;
     private HashMap<String, Boolean> constraints;
@@ -60,23 +61,6 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         } else if (v.getId() == R.id.addRow) {
             generateRow();
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        if (adapterView.getId() == R.id.aySpinner) {
-            ay = adapterView.getItemAtPosition(position).toString();
-            Log.d("AY spinner check", ay);
-        } else if (adapterView.getId() == R.id.semesterSpinner) {
-            semester = adapterView.getItemAtPosition(position).toString();
-            Log.d("Semester spinner check", semester);
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     @SuppressLint("NewApi")
@@ -131,16 +115,31 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
 
     public void init_spinners() {
         aySpinner = findViewById(R.id.aySpinner);
-        aySpinner.setOnItemSelectedListener(this);
+
         ayAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.AY_array, android.R.layout.simple_spinner_item);
         ayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aySpinner.setAdapter(ayAdapter);
+        System.out.println("initSpinnersRunning--------------------------");
+
+        aySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ay = ayAdapter.getItem(position).toString();
+                Log.d("AY spinner check", ay);
+            }
+        });
 
         semesterSpinner = findViewById(R.id.semesterSpinner);
-        semesterSpinner.setOnItemSelectedListener(this);
         semAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.SEM_array, android.R.layout.simple_spinner_item);
         semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         semesterSpinner.setAdapter(semAdapter);
+        semesterSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                semester = semAdapter.getItem(position).toString();
+                Log.d("Semester spinner check", semester);
+            }
+        });
     }
 
     public void init_checkboxes() {

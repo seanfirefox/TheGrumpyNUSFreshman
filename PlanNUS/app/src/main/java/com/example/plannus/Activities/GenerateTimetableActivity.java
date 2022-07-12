@@ -69,6 +69,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_timetable);
         initVars();
+        deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+        inflateTextViews(nothingTextView);
+        nothingTextView.setText("No Timetable Generated Yet");
         obtainSettings();
     }
 
@@ -93,6 +96,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         .buildRequestBody(iterations);
                 if (requestBody == null) {
                     deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                    inflateTextViews(nothingTextView);
                     nothingTextView.setText("Settings page empty");
                     disableButtonBlocker(true);
                 } else {
@@ -293,10 +297,24 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     @SafeVarargs
     private final void deflateTextViews(TextView... textViews) {
         for (TextView t : textViews) {
-            t.setHeight(0);
-            t.setPadding(0,0,0,0);
-            t.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-            t.setVisibility(View.VISIBLE);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
+            params.bottomMargin = 0;
+            params.topMargin = 0;
+            params.height = 0;
+            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        }
+    }
+
+    @SafeVarargs
+    private final void inflateTextViews(TextView... textViews) {
+        for (TextView t : textViews) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
+            params.topMargin = 18;
+            params.bottomMargin = 18;
+            params.leftMargin = 10;
+            params.rightMargin = 10;
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
         }
     }
 
@@ -307,6 +325,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             public void onFailure(Call call, IOException e) {
                 Log.d("NETWORK_FAIL", "NETWORK FAIL");
                 deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                inflateTextViews(nothingTextView);
                 nothingTextView.setText("Network Fail");
                 runOnUiThread(() -> {
                     disableButtonBlocker(true);
@@ -321,12 +340,15 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         System.out.println(jsonReturnString);
                         if (jsonReturnString.equals("No Feasible Timetable!")) {
                             deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                            inflateTextViews(nothingTextView);
                             nothingTextView.setText("No Feasible Timetable!\n Change your study plan in Settings!");
                         } else {
                             JSONObject jsonObject = new JSONObject(jsonReturnString);
                             String displayText = (String) jsonObject.get("string");
                             nusTimetable = new NUSTimetable(jsonObject);
                             Log.d("RESPONSE_BODY", displayText);
+                            inflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                            deflateTextViews(nothingTextView);
                             mondayTextView.setText(nusTimetable.getMonClass());
                             tuesdayTextView.setText(nusTimetable.getTueClass());
                             wednesdayTextView.setText(nusTimetable.getWedClass());
@@ -337,6 +359,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         e.getStackTrace();
                     } catch (JSONException e) {
                         deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                        inflateTextViews(nothingTextView);
                         nothingTextView.setText("Invalid Combination!\n There is NO OTHER solution!");
                     } finally {
                         disableButtonBlocker(true);

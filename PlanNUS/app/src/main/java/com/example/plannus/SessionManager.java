@@ -60,7 +60,7 @@ public class SessionManager {
                 .collection("NUS_Schedule")
                 .document("NUS_Schedule")
                 .collection(collectionPath)
-                .orderBy("end", Query.Direction.ASCENDING);
+                .orderBy("start", Query.Direction.ASCENDING);
     }
 
     public DocumentReference getDocRef(String userID, String collectionPath, String documentPath) {

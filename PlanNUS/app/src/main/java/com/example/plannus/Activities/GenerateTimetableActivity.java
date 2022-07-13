@@ -123,18 +123,26 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             CompletableFuture.supplyAsync(() -> getAllDocumentNames())
                     .thenAccept(x -> deleteOldTimeTable())
                     .thenAccept(x -> saveTimeTable())
+                    .thenAccept(x -> getAllDocumentNames())
+                    .thenAccept(x -> deleteOldTimeTable())
+                    .thenAccept(x -> saveTimeTable())
                     .join();
         }
 
     }
 
     private int getAllDocumentNames() {
-        CompletableFuture.supplyAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames))
-                .thenAcceptAsync(x -> getDocumentNames("tuesdayClass", tuesdayDocumentNames))
-                .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
-                .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
-                .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
-                .join();
+        try {
+            CompletableFuture.supplyAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames))
+                    .thenAcceptAsync(x -> getDocumentNames("tuesdayClass", tuesdayDocumentNames))
+                    .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
+                    .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
+                    .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
+                    .join();
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 1;
     }
 
@@ -159,12 +167,17 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private int deleteOldTimeTable() {
-        CompletableFuture.supplyAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass"))
-                .thenAcceptAsync(x -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass"))
-                .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
-                .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
-                .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
-                .join();
+        try {
+            CompletableFuture.supplyAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass"))
+                    .thenAcceptAsync(x -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass"))
+                    .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
+                    .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
+                    .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
+                    .join();
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 1;
     }
 

@@ -20,6 +20,10 @@ import com.example.plannus.Objects.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
+
+import java.util.List;
 
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
@@ -29,6 +33,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private ProgressBar progressBar;
     private SessionManager sessionManager;
+    boolean emailInUseCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,14 +110,45 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     }
 
     public boolean emailCheck(String email) {
-        return !(email.isEmpty()) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if (email.isEmpty()) {
+            Toast.makeText(RegisterUser.this, "Email field empty", Toast.LENGTH_LONG).show();
+        } else if (!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
+            Toast.makeText(RegisterUser.this, "Email not in correct format", Toast.LENGTH_LONG).show();
+        }
+
+        sessionManager.getAuth().fetchSignInMethodsForEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                        if (task.isSuccessful()) {
+                            SignInMethodQueryResult result = task.getResult();
+                            List<String> signInMethods = result.getSignInMethods();
+                            if (signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
+                                // User can sign in with email/password
+                                Toast.makeText(RegisterUser.this, "Email in use", Toast.LENGTH_LONG).show();
+                                emailInUseCheck = true;
+                            }
+                        }
+                    }
+                });
+        return !(email.isEmpty()) && Patterns.EMAIL_ADDRESS.matcher(email).matches() && !emailInUseCheck;
     }
 
     public boolean particularsCheck(String fullName, String age) {
+        if (fullName.isEmpty()) {
+            Toast.makeText(RegisterUser.this, "Name field empty", Toast.LENGTH_LONG).show();
+        } else if (age.isEmpty()) {
+            Toast.makeText(RegisterUser.this, "Age field empty", Toast.LENGTH_LONG).show();
+        }
         return !(fullName.isEmpty()) && !(age.isEmpty());
     }
 
     public boolean passwordCheck(String password) {
+        if (password.isEmpty()) {
+            Toast.makeText(RegisterUser.this, "Password field empty", Toast.LENGTH_LONG).show();
+        } else if (password.length() < 6) {
+            Toast.makeText(RegisterUser.this, "Password length less than 6 characters", Toast.LENGTH_LONG).show();
+        }
         return !(password.isEmpty()) && !(password.length() < 6);
     }
 

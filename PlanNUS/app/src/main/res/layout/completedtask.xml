@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_colour"
     android:layout_margin="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
@@ -151,7 +150,7 @@
                     android:id="@+id/completedReward"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_ribbon_sticker_svgrepo_com"/>
+                    android:src="@drawable/ic_ribbon_sticker_svgrepo_com" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

@@ -29,6 +29,13 @@ public class NUSTimetable {
     @PropertyName("Friday")
     private ArrayList<String> fridayClass;
 
+    private String monClass;
+    private String tueClass;
+    private String wedClass;
+    private String thurClass;
+    private String friClass;
+
+
     public NUSTimetable() {
 
     }
@@ -38,14 +45,28 @@ public class NUSTimetable {
         try {
             this.stringRep = (String) jsonObject.get("string");
             this.mondayClass =  ArrayListConverter((JSONArray) jsonObject.get("MON"));
+            monClass = representText(this.mondayClass, "MONDAY");
             this.tuesdayClass = ArrayListConverter((JSONArray) jsonObject.get("TUE"));
+            tueClass = representText(this.tuesdayClass, "TUESDAY");
             this.wednesdayClass = ArrayListConverter((JSONArray) jsonObject.get("WED"));
+            wedClass = representText(this.wednesdayClass, "WEDNESDAY");
             this.thursdayClass =  ArrayListConverter((JSONArray) jsonObject.get("THUR"));
+            thurClass = representText(this.thursdayClass, "THURSDAY");
             this.fridayClass = ArrayListConverter((JSONArray) jsonObject.get("FRI"));
+            friClass = representText(this.fridayClass, "FRIDAY");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static String representText(ArrayList<String> arr, String start) {
+        if (arr.size() == 0) {
+            return start + "\n NO CLASS TODAY";
+        }
+        String ss = arr.stream().reduce(start, (s, x) -> s + "\n" + x);
+        System.out.println(ss);
+        return ss;
     }
 
     public static ArrayList<String> ArrayListConverter(JSONArray jsonObject) throws JSONException {
@@ -80,5 +101,25 @@ public class NUSTimetable {
 
     public ArrayList<String> getFridayClass() {
         return fridayClass;
+    }
+
+    public String getMonClass() {
+        return monClass;
+    }
+
+    public String getTueClass() {
+        return tueClass;
+    }
+
+    public String getWedClass() {
+        return wedClass;
+    }
+
+    public String getThurClass() {
+        return thurClass;
+    }
+
+    public String getFriClass() {
+        return friClass;
     }
 }

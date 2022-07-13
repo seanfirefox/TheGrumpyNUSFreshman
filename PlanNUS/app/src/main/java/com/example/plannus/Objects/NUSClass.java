@@ -2,6 +2,8 @@ package com.example.plannus.Objects;
 
 import com.google.firebase.database.PropertyName;
 
+import java.util.Arrays;
+
 public class NUSClass {
 
     @PropertyName("string")
@@ -17,10 +19,10 @@ public class NUSClass {
     private String slot;
 
     @PropertyName("start")
-    private String start;
+    private int start;
 
     @PropertyName("end")
-    private String end;
+    private int end;
 
     public NUSClass() {}
 
@@ -28,11 +30,12 @@ public class NUSClass {
         this.classString = classString;
         String[] tokens = classString.split(" ");
         // ["CS2030S", "LEC", "01", "@", "0800", "-", "1000"]
-        this.module = tokens[0];
-        this.classType = tokens[1];
-        this.slot = tokens[2];
-        this.start = tokens[4];
-        this.end = tokens[6];
+        this.module = tokens[1];
+        System.out.println(Arrays.toString(tokens));
+        this.classType = tokens[2];
+        this.slot = tokens[3];
+        this.start = Integer.parseInt(tokens[5]);
+        this.end = Integer.parseInt(tokens[7]);
     }
 
     public String getModule() {
@@ -47,11 +50,11 @@ public class NUSClass {
         return slot;
     }
 
-    public String getStart() {
+    public int getStart() {
         return start;
     }
 
-    public String getEnd() {
+    public int getEnd() {
         return end;
     }
 

@@ -2,9 +2,6 @@ package com.example.plannus.Activities;
 
 import static com.example.plannus.utils.MetricsConverter.convertDpToPixel;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,14 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
@@ -28,18 +28,19 @@ import com.example.plannus.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class TimetableSettingsActivity extends AppCompatActivity implements View.OnClickListener    {
     private Button saveTimetableSettings, addRow;
     private LinearLayout wrappingLayout;
     private SessionManager sessionManager;
     private String userID;
     private int numMods;
     private CheckBox no8amConstraint, oneFreeDayConstraint;
-    private Spinner aySpinner, semesterSpinner;
+//    private Spinner aySpinner, semesterSpinner;
+//    private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
+    private AutoCompleteTextView aySpinner, semesterSpinner;
     private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
     private String ay, semester;
     private HashMap<String, Boolean> constraints;
@@ -62,23 +63,6 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        if (adapterView.getId() == R.id.aySpinner) {
-            ay = adapterView.getItemAtPosition(position).toString();
-            Log.d("AY spinner check", ay);
-        } else if (adapterView.getId() == R.id.semesterSpinner) {
-            semester = adapterView.getItemAtPosition(position).toString();
-            Log.d("Semester spinner check", semester);
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     @SuppressLint("NewApi")
     private void generateRow() {
         numMods++;
@@ -87,21 +71,22 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         TextView textView = new TextView(TimetableSettingsActivity.this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(convertDpToPixel(82), convertDpToPixel(46));
-        params.setMargins(convertDpToPixel(20),0, 0, 0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(convertDpToPixel(95), convertDpToPixel(46));
+        params.setMargins(convertDpToPixel(15),0, 0, 0);
         textView.setLayoutParams(params);
         textView.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         textView.setText(String.format("Module %s:", numMods));
-        textView.setTextColor(Color.parseColor("#808080"));
+        textView.setTextColor(Color.parseColor("#FF000000"));
         linearLayout.addView(textView);
 
         EditText editText = new EditText(TimetableSettingsActivity.this);
         LinearLayout.LayoutParams editParams = new LinearLayout.LayoutParams(convertDpToPixel(285), convertDpToPixel(48));
+        editParams.setMargins(0,0, convertDpToPixel(20), 0);
         editText.setLayoutParams(editParams);
         editText.setAutoSizeTextTypeUniformWithConfiguration(10, 20, 1, 1);
         editText.setHint("Enter module code");
         editText.setTag("moduleCode" + numMods);
-        editText.setTextColor(Color.parseColor("#808080"));
+        editText.setTextColor(Color.parseColor("#FF000000"));
         editText.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         linearLayout.addView(editText);
 
@@ -131,16 +116,31 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
 
     public void init_spinners() {
         aySpinner = findViewById(R.id.aySpinner);
-        aySpinner.setOnItemSelectedListener(this);
+
         ayAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.AY_array, android.R.layout.simple_spinner_item);
         ayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aySpinner.setAdapter(ayAdapter);
+        System.out.println("initSpinnersRunning--------------------------");
+
+        aySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ay = ayAdapter.getItem(position).toString();
+                Log.d("AY spinner check", ay);
+            }
+        });
 
         semesterSpinner = findViewById(R.id.semesterSpinner);
-        semesterSpinner.setOnItemSelectedListener(this);
         semAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.SEM_array, android.R.layout.simple_spinner_item);
         semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         semesterSpinner.setAdapter(semAdapter);
+        semesterSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                semester = semAdapter.getItem(position).toString();
+                Log.d("Semester spinner check", semester);
+            }
+        });
     }
 
     public void init_checkboxes() {

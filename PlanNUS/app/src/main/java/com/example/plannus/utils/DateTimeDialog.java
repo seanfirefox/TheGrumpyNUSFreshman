@@ -15,6 +15,7 @@ public class DateTimeDialog {
     private final int year = calendar.get(Calendar.YEAR);
     private final int month = calendar.get(Calendar.MONTH);
     private final int day = calendar.get(Calendar.DAY_OF_MONTH);
+    private final int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
     private int hour;
     private int min;
     private static DateTimeDialog dateTimeDialog = null;
@@ -65,6 +66,10 @@ public class DateTimeDialog {
 
     public int getDay() {
         return day;
+    }
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
     }
 
     public int getMinute() {

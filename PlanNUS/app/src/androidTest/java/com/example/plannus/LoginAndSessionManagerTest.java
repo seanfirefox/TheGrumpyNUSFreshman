@@ -40,7 +40,7 @@ public class LoginAndSessionManagerTest {
     private String password = "1234567";
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() {
         Intents.init();
     }
 
@@ -52,8 +52,6 @@ public class LoginAndSessionManagerTest {
         onView(withId(R.id.passWord)).check(matches(isDisplayed()));
         onView(withId(R.id.register)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView)).check(matches(isDisplayed()));
-        onView(withId(R.id.imageView2)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailIcon)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -63,10 +61,12 @@ public class LoginAndSessionManagerTest {
     }
 
     @Test
-    public void failedLoginCheck() {
+    public void failedLoginCheck() throws Exception {
+        Thread.sleep(1000);
         String expectedWarning = "Invalid Credentials";
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
-        checkLoginPageDisplayed();
+        Thread.sleep(1000);
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LoginAndSessionManagerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Intents.release();
     }
 }

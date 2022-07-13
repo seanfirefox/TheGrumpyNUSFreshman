@@ -1,255 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="@color/bg_colour"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ECD39F"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="8dp">
-
-
-        <TextView
-            android:id="@+id/taskHeaderCompleted"
-            android:layout_width="85dp"
-            android:layout_height="34dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Task :"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/toDoTaskNameCompleted"
-            app:layout_constraintHorizontal_bias="0.236"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/toDoTaskNameCompleted"
-            android:layout_width="236dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="16dp"
-            android:text="Quiz 1"
-            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeMinTextSize="22sp"
             android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/tagNameCompleted"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.96" />
-        <TextView
-            android:id="@+id/tagHeaderCompleted"
-            android:layout_width="85dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/taskHeaderCompleted"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Tag :"
+            android:text="Milestone 1"
             android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/taskHeaderCompleted" />
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <TextView
-            android:id="@+id/tagNameCompleted"
-            android:layout_width="236dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/toDoTaskNameCompleted"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_toEndOf="@+id/tagHeaderCompleted"
-            android:text="CS2030S"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/statusIntCompleted"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.264"
-            app:layout_constraintStart_toEndOf="@+id/tagHeaderCompleted" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/statusTagCompleted"
-            android:layout_width="85dp"
-            android:layout_height="34dp"
-            android:layout_below="@id/tagHeaderCompleted"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Status :"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tagHeaderCompleted" />
-        <TextView
-            android:id="@+id/statusIntCompleted"
-            android:layout_width="236dp"
-            android:layout_height="34dp"
-            android:layout_below="@id/tagNameCompleted"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:text="50%"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/deadlineDateCompleted"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
-            app:layout_constraintStart_toEndOf="@+id/statusTagCompleted" />
+            <TextView
+                android:id="@+id/tagNameCompleted"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:autoSizeMaxTextSize="19sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform"
+                android:text="CS2030S"
+                android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/deadlineDateTagCompleted"
-            android:layout_width="119dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/statusTagCompleted"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Due Date:"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/statusTagCompleted" />
+            <TextView
+                android:id="@+id/statusTagCompleted"
+                android:layout_width="130dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:autoSizeMaxTextSize="26sp"
+                android:autoSizeMinTextSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="Status:"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/deadlineDateCompleted"
-            android:layout_width="212dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/statusIntCompleted"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_toEndOf="@+id/deadlineDateTagCompleted"
-            android:text="12122022"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/deadlineTimeCompleted"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.258"
-            app:layout_constraintStart_toEndOf="@+id/deadlineDateTagCompleted" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/deadlineTimeTagCompleted"
-            android:layout_width="119dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/deadlineDateCompleted"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Due Time:"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/deadlineDateTagCompleted" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+                <!--            planned and due dates info-->
 
-        <TextView
-            android:id="@+id/deadlineTimeCompleted"
-            android:layout_width="207dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/deadlineDateCompleted"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="16dp"
-            android:layout_toEndOf="@+id/deadlineTimeTagCompleted"
-            android:text="1400"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/PlannedDateCompleted"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384"
-            app:layout_constraintStart_toEndOf="@+id/deadlineTimeTagCompleted" />
-        <TextView
-            android:id="@+id/PlannedDateTagCompleted"
-            android:layout_width="165dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/deadlineTimeTagCompleted"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Planned Date:"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/deadlineTimeTagCompleted" />
+                <TextView
+                    android:id="@+id/deadlineDateTagCompleted"
+                    android:layout_width="119dp"
+                    android:layout_height="34dp"
+                    android:text="Due:"
+                    android:textColor="@color/black"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMaxTextSize="26sp"
+                    android:autoSizeMinTextSize="16sp"
+                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-        <TextView
-            android:id="@+id/PlannedDateCompleted"
-            android:layout_width="168dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/deadlineTimeCompleted"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="16dp"
-            android:layout_toEndOf="@+id/PlannedDateTagCompleted"
-            android:text="10122022"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/PlannedTimeCompleted"
-            app:layout_constraintStart_toEndOf="@+id/PlannedDateTagCompleted" />
+                    <TextView
+                        android:id="@+id/deadlineDateCompleted"
+                        android:layout_width="110dp"
+                        android:layout_height="34dp"
+                        android:text="12122022"
+                        android:textColor="@color/black"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMaxTextSize="19sp"
+                        android:autoSizeMinTextSize="12sp" />
 
-        <TextView
-            android:id="@+id/PlannedTimeTagCompleted"
-            android:layout_width="168dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/PlannedDateTagCompleted"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Planned Time:"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PlannedDateTagCompleted" />
+                    <TextView
+                        android:id="@+id/deadlineTimeCompleted"
+                        android:layout_width="70dp"
+                        android:layout_height="34dp"
+                        android:text="1400"
+                        android:textColor="@color/black"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMaxTextSize="19sp"
+                        android:autoSizeMinTextSize="12sp" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/PlannedDateTagCompleted"
+                    android:layout_width="165dp"
+                    android:layout_height="34dp"
+                    android:text="Planned:"
+                    android:textColor="@color/black"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMaxTextSize="26sp"
+                    android:autoSizeMinTextSize="16sp"
+                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <TextView
+                        android:id="@+id/PlannedDateCompleted"
+                        android:layout_width="110dp"
+                        android:layout_height="34dp"
+                        android:text="10122022"
+                        android:textColor="@color/black"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMaxTextSize="19sp"
+                        android:autoSizeMinTextSize="12sp" />
+                    <TextView
+                        android:id="@+id/PlannedTimeCompleted"
+                        android:layout_width="70dp"
+                        android:layout_height="34dp"
+                        android:text="1400"
+                        android:textColor="@color/black"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMaxTextSize="19sp"
+                        android:autoSizeMinTextSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/PlannedTimeCompleted"
-            android:layout_width="166dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/PlannedDateCompleted"
-            android:layout_alignParentEnd="true"
-            android:text="1400"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="26sp"
-            android:autoSizeMinTextSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.567"
-            app:layout_constraintStart_toEndOf="@+id/PlannedTimeTagCompleted" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/completedReward"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_ribbon_sticker_svgrepo_com" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

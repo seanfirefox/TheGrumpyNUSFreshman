@@ -118,6 +118,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         editDueTime.setText(taskInfo[4], TextView.BufferType.EDITABLE);
         editPlannedDate.setText(taskInfo[5], TextView.BufferType.EDITABLE);
         editPlannedTime.setText(taskInfo[6], TextView.BufferType.EDITABLE);
+        ((TextView) findViewById(R.id.editTasks)).setText("Edit " + task);
     }
 
     private void editTask() {

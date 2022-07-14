@@ -9,7 +9,7 @@ import gc
 # Flask Constructor
 app = Flask(__name__)
 
-DISCARD = {"On Monday": "MON", "On Tuesday" : "TUE", "On Wednesday" : "WED" , "On Thursday" : "THUR", "On Friday" : "FRI"}
+DISCARD = {"On Monday": "MON", "On Tuesday" : "TUE", "On Wednesday" : "WED" , "On Thursday" : "THUR", "On Friday" : "FRI", "On Saturday" : "SAT"}
 
 @app.route("/")
 def show_heroku_site() :
@@ -41,7 +41,7 @@ def test_one() :
     return process_string_to_json(string)
 
 def process_string_to_json(string) :
-    dictionary = {"MON" : [], "TUE" : [], "WED" : [], "THUR" : [], "FRI" : []}
+    dictionary = {"MON" : [], "TUE" : [], "WED" : [], "THUR" : [], "FRI" : [], "SAT" : []}
     a = string.split("\n")
     print(a)
     key_ = None

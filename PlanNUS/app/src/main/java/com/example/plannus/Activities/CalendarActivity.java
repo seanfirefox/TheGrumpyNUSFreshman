@@ -21,6 +21,8 @@ import com.example.plannus.utils.DateTimeDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 public class CalendarActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
@@ -94,11 +96,13 @@ public class CalendarActivity extends AppCompatActivity implements NavigationBar
                 .beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment, null)
                 .commit();
-        if (daySelected == daySelectedForFrag) {
-            calendarHeader.setText("Your Classes For Today");
-        } else {
-            calendarHeader.setText(header[daySelectedForFrag]);
-        }
+//        if (daySelected == daySelectedForFrag) {
+//            calendarHeader.setText("Your Classes For Today");
+//        } else {
+//            calendarHeader.setText(header[daySelectedForFrag]);
+//        }
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        calendarHeader.setText(dateFormat.format(DateTimeDialog.getInstance().getTime()));
     }
 
 }

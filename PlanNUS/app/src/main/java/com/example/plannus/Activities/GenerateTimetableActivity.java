@@ -50,7 +50,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private String userID;
     private OkHttpClient okHttpClient;
     private TimetableSettings timetableSettings;
-    private TextView mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, nothingTextView;
+    private TextView mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView, nothingTextView;
     private final String actualURL = "https://plannus-sat-solver.herokuapp.com/z3runner";
     private final String URL = "https://plannus-satsolver-backup.herokuapp.com/z3runner";
     private static int iterations = 0;
@@ -64,13 +64,14 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private ArrayList<String> wednesdayDocumentNames;
     private ArrayList<String> thursdayDocumentNames;
     private ArrayList<String> fridayDocumentNames;
+    private ArrayList<String> saturdayDocumentNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_timetable);
         initVars();
-        deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+        deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
         inflateTextViews(nothingTextView);
         nothingTextView.setText("No Timetable Generated Yet");
         obtainSettings();
@@ -96,7 +97,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 RequestBody requestBody = new RequestBuilder(timetableSettings, userID, URL)
                         .buildRequestBody(iterations);
                 if (requestBody == null) {
-                    deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                    deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
                     inflateTextViews(nothingTextView);
                     nothingTextView.setText("Settings page empty");
                     disableButtonBlocker(true);
@@ -138,6 +139,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
                     .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
                     .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
+                    .thenAcceptAsync(x -> getDocumentNames("saturdayClass", saturdayDocumentNames))
                     .join();
             Thread.sleep(2000);
         } catch (Exception e) {
@@ -173,6 +175,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
                     .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
                     .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
+                    .thenAcceptAsync(x -> deleteCollectionInFireStore(saturdayDocumentNames, "saturdayClass"))
                     .join();
             Thread.sleep(2000);
         } catch (Exception e) {
@@ -217,6 +220,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getWednesdayClass(), "wednesdayClass"))
                 .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getThursdayClass(), "thursdayClass"))
                 .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getFridayClass(), "fridayClass"))
+                .thenAcceptAsync(x -> saveTimeTableClass(nusTimetable.getSaturdayClass(), "saturdayClass"))
                 .join();
         return 1;
     }
@@ -272,6 +276,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         wednesdayTextView = findViewById(R.id.wednesdayClass);
         thursdayTextView = findViewById(R.id.thursdayClass);
         fridayTextView = findViewById(R.id.fridayClass);
+        saturdayTextView = findViewById(R.id.saturdayClass);
 
         nothingTextView = findViewById(R.id.nothingCard);
 
@@ -301,6 +306,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         wednesdayDocumentNames = new ArrayList<>();
         thursdayDocumentNames = new ArrayList<>();
         fridayDocumentNames = new ArrayList<>();
+        saturdayDocumentNames = new ArrayList<>();
 
         nusTimetable = new NUSTimetable();
 
@@ -328,20 +334,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     @SafeVarargs
     private final void inflateTextViews(TextView... textViews) {
         for (TextView t : textViews) {
-//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
-//            int pixel = MetricsConverter.convertDpToPixel(8);
-//            if (params.height == LinearLayout.LayoutParams.WRAP_CONTENT) {
-//                continue;
-//            } else {
-//                Log.d("Attempt", "Attempting to inflate");
-//                t.setPadding(pixel,pixel,pixel,pixel);
-//                params.topMargin = pixel;
-//                params.bottomMargin = pixel;
-//                params.leftMargin = pixel;
-//                params.rightMargin = pixel;
-//                params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-//                params.width = LinearLayout.LayoutParams.MATCH_PARENT;
-//            }
             t.setVisibility(View.VISIBLE);
         }
     }
@@ -352,7 +344,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("NETWORK_FAIL", "NETWORK FAIL");
-                deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
                 inflateTextViews(nothingTextView);
                 nothingTextView.setText("Network Fail");
                 runOnUiThread(() -> {
@@ -367,7 +359,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                         String jsonReturnString = response.body().string();
                         System.out.println(jsonReturnString);
                         if (jsonReturnString.equals("No Feasible Timetable!")) {
-                            deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                            deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
                             inflateTextViews(nothingTextView);
                             nothingTextView.setText("No Feasible Timetable!\n Change your study plan in Settings!");
                         } else {
@@ -375,18 +367,19 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                             String displayText = (String) jsonObject.get("string");
                             nusTimetable = new NUSTimetable(jsonObject);
                             Log.d("RESPONSE_BODY", displayText);
-                            inflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                            inflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
                             deflateTextViews(nothingTextView);
                             mondayTextView.setText(nusTimetable.getMonClass());
                             tuesdayTextView.setText(nusTimetable.getTueClass());
                             wednesdayTextView.setText(nusTimetable.getWedClass());
                             thursdayTextView.setText(nusTimetable.getThurClass());
                             fridayTextView.setText(nusTimetable.getFriClass());
+                            saturdayTextView.setText(nusTimetable.getSatClass());
                         }
                     } catch (IOException e) {
                         e.getStackTrace();
                     } catch (JSONException e) {
-                        deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView);
+                        deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
                         inflateTextViews(nothingTextView);
                         nothingTextView.setText("Invalid Combination!\n There is NO OTHER solution!");
                     } finally {

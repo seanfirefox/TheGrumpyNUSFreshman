@@ -56,7 +56,7 @@ public class FridayClassFragment extends Fragment {
     }
 
     private void setupRecyclerView(View view) {
-        Query query = sessionManager.getTimetableQuery(userID, "mondayClass");
+        Query query = sessionManager.getTimetableQuery(userID, "fridayClass");
         FirestoreRecyclerOptions<NUSClass> options = new FirestoreRecyclerOptions.Builder<NUSClass>()
                 .setQuery(query, NUSClass.class)
                 .build();

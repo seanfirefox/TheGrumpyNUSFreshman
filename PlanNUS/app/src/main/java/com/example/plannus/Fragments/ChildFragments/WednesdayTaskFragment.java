@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.plannus.R;
 
-public class MondayTaskFragment extends Fragment {
+public class WednesdayTaskFragment extends Fragment {
 
-    public MondayTaskFragment() {
+    public WednesdayTaskFragment() {
         // Required empty public constructor
     }
 
@@ -20,6 +20,6 @@ public class MondayTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monday_task, container, false);
+        return inflater.inflate(R.layout.fragment_wednesday_task, container, false);
     }
 }

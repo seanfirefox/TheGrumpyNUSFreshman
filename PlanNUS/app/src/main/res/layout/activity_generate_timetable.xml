@@ -114,6 +114,20 @@
 
                 </com.google.android.material.textview.MaterialTextView>
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/saturdayClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="On Friday \n CS2100 LEC 1 @ 0800 - 1000\n CS3230 TUT 7 @ 1100 - 1200"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold">
+
+                </com.google.android.material.textview.MaterialTextView>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

@@ -135,7 +135,7 @@ class TimeTableSchedulerZ3 :
         self.sects = []
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
 
     def input_new_modules(self, module_dict) :
         self.semesterMods = module_dict
@@ -190,7 +190,7 @@ class TimeTableSchedulerZ3 :
 
     def string_timetable(self) :
         string = ""
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
         for item in self.solver.model() :
             if (self.solver.model()[item]) :
                 pp = self.string_to_bool_literal[str(item)]
@@ -208,7 +208,7 @@ class TimeTableSchedulerZ3 :
         return string
 
     def printTimeTable(self) :
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
         for item in self.solver.model() :
             if (self.solver.model()[item]) :
                 pp = self.string_to_bool_literal[str(item)]

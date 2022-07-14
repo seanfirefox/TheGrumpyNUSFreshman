@@ -6,13 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.MondayFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="6dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mondayRecyclerVIew"
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pagerMonday"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehaviour"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabMonday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backGroundColor"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/backGroundColorContrast"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed" />
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/mondayRecyclerVIew"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

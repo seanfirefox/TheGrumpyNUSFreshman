@@ -34,6 +34,8 @@
         <entry key="app/src/main/res/layout/completedtask.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_friday.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_monday.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_monday_class.xml" value="0.28974358974358977" />
+        <entry key="app/src/main/res/layout/fragment_monday_task.xml" value="0.28974358974358977" />
         <entry key="app/src/main/res/layout/fragment_thursday.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tuesday.xml" value="0.17572463768115942" />
         <entry key="app/src/main/res/layout/fragment_wednesday.xml" value="0.1" />

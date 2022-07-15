@@ -68,7 +68,7 @@ public class MondayFragment extends Fragment {
 
     public void setHeader() {
         int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyy");
         String date = "Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime());
         if (dayOfWeek == Calendar.MONDAY) {
             ((TextView) requireActivity().findViewById(R.id.calendarHeader)).setText(date);

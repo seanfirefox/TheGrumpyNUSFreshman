@@ -69,14 +69,12 @@ public class WednesdayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Wednesday");
         adapter.startListening();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Wednesday");
     }
 
     @Override

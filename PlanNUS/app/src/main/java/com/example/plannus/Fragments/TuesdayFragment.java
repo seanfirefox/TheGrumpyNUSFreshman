@@ -1,6 +1,7 @@
 package com.example.plannus.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,13 +69,15 @@ public class TuesdayFragment extends Fragment {
 
     public void setHeader() {
         int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyy");
         String date = "Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime());
         if (dayOfWeek == Calendar.TUESDAY) {
-            ((TextView)requireActivity().findViewById(R.id.calendarHeader)).setText(date);
+            Log.d("HEADER CHECK", "Tuesday (TODAY) HEADER CHECKING");
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText(date);
         } else {
             Calendar c = getDateAfter(dayOfWeek, Calendar.TUESDAY);
-            ((TextView)requireActivity().findViewById(R.id.calendarHeader)).setText(dateFormat.format(c.getTime()));
+            Log.d("HEADER CHECK", "Tuesday (OTHER DAY) HEADER CHECKING");
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText(dateFormat.format(c.getTime()));
         }
     }
 

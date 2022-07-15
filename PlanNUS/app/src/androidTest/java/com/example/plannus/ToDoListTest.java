@@ -23,11 +23,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.example.plannus.Activities.AddTaskActivity;
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.EditTaskActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.ToDoList;
+import com.example.plannus.Activities.ToDoList.AddTaskActivity;
+import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
+import com.example.plannus.Activities.ToDoList.EditTaskActivity;
+import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.ToDoList.ToDoList;
 import com.example.plannus.utils.ProgressBarSetter;
 
 import org.hamcrest.Matchers;

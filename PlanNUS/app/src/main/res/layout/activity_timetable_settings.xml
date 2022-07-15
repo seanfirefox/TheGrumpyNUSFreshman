@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/backGroundColor"
     android:fillViewport="true"
-    tools:context=".Activities.TimetableSettingsActivity">
+    tools:context=".Activities.TimetableGenerator.TimetableSettingsActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -32,10 +32,10 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.GenerateTimetableActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.TimetableSettingsActivity;
+import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
+import com.example.plannus.Activities.TimetableGenerator.GenerateTimetableActivity;
+import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.TimetableGenerator.TimetableSettingsActivity;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest

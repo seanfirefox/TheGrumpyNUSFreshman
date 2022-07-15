@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundColor"
-    tools:context=".Activities.CalendarActivity">
+    tools:context=".Activities.MyCalendar.CalendarActivity">
 
     <TextView
         android:id="@+id/calendarHeader"
@@ -24,7 +24,7 @@
 
 <!--    <androidx.fragment.app.FragmentContainerView-->
 <!--        android:id="@+id/fragmentContainerView"-->
-<!--        android:name="com.example.plannus.Fragments.MondayFragment"-->
+<!--        android:name="com.example.plannus.Fragments.ParentFragments.MondayFragment"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="634dp"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->

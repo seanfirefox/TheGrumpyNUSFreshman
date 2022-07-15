@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plannus.Activities.EditTaskActivity;
+import com.example.plannus.Activities.ToDoList.EditTaskActivity;
 import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.R;
 import com.example.plannus.utils.DateFormatter;

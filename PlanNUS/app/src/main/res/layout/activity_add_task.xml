@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundColor"
-    tools:context=".Activities.AddTaskActivity">
+    tools:context=".Activities.ToDoList.AddTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

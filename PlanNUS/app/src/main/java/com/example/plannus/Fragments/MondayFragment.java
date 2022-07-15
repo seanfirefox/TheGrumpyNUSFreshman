@@ -69,11 +69,12 @@ public class MondayFragment extends Fragment {
     public void setHeader() {
         int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        String date = "Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime());
         if (dayOfWeek == Calendar.MONDAY) {
-            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime()));
-        } else if (dayOfWeek < Calendar.MONDAY) {
+            ((TextView) requireActivity().findViewById(R.id.calendarHeader)).setText(date);
+        } else {
             Calendar c = getDateAfter(dayOfWeek, Calendar.MONDAY);
-            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText(dateFormat.format(c.getTime()));
+            ((TextView)requireActivity().findViewById(R.id.calendarHeader)).setText(dateFormat.format(c.getTime()));
         }
     }
 

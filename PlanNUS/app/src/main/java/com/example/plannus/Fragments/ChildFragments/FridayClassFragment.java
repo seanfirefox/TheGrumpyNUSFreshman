@@ -74,15 +74,9 @@ public class FridayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Friday");
         adapter.startListening();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        setHeader();
-    }
 
     @Override
     public void onStop() {
@@ -90,12 +84,4 @@ public class FridayClassFragment extends Fragment {
         adapter.stopListening();
     }
 
-    public void setHeader() {
-        if (DateTimeDialog.getInstance().getDayOfWeek() == Calendar.FRIDAY) {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM");
-            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime()));
-        } else {
-            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Friday");
-        }
-    }
 }

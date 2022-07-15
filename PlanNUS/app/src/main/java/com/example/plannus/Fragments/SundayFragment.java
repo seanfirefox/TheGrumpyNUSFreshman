@@ -8,13 +8,19 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.plannus.Adaptors.ViewPagerAdapter;
 import com.example.plannus.Fragments.ChildFragments.SundayClassFragment;
 import com.example.plannus.Fragments.ChildFragments.SundayTaskFragment;
 import com.example.plannus.R;
+import com.example.plannus.utils.DateTimeDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class SundayFragment extends Fragment {
     private TabLayout tabLayout;
@@ -47,10 +53,37 @@ public class SundayFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        setHeader();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setHeader();
     }
 
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    public void setHeader() {
+        int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        String date = "Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime());
+        if (dayOfWeek == Calendar.SUNDAY) {
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText(date);
+        } else {
+            Calendar c = getDateAfter(dayOfWeek, Calendar.SUNDAY);
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText(dateFormat.format(c.getTime()));
+        }
+    }
+
+    public Calendar getDateAfter(int dayOfWeek,int currentDay) {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, dayOfWeek < currentDay
+                ? currentDay - dayOfWeek
+                : 7 - dayOfWeek + currentDay);
+        return c;
     }
 }

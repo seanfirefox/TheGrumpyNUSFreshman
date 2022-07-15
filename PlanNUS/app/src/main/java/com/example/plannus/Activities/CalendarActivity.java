@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class CalendarActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private TextView calendarHeader;
+//    private TextView calendarHeader;
     int dayOfWeek;
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
@@ -89,15 +89,15 @@ public class CalendarActivity extends AppCompatActivity {
             }
         }).attach();
 
-        calendarHeader = findViewById(R.id.calendarHeader);
+//        calendarHeader = findViewById(R.id.calendarHeader);
         dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
         changeFragment(dayOfWeek);
     }
 
     public void changeFragment(int dayOfWeek) {
         tabLayout.selectTab(tabLayout.getTabAt(dayOfWeek > 1 ? dayOfWeek - 2 : 6));
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
-        calendarHeader.setText(dateFormat.format(DateTimeDialog.getInstance().getTime()));
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+//        calendarHeader.setText(dateFormat.format(DateTimeDialog.getInstance().getTime()));
     }
 
     public void addDaysToAdaptor(ViewPagerAdapter adpt) {

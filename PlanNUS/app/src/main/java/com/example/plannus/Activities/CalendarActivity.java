@@ -47,13 +47,7 @@ public class CalendarActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setReorderingAllowed(true);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager, getLifecycle());
-        viewPagerAdapter.addFragment(new MondayFragment(), "Monday");
-        viewPagerAdapter.addFragment(new TuesdayFragment(), "Tuesday");
-        viewPagerAdapter.addFragment(new WednesdayFragment(), "Wednesday");
-        viewPagerAdapter.addFragment(new ThursdayFragment(), "Thursday");
-        viewPagerAdapter.addFragment(new FridayFragment(), "Friday");
-        viewPagerAdapter.addFragment(new SaturdayFragment(), "Saturday");
-        viewPagerAdapter.addFragment(new SundayFragment(), "Sunday");
+        addDaysToAdaptor(viewPagerAdapter);
         viewPager.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
@@ -104,6 +98,16 @@ public class CalendarActivity extends AppCompatActivity {
         tabLayout.selectTab(tabLayout.getTabAt(dayOfWeek > 1 ? dayOfWeek - 2 : 6));
         DateFormat dateFormat = new SimpleDateFormat("dd/MM");
         calendarHeader.setText(dateFormat.format(DateTimeDialog.getInstance().getTime()));
+    }
+
+    public void addDaysToAdaptor(ViewPagerAdapter adpt) {
+        adpt.addFragment(new MondayFragment(), "Monday");
+        adpt.addFragment(new TuesdayFragment(), "Tuesday");
+        adpt.addFragment(new WednesdayFragment(), "Wednesday");
+        adpt.addFragment(new ThursdayFragment(), "Thursday");
+        adpt.addFragment(new FridayFragment(), "Friday");
+        adpt.addFragment(new SaturdayFragment(), "Saturday");
+        adpt.addFragment(new SundayFragment(), "Sunday");
     }
 
 }

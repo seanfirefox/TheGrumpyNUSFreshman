@@ -60,7 +60,7 @@ class NoClashConstraint(Constraint) :
 
     def __init__(self, classes, string_to_bool_literal_dict, name="No Time Clash Constraint") :
         super().__init__(classes, string_to_bool_literal_dict, name)
-        self.lessons_by_day = [[], [], [], [], []]
+        self.lessons_by_day = [[], [], [], [], [], []]
 
     def sort_by_days(self) :
         for lesson in self.classes :

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.plannus.Adaptors.CalendarAdapter;
 import com.example.plannus.Objects.NUSClass;
@@ -54,15 +55,20 @@ public class SundayClassFragment extends Fragment {
 //        recyclerView.setAdapter(adapter);
 //    }
 //
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        adapter.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        adapter.stopListening();
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Sunday");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Sunday");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 }

@@ -9,14 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.plannus.Adaptors.CalendarAdapter;
 import com.example.plannus.Objects.NUSClass;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.example.plannus.WrapContentLinearLayoutManager;
+import com.example.plannus.utils.DateTimeDialog;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
+
+import org.joda.time.DateTime;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class SaturdayClassFragment extends Fragment {
@@ -57,12 +66,38 @@ public class SaturdayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        setHeader();
         adapter.startListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setHeader();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void setHeader() {
+        int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        if (dayOfWeek == Calendar.SATURDAY) {
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime()));
+        } else if (dayOfWeek < Calendar.SATURDAY) {
+            Calendar c = getDateAfter(dayOfWeek, Calendar.SATURDAY);
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText(dateFormat.format(c.getTime()));
+        }
+    }
+
+    public Calendar getDateAfter(int dayOfWeek,int currentDay) {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, dayOfWeek < currentDay
+                ? currentDay - dayOfWeek
+                : 7 - dayOfWeek + currentDay);
+        return c;
     }
 }

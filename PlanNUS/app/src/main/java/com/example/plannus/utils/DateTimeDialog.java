@@ -85,4 +85,8 @@ public class DateTimeDialog {
     public Date getTime() {
         return time;
     }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
 }

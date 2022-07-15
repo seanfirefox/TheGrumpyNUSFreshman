@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.plannus.Adaptors.CalendarAdapter;
 import com.example.plannus.Objects.NUSClass;
@@ -56,7 +57,14 @@ public class ThursdayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Thursday");
         adapter.startListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Thursday");
     }
 
     @Override

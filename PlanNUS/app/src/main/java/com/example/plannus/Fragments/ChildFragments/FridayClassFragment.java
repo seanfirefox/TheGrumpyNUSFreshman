@@ -15,6 +15,7 @@ import com.example.plannus.Objects.NUSClass;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.example.plannus.WrapContentLinearLayoutManager;
+import com.example.plannus.utils.DateTimeDialog;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
@@ -25,8 +26,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.plannus.R;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class FridayClassFragment extends Fragment {
 
@@ -68,12 +74,28 @@ public class FridayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Friday");
         adapter.startListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setHeader();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void setHeader() {
+        if (DateTimeDialog.getInstance().getDayOfWeek() == Calendar.FRIDAY) {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Today: " + dateFormat.format(DateTimeDialog.getInstance().getTime()));
+        } else {
+            ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Friday");
+        }
     }
 }

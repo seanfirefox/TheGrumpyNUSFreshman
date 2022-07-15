@@ -1,14 +1,14 @@
 package com.example.plannus.Fragments.ChildFragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.plannus.Adaptors.CalendarAdapter;
 import com.example.plannus.Objects.NUSClass;
@@ -17,16 +17,6 @@ import com.example.plannus.SessionManager;
 import com.example.plannus.WrapContentLinearLayoutManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
-
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.plannus.R;
 
 public class TuesdayClassFragment extends Fragment {
 
@@ -68,7 +58,14 @@ public class TuesdayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Tuesday");
         adapter.startListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Tuesday");
     }
 
     @Override

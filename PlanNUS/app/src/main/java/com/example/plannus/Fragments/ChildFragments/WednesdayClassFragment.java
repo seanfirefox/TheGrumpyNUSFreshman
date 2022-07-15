@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.plannus.R;
 
@@ -68,7 +69,14 @@ public class WednesdayClassFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Wednesday");
         adapter.startListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((TextView)getActivity().findViewById(R.id.calendarHeader)).setText("Wednesday");
     }
 
     @Override

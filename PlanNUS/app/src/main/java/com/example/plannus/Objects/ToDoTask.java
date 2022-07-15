@@ -53,4 +53,7 @@ public class ToDoTask {
 
     public String getPlannedDateTime() { return  plannedDateTime; }
 
+    public String getPlannedDate() {
+        return plannedDate;
+    }
 }

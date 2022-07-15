@@ -83,7 +83,9 @@ public class FridayTaskFragment extends Fragment {
 
     public Calendar getDateAfter(int dayOfWeek, int currentDay) {
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, dayOfWeek < currentDay
+        c.add(Calendar.DATE, dayOfWeek == currentDay
+                ? 0
+                : dayOfWeek < currentDay
                 ? currentDay - dayOfWeek
                 : 7 - dayOfWeek + currentDay);
         return c;

@@ -59,11 +59,10 @@ public class SaturdayTaskFragment extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Calendar c = getDateAfter(dayOfWeek, Calendar.SATURDAY);
         String plannedDateString = dateFormat.format(c.getTime());
+        System.out.println(plannedDateString);
         Query query = taskRef.orderBy("plannedDate", Query.Direction.ASCENDING)
                 .orderBy("plannedDateTime", Query.Direction.ASCENDING)
-                .whereLessThanOrEqualTo("plannedDate", plannedDateString)
-                .whereGreaterThanOrEqualTo("plannedDate", plannedDateString);
-//                .whereEqualTo("plannedDate", plannedDateString);
+                .whereEqualTo("plannedDate", plannedDateString);
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)
                 .build();
@@ -86,7 +85,9 @@ public class SaturdayTaskFragment extends Fragment {
 
     public Calendar getDateAfter(int dayOfWeek, int currentDay) {
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, dayOfWeek < currentDay
+        c.add(Calendar.DATE, dayOfWeek == currentDay
+                ? 0
+                : dayOfWeek < currentDay
                 ? currentDay - dayOfWeek
                 : 7 - dayOfWeek + currentDay);
         return c;

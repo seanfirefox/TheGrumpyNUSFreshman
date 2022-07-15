@@ -56,7 +56,8 @@ public class ThursdayTaskFragment extends Fragment {
     private void setupRecyclerView(View view) {
         int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        String plannedDateString = dateFormat.format(DateTimeDialog.getInstance().getTime());
+        Calendar c = getDateAfter(dayOfWeek, Calendar.THURSDAY);
+        String plannedDateString = dateFormat.format(c.getTime());
         Query query = taskRef.orderBy("plannedDate", Query.Direction.ASCENDING)
                 .orderBy("plannedDateTime", Query.Direction.ASCENDING)
                 .whereEqualTo("plannedDate", plannedDateString);
@@ -82,7 +83,9 @@ public class ThursdayTaskFragment extends Fragment {
 
     public Calendar getDateAfter(int dayOfWeek, int currentDay) {
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, dayOfWeek < currentDay
+        c.add(Calendar.DATE, dayOfWeek == currentDay
+                ? 0
+                : dayOfWeek < currentDay
                 ? currentDay - dayOfWeek
                 : 7 - dayOfWeek + currentDay);
         return c;

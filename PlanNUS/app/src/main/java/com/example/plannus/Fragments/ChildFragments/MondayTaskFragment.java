@@ -1,27 +1,36 @@
 package com.example.plannus.Fragments.ChildFragments;
 
-import android.app.DownloadManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.plannus.Adaptors.CalendarAdapter;
+import com.example.plannus.Adaptors.CalendarClassAdapter;
+import com.example.plannus.Adaptors.CalendarTaskAdapter;
 import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.example.plannus.WrapContentLinearLayoutManager;
+import com.example.plannus.utils.DateTimeDialog;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.Query;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MondayTaskFragment extends Fragment {
     private SessionManager sessionManager;
     private String userID;
-    private CalendarAdapter adapter;
+    private CalendarTaskAdapter adapter;
     private RecyclerView recyclerView;
+    CollectionReference taskRef;
 
     public MondayTaskFragment() {
         // Required empty public constructor
@@ -41,24 +50,42 @@ public class MondayTaskFragment extends Fragment {
         sessionManager = SessionManager.get();
         userID = sessionManager.getUserID();
         recyclerView = view.findViewById(R.id.mondayTaskRecyclerVIew);
+        taskRef = sessionManager.getColRef(userID, "Tasks");
     }
 
     private void setupRecyclerView(View view) {
-//        Query query =
-//        FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
-//                .setQuery(query, ToDoTask.class)
-//                .build();
+        int dayOfWeek = DateTimeDialog.getInstance().getDayOfWeek();
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar c = getDateAfter(dayOfWeek, Calendar.MONDAY);
+        String plannedDateString = dateFormat.format(c.getTime());
+        Query query = taskRef.orderBy("plannedDate", Query.Direction.ASCENDING)
+                .orderBy("plannedDateTime", Query.Direction.ASCENDING)
+                .whereEqualTo("plannedDate", plannedDateString);
+        FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
+                .setQuery(query, ToDoTask.class)
+                .build();
+        adapter = new CalendarTaskAdapter(options);
+        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        adapter.startListening();
+        adapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-//        adapter.stopListening();
+        adapter.stopListening();
+    }
+
+    public Calendar getDateAfter(int dayOfWeek, int currentDay) {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, dayOfWeek < currentDay
+                ? currentDay - dayOfWeek
+                : 7 - dayOfWeek + currentDay);
+        return c;
     }
 }

@@ -89,4 +89,8 @@ public class DateTimeDialog {
     public Calendar getCalendar() {
         return calendar;
     }
+
+    public String dateTimeString() {
+        return String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
+    }
 }

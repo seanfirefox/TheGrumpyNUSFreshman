@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.plannus.Adaptors.CalendarAdapter;
+import com.example.plannus.Adaptors.CalendarClassAdapter;
 import com.example.plannus.Objects.NUSClass;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
@@ -18,22 +18,11 @@ import com.example.plannus.WrapContentLinearLayoutManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.plannus.R;
-
 public class WednesdayClassFragment extends Fragment {
 
     private SessionManager sessionManager;
     private String userID;
-    private CalendarAdapter adapter;
+    private CalendarClassAdapter adapter;
     private RecyclerView recyclerView;
 
     public WednesdayClassFragment() {
@@ -61,7 +50,7 @@ public class WednesdayClassFragment extends Fragment {
         FirestoreRecyclerOptions<NUSClass> options = new FirestoreRecyclerOptions.Builder<NUSClass>()
                 .setQuery(query, NUSClass.class)
                 .build();
-        adapter = new CalendarAdapter(options);
+        adapter = new CalendarClassAdapter(options);
         recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
     }

@@ -19,6 +19,9 @@ public class ToDoTask {
     @PropertyName("plannedDateTime")
     private String plannedDateTime;
 
+    @PropertyName("plannedDate")
+    private String plannedDate;
+
     public ToDoTask() {
 
     }
@@ -29,6 +32,7 @@ public class ToDoTask {
         this.status = status;
         this.deadLineDateTime = deadLineDateTime;
         this.plannedDateTime = plannedDateTime;
+        this.plannedDate = plannedDateTime.substring(0,8);
     }
 
     public String getModuleName() {

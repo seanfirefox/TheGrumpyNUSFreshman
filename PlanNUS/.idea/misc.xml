@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/layout/activity_timetable_settings.xml" value="0.26744186046511625" />
         <entry key="app/src/main/res/layout/activity_to_do_list.xml" value="0.18" />
         <entry key="app/src/main/res/layout/announcement_todolist.xml" value="0.34251215838003846" />
+        <entry key="app/src/main/res/layout/calendar_task.xml" value="0.18796296296296297" />
         <entry key="app/src/main/res/layout/completedtask.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_friday.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_friday_class.xml" value="0.1" />
@@ -56,7 +57,7 @@
         <entry key="app/src/main/res/layout/fragment_wednesday_task.xml" value="0.1" />
         <entry key="app/src/main/res/layout/linear_layout_attribute_set_generator.xml" value="0.18931159420289856" />
         <entry key="app/src/main/res/layout/linear_layout_generator.xml" value="0.11854103343465046" />
-        <entry key="app/src/main/res/layout/nus_class.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/nus_class.xml" value="0.1" />
         <entry key="app/src/main/res/layout/test.xml" value="0.33" />
         <entry key="app/src/main/res/layout/test1.xml" value="0.35517730712890627" />
         <entry key="app/src/main/res/layout/todotask.xml" value="0.33" />

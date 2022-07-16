@@ -13,6 +13,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -55,6 +56,12 @@ public class SaveSettingsTest {
     public void setUp() throws Exception{
         Intents.init();
         // Login First
+        try {
+            onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
+                    .perform(ViewActions.click());
+        } catch (NoMatchingViewException e) {
+
+        }
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());

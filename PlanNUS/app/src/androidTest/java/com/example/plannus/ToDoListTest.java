@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.not;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -59,6 +60,12 @@ public class ToDoListTest {
     @Before
     public void setUp() throws Exception {
         Intents.init();
+        try {
+            onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
+                    .perform(ViewActions.click());
+        } catch (NoMatchingViewException e) {
+
+        }
     }
 
     @Test

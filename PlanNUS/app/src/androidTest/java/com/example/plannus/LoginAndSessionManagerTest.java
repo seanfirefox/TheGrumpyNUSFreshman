@@ -8,6 +8,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -42,6 +43,12 @@ public class LoginAndSessionManagerTest {
     @Before
     public void setUp() {
         Intents.init();
+        try {
+            onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
+                    .perform(ViewActions.click());
+        } catch (NoMatchingViewException e) {
+
+        }
     }
 
     @Test

@@ -112,14 +112,14 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String tag = newTag.getText().toString().trim();
 
         String deadlineDate = dueDate.getText().toString().trim();
-        if (deadlineDate.equals("Due Date Here")) {
+        if (deadlineDate.equals("Due Date")) {
             Toast.makeText(this, "DUE DATE EMPTY", Toast.LENGTH_SHORT).show();
             return;
         }
         String deadLineDateStore = DateFormatter.dateToNumber(deadlineDate);
 
         String deadLineTime = dueTime.getText().toString().trim();
-        if (deadLineTime.equals("Due Time Here")) {
+        if (deadLineTime.equals("Due Time")) {
             Toast.makeText(this, "DUE TIME EMPTY", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -128,14 +128,14 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         String deadLineDateTime = deadLineDateStore + deadLineTimeStore;
 
         String planDate = plannedDate.getText().toString().trim();
-        if (planDate.equals("Planned Date Here")) {
+        if (planDate.equals("Planned Date")) {
             Toast.makeText(this, "PLANNED DATE EMPTY", Toast.LENGTH_SHORT).show();
             return;
         }
         String planDateStore = DateFormatter.dateToNumber(planDate);
 
         String planTime = plannedTime.getText().toString().trim();
-        if (planTime.equals("Planned Time Here")) {
+        if (planTime.equals("Planned Time")) {
             Toast.makeText(this, "PLANNED Time EMPTY", Toast.LENGTH_SHORT).show();
             return;
         }

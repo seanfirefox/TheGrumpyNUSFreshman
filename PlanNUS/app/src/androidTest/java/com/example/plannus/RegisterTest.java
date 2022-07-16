@@ -47,6 +47,25 @@ public class RegisterTest {
     }
 
     @Test
+    public void A_isBackToMain() {
+        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
+        intending(hasComponent(RegisterUser.class.getName()));
+        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.closeSoftKeyboard(), ViewActions.pressBack());
+        intending(hasComponent(MainActivity.class.getName()));
+        checkLoginPageDisplayed();
+    }
+
+    public void checkLoginPageDisplayed() {
+        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
+        onView(withId(R.id.passWord)).check(matches(isDisplayed()));
+        onView(withId(R.id.register)).check(matches(isDisplayed()));
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()));
+        B_clickOnRegisterButton();
+    }
+
+    @Test
     public void B_clickOnRegisterButton() {
         intending(hasComponent(MainActivity.class.getName()));
         onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -70,25 +89,6 @@ public class RegisterTest {
     }
 
     @Test
-    public void A_isBackToMain() {
-        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
-        intending(hasComponent(RegisterUser.class.getName()));
-        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.closeSoftKeyboard(), ViewActions.pressBack());
-        intending(hasComponent(MainActivity.class.getName()));
-        checkLoginPageDisplayed();
-    }
-
-    public void checkLoginPageDisplayed() {
-        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
-        onView(withId(R.id.passWord)).check(matches(isDisplayed()));
-        onView(withId(R.id.register)).check(matches(isDisplayed()));
-        onView(withId(R.id.imageView)).check(matches(isDisplayed()));
-        B_clickOnRegisterButton();
-    }
-
-    @Test
     public void C_AttemptToLoginNewUser() throws InterruptedException {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
@@ -98,12 +98,14 @@ public class RegisterTest {
         Thread.sleep(1000);
         onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
+        onView(withId(R.id.logoutButton)).perform(ViewActions.click());
     }
 
     public void checkSuccessfulLoginOfNewUser() {
         intending(hasComponent(ContentMainActivity.class.getName()));
         onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
+        onView(withId(R.id.logoutButton)).perform(ViewActions.click());
     }
 
     @After

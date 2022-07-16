@@ -70,7 +70,7 @@ public class LoginAndSessionManagerTest {
     }
 
     @Test
-    public void successfulLoginAndSessionManagerSingletonStatusCheck() {
+    public void successfulLoginAndSessionManagerSingletonStatusCheck() throws Exception {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -78,6 +78,9 @@ public class LoginAndSessionManagerTest {
         SessionManager a = SessionManager.get();
         SessionManager b = SessionManager.get();
         assertEquals(a, b);
+        Thread.sleep(1000);
+        onView(withId(R.id.logoutButton)).perform(ViewActions.click());
+        intending((hasComponent(MainActivity.class.getName())));
     }
 
     @After

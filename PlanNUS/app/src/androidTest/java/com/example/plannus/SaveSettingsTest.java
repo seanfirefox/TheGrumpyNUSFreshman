@@ -6,6 +6,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -16,6 +17,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -59,8 +61,11 @@ public class SaveSettingsTest {
         try {
             onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
                     .perform(ViewActions.click());
+            Thread.sleep(1000);
         } catch (NoMatchingViewException e) {
-
+            System.out.println("NO MATCHING VIEW EXCEPTION");
+        } catch (InterruptedException e) {
+            System.out.println("THREAD INTERRUPTED");
         }
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
@@ -90,18 +95,19 @@ public class SaveSettingsTest {
 
    @Test
    public void B_CanSave5Modules() throws Exception {
+       Thread.sleep(1000);
        onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
        intending(hasComponent(TimetableSettingsActivity.class.getName()));
        Thread.sleep(1000);
        onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
 
        onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-       onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-       onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+       onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+       onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
        onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-       onData(allOf(is(instanceOf(String.class)), is("2"))).perform(ViewActions.click());
-       onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("2"))));
+       onView(withText("2")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+       onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("2"))));
 
        onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                .check(matches(withText("CS1101S")));
@@ -123,18 +129,19 @@ public class SaveSettingsTest {
    }
    @Test
    public void C_CanSaveModulesWithConstraints() throws Exception {
+       Thread.sleep(1000);
        onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
        intending(hasComponent(TimetableSettingsActivity.class.getName()));
        Thread.sleep(1000);
        onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
 
        onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-       onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-       onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+       onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+       onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
        onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-       onData(allOf(is(instanceOf(String.class)), is("2"))).perform(ViewActions.click());
-       onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("2"))));
+       onView(withText("2")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+       onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("2"))));
 
        onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                .check(matches(withText("CS1101S")));
@@ -167,18 +174,19 @@ public class SaveSettingsTest {
 
     @Test
     public void E_CanSave7ModulesWithConstraints() throws Exception {
+        Thread.sleep(1000);
         onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
         onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("2"))));
+        onView(withText("2")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("2"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS2030S"))
                 .check(matches(withText("CS2030S")));
@@ -213,7 +221,7 @@ public class SaveSettingsTest {
                 .perform(ViewActions.click())
                 .check(matches(isNotChecked()));
 
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(),ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
 //        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
@@ -221,18 +229,19 @@ public class SaveSettingsTest {
 
     @Test
     public void D_CanSave6Modules() throws Exception {
+        Thread.sleep(1000);
         onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(TimetableSettingsActivity.class.getName()));
         Thread.sleep(1000);
         onView(withId(R.id.settingsPage)).check(matches(isDisplayed()));
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("2"))));
+        onView(withText("2")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("2"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -250,7 +259,7 @@ public class SaveSettingsTest {
                 .perform(ViewActions.scrollTo(), ViewActions.typeText("GEA1000"), ViewActions.closeSoftKeyboard())
                 .check(matches(withText("GEA1000")));
         Thread.sleep(1000);
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
 //        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));

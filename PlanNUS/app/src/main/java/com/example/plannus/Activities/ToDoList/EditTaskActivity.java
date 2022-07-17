@@ -72,7 +72,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         Log.e("check", Arrays.toString(taskInfo));
 
         editStatusText = findViewById(R.id.textViewStatus);
-        statusValue = editStatusText.getText().toString();
+        statusValue = editStatusText.getText().toString().substring(0, 1);;
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
         editTag = findViewById(R.id.editTag);
@@ -111,7 +111,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     public void renderVars() {
         editTask.setText(task, TextView.BufferType.EDITABLE);
         editStatus.setProgress(Integer.valueOf(taskInfo[2]));
-        editStatusText.setText(taskInfo[2], TextView.BufferType.EDITABLE);
+        editStatusText.setText(taskInfo[2] + "%", TextView.BufferType.EDITABLE);
         editTag.setText(taskInfo[0], TextView.BufferType.EDITABLE);
         editDueDate.setText(taskInfo[3], TextView.BufferType.EDITABLE);
         editDueTime.setText(taskInfo[4], TextView.BufferType.EDITABLE);

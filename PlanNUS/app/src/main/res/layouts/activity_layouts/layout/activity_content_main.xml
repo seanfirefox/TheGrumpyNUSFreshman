@@ -63,7 +63,7 @@
                     android:id="@+id/calendarImgView"
                     android:layout_width="163dp"
                     android:layout_height="131dp"
-                    android:layout_marginStart="16dp"
+
                     android:layout_marginTop="28dp"
                     android:autoSizeMaxTextSize="18sp"
                     android:autoSizeMinTextSize="8sp"
@@ -78,6 +78,9 @@
                     app:iconGravity="top"
                     app:iconSize="70dp"
                     app:iconTint="@color/black"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+
+                    app:layout_constraintEnd_toStartOf="@id/checklistImgView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/hiName"
                     app:strokeColor="@color/black"

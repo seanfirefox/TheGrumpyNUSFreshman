@@ -59,9 +59,9 @@ public class SaveSettingsTest {
         Intents.init();
         // Login First
         try {
+            Thread.sleep(2000);
             onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
                     .perform(ViewActions.click());
-            Thread.sleep(1000);
         } catch (NoMatchingViewException e) {
             System.out.println("NO MATCHING VIEW EXCEPTION");
         } catch (InterruptedException e) {
@@ -117,12 +117,12 @@ public class SaveSettingsTest {
                .check(matches(withText("MA2001")));
        onView(withId(R.id.moduleCode4)).perform(ViewActions.typeText("MA1521"))
                .check(matches(withText("MA1521")));
-       onView(withId(R.id.moduleCode5)).perform(ViewActions.typeText("GEC1030"), ViewActions.closeSoftKeyboard())
+       onView(withId(R.id.moduleCode5)).perform(ViewActions.scrollTo(), ViewActions.typeText("GEC1030"), ViewActions.closeSoftKeyboard())
                .check(matches(withText("GEC1030")));
 
        ViewActions.closeSoftKeyboard();
 
-       onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+       onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
        intending(hasComponent(GenerateTimetableActivity.class.getName()));
        Thread.sleep(1000);
 //       onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
@@ -151,21 +151,21 @@ public class SaveSettingsTest {
                .check(matches(withText("MA2001")));
        onView(withId(R.id.moduleCode4)).perform(ViewActions.typeText("MA1521"))
                .check(matches(withText("MA1521")));
-       onView(withId(R.id.moduleCode5)).perform(ViewActions.typeText("GEC1030"), ViewActions.closeSoftKeyboard())
+       onView(withId(R.id.moduleCode5)).perform(ViewActions.scrollTo(), ViewActions.typeText("GEC1030"), ViewActions.closeSoftKeyboard())
                .check(matches(withText("GEC1030")));
 
        onView(withId(R.id.no8amLessons)).check(matches(isNotChecked()))
-                       .perform(ViewActions.click())
+                       .perform(ViewActions.scrollTo(), ViewActions.click())
                        .check(matches(isChecked()));
 
        onView(withId(R.id.oneFreeDay)).check(matches(isNotChecked()))
-                       .perform(ViewActions.click())
+                       .perform(ViewActions.scrollTo(), ViewActions.click())
                        .check(matches(isChecked()))
                        .perform(ViewActions.click())
                        .check(matches(isNotChecked()));
 
        ViewActions.closeSoftKeyboard();
-       onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+       onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
        intending(hasComponent(GenerateTimetableActivity.class.getName()));
        Thread.sleep(1000);
 //       onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
@@ -196,9 +196,9 @@ public class SaveSettingsTest {
                 .check(matches(withText("SP1541")));
         onView(withId(R.id.moduleCode4)).perform(ViewActions.typeText("IS1103"))
                 .check(matches(withText("IS1103")));
-        onView(withId(R.id.moduleCode5)).perform(ViewActions.typeText("HSS1000"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.moduleCode5)).perform(ViewActions.scrollTo(), ViewActions.typeText("HSS1000"), ViewActions.closeSoftKeyboard())
                 .check(matches(withText("HSS1000")));
-        onView(withId(R.id.addRow)).perform(ViewActions.click());
+        onView(withId(R.id.addRow)).perform(ViewActions.scrollTo(), ViewActions.click());
         onView(withId(R.id.addRow)).perform(ViewActions.click());
         Thread.sleep(1000);
         onView(withTagValue(is("moduleCode6")))
@@ -212,11 +212,11 @@ public class SaveSettingsTest {
         Thread.sleep(1000);
 
         onView(withId(R.id.no8amLessons)).check(matches(isNotChecked()))
-                .perform(ViewActions.click())
+                .perform(ViewActions.scrollTo(), ViewActions.click())
                 .check(matches(isChecked()));
 
         onView(withId(R.id.oneFreeDay)).check(matches(isNotChecked()))
-                .perform(ViewActions.click())
+                .perform(ViewActions.scrollTo(), ViewActions.click())
                 .check(matches(isChecked()))
                 .perform(ViewActions.click())
                 .check(matches(isNotChecked()));
@@ -251,9 +251,9 @@ public class SaveSettingsTest {
                 .check(matches(withText("MA2001")));
         onView(withId(R.id.moduleCode4)).perform(ViewActions.typeText("MA1521"))
                 .check(matches(withText("MA1521")));
-        onView(withId(R.id.moduleCode5)).perform(ViewActions.typeText("GEC1030"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.moduleCode5)).perform(ViewActions.scrollTo(), ViewActions.typeText("GEC1030"), ViewActions.closeSoftKeyboard())
                 .check(matches(withText("GEC1030")));
-        onView(withId(R.id.addRow)).perform(ViewActions.click());
+        onView(withId(R.id.addRow)).perform(ViewActions.scrollTo(), ViewActions.click());
         Thread.sleep(1000);
         onView(withTagValue(is("moduleCode6")))
                 .perform(ViewActions.scrollTo(), ViewActions.typeText("GEA1000"), ViewActions.closeSoftKeyboard())

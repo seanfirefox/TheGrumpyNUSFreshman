@@ -1,6 +1,5 @@
 package com.example.plannus;
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
@@ -10,13 +9,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 
 import androidx.test.espresso.NoMatchingViewException;
@@ -28,8 +24,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
-import com.example.plannus.Activities.TimetableGenerator.GenerateTimetableActivity;
 import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.TimetableGenerator.GenerateTimetableActivity;
 import com.example.plannus.Activities.TimetableGenerator.TimetableSettingsActivity;
 
 import org.junit.After;

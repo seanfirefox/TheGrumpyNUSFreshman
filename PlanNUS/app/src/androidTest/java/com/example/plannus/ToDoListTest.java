@@ -24,10 +24,10 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.example.plannus.Activities.ToDoList.AddTaskActivity;
 import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
-import com.example.plannus.Activities.ToDoList.EditTaskActivity;
 import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.ToDoList.AddTaskActivity;
+import com.example.plannus.Activities.ToDoList.EditTaskActivity;
 import com.example.plannus.Activities.ToDoList.ToDoList;
 import com.example.plannus.utils.ProgressBarSetter;
 
@@ -116,7 +116,8 @@ public class ToDoListTest {
     }
 
     public void addTask() throws Exception {
-        onView(withId(R.id.createTask)).perform(ViewActions.click());
+        Thread.sleep(1000);
+        onView(withId(R.id.createTask)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(AddTaskActivity.class.getName()));
         onView(withId(R.id.taskDescEditText)).perform(ViewActions.typeText(task));
         onView(withId(R.id.taskDescEditStatus)).perform(ProgressBarSetter.scrubSeekBarAction(status));
@@ -184,7 +185,7 @@ public class ToDoListTest {
         onView(withId(R.id.editPlannedTimeButton)).perform(ViewActions.click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(20, 0));
         onView(withId(android.R.id.button1)).perform(ViewActions.click());
-        onView(withId(R.id.editButton)).perform(ViewActions.click());
+        onView(withId(R.id.editButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         onView(withId(R.id.taskListAnnouncements)).perform(RecyclerViewActions.scrollTo(
                 hasDescendant(withText(newTask))));
         Thread.sleep(2000);

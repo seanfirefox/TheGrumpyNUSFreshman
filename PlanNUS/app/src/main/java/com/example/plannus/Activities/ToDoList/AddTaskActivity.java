@@ -67,7 +67,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         plannedTime.setOnClickListener(this);
 
         statusValue = findViewById(R.id.textViewNewStatus);
-        status_text = statusValue.getText().toString();
+        status_text = statusValue.getText().toString().substring(0, 1);
         newStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

@@ -20,8 +20,8 @@
             android:id="@+id/toDoTaskName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeMinTextSize="22sp"
+            android:autoSizeMaxTextSize="45sp"
+            android:autoSizeMinTextSize="12sp"
             android:autoSizeTextType="uniform"
             android:text="Milestone 1"
             android:textColor="@color/black"
@@ -32,14 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
+
             <TextView
                 android:id="@+id/tagName"
-                android:layout_width="wrap_content"
+                android:layout_width="220dp"
                 android:layout_height="35dp"
-                android:autoSizeMaxTextSize="19sp"
-                android:autoSizeMinTextSize="12sp"
-                android:autoSizeTextType="uniform"
                 android:layout_alignParentStart="true"
+                android:autoSizeMaxTextSize="19sp"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeTextType="uniform"
                 android:text="CS2030S"
                 android:textColor="@color/black" />
 
@@ -90,11 +91,12 @@
                     android:id="@+id/deadlineDate"
                     android:layout_width="110dp"
                     android:layout_height="34dp"
+                    android:layout_marginEnd="10dp"
                     android:text="12122022"
                     android:textColor="@color/black"
                     android:autoSizeTextType="uniform"
                     android:autoSizeMaxTextSize="19sp"
-                    android:autoSizeMinTextSize="12sp" />
+                    android:autoSizeMinTextSize="9sp"/>
 
                 <TextView
                     android:id="@+id/deadlineTime"
@@ -104,7 +106,7 @@
                     android:textColor="@color/black"
                     android:autoSizeTextType="uniform"
                     android:autoSizeMaxTextSize="19sp"
-                    android:autoSizeMinTextSize="12sp" />
+                    android:autoSizeMinTextSize="9sp"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/PlannedDateTag"
@@ -125,11 +127,12 @@
                     android:id="@+id/PlannedDate"
                     android:layout_width="110dp"
                     android:layout_height="34dp"
+                    android:layout_marginEnd="10dp"
                     android:text="10122022"
                     android:textColor="@color/black"
                     android:autoSizeTextType="uniform"
                     android:autoSizeMaxTextSize="19sp"
-                    android:autoSizeMinTextSize="12sp" />
+                    android:autoSizeMinTextSize="9sp"/>
                 <TextView
                     android:id="@+id/PlannedTime"
                     android:layout_width="70dp"
@@ -138,7 +141,7 @@
                     android:textColor="@color/black"
                     android:autoSizeTextType="uniform"
                     android:autoSizeMaxTextSize="19sp"
-                    android:autoSizeMinTextSize="12sp" />
+                    android:autoSizeMinTextSize="9sp"/>
             </LinearLayout>
         </LinearLayout>
 <!--        Put the piechART BELOW-->

@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="32sp"
-            android:autoSizeMinTextSize="22sp"
+            android:autoSizeMinTextSize="12sp"
             android:autoSizeTextType="uniform"
             android:text="Milestone 1"
             android:drawableEnd="@drawable/ic_alarmclocksquare"

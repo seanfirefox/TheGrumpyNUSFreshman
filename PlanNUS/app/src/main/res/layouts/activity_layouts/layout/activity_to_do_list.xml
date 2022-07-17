@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundColor"
     tools:context=".Activities.ToDoList.ToDoList">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backGroundColor"
+        tools:context=".Activities.ToDoList.ToDoList">
 
-    <TextView
-        android:id="@+id/myTasks"
-        android:layout_width="404dp"
-        android:layout_height="72dp"
-        android:text="My Tasks"
-        android:textColor="#000000"
-        android:autoSizeMaxTextSize="50sp"
-        android:autoSizeMinTextSize="40sp"
-        android:autoSizeTextType="uniform"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/myTasks"
+            android:layout_width="404dp"
+            android:layout_height="72dp"
+            android:text="My Tasks"
+            android:textColor="#000000"
+            android:autoSizeMaxTextSize="50sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/createTask"
-        android:layout_width="170dp"
-        android:layout_height="120dp"
-        android:autoSizeMaxTextSize="15sp"
-        android:autoSizeMinTextSize="8sp"
-        android:autoSizeTextType="uniform"
-        android:backgroundTint="@color/backGroundColorContrast"
-        android:drawableTop="@drawable/ic_baseline_post_add_24"
-        android:text="Create Task"
-        android:textColor="@color/black"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/milestone"
-        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
-        app:strokeColor="@color/black"
-        app:strokeWidth="3dp" />
+        <Button
+            android:id="@+id/createTask"
+            android:layout_width="170dp"
+            android:layout_height="120dp"
+            android:autoSizeMaxTextSize="15sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/backGroundColorContrast"
+            android:drawableTop="@drawable/ic_baseline_post_add_24"
+            android:text="Create Task"
+            android:textColor="@color/black"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/milestone"
+            app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
 
-    <Button
-        android:id="@+id/milestone"
-        android:layout_width="170dp"
-        android:layout_height="120dp"
-        android:autoSizeMaxTextSize="15sp"
-        android:autoSizeMinTextSize="8sp"
-        android:autoSizeTextType="uniform"
-        android:backgroundTint="@color/backGroundColorContrast"
-        android:drawableTop="@drawable/conquer_mountain"
-        android:text="Milestones"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/createTask"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
-        app:strokeColor="@color/black"
-        app:strokeWidth="3dp" />
+        <Button
+            android:id="@+id/milestone"
+            android:layout_width="170dp"
+            android:layout_height="120dp"
+            android:autoSizeMaxTextSize="15sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/backGroundColorContrast"
+            android:drawableTop="@drawable/conquer_mountain"
+            android:text="Milestones"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/createTask"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskListAnnouncements"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskListAnnouncements"
-        android:layout_width="409dp"
-        android:layout_height="460dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myTasks" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/taskListAnnouncements"
+            android:layout_width="409dp"
+            android:layout_height="460dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myTasks" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

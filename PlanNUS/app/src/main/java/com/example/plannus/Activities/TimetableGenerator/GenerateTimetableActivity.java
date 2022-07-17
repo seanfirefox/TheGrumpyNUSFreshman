@@ -32,14 +32,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
-import okhttp3.RequestBody;
-import okhttp3.Request;
-import okhttp3.OkHttpClient;
 import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GenerateTimetableActivity extends AppCompatActivity implements View.OnClickListener {
@@ -63,6 +64,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private ArrayList<String> thursdayDocumentNames;
     private ArrayList<String> fridayDocumentNames;
     private ArrayList<String> saturdayDocumentNames;
+    private HashMap<Integer, String> hashMapCollectionPath;
+    private HashMap<Integer, ArrayList<String>> hashMapArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,82 +122,87 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
-            CompletableFuture.supplyAsync(() -> getAllDocumentNames())
-                    .thenAccept(x -> deleteOldTimeTable())
-                    .thenAccept(x -> saveTimeTable())
-                    .thenAccept(x -> getAllDocumentNames())
-                    .thenAccept(x -> deleteOldTimeTable())
-                    .thenAccept(x -> saveTimeTable())
-                    .join();
+            getDocumentNames(1);
         }
 
     }
 
-    private int getAllDocumentNames() {
-        try {
-            CompletableFuture.supplyAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames))
-                    .thenAcceptAsync(x -> getDocumentNames("tuesdayClass", tuesdayDocumentNames))
-                    .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
-                    .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
-                    .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
-                    .thenAcceptAsync(x -> getDocumentNames("saturdayClass", saturdayDocumentNames))
-                    .join();
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 1;
-    }
+//    private int getAllDocumentNames() {
+//        try {
+////            CompletableFuture.supplyAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames))
+////                    .thenAcceptAsync(x -> getDocumentNames("tuesdayClass", tuesdayDocumentNames))
+////                    .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
+////                    .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
+////                    .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
+////                    .thenAcceptAsync(x -> getDocumentNames("saturdayClass", saturdayDocumentNames))
+////                    .join();
+//            getDocumentNames(1);
+//            Thread.sleep(2000);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return 1;
+//    }
 
-    private int getDocumentNames(String collectionPath, ArrayList<String> arrayList) {
-        timetableDocRef.collection(collectionPath)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                NUSClass nusClass = document.toObject(NUSClass.class);
-                                arrayList.add(nusClass.getClassString());
-                                Log.d("Success", "Class: " + nusClass.getClassString());
+    private int getDocumentNames(int r) {
+        if (r < 7) {
+            timetableDocRef.collection(hashMapCollectionPath.get(r))
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    NUSClass nusClass = document.toObject(NUSClass.class);
+                                    hashMapArrayList.get(r).add(nusClass.getClassString());
+                                    Log.d("Success", "Class: " + nusClass.getClassString());
+                                }
+                                if (r < 7) {
+                                    deleteCollectionInFireStore(r);
+                                }
+                            } else {
+                                Log.d("Fail", "Error getting documents: ", task.getException());
                             }
-                        } else {
-                            Log.d("Fail", "Error getting documents: ", task.getException());
                         }
-                    }
-                });
-        return 1;
-    }
-
-    private int deleteOldTimeTable() {
-        try {
-            CompletableFuture.supplyAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass"))
-                    .thenAcceptAsync(x -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass"))
-                    .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
-                    .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
-                    .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
-                    .thenAcceptAsync(x -> deleteCollectionInFireStore(saturdayDocumentNames, "saturdayClass"))
-                    .join();
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
+                    });
+        } else {
+            saveTimeTable();
         }
         return 1;
     }
 
-    private int deleteCollectionInFireStore(ArrayList<String> classList, String collectionPath) {
-        if (classList == null) {
+//    private int deleteOldTimeTable() {
+//        try {
+//            CompletableFuture.supplyAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass"))
+//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass"))
+//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
+//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
+//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
+//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(saturdayDocumentNames, "saturdayClass"))
+//                    .join();
+//            deleteCollectionInFireStore(1);
+//            Thread.sleep(2000);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return 1;
+//    }
+
+    private void deleteCollectionInFireStore(int r) {
+        ArrayList<String> classList = hashMapArrayList.get(r);
+        String collectionPath = hashMapCollectionPath.get(r);
+        if (classList == null || classList.size() == 0) {
             Log.d("Timetable NULL", "No Old Class in FireStore");
-            return 1;
+            getDocumentNames(r + 1);
+        } else {
+            for (int i = 0; i < classList.size(); i++) {
+                String s = classList.get(i);
+                deleteClassInFireStore(s, collectionPath, classList.size(), i, r);
+            }
         }
-        for (int i = 0; i < classList.size(); i++) {
-            String s = classList.get(i);
-            deleteClassInFireStore(s, collectionPath);
-        }
-        return 1;
     }
 
-    private void deleteClassInFireStore(String documentName, String collectionName) {
+    private void deleteClassInFireStore(String documentName, String collectionName, int size, int i, int r) {
         timetableDocRef.collection(collectionName)
                 .document(documentName)
                 .delete()
@@ -202,6 +210,9 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("Success", "DocumentSnapshot successfully deleted!");
+                        if (i == size - 1) {
+                            getDocumentNames(r + 1);
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -269,6 +280,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     private void initVars() {
+
         mondayTextView = findViewById(R.id.mondayClass);
         tuesdayTextView = findViewById(R.id.tuesdayClass);
         wednesdayTextView = findViewById(R.id.wednesdayClass);
@@ -305,6 +317,22 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         thursdayDocumentNames = new ArrayList<>();
         fridayDocumentNames = new ArrayList<>();
         saturdayDocumentNames = new ArrayList<>();
+
+        hashMapCollectionPath = new HashMap<>();
+        hashMapCollectionPath.put(1, "mondayClass");
+        hashMapCollectionPath.put(2, "tuesdayClass");
+        hashMapCollectionPath.put(3, "wednesdayClass");
+        hashMapCollectionPath.put(4, "thursdayClass");
+        hashMapCollectionPath.put(5, "fridayClass");
+        hashMapCollectionPath.put(6, "saturdayClass");
+
+        hashMapArrayList = new HashMap<>();
+        hashMapArrayList.put(1, mondayDocumentNames);
+        hashMapArrayList.put(2, tuesdayDocumentNames);
+        hashMapArrayList.put(3, wednesdayDocumentNames);
+        hashMapArrayList.put(4, thursdayDocumentNames);
+        hashMapArrayList.put(5, fridayDocumentNames);
+        hashMapArrayList.put(6, saturdayDocumentNames);
 
         nusTimetable = new NUSTimetable();
 

@@ -61,13 +61,17 @@
         <entry key="app/src/main/res/layout/test.xml" value="0.33" />
         <entry key="app/src/main/res/layout/test1.xml" value="0.35517730712890627" />
         <entry key="app/src/main/res/layout/todotask.xml" value="0.33" />
+        <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_calendar.xml" value="0.22546419098143236" />
         <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_to_do_list.xml" value="0.1040268456375839" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday_class.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday_class.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_saturday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday.xml" value="0.2536231884057971" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday_class.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday_task.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_tuesday.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_tuesday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_wednesday.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_wednesday_class.xml" value="0.1" />
         <entry key="app/src/main/res/menu/ay_menu.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/menu/weekday.xml" value="0.23255813953488372" />
@@ -80,5 +84,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22546419098143236" />
+      </ProjectState>
+    </option>
   </component>
 </project>

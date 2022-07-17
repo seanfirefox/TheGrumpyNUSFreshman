@@ -42,7 +42,6 @@ public class TuesdayClassFragment extends Fragment {
         sessionManager = SessionManager.get();
         userID = sessionManager.getUserID();
         recyclerView = view.findViewById(R.id.tuesdayRecyclerVIew);
-        recyclerView.setNestedScrollingEnabled(false);
     }
 
     private void setupRecyclerView(View view) {

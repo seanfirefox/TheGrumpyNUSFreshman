@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundColor"
     tools:context=".Activities.MyCalendar.CalendarActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backGroundColor">
 
     <TextView
         android:id="@+id/calendarHeader"
@@ -22,15 +26,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/fragmentContainerView"-->
-<!--        android:name="com.example.plannus.Fragments.ParentFragments.MondayFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="634dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.52"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/calendarHeader" />-->
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--        android:id="@+id/fragmentContainerView"-->
+    <!--        android:name="com.example.plannus.Fragments.ParentFragments.MondayFragment"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="634dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.52"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/calendarHeader" />-->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/fragmentContainerView"
         android:layout_width="match_parent"
@@ -61,55 +65,57 @@
             app:tabIndicatorColor="@drawable/icon_color_selector"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <com.google.android.material.tabs.TabItem-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:icon="@drawable/ic_monday"-->
-<!--        android:iconTint="@drawable/icon_color_selector"-->
-<!--        android:text="Monday"-->
-<!--        />-->
+    <!--    <com.google.android.material.tabs.TabItem-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:icon="@drawable/ic_monday"-->
+    <!--        android:iconTint="@drawable/icon_color_selector"-->
+    <!--        android:text="Monday"-->
+    <!--        />-->
 
-<!--    <com.google.android.material.tabs.TabItem-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:icon="@drawable/ic_tuesday"-->
-<!--        android:text="Tuesday"-->
-<!--        />-->
+    <!--    <com.google.android.material.tabs.TabItem-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:icon="@drawable/ic_tuesday"-->
+    <!--        android:text="Tuesday"-->
+    <!--        />-->
 
-<!--    <com.google.android.material.tabs.TabItem-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:icon="@drawable/ic_wednesday"-->
-<!--        android:text="Wednesday"-->
-<!--        />-->
+    <!--    <com.google.android.material.tabs.TabItem-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:icon="@drawable/ic_wednesday"-->
+    <!--        android:text="Wednesday"-->
+    <!--        />-->
 
-<!--    <com.google.android.material.tabs.TabItem-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:icon="@drawable/ic_thursday"-->
-<!--        android:text="Thursday"-->
-<!--        />-->
+    <!--    <com.google.android.material.tabs.TabItem-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:icon="@drawable/ic_thursday"-->
+    <!--        android:text="Thursday"-->
+    <!--        />-->
 
-<!--    <com.google.android.material.tabs.TabItem-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:icon="@drawable/ic_friday"-->
-<!--        android:text="Friday"-->
-<!--        />-->
+    <!--    <com.google.android.material.tabs.TabItem-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:icon="@drawable/ic_friday"-->
+    <!--        android:text="Friday"-->
+    <!--        />-->
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottom_navigation_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/backGroundColorContrast"-->
-<!--        app:itemIconTint="@drawable/icon_color_selector"-->
-<!--        app:labelVisibilityMode="unlabeled"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"-->
-<!--        app:layout_constraintVertical_bias="1.0"-->
-<!--        app:menu="@menu/weekday" />-->
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottom_navigation_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/backGroundColorContrast"-->
+    <!--        app:itemIconTint="@drawable/icon_color_selector"-->
+    <!--        app:labelVisibilityMode="unlabeled"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"-->
+    <!--        app:layout_constraintVertical_bias="1.0"-->
+    <!--        app:menu="@menu/weekday" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

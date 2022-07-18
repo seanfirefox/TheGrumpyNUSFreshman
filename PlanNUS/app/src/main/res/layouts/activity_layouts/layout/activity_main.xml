@@ -13,22 +13,22 @@
         android:layout_height="wrap_content"
         android:background="#95b4de">
 
+
         <Button
             android:id="@+id/loginButton"
             android:layout_width="140dp"
             android:layout_height="45dp"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="28dp"
             android:autoSizeMaxTextSize="18sp"
             android:autoSizeMinTextSize="2sp"
             android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/button_colour"
             android:gravity="center"
             android:text="@string/Login"
-            android:backgroundTint="@color/button_colour"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passWord1" />
-
+            app:layout_constraintTop_toBottomOf="@+id/forgotpassword" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -133,6 +133,22 @@
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/forgotpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="2sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="15dp"
+            android:text="Forgot Your Password ?"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passWord1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

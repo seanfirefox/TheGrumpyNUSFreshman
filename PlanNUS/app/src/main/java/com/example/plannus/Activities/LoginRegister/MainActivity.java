@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        if (sessionManager.getAuth().getCurrentUser() != null) {
+        if (sessionManager.getAuth().getCurrentUser() != null && sessionManager.getAuth().getCurrentUser().isEmailVerified()) {
             startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
         }
     }

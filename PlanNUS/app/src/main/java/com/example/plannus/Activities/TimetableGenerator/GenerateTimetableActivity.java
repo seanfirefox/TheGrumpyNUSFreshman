@@ -3,6 +3,8 @@ package com.example.plannus.Activities.TimetableGenerator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -85,6 +87,26 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     }
 
     @Override
+    public void onBackPressed() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            Toast.makeText(this, "Timetable is Still generating / saving.", Toast.LENGTH_LONG).show();
+            return;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if  (item.getItemId() == android.R.id.home) {
+            if (progressBar.getVisibility() == View.VISIBLE) {
+                Toast.makeText(this, "PROCESS INTERRUPTED AND ABORTED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "CALENDAR DATA MAY BE COMPROMISED", Toast.LENGTH_LONG).show();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.settingsButton) {
             startActivity(new Intent(this, TimetableSettingsActivity.class));
@@ -122,27 +144,11 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
+            progressBar.setVisibility(View.VISIBLE);
             getDocumentNames(1);
         }
 
     }
-
-//    private int getAllDocumentNames() {
-//        try {
-////            CompletableFuture.supplyAsync(() -> getDocumentNames("mondayClass", mondayDocumentNames))
-////                    .thenAcceptAsync(x -> getDocumentNames("tuesdayClass", tuesdayDocumentNames))
-////                    .thenAcceptAsync(x -> getDocumentNames("wednesdayClass", wednesdayDocumentNames))
-////                    .thenAcceptAsync(x -> getDocumentNames("thursdayClass", thursdayDocumentNames))
-////                    .thenAcceptAsync(x -> getDocumentNames("fridayClass", fridayDocumentNames))
-////                    .thenAcceptAsync(x -> getDocumentNames("saturdayClass", saturdayDocumentNames))
-////                    .join();
-//            getDocumentNames(1);
-//            Thread.sleep(2000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return 1;
-//    }
 
     private int getDocumentNames(int r) {
         if (r < 7) {
@@ -171,22 +177,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         return 1;
     }
 
-//    private int deleteOldTimeTable() {
-//        try {
-//            CompletableFuture.supplyAsync(() -> deleteCollectionInFireStore(mondayDocumentNames, "mondayClass"))
-//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(tuesdayDocumentNames, "tuesdayClass"))
-//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(wednesdayDocumentNames, "wednesdayClass"))
-//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(thursdayDocumentNames, "thursdayClass"))
-//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(fridayDocumentNames, "fridayClass"))
-//                    .thenAcceptAsync(x -> deleteCollectionInFireStore(saturdayDocumentNames, "saturdayClass"))
-//                    .join();
-//            deleteCollectionInFireStore(1);
-//            Thread.sleep(2000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return 1;
-//    }
+
 
     private void deleteCollectionInFireStore(int r) {
         ArrayList<String> classList = hashMapArrayList.get(r);
@@ -249,14 +240,18 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(GenerateTimetableActivity.this, "Timetable Saved Successfully",Toast.LENGTH_LONG).show();
+                        if (collectionPath.equals("saturdayClass")) {
+                            Toast.makeText(GenerateTimetableActivity.this, "Timetable Saved Successfully",Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
                         Log.d("SAVE SUCCESS", "Timetable Saved successfully!");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(GenerateTimetableActivity.this, "Timetable did not save", Toast.LENGTH_LONG).show();
+                        Toast.makeText(GenerateTimetableActivity.this, "Timetable did not save", Toast.LENGTH_SHORT).show();
                         Log.d("SAVE FAIL", "Timetable Did NOT Save !");
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
         return 1;
@@ -343,16 +338,6 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     @SafeVarargs
     private final void deflateTextViews(TextView... textViews) {
         for (TextView t : textViews) {
-//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) t.getLayoutParams();
-//            if (params.height == 0) {
-//                continue;
-//            } else {
-//                Log.d("Grep Id", String.valueOf(t.getId()));
-//                params.bottomMargin = 0;
-//                params.topMargin = 0;
-//                params.height = 0;
-//                params.width = LinearLayout.LayoutParams.MATCH_PARENT;
-//            }
             t.setVisibility(View.GONE);
         }
     }

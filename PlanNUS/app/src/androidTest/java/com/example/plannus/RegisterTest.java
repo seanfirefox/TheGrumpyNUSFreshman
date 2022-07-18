@@ -8,6 +8,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -15,9 +16,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.RegisterUser;
+import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
+import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.LoginRegister.RegisterUser;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,6 +45,31 @@ public class RegisterTest {
     @Before
     public void setUp() throws Exception{
         Intents.init();
+        try {
+            onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
+                    .perform(ViewActions.click());
+        } catch (NoMatchingViewException e) {
+
+        }
+    }
+
+    @Test
+    public void A_isBackToMain() {
+        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
+        intending(hasComponent(RegisterUser.class.getName()));
+        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.closeSoftKeyboard(), ViewActions.pressBack());
+        intending(hasComponent(MainActivity.class.getName()));
+        checkLoginPageDisplayed();
+    }
+
+    public void checkLoginPageDisplayed() {
+        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
+        onView(withId(R.id.passWord)).check(matches(isDisplayed()));
+        onView(withId(R.id.register)).check(matches(isDisplayed()));
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()));
+        B_clickOnRegisterButton();
     }
 
     @Test
@@ -70,25 +96,6 @@ public class RegisterTest {
     }
 
     @Test
-    public void A_isBackToMain() {
-        onView(withId(R.id.register)).perform(ViewActions.scrollTo(), ViewActions.click());
-        intending(hasComponent(RegisterUser.class.getName()));
-        onView(withId(R.id.password)).perform(ViewActions.scrollTo(), ViewActions.closeSoftKeyboard(), ViewActions.pressBack());
-        intending(hasComponent(MainActivity.class.getName()));
-        checkLoginPageDisplayed();
-    }
-
-    public void checkLoginPageDisplayed() {
-        onView(withId(R.id.emailAddress)).perform(ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailAddress)).check(matches(isDisplayed()));
-        onView(withId(R.id.passWord)).check(matches(isDisplayed()));
-        onView(withId(R.id.register)).check(matches(isDisplayed()));
-        onView(withId(R.id.imageView)).check(matches(isDisplayed()));
-        B_clickOnRegisterButton();
-    }
-
-    @Test
     public void C_AttemptToLoginNewUser() throws InterruptedException {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
@@ -98,12 +105,14 @@ public class RegisterTest {
         Thread.sleep(1000);
         onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
+        onView(withId(R.id.logoutButton)).perform(ViewActions.click());
     }
 
     public void checkSuccessfulLoginOfNewUser() {
         intending(hasComponent(ContentMainActivity.class.getName()));
         onView(withId(R.id.logoutButton)).check(matches(isDisplayed()));
         onView(withId(R.id.hiName)).check(matches(withText("Hi " + fullName + " !")));
+        onView(withId(R.id.logoutButton)).perform(ViewActions.click());
     }
 
     @After

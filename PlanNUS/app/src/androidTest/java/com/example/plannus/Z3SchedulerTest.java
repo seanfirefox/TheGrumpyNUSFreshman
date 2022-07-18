@@ -1,6 +1,5 @@
 package com.example.plannus;
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
@@ -10,25 +9,24 @@ import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.GenerateTimetableActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.TimetableSettingsActivity;
+import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
+import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.TimetableGenerator.GenerateTimetableActivity;
+import com.example.plannus.Activities.TimetableGenerator.TimetableSettingsActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,6 +54,16 @@ public class Z3SchedulerTest {
     public void setUp() throws Exception{
         Intents.init();
         // Login First
+        Thread.sleep(1000);
+        try {
+            onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
+                    .perform(ViewActions.click());
+            Thread.sleep(2000);
+        } catch (NoMatchingViewException e) {
+            System.out.println("NO MATCHING VIEW EXCEPTION");
+        } catch (InterruptedException e) {
+            System.out.println("THREAD INTERRUPTED");
+        }
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -69,7 +77,8 @@ public class Z3SchedulerTest {
         onView(withId(R.id.generateTimetableButton)).perform(ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         // Go to Settings Activity
         onView(withId(R.id.settingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -87,6 +96,7 @@ public class Z3SchedulerTest {
     @Test
     public void B_EmptySettingsTimetable() throws Exception {
         // Go into settings and zero out the settings
+        Thread.sleep(1000);
         onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.closeSoftKeyboard(), ViewActions.click());
 
         // Click on generate and it fails
@@ -94,7 +104,7 @@ public class Z3SchedulerTest {
         onView(withId(R.id.generateButton)).check(matches(isDisplayed()));
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Settings page empty")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("Settings page empty")));
     }
 
 
@@ -102,12 +112,12 @@ public class Z3SchedulerTest {
     public void C_Generate_SAT_5Modules_TimetableTest() throws Exception {
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("1"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("1"))));
+        onView(withText("1")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("1"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -125,23 +135,23 @@ public class Z3SchedulerTest {
         onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(20000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("Monday")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MONDAY")));
     }
 
     @Test
     public void D_Generate_SAT_5Modules_TimetableTestWithConstraints() throws Exception {
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("1"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("1"))));
+        onView(withText("1")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("1"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -168,24 +178,24 @@ public class Z3SchedulerTest {
         onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(20000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("Monday")));
-        onView(withId(R.id.textView)).check(matches(withSubstring("No Classes On that Day!")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MONDAY")));
+        onView(withId(R.id.tuesdayClass)).check(matches(withSubstring("NO CLASS TODAY")));
     }
 
     @Test
     public void E_Generate_SAT_6Modules_TimetableTest() throws Exception {
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("2"))));
+        onView(withText("2")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("2"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -203,25 +213,25 @@ public class Z3SchedulerTest {
                 .perform(ViewActions.scrollTo(), ViewActions.typeText("GEA1000"), ViewActions.closeSoftKeyboard())
                 .check(matches(withText("GEA1000")));
         Thread.sleep(1000);
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("Monday")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MONDAY")));
     }
 
     @Test
     public void F_Generate_SAT_7Modules_TimetableTest() throws Exception {
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("2"))));
+        onView(withText("2")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("2"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS2030S"))
                 .check(matches(withText("CS2030S")));
@@ -246,28 +256,28 @@ public class Z3SchedulerTest {
                 .check(matches(withText("MA2104")));
         Thread.sleep(1000);
 
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("Monday")));
-        onView(withId(R.id.textView)).perform(ViewActions.scrollTo());
-        onView(withId(R.id.textView)).check(matches(withSubstring("Friday")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MONDAY")));
+        onView(withId(R.id.saturdayClass)).perform(ViewActions.scrollTo())
+                .check(matches(withSubstring("SATURDAY")));
     }
 
     @Test
     public void G_UNSAT_TimetableTest() throws Exception {
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("1"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("1"))));
+        onView(withText("1")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("1"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -291,25 +301,26 @@ public class Z3SchedulerTest {
                 .check(matches(isNotChecked()));
 
         ViewActions.closeSoftKeyboard();
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("No Feasible Timetable!")));
+        onView(withId(R.id.nothingCard)).check(matches(withSubstring("No Feasible Timetable!")));
     }
 
     @Test
     public void H_AnotherTimetable_5ModuleTest() throws Exception {
+
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("1"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("1"))));
+        onView(withText("1")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("1"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -324,30 +335,32 @@ public class Z3SchedulerTest {
 
         ViewActions.closeSoftKeyboard();
 
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("MA2001 TUT 2")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MONDAY")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MA2001 TUT 2")));
 
         onView(withId(R.id.nextButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("MA2001 TUT 1")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MONDAY")));
+        onView(withId(R.id.mondayClass)).check(matches(withSubstring("MA2001 TUT 1")));
     }
 
     @Test
     public void I_Already_UNSAT_AnotherTimetable_FAIL_CHECK() throws Exception {
 
         onView(withId(R.id.aySpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("2021-2022"))).perform(ViewActions.click());
-        onView(withId(R.id.aySpinner)).check(matches(withSpinnerText(containsString("2021-2022"))));
+        onView(withText("2021-2022")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.aySpinner)).check(matches(withText(containsString("2021-2022"))));
 
         onView(withId(R.id.semesterSpinner)).perform(ViewActions.click());
-        onData(allOf(is(instanceOf(String.class)), is("1"))).perform(ViewActions.click());
-        onView(withId(R.id.semesterSpinner)).check(matches(withSpinnerText(containsString("1"))));
+        onView(withText("1")).inRoot(RootMatchers.isPlatformPopup()).perform(ViewActions.click());
+        onView(withId(R.id.semesterSpinner)).check(matches(withText(containsString("1"))));
 
         onView(withId(R.id.moduleCode1)).perform(ViewActions.typeText("CS1101S"))
                 .check(matches(withText("CS1101S")));
@@ -371,18 +384,18 @@ public class Z3SchedulerTest {
                 .check(matches(isNotChecked()));
 
         ViewActions.closeSoftKeyboard();
-        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.click());
+        onView(withId(R.id.saveTimetableSettingsButton)).perform(ViewActions.scrollTo(), ViewActions.click());
         intending(hasComponent(GenerateTimetableActivity.class.getName()));
         Thread.sleep(1000);
-        onView(withId(R.id.textView)).check(matches(withText("Timetable not yet generated")));
+        onView(withId(R.id.nothingCard)).check(matches(withText("No Timetable Generated Yet")));
 
         onView(withId(R.id.generateButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("No Feasible Timetable!")));
+        onView(withId(R.id.nothingCard)).check(matches(withSubstring("No Feasible Timetable!")));
 
         onView(withId(R.id.nextButton)).perform(ViewActions.click());
         Thread.sleep(7000);
-        onView(withId(R.id.textView)).check(matches(withSubstring("Invalid Combination!")));
+        onView(withId(R.id.nothingCard)).check(matches(withSubstring("Invalid Combination!")));
     }
 
     @After

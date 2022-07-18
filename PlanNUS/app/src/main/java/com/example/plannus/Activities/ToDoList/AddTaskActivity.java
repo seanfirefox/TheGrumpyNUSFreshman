@@ -1,26 +1,25 @@
 package com.example.plannus.Activities.ToDoList;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.DatePickerDialog;
 
-import com.example.plannus.utils.DateFormatter;
-import com.example.plannus.utils.DateTimeDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
+import com.example.plannus.utils.DateFormatter;
+import com.example.plannus.utils.DateTimeDialog;
 import com.example.plannus.utils.TimeFormatter;
-import com.example.plannus.Objects.ToDoTask;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.SetOptions;
 
@@ -69,9 +68,10 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         statusValue = findViewById(R.id.textViewNewStatus);
         status_text = statusValue.getText().toString().substring(0, 1);
         newStatus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                statusValue.setText(String.valueOf(i) + " %");
+                statusValue.setText(i + " %");
                 status_text = String.valueOf(i);
                 Log.e("GET STATUS TEXT",status_text);
             }
@@ -151,12 +151,9 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
             Log.d("TaskCreated", "onSuccess: Task is created");
             Toast.makeText(AddTaskActivity.this, "Task added Successfully",Toast.LENGTH_LONG).show();
             finish();
-        } ).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("TaskFail", "onFailure: "+ e);
-                Toast.makeText(AddTaskActivity.this, "Failed to Create Task", Toast.LENGTH_LONG).show();
-            }
+        } ).addOnFailureListener(e -> {
+            Log.d("TaskFail", "onFailure: "+ e);
+            Toast.makeText(AddTaskActivity.this, "Failed to Create Task", Toast.LENGTH_LONG).show();
         });
     }
 

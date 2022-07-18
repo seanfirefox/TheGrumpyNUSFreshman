@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.plannus.Adaptors.CalendarClassAdapter;
 import com.example.plannus.Adaptors.CalendarTaskAdapter;
 import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.R;
@@ -30,7 +29,7 @@ public class MondayTaskFragment extends Fragment {
     private String userID;
     private CalendarTaskAdapter adapter;
     private RecyclerView recyclerView;
-    CollectionReference taskRef;
+    private CollectionReference taskRef;
 
     public MondayTaskFragment() {
         // Required empty public constructor

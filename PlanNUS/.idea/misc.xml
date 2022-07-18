@@ -73,9 +73,13 @@
         <entry key="app/src/main/res/layouts/card_layouts/layout/nus_class.xml" value="0.2418478260869565" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/popup_verifyemail.xml" value="0.335" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/todotask.xml" value="0.19479166666666667" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday.xml" value="0.17592592592592593" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday.xml" value="0.13779128672745694" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_saturday.xml" value="0.13779128672745694" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_saturday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_sunday.xml" value="0.13779128672745694" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday.xml" value="0.2536231884057971" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday_class.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday_task.xml" value="0.1" />

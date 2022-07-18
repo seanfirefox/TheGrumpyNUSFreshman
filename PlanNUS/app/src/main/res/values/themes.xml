@@ -32,4 +32,8 @@
     <style name="CustomTextInputStyleOutLinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@color/white</item>
     </style>
+    <style name="CustomTabLayoutText" parent="Theme.AppCompat">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

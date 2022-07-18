@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 
 
@@ -67,6 +68,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void verifyEmail(String email) {
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View verifyView = getLayoutInflater().inflate(R.layout.popup_verifyemail,  null);
+        Button bb = verifyView.findViewById(R.id.verifyEmailButton);
+        dialogBuilder.setView(verifyView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+        bb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sessionManager.getAuth().getCurrentUser().sendEmailVerification()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(MainActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                dialog.dismiss();
+            }
+        });
+    }
+
     public void alertDialoger() {
         dialogBuilder = new AlertDialog.Builder(this);
         final View popUpView = getLayoutInflater().inflate(R.layout.popup_forgotpassword, null);
@@ -103,46 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-//    public void onButtonPopUpWindow(View view) {
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//        View popUpView = inflater.inflate(R.layout.popup_forgotpassword, null);
-//
-//
-//        int width = ConstraintLayout.LayoutParams.MATCH_PARENT;
-//        int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-//        boolean focusable = true; // lets taps outside the popup also dismiss it
-//        final PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
-//        View container = (View) popupWindow.getContentView().getParent();
-//        popupWindow.showAtLocation(view, Gravity.CENTER, 10, 10);
-//        Button b  = popUpView.findViewById(R.id.resetPasswordButton);
-//        EditText a = popUpView.findViewById(R.id.emailA);
-//        b.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String emailA = a.getText().toString().trim();
-//                if (emailA.isEmpty()) {
-//                    Toast.makeText(MainActivity.this,"Email Field is Empty!",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                sessionManager.getAuth().sendPasswordResetEmail(emailA)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void unused) {
-//                                Toast.makeText(MainActivity.this,"Email Sent!",Toast.LENGTH_SHORT).show();
-//                                popupWindow.dismiss();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Toast.makeText(MainActivity.this,"No Account Registered with the Email",Toast.LENGTH_SHORT).show();
-//                                popupWindow.dismiss();
-//                            }
-//                        });
-//            }
-//        });
-//    }
-
-
     public void tryLogin() {
         String email = this.emailAddress.getText().toString().trim();
         String password = this.passWord.getText().toString().trim();
@@ -160,7 +143,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         cleanActivity();
                         if (task.isSuccessful()) {
                             progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
+                            System.out.println("verified User" + sessionManager.getAuth().getCurrentUser().isEmailVerified());
+                            if (email.equals("admin@gmail.com") || sessionManager.getAuth().getCurrentUser().isEmailVerified()) {
+                                startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
+                            } else {
+                                verifyEmail(email);
+                            }
                         } else {
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
@@ -199,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        if (sessionManager.getAuth().getCurrentUser() != null) {
+        if (sessionManager.getAuth().getCurrentUser() != null && sessionManager.getAuth().getCurrentUser().isEmailVerified()) {
             startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
         }
     }

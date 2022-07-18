@@ -81,6 +81,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(RegisterUser.this, "Registered successfully, please go back to Main Page to login", Toast.LENGTH_LONG).show();
                                                         Log.d("Successful login", "Successful Login");
+                                                        sessionManager.getAuth().signOut();
                                                     } else {
                                                         Toast.makeText(RegisterUser.this, "Failed to register, please try again", Toast.LENGTH_LONG).show();
                                                         Log.d("Unsuccessful login", "Unsuccessful login");

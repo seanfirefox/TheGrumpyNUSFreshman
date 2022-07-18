@@ -71,6 +71,7 @@
         <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_to_do_list.xml" value="0.1040268456375839" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/announcement_todolist.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/nus_class.xml" value="0.2418478260869565" />
+        <entry key="app/src/main/res/layouts/card_layouts/layout/popup_verifyemail.xml" value="0.335" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/todotask.xml" value="0.19479166666666667" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday_class.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday_class.xml" value="0.1" />

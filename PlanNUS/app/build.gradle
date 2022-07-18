@@ -34,6 +34,11 @@ android {
             java {
                 srcDirs 'src/main/java', 'src/main/java/Activities', 'src/main/java/com.example.plannus/Activities'
             }
+            res.srcDirs = ['src/main/res',
+                           'src/main/res/layouts/activity_layouts',
+                           'src/main/res/layouts/card_layouts',
+                           'src/main/res/layouts/fragment_layouts'
+                    ]
         }
     }
 }

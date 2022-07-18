@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundColor"
+    tools:context=".Activities.ToDoList.EditTaskActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_outline">
+
+        <TextView
+            android:id="@+id/editTasks"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Edit Task Russell Tan Kai Min Tan Lit Thai Sean Izz Hafeez B Zek Hazley Danish Uzair Abdul Hamid Khan Suratee"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:drawableStart="@drawable/ic_baseline_edit_note_24"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTaskDesc1"
+            style="@style/CustomTextInputStyleOutLinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Task Description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconDrawable="@drawable/ic_baseline_task_24"
+            tools:layout_editor_absoluteY="56dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTaskDesc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeMaxTextSize="18sp"
+                android:autoSizeMinTextSize="2sp"
+                android:autoSizeTextType="uniform"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTag1"
+                style="@style/CustomTextInputStyleOutLinedBox"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:hint="Tag (e.g CS1101S)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:startIconDrawable="@drawable/ic_baseline_tag_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTag"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:autoSizeMaxTextSize="18sp"
+                    android:autoSizeMinTextSize="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:autofillHints="name"
+                    android:maxLength="50"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewStatus"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:drawableStart="@drawable/ic_statuscomp_adobe_express"
+                android:paddingLeft="15dp"
+                android:autoSizeMaxTextSize="25sp"
+                android:autoSizeMinTextSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:background="@color/white"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:text="0 %"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editStatusTexTtextView"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:drawableStart="@drawable/ic_statuscomp_adobe_express"
+                android:autoSizeMaxTextSize="21sp"
+                android:autoSizeMinTextSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:background="@color/white"
+                android:drawablePadding="2dp"
+                android:paddingLeft="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:text="Status : "
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <!--                android:progressTint="#880808"-->
+            <SeekBar
+                android:id="@+id/editStatusDesc"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:autofillHints="Status"
+                android:background="@color/white"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/seek_bar"
+                android:thumb="@drawable/seek_thumb"
+                android:thumbTint="#F80404" />
+        </LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/editDeadLineTexTtextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:autoSizeMaxTextSize="21sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:background="@color/white"
+            android:drawablePadding="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Set Deadline"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+
+            <Button
+                android:id="@+id/editDueDateButton"
+                android:layout_width="210dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/backGroundColorContrast"
+                android:text="Due Date"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="7sp" />
+
+            <Button
+                android:id="@+id/editDueTimeButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/backGroundColorContrast"
+                android:text="Due Time"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="7sp" />
+        </LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/editPlannedTexTtextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:autoSizeMaxTextSize="21sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:background="@color/white"
+            android:drawablePadding="2dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Set Planned Date"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+
+            <Button
+                android:id="@+id/editPlannedDateButton"
+                android:layout_width="210dp"
+                android:layout_height="60dp"
+
+                android:backgroundTint="@color/backGroundColorContrast"
+                android:text="Planned Date"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="7sp" />
+
+            <Button
+                android:id="@+id/editPlannedTimeButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/backGroundColorContrast"
+                android:text="Planned Time"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="7sp" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="150dp"
+            android:layout_height="51dp"
+            android:text="Save Task"
+            android:textColor="@color/white"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="15sp"
+            android:autoSizeMinTextSize="8sp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/button_colour"
+            app:icon="@drawable/ic_baseline_save_alt_24" />
+    </LinearLayout>
+</ScrollView>
+

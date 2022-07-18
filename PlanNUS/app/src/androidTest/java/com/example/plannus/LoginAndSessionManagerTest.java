@@ -8,15 +8,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.example.plannus.Activities.ContentMainActivity;
-import com.example.plannus.Activities.MainActivity;
-import com.example.plannus.Activities.RegisterUser;
+import com.example.plannus.Activities.LoginRegister.ContentMainActivity;
+import com.example.plannus.Activities.LoginRegister.MainActivity;
+import com.example.plannus.Activities.LoginRegister.RegisterUser;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,6 +43,12 @@ public class LoginAndSessionManagerTest {
     @Before
     public void setUp() {
         Intents.init();
+        try {
+            onView(withId(R.id.logoutButton)).check(matches(isDisplayed()))
+                    .perform(ViewActions.click());
+        } catch (NoMatchingViewException e) {
+
+        }
     }
 
     @Test
@@ -70,7 +77,7 @@ public class LoginAndSessionManagerTest {
     }
 
     @Test
-    public void successfulLoginAndSessionManagerSingletonStatusCheck() {
+    public void successfulLoginAndSessionManagerSingletonStatusCheck() throws Exception {
         onView(withId(R.id.emailAddress)).perform(ViewActions.typeText(email));
         onView(withId(R.id.passWord)).perform(ViewActions.scrollTo(), ViewActions.typeText(password));
         onView(withId(R.id.loginButton)).perform(ViewActions.scrollTo(), ViewActions.click());
@@ -78,6 +85,9 @@ public class LoginAndSessionManagerTest {
         SessionManager a = SessionManager.get();
         SessionManager b = SessionManager.get();
         assertEquals(a, b);
+        Thread.sleep(1000);
+        onView(withId(R.id.logoutButton)).perform(ViewActions.click());
+        intending((hasComponent(MainActivity.class.getName())));
     }
 
     @After

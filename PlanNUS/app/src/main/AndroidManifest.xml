@@ -16,44 +16,44 @@
         tools:remove="android:appComponentFactory"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.CalendarActivity"
+            android:name=".Activities.MyCalendar.CalendarActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.ContentMainActivity"/>
+            android:parentActivityName=".Activities.LoginRegister.ContentMainActivity"/>
         <activity
-            android:name=".Activities.TimetableSettingsActivity"
+            android:name=".Activities.TimetableGenerator.TimetableSettingsActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.GenerateTimetableActivity" />
+            android:parentActivityName=".Activities.TimetableGenerator.GenerateTimetableActivity" />
         <activity
-            android:name=".Activities.GenerateTimetableActivity"
+            android:name=".Activities.TimetableGenerator.GenerateTimetableActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.ContentMainActivity" />
+            android:parentActivityName=".Activities.LoginRegister.ContentMainActivity" />
         <activity
-            android:name=".Activities.CompletedTaskActivity"
+            android:name=".Activities.ToDoList.CompletedTaskActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.ToDoList" />
+            android:parentActivityName=".Activities.ToDoList.ToDoList" />
         <activity
-            android:name=".Activities.EditTaskActivity"
+            android:name=".Activities.ToDoList.EditTaskActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.ToDoList" />
+            android:parentActivityName=".Activities.ToDoList.ToDoList" />
         <activity
-            android:name=".Activities.AddTaskActivity"
+            android:name=".Activities.ToDoList.AddTaskActivity"
             android:exported="false"
-            android:parentActivityName=".Activities.ToDoList" />
+            android:parentActivityName=".Activities.ToDoList.ToDoList" />
         <activity
-            android:name=".Activities.ToDoList"
+            android:name=".Activities.ToDoList.ToDoList"
             android:exported="false"
-            android:parentActivityName=".Activities.ContentMainActivity" />
+            android:parentActivityName=".Activities.LoginRegister.ContentMainActivity" />
         <activity
-            android:name=".Activities.ContentMainActivity"
+            android:name=".Activities.LoginRegister.ContentMainActivity"
             android:exported="false"
             android:theme="@style/Theme.PlanNUS.NoActionBar"
             android:label=""/>
         <activity
-            android:name=".Activities.RegisterUser"
+            android:name=".Activities.LoginRegister.RegisterUser"
             android:exported="false"
-            android:parentActivityName=".Activities.MainActivity"/>
+            android:parentActivityName=".Activities.LoginRegister.MainActivity"/>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.LoginRegister.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -41,13 +41,13 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         plannedDate = DateFormatter.numberToDate(model.getPlannedDateTime().substring(0, 8));
         plannedTime = TimeFormatter.numberToTime(model.getPlannedDateTime().substring(8, 12));
 
-        int statInt = Integer.valueOf(status);
+        int statInt = Integer.parseInt(status);
         holder.taskName.setText(task);
         holder.tagName.setText(moduleName);
         holder.status.setProgress(statInt);
         holder.status.setProgressTintList(ColorStateList.valueOf(
-                Color.rgb(statInt < 51 ? 255 : (int) (255 - (statInt - 50) * 255 / 50),
-                        (int) (statInt * 255 / 100),
+                Color.rgb(statInt < 51 ? 255 : (255 - (statInt - 50) * 255 / 50),
+                        statInt * 255 / 100,
                         0)));
         holder.statusText.setText(status +"%");
         holder.dueDate.setText(deadlineDate);
@@ -64,14 +64,11 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
                 plannedDate,
                 plannedTime};
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(holder.itemView.getContext(), EditTaskActivity.class);
-                intent.putExtra("taskInfo", taskInfo);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(holder.itemView.getContext(), EditTaskActivity.class);
+            intent.putExtra("taskInfo", taskInfo);
 
-                holder.itemView.getContext().startActivity(intent);
-            }
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 
@@ -88,9 +85,15 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
     }
 
     class TaskHolder extends RecyclerView.ViewHolder {
-        private TextView taskName, tagName, dueDate, dueTime, plannedDate, plannedTime, statusText;
+        private final TextView taskName;
+        private final TextView tagName;
+        private final TextView dueDate;
+        private final TextView dueTime;
+        private final TextView plannedDate;
+        private final TextView plannedTime;
+        private final TextView statusText;
         //private AnyChartView status;
-        private ProgressBar status;
+        private final ProgressBar status;
 
         public TaskHolder(View itemView) {
             super(itemView);

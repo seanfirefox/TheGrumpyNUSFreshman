@@ -1,33 +1,20 @@
 package com.example.plannus.Activities.LoginRegister;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.ActionCodeSettings;
-import com.google.firebase.auth.AuthResult;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -63,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v.getId() == R.id.loginButton) {
             tryLogin();
         } else if (v.getId() == R.id.forgotpassword) {
-//            onButtonPopUpWindow(v);
             alertDialoger();
         }
     }
@@ -75,18 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialogBuilder.setView(verifyView);
         dialog = dialogBuilder.create();
         dialog.show();
-        bb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sessionManager.getAuth().getCurrentUser().sendEmailVerification()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(MainActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                dialog.dismiss();
-            }
+        bb.setOnClickListener(view -> {
+            sessionManager.getAuth().getCurrentUser().sendEmailVerification()
+                    .addOnCompleteListener(task -> Toast.makeText(MainActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show());
+            dialog.dismiss();
         });
     }
 
@@ -99,29 +77,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog = dialogBuilder.create();
         dialog.show();
 
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String emailA = a.getText().toString().trim();
-                if (emailA.isEmpty()) {
-                    Toast.makeText(MainActivity.this,"Email Field is Empty!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                sessionManager.getAuth().sendPasswordResetEmail(emailA)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(MainActivity.this,"Email Sent!",Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(MainActivity.this,"No Account Registered with the Email",Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        });
+        b.setOnClickListener(view -> {
+            String emailA = a.getText().toString().trim();
+            if (emailA.isEmpty()) {
+                Toast.makeText(MainActivity.this,"Email Field is Empty!",Toast.LENGTH_SHORT).show();
+                return;
             }
+            sessionManager.getAuth().sendPasswordResetEmail(emailA)
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(MainActivity.this,"Email Sent!",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(MainActivity.this,"No Account Registered with the Email",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    });
         });
 
     }
@@ -137,22 +106,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressBar.setVisibility(View.VISIBLE);
         sessionManager.getAuth()
                 .signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        cleanActivity();
-                        if (task.isSuccessful()) {
-                            progressBar.setVisibility(View.GONE);
-                            System.out.println("verified User" + sessionManager.getAuth().getCurrentUser().isEmailVerified());
-                            if (email.equals("admin@gmail.com") || sessionManager.getAuth().getCurrentUser().isEmailVerified()) {
-                                startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
-                            } else {
-                                verifyEmail(email);
-                            }
+                .addOnCompleteListener(task -> {
+                    cleanActivity();
+                    if (task.isSuccessful()) {
+                        progressBar.setVisibility(View.GONE);
+                        System.out.println("verified User" + sessionManager.getAuth().getCurrentUser().isEmailVerified());
+                        if (email.equals("admin@gmail.com") || sessionManager.getAuth().getCurrentUser().isEmailVerified()) {
+                            startActivity(new Intent(MainActivity.this, ContentMainActivity.class));
                         } else {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
+                            verifyEmail(email);
                         }
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(MainActivity.this, "Failed to login, try again. At least one of your email address or password is invalid", Toast.LENGTH_LONG).show();
                     }
                 });
     }

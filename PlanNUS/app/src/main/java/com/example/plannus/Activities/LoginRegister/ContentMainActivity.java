@@ -45,9 +45,6 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_main);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setIcon(getDrawable(R.drawable.ic_baseline_pending_actions_24));
 
         initVars();
         initProfile();
@@ -95,7 +92,6 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
 
     private void setUpRecyclerView() {
         Query query = taskRef.orderBy("deadLineDateTime", Query.Direction.ASCENDING);
-//                .whereGreaterThanOrEqualTo("deadLineDateTime", DateTime.now().toString("yyyyMMddHHmm"));
         Log.d("CHECK DATETIME QUERY", DateTime.now().toString("yyyyMMddHHmm"));
         FirestoreRecyclerOptions<ToDoTask> options = new FirestoreRecyclerOptions.Builder<ToDoTask>()
                 .setQuery(query, ToDoTask.class)
@@ -134,8 +130,6 @@ public class ContentMainActivity extends AppCompatActivity implements View.OnCli
             startActivity(new Intent(this, CalendarActivity.class));
         } else if (v.getId() == R.id.logoutButton){
             logout();
-        } else {
-
         }
     }
 

@@ -30,7 +30,7 @@ public class FridayTaskFragment extends Fragment {
     private String userID;
     private CalendarTaskAdapter adapter;
     private RecyclerView recyclerView;
-    CollectionReference taskRef;
+    private CollectionReference taskRef;
 
     public FridayTaskFragment() {
         // Required empty public constructor

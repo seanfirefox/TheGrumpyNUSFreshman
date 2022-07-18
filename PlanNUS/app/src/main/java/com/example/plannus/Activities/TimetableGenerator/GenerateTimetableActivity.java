@@ -3,7 +3,6 @@ package com.example.plannus.Activities.TimetableGenerator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,13 +19,8 @@ import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
 import com.example.plannus.utils.RequestBuilder;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import org.json.JSONException;
@@ -56,7 +50,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
     private final String URL = "https://plannus-satsolver-backup.herokuapp.com/z3runner";
     private static int iterations = 0;
     private Call call;
-    private NUSTimetable nusTimetable, oldNusTimetable;
+    private NUSTimetable nusTimetable;
     private ArrayList<String> constraintStrings;
     private ProgressBar progressBar;
     private DocumentReference timetableDocRef, settingsDocRef;
@@ -117,7 +111,7 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                 disableButtonBlocker(false);
                 iterations = 0;
                 obtainSettings();
-                RequestBody requestBody = new RequestBuilder(timetableSettings, userID, URL)
+                RequestBody requestBody = new RequestBuilder(timetableSettings, userID, actualURL)
                         .buildRequestBody(iterations);
                 if (requestBody == null) {
                     deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
@@ -128,8 +122,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
                     if (call != null) {
                         call.cancel();
                     }
-                    Request builtRequest = new RequestBuilder(timetableSettings, userID, URL)
-                            .buildPostRequest(URL, iterations);
+                    Request builtRequest = new RequestBuilder(timetableSettings, userID, actualURL)
+                            .buildPostRequest(actualURL, iterations);
                     getRequest(builtRequest);
                 }
             }
@@ -139,8 +133,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
             } else {
                 disableButtonBlocker(false);
                 iterations++;
-                Request nextSolutionRequest = new RequestBuilder(timetableSettings, userID, URL)
-                        .buildPostRequest(URL, iterations);
+                Request nextSolutionRequest = new RequestBuilder(timetableSettings, userID, actualURL)
+                        .buildPostRequest(actualURL, iterations);
                 getRequest(nextSolutionRequest);
             }
         } else if (v.getId() == R.id.saveTimetableButton) {
@@ -154,21 +148,17 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         if (r < 7) {
             timetableDocRef.collection(hashMapCollectionPath.get(r))
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    NUSClass nusClass = document.toObject(NUSClass.class);
-                                    hashMapArrayList.get(r).add(nusClass.getClassString());
-                                    Log.d("Success", "Class: " + nusClass.getClassString());
-                                }
-                                if (r < 7) {
-                                    deleteCollectionInFireStore(r);
-                                }
-                            } else {
-                                Log.d("Fail", "Error getting documents: ", task.getException());
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                NUSClass nusClass = document.toObject(NUSClass.class);
+                                hashMapArrayList.get(r).add(nusClass.getClassString());
+                                Log.d("Success", "Class: " + nusClass.getClassString());
                             }
+                            deleteCollectionInFireStore(r);
+
+                        } else {
+                            Log.d("Fail", "Error getting documents: ", task.getException());
                         }
                     });
         } else {
@@ -197,21 +187,13 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         timetableDocRef.collection(collectionName)
                 .document(documentName)
                 .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Success", "DocumentSnapshot successfully deleted!");
-                        if (i == size - 1) {
-                            getDocumentNames(r + 1);
-                        }
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Success", "DocumentSnapshot successfully deleted!");
+                    if (i == size - 1) {
+                        getDocumentNames(r + 1);
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("Failure", "Error deleting document", e);
-                    }
-                });
+                .addOnFailureListener(e -> Log.d("Failure", "Error deleting document", e));
     }
 
     private int saveTimeTable() {
@@ -237,22 +219,16 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         }
 
         timetableDocRef.set(nusTimetable)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        if (collectionPath.equals("saturdayClass")) {
-                            Toast.makeText(GenerateTimetableActivity.this, "Timetable Saved Successfully",Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
-                        Log.d("SAVE SUCCESS", "Timetable Saved successfully!");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(GenerateTimetableActivity.this, "Timetable did not save", Toast.LENGTH_SHORT).show();
-                        Log.d("SAVE FAIL", "Timetable Did NOT Save !");
+                .addOnSuccessListener(unused -> {
+                    if (collectionPath.equals("saturdayClass")) {
+                        Toast.makeText(GenerateTimetableActivity.this, "Timetable Saved Successfully",Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     }
+                    Log.d("SAVE SUCCESS", "Timetable Saved successfully!");
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(GenerateTimetableActivity.this, "Timetable did not save", Toast.LENGTH_SHORT).show();
+                    Log.d("SAVE FAIL", "Timetable Did NOT Save !");
+                    progressBar.setVisibility(View.GONE);
                 });
         return 1;
     }
@@ -261,17 +237,8 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         timetableDocRef.collection(collectionPath)
                 .document(s)
                 .set(nusClass, SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d("CLASS SAVED", "onSuccess: Class is saved");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("CLASS UNSAVED", "onFailure : Class not saved!");
-                    }
-                });
+                .addOnSuccessListener(unused -> Log.d("CLASS SAVED", "onSuccess: Class is saved"))
+                .addOnFailureListener(e -> Log.d("CLASS UNSAVED", "onFailure : Class not saved!"));
     }
 
     private void initVars() {
@@ -353,18 +320,16 @@ public class GenerateTimetableActivity extends AppCompatActivity implements View
         call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.d("NETWORK_FAIL", "NETWORK FAIL");
                 deflateTextViews(mondayTextView, tuesdayTextView, wednesdayTextView, thursdayTextView, fridayTextView, saturdayTextView);
                 inflateTextViews(nothingTextView);
                 nothingTextView.setText("Network Fail");
-                runOnUiThread(() -> {
-                    disableButtonBlocker(true);
-                });
+                runOnUiThread(() -> disableButtonBlocker(true));
             }
 
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 runOnUiThread(() -> {
                     try {
                         String jsonReturnString = response.body().string();

@@ -44,9 +44,8 @@ public class SaturdayFragment extends Fragment {
         adaptor.addFragment(new SaturdayClassFragment(), "Saturday Class");
         adaptor.addFragment(new SaturdayTaskFragment(), "Saturday Task");
         viewPager.setAdapter(adaptor);
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            tab.setText(position == 0 ? "Class" : "Tasks");
-        }).attach();
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(position == 0 ? "Class" : "Tasks")).attach();
     }
 
     @Override

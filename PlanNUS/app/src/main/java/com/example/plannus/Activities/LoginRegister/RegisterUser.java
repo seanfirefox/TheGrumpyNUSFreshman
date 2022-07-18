@@ -1,25 +1,21 @@
 package com.example.plannus.Activities.LoginRegister;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.plannus.Objects.User;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
-import com.example.plannus.Objects.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.SignInMethodQueryResult;
 
@@ -68,27 +64,21 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         sessionManager.getAuth()
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
-                        new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    sessionManager.getdRef()
-                                            .child(sessionManager.getUserID())
-                                            .setValue(new User(fullName, age, email, password))
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Toast.makeText(RegisterUser.this, "Registered successfully, please go back to Main Page to login", Toast.LENGTH_LONG).show();
-                                                        Log.d("Successful login", "Successful Login");
-                                                        sessionManager.getAuth().signOut();
-                                                    } else {
-                                                        Toast.makeText(RegisterUser.this, "Failed to register, please try again", Toast.LENGTH_LONG).show();
-                                                        Log.d("Unsuccessful login", "Unsuccessful login");
-                                                    }
-                                                }
-                                            });
-                                }
+                        task -> {
+                            if (task.isSuccessful()) {
+                                sessionManager.getdRef()
+                                        .child(sessionManager.getUserID())
+                                        .setValue(new User(fullName, age, email, password))
+                                        .addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                Toast.makeText(RegisterUser.this, "Registered successfully, please go back to Main Page to login", Toast.LENGTH_LONG).show();
+                                                Log.d("Successful login", "Successful Login");
+                                                sessionManager.getAuth().signOut();
+                                            } else {
+                                                Toast.makeText(RegisterUser.this, "Failed to register, please try again", Toast.LENGTH_LONG).show();
+                                                Log.d("Unsuccessful login", "Unsuccessful login");
+                                            }
+                                        });
                             }
                         }
                 );
@@ -118,17 +108,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
 
         sessionManager.getAuth().fetchSignInMethodsForEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                        if (task.isSuccessful()) {
-                            SignInMethodQueryResult result = task.getResult();
-                            List<String> signInMethods = result.getSignInMethods();
-                            if (signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
-                                // User can sign in with email/password
-                                Toast.makeText(RegisterUser.this, "Email in use", Toast.LENGTH_LONG).show();
-                                emailInUseCheck = true;
-                            }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        SignInMethodQueryResult result = task.getResult();
+                        List<String> signInMethods = result.getSignInMethods();
+                        if (signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
+                            // User can sign in with email/password
+                            Toast.makeText(RegisterUser.this, "Email in use", Toast.LENGTH_LONG).show();
+                            emailInUseCheck = true;
                         }
                     }
                 });

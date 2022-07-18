@@ -1,8 +1,5 @@
 package com.example.plannus.Activities.ToDoList;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -13,13 +10,14 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
-import com.example.plannus.utils.TimeFormatter;
-import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.utils.DateFormatter;
 import com.example.plannus.utils.DateTimeDialog;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.plannus.utils.TimeFormatter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.SetOptions;
 
@@ -72,7 +70,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         Log.e("check", Arrays.toString(taskInfo));
 
         editStatusText = findViewById(R.id.textViewStatus);
-        statusValue = editStatusText.getText().toString().substring(0, 1);;
+        statusValue = editStatusText.getText().toString().substring(0, 1);
         editTask = findViewById(R.id.editTaskDesc);
         editStatus = findViewById(R.id.editStatusDesc);
         editTag = findViewById(R.id.editTag);
@@ -110,7 +108,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     public void renderVars() {
         editTask.setText(task, TextView.BufferType.EDITABLE);
-        editStatus.setProgress(Integer.valueOf(taskInfo[2]));
+        editStatus.setProgress(Integer.parseInt(taskInfo[2]));
         editStatusText.setText(taskInfo[2] + "%", TextView.BufferType.EDITABLE);
         editTag.setText(taskInfo[0], TextView.BufferType.EDITABLE);
         editDueDate.setText(taskInfo[3], TextView.BufferType.EDITABLE);
@@ -151,29 +149,14 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
                 .set(t, SetOptions.merge()).addOnSuccessListener((OnSuccessListener<? super Void>) (aVoid) -> {
                     Log.d("TaskCreated", "onSuccess: Task is created");
                     finish();
-                } ).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("TaskFail", "onFailure: "+ e);
-                    }
-                });
+                } ).addOnFailureListener(e -> Log.d("TaskFail", "onFailure: "+ e));
         }
 
     private void deleteTask() {
         sessionManager.getDocRef(userId, "Tasks", task + tagName)
                 .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Success", "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Failure", "Error deleting document", e);
-                    }
-                });
+                .addOnSuccessListener(aVoid -> Log.d("Success", "DocumentSnapshot successfully deleted!"))
+                .addOnFailureListener(e -> Log.w("Failure", "Error deleting document", e));
         Log.e("Successful", task);
     }
 

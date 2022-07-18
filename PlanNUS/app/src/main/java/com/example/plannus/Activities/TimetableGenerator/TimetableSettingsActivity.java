@@ -8,24 +8,20 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.plannus.Objects.TimetableSettings;
 import com.example.plannus.R;
 import com.example.plannus.SessionManager;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
@@ -38,8 +34,6 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
     private String userID;
     private int numMods;
     private CheckBox no8amConstraint, oneFreeDayConstraint;
-//    private Spinner aySpinner, semesterSpinner;
-//    private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
     private AutoCompleteTextView aySpinner, semesterSpinner;
     private ArrayAdapter<CharSequence> ayAdapter, semAdapter;
     private String ay, semester;
@@ -109,7 +103,7 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
 
         init_spinners();
 
-        constraints = new HashMap<String, Boolean>();
+        constraints = new HashMap<>();
         constraints.put("no8amLessons", false);
         constraints.put("oneFreeDay", false);
     }
@@ -122,44 +116,28 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
         aySpinner.setAdapter(ayAdapter);
         System.out.println("initSpinnersRunning--------------------------");
 
-        aySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ay = ayAdapter.getItem(position).toString();
-                Log.d("AY spinner check", ay);
-            }
+        aySpinner.setOnItemClickListener((parent, view, position, id) -> {
+            ay = ayAdapter.getItem(position).toString();
+            Log.d("AY spinner check", ay);
         });
 
         semesterSpinner = findViewById(R.id.semesterSpinner);
         semAdapter = ArrayAdapter.createFromResource(TimetableSettingsActivity.this, R.array.SEM_array, android.R.layout.simple_spinner_item);
         semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         semesterSpinner.setAdapter(semAdapter);
-        semesterSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                semester = semAdapter.getItem(position).toString();
-                Log.d("Semester spinner check", semester);
-            }
+        semesterSpinner.setOnItemClickListener((parent, view, position, id) -> {
+            semester = semAdapter.getItem(position).toString();
+            Log.d("Semester spinner check", semester);
         });
     }
 
     public void init_checkboxes() {
 
         oneFreeDayConstraint = findViewById(R.id.oneFreeDay);
-        oneFreeDayConstraint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                constraints.put("oneFreeDay", b);
-            }
-        });
+        oneFreeDayConstraint.setOnCheckedChangeListener((compoundButton, b) -> constraints.put("oneFreeDay", b));
 
         no8amConstraint = findViewById(R.id.no8amLessons);
-        no8amConstraint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                constraints.put("no8amLessons", b);
-            }
-        });
+        no8amConstraint.setOnCheckedChangeListener((compoundButton, b) -> constraints.put("no8amLessons", b));
     }
 
     private void saveSettings() {
@@ -182,12 +160,9 @@ public class TimetableSettingsActivity extends AppCompatActivity implements View
                     Log.d("SaveCreated", "onSuccess: Settings is saved");
                     Toast.makeText(TimetableSettingsActivity.this, "Settings saved Successfully",Toast.LENGTH_LONG).show();
                     finish();
-                } ).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("SaveFail", "onFailure: "+ e);
-                        Toast.makeText(TimetableSettingsActivity.this, "Failed to save settings", Toast.LENGTH_LONG).show();
-                    }
+                } ).addOnFailureListener(e -> {
+                    Log.d("SaveFail", "onFailure: "+ e);
+                    Toast.makeText(TimetableSettingsActivity.this, "Failed to save settings", Toast.LENGTH_LONG).show();
                 });
     }
 }

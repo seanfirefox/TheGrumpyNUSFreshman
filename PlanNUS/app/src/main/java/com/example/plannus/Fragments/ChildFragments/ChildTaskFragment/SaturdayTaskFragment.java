@@ -1,16 +1,14 @@
 package com.example.plannus.Fragments.ChildFragments.ChildTaskFragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.plannus.Adaptors.CalendarClassAdapter;
 import com.example.plannus.Adaptors.CalendarTaskAdapter;
 import com.example.plannus.Objects.ToDoTask;
 import com.example.plannus.R;
@@ -31,7 +29,7 @@ public class SaturdayTaskFragment extends Fragment {
     private String userID;
     private CalendarTaskAdapter adapter;
     private RecyclerView recyclerView;
-    CollectionReference taskRef;
+    private CollectionReference taskRef;
 
     public SaturdayTaskFragment() {
         // Required empty public constructor

@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class NUSTimetable {
@@ -29,11 +28,15 @@ public class NUSTimetable {
     @PropertyName("Friday")
     private ArrayList<String> fridayClass;
 
+    @PropertyName("Saturday")
+    private ArrayList<String> saturdayClass;
+
     private String monClass;
     private String tueClass;
     private String wedClass;
     private String thurClass;
     private String friClass;
+    private String satClass;
 
 
     public NUSTimetable() {
@@ -54,6 +57,8 @@ public class NUSTimetable {
             thurClass = representText(this.thursdayClass, "THURSDAY");
             this.fridayClass = ArrayListConverter((JSONArray) jsonObject.get("FRI"));
             friClass = representText(this.fridayClass, "FRIDAY");
+            this.saturdayClass = ArrayListConverter((JSONArray) jsonObject.get("SAT"));
+            satClass = representText(this.saturdayClass, "SATURDAY");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -97,6 +102,14 @@ public class NUSTimetable {
 
     public ArrayList<String> getThursdayClass() {
         return thursdayClass;
+    }
+
+    public ArrayList<String> getSaturdayClass() {
+        return saturdayClass;
+    }
+
+    public String getSatClass() {
+        return satClass;
     }
 
     public ArrayList<String> getFridayClass() {

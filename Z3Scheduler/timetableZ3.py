@@ -12,7 +12,8 @@ class TimeTableSchedulerZ3 :
                 2 : "Tuesday",
                 3 : "Wednesday",
                 4 : "Thursday",
-                5 : "Friday"}
+                5 : "Friday",
+                6 : "Saturday"}
 
     def __init__(self, module_dict, print=True) :
         self.semesterMods = module_dict
@@ -29,7 +30,7 @@ class TimeTableSchedulerZ3 :
         self.literal_to_object = {}
         self.print = print
         self.custom_constraints = {}
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
 
     def init_variables(self) :
         '''
@@ -125,7 +126,7 @@ class TimeTableSchedulerZ3 :
     def clear_settings(self) :
         self.semesterMods = {}
         self.solver = Solver()
-        self.lessons_by_day = [[], [], [], [], []]
+        self.lessons_by_day = [[], [],[], [], [], []]
         self.lecs = []
         self.tuts = []
         self.recs = []
@@ -134,7 +135,7 @@ class TimeTableSchedulerZ3 :
         self.sects = []
         self.string_to_bool_literal = {}
         self.literal_to_object = {}
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
 
     def input_new_modules(self, module_dict) :
         self.semesterMods = module_dict
@@ -189,13 +190,13 @@ class TimeTableSchedulerZ3 :
 
     def string_timetable(self) :
         string = ""
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
         for item in self.solver.model() :
             if (self.solver.model()[item]) :
                 pp = self.string_to_bool_literal[str(item)]
                 l = self.literal_to_object[pp]
                 self.finalTimetable[l.day - 1].append(l)
-        for i in range(5) :
+        for i in range(6) :
             self.finalTimetable[i] = sorted(self.finalTimetable[i], key=lambda x : x.start)
             string = string + ("On " + TimeTableSchedulerZ3.WEEKDAYS[i + 1]) + "\n"
             if (len(self.finalTimetable[i]) == 0) :
@@ -207,13 +208,13 @@ class TimeTableSchedulerZ3 :
         return string
 
     def printTimeTable(self) :
-        self.finalTimetable = [[], [], [], [], []]
+        self.finalTimetable = [[], [], [], [], [], []]
         for item in self.solver.model() :
             if (self.solver.model()[item]) :
                 pp = self.string_to_bool_literal[str(item)]
                 l = self.literal_to_object[pp]
                 self.finalTimetable[l.day - 1].append(l)
-        for i in range(5) :
+        for i in range(6) :
             self.finalTimetable[i] = sorted(self.finalTimetable[i], key=lambda x : x.start)
             print("On " + TimeTableSchedulerZ3.WEEKDAYS[i + 1])
             if (len(self.finalTimetable[i]) == 0) :

@@ -56,7 +56,7 @@ public class AnnouncementsAdapter extends FirestoreRecyclerAdapter<ToDoTask, Ann
                                 : DateTimeUtils.getDuration(time);
 
         holder.taskName.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,
-                processedTime.equals("EXPIRED TASK")
+                processedTime.contains("EXPIRED")
                         ? R.drawable.ic_baseline_warning_amber_24
                         : processedTime.contains("days")
                         ? R.drawable.ic_happyface

@@ -21,8 +21,6 @@ public class CompletedTaskAdapter extends FirestoreRecyclerAdapter<ToDoTask, Com
         super(options);
     }
 
-    private static double randDouble = Math.random();
-
     @Override
     protected void onBindViewHolder(@NonNull CompletedTaskAdapter.FinishedTaskHolder holder, int position, @NonNull ToDoTask model) {
         String moduleName, task, deadlineDate, deadlineTime, plannedDate, plannedTime;

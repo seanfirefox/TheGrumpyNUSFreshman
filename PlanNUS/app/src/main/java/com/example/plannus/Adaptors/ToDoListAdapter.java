@@ -92,7 +92,6 @@ public class ToDoListAdapter extends FirestoreRecyclerAdapter<ToDoTask, ToDoList
         private final TextView plannedDate;
         private final TextView plannedTime;
         private final TextView statusText;
-        //private AnyChartView status;
         private final ProgressBar status;
 
         public TaskHolder(View itemView) {

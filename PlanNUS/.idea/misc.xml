@@ -75,18 +75,24 @@
         <entry key="app/src/main/res/layouts/card_layouts/layout/todotask.xml" value="0.19479166666666667" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday.xml" value="0.17592592592592593" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_friday_task.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday.xml" value="0.13779128672745694" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_monday_task.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_saturday.xml" value="0.13779128672745694" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_saturday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_saturday_task.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_sunday.xml" value="0.13779128672745694" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_sunday_task.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday.xml" value="0.2536231884057971" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday_class.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_thursday_task.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_tuesday.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_tuesday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_tuesday_task.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_wednesday.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_wednesday_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/fragment_layouts/layout/fragment_wednesday_task.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/menu/ay_menu.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/menu/weekday.xml" value="0.23255813953488372" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

@@ -68,6 +68,7 @@
         <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_edit_task.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_generate_timetable.xml" value="0.10764944275582573" />
         <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_main.xml" value="0.22546419098143236" />
+        <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_register_user.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layouts/activity_layouts/layout/activity_to_do_list.xml" value="0.1040268456375839" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/announcement_todolist.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/layouts/card_layouts/layout/nus_class.xml" value="0.2418478260869565" />
